@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "语言"; ObjectID = "6vc-i0-D1o"; */
+"6vc-i0-D1o.text" = "语言";
+
+/* Class = "UIButton"; normalTitle = "修改ip"; ObjectID = "DIc-qG-KIQ"; */
+"DIc-qG-KIQ.normalTitle" = "修改ip";
+
+/* Class = "UIButton"; normalTitle = "登陸"; ObjectID = "a7h-xw-lA0"; */
+"a7h-xw-lA0.normalTitle" = "登陸";
+
+/* Class = "UILabel"; text = "用户名"; ObjectID = "s3f-0v-Lzb"; */
+"s3f-0v-Lzb.text" = "用户名";
+
+/* Class = "UILabel"; text = "密码"; ObjectID = "wfS-uD-efC"; */
+"wfS-uD-efC.text" = "密码";
+
+/* Class = "UIButton"; normalTitle = "掃碼登錄"; ObjectID = "zmi-e4-VNw"; */
+"zmi-e4-VNw.normalTitle" = "掃碼登錄";

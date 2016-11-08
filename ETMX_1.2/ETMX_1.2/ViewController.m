@@ -82,8 +82,7 @@
         self.changeIPLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         self.QRCodeLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         [self.passwordTest setSecureTextEntry:YES];
-//
-//
+
 //        CGRect userNameRect = self.userNameText.frame;
 //        userNameRect.size.width = 40;
 //        self.userNameText.frame = userNameRect;
@@ -93,8 +92,7 @@
 //        passRect.size.width = 40;
 //        self.passwordTest.frame = passRect;
 //        self.passwordTest.font = [UIFont systemFontOfSize:30];
-//
-//        
+  
         self.userNameText.font = [UIFont systemFontOfSize:25];
         self.passWordLabel.font = [UIFont systemFontOfSize:25];
         
@@ -109,6 +107,8 @@
         [self.view addConstraint:con_3];
         [self.view addConstraint:con_4];
         [self.view addConstraint:con_5];
+        
+        
         
     }
     

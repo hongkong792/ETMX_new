@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserAccount.h"
 //使用单例管理用户的行为
 @interface UserManager : NSObject
 +(UserManager *)instance;
+-(UserAccount *)getCurAccount;
 @end

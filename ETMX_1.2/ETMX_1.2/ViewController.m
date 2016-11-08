@@ -201,7 +201,7 @@
     UserAccount * user = [[UserAccount alloc] init];
     if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
         
-        user.userName = self.userNameText.text;
+        user.name = self.userNameText.text;
         user.password = self.passwordTest.text;
         NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login?wsdl";
         [loginCon loginWithReq:user withUrl:loginUrl success:^(id data) {

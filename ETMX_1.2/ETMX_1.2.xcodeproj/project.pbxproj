@@ -51,6 +51,18 @@
 		0674B8A51DD08AB0004FF173 /* UIImage+QRScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8741DD08AB0004FF173 /* UIImage+QRScale.m */; };
 		0674B8A61DD08AB0004FF173 /* ETMXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8771DD08AB0004FF173 /* ETMXApi.m */; };
 		0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B87A1DD08AB0004FF173 /* NetWorkManager.m */; };
+		2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */; };
+		247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */; };
+		247494911DD21B7400BD7711 /* EtmxMold.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474947E1DD21B7400BD7711 /* EtmxMold.m */; };
+		247494921DD21B7400BD7711 /* CustomBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494811DD21B7400BD7711 /* CustomBtn.m */; };
+		247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494831DD21B7400BD7711 /* CustomSegmentController.m */; };
+		247494941DD21B7400BD7711 /* ETMXTableViewCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */; };
+		247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */; };
+		247494961DD21B7400BD7711 /* ETMXTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494881DD21B7400BD7711 /* ETMXTableViewCell2.m */; };
+		247494971DD21B7400BD7711 /* ETMXTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247494891DD21B7400BD7711 /* ETMXTableViewCell2.xib */; };
+		247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948B1DD21B7400BD7711 /* TaskContentTableView.m */; };
+		247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */; };
+		2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +175,26 @@
 		0674B8791DD08AB0004FF173 /* NetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkManager.h; sourceTree = "<group>"; };
 		0674B87A1DD08AB0004FF173 /* NetWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkManager.m; sourceTree = "<group>"; };
 		0674B8B51DD099E9004FF173 /* QRCodeCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeCommon.h; sourceTree = "<group>"; };
+		247494781DD21B7400BD7711 /* TaskMainControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskMainControllerViewController.h; sourceTree = "<group>"; };
+		247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskMainControllerViewController.m; sourceTree = "<group>"; };
+		2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskMainControllerViewController.xib; sourceTree = "<group>"; };
+		2474947D1DD21B7400BD7711 /* EtmxMold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EtmxMold.h; sourceTree = "<group>"; };
+		2474947E1DD21B7400BD7711 /* EtmxMold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EtmxMold.m; sourceTree = "<group>"; };
+		247494801DD21B7400BD7711 /* CustomBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBtn.h; sourceTree = "<group>"; };
+		247494811DD21B7400BD7711 /* CustomBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBtn.m; sourceTree = "<group>"; };
+		247494821DD21B7400BD7711 /* CustomSegmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentController.h; sourceTree = "<group>"; };
+		247494831DD21B7400BD7711 /* CustomSegmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentController.m; sourceTree = "<group>"; };
+		247494841DD21B7400BD7711 /* ETMXTableViewCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETMXTableViewCell1.h; sourceTree = "<group>"; };
+		247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETMXTableViewCell1.m; sourceTree = "<group>"; };
+		247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETMXTableViewCell1.xib; sourceTree = "<group>"; };
+		247494871DD21B7400BD7711 /* ETMXTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETMXTableViewCell2.h; sourceTree = "<group>"; };
+		247494881DD21B7400BD7711 /* ETMXTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETMXTableViewCell2.m; sourceTree = "<group>"; };
+		247494891DD21B7400BD7711 /* ETMXTableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETMXTableViewCell2.xib; sourceTree = "<group>"; };
+		2474948A1DD21B7400BD7711 /* TaskContentTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContentTableView.h; sourceTree = "<group>"; };
+		2474948B1DD21B7400BD7711 /* TaskContentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContentTableView.m; sourceTree = "<group>"; };
+		2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSectionHeaderView.h; sourceTree = "<group>"; };
+		2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSectionHeaderView.m; sourceTree = "<group>"; };
+		2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskSectionHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +434,7 @@
 		0674B8651DD08AAF004FF173 /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				247494761DD21B7400BD7711 /* TaskMainController */,
 				0674B8B51DD099E9004FF173 /* QRCodeCommon.h */,
 				0674B8661DD08AAF004FF173 /* Common */,
 				0674B8671DD08AAF004FF173 /* LoginConttrol */,
@@ -460,6 +493,65 @@
 				0674B87A1DD08AB0004FF173 /* NetWorkManager.m */,
 			);
 			path = tools;
+			sourceTree = "<group>";
+		};
+		247494761DD21B7400BD7711 /* TaskMainController */ = {
+			isa = PBXGroup;
+			children = (
+				247494771DD21B7400BD7711 /* Controller */,
+				2474947B1DD21B7400BD7711 /* Image */,
+				2474947C1DD21B7400BD7711 /* Model */,
+				2474947F1DD21B7400BD7711 /* View */,
+			);
+			path = TaskMainController;
+			sourceTree = "<group>";
+		};
+		247494771DD21B7400BD7711 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				247494781DD21B7400BD7711 /* TaskMainControllerViewController.h */,
+				247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */,
+				2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2474947B1DD21B7400BD7711 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		2474947C1DD21B7400BD7711 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2474947D1DD21B7400BD7711 /* EtmxMold.h */,
+				2474947E1DD21B7400BD7711 /* EtmxMold.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2474947F1DD21B7400BD7711 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				247494801DD21B7400BD7711 /* CustomBtn.h */,
+				247494811DD21B7400BD7711 /* CustomBtn.m */,
+				247494821DD21B7400BD7711 /* CustomSegmentController.h */,
+				247494831DD21B7400BD7711 /* CustomSegmentController.m */,
+				247494841DD21B7400BD7711 /* ETMXTableViewCell1.h */,
+				247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */,
+				247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */,
+				247494871DD21B7400BD7711 /* ETMXTableViewCell2.h */,
+				247494881DD21B7400BD7711 /* ETMXTableViewCell2.m */,
+				247494891DD21B7400BD7711 /* ETMXTableViewCell2.xib */,
+				2474948A1DD21B7400BD7711 /* TaskContentTableView.h */,
+				2474948B1DD21B7400BD7711 /* TaskContentTableView.m */,
+				2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */,
+				2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */,
+				2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -523,14 +615,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */,
 				0674B8991DD08AB0004FF173 /* LICENSE in Resources */,
+				247494971DD21B7400BD7711 /* ETMXTableViewCell2.xib in Resources */,
 				0674B7F11DD08971004FF173 /* Language.strings in Resources */,
+				247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */,
 				0674B89D1DD08AB0004FF173 /* zbar-back.png in Resources */,
 				0674B7E31DD086F7004FF173 /* LaunchScreen.storyboard in Resources */,
 				0674B7E01DD086F7004FF173 /* Assets.xcassets in Resources */,
 				0674B7DE1DD086F7004FF173 /* Main.storyboard in Resources */,
 				0674B8A01DD08AB0004FF173 /* zbar-samples.png in Resources */,
 				0674B89E1DD08AB0004FF173 /* zbar-help.html in Resources */,
+				247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */,
 				0674B8851DD08AB0004FF173 /* LICENSE in Resources */,
 				0674B89F1DD08AB0004FF173 /* zbar-helpicons.png in Resources */,
 			);
@@ -544,6 +640,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0674B8871DD08AB0004FF173 /* AFAutoPurgingImageCache.m in Sources */,
+				247494941DD21B7400BD7711 /* ETMXTableViewCell1.m in Sources */,
 				0674B7DB1DD086F7004FF173 /* ViewController.m in Sources */,
 				0674B8A31DD08AB0004FF173 /* QRCodeGenerator.m in Sources */,
 				0674B8801DD08AB0004FF173 /* AFNetworkReachabilityManager.m in Sources */,
@@ -554,23 +651,30 @@
 				0674B89A1DD08AB0004FF173 /* README.md in Sources */,
 				0674B88D1DD08AB0004FF173 /* UIProgressView+AFNetworking.m in Sources */,
 				0674B7D51DD086F7004FF173 /* main.m in Sources */,
+				247494911DD21B7400BD7711 /* EtmxMold.m in Sources */,
 				0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */,
 				0674B8A51DD08AB0004FF173 /* UIImage+QRScale.m in Sources */,
 				0674B8891DD08AB0004FF173 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0674B8881DD08AB0004FF173 /* AFImageDownloader.m in Sources */,
 				0674B88B1DD08AB0004FF173 /* UIButton+AFNetworking.m in Sources */,
+				247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */,
 				0674B88C1DD08AB0004FF173 /* UIImageView+AFNetworking.m in Sources */,
 				0674B8A41DD08AB0004FF173 /* UIView+QREasyFrame.m in Sources */,
+				2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */,
 				0674B8A21DD08AB0004FF173 /* QRScanViewController.m in Sources */,
 				0674B8811DD08AB0004FF173 /* AFSecurityPolicy.m in Sources */,
 				0674B8821DD08AB0004FF173 /* AFURLRequestSerialization.m in Sources */,
 				0674B87D1DD08AB0004FF173 /* UserAccount.m in Sources */,
 				0674B88F1DD08AB0004FF173 /* UIWebView+AFNetworking.m in Sources */,
+				247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */,
+				247494921DD21B7400BD7711 /* CustomBtn.m in Sources */,
 				0674B87B1DD08AB0004FF173 /* ETMXMachine.m in Sources */,
 				0674B8861DD08AB0004FF173 /* README.md in Sources */,
 				0674B88E1DD08AB0004FF173 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0674B89B1DD08AB0004FF173 /* XMLReader.m in Sources */,
 				0674B8831DD08AB0004FF173 /* AFURLResponseSerialization.m in Sources */,
+				247494961DD21B7400BD7711 /* ETMXTableViewCell2.m in Sources */,
+				247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */,
 				0674B8841DD08AB0004FF173 /* AFURLSessionManager.m in Sources */,
 				0674B8981DD08AB0004FF173 /* LibraryTest.m in Sources */,
 				0674B8A61DD08AB0004FF173 /* ETMXApi.m in Sources */,
@@ -761,6 +865,7 @@
 				0674B7E91DD086F7004FF173 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

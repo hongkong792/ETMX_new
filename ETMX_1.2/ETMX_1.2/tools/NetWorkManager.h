@@ -30,7 +30,7 @@ typedef void (^HttpFailure)(NSError *error);
  *  @param success   请求成功回调
  *  @param failure   请求失败回调
  */
-+(void)sendRequestWith:(NSArray *)paramters  url:(NSString *)urlStr method:(NSString *)methodName success:(HttpSuccess)success failure:(HttpFailure)failure;
++(void)sendRequestWithParameters:(NSArray *)paramters  url:(NSString *)urlStr method:(NSString *)methodName success:(HttpSuccess)success failure:(HttpFailure)failure;
 
 
 //get请求

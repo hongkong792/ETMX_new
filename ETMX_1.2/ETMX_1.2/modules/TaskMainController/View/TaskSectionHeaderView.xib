@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TaskSectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="667" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQP-vZ-upg">
+                    <rect key="frame" x="0.0" y="5" width="667" height="40"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="aWr-4e-Ko4">
+                            <rect key="frame" x="5" y="14" width="12" height="12"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模具编号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5t-6c-57F">
+                            <rect key="frame" x="44" y="9.5" width="87" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E20-1600109-09S（5）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csr-WN-qOE" userLabel="模具编号内容">
+                            <rect key="frame" x="133" y="9.5" width="189" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05/05/2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbJ-B9-9i0" userLabel="开始时间">
+                            <rect key="frame" x="352" y="9.5" width="90.5" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26/05/2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhZ-0M-62L">
+                            <rect key="frame" x="456.5" y="9.5" width="90" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Utr-0Y-d1U">
+                            <rect key="frame" x="444.5" y="9.5" width="10" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Utr-0Y-d1U" firstAttribute="leading" secondItem="YbJ-B9-9i0" secondAttribute="trailing" constant="2" id="4hw-pJ-LdD"/>
+                        <constraint firstItem="aWr-4e-Ko4" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="5J8-kM-Oj1"/>
+                        <constraint firstItem="csr-WN-qOE" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="B9F-0B-KS9"/>
+                        <constraint firstItem="aWr-4e-Ko4" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="5" id="RyA-U1-e9y"/>
+                        <constraint firstItem="csr-WN-qOE" firstAttribute="leading" secondItem="r5t-6c-57F" secondAttribute="trailing" constant="2" id="TFH-Tb-Y2y"/>
+                        <constraint firstItem="r5t-6c-57F" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="Yco-8a-oS4"/>
+                        <constraint firstAttribute="height" constant="40" id="aKS-aI-KdG"/>
+                        <constraint firstItem="YbJ-B9-9i0" firstAttribute="leading" secondItem="csr-WN-qOE" secondAttribute="trailing" constant="30" id="efO-Y8-5WD"/>
+                        <constraint firstItem="vhZ-0M-62L" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="egv-ZL-UNg"/>
+                        <constraint firstItem="YbJ-B9-9i0" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="fez-QA-bb1"/>
+                        <constraint firstItem="r5t-6c-57F" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="44" id="geq-bc-bMJ"/>
+                        <constraint firstItem="Utr-0Y-d1U" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="tUJ-Mx-izP"/>
+                        <constraint firstItem="vhZ-0M-62L" firstAttribute="leading" secondItem="Utr-0Y-d1U" secondAttribute="trailing" constant="2" id="ueq-pH-YM5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fQP-vZ-upg" secondAttribute="trailing" id="4gN-kB-a2G"/>
+                <constraint firstItem="fQP-vZ-upg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dpP-4H-sn9"/>
+                <constraint firstItem="fQP-vZ-upg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="jJ8-xC-VQl"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="containerCode" destination="csr-WN-qOE" id="H6j-IH-EqH"/>
+                <outlet property="planEndDate" destination="vhZ-0M-62L" id="63j-Xz-T8o"/>
+                <outlet property="planStartDate" destination="YbJ-B9-9i0" id="EtJ-A5-5jn"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="selected_image_uncheckmark.png" width="12" height="12"/>
+    </resources>
+</document>

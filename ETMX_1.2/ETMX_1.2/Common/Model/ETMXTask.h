@@ -10,28 +10,28 @@
 //任务模型
 @interface ETMXTask : NSObject
 /**任务id*/
-@property (nonatomic ,strong)NSString*taskID;
+@property (nonatomic ,strong)NSString*id;
 
 /**任务编号*/
-@property (nonatomic ,strong)NSString*taskCode;
+@property (nonatomic ,strong)NSString*code;
 
 /**任务名称*/
-@property (nonatomic ,strong)NSString*taskName;
+@property (nonatomic ,strong)NSString*name;
 
 /**任务对象*/
-@property (nonatomic ,strong)NSString*taskObject;
+@property (nonatomic ,strong)NSString*object;
 
 /**任务对象名称*/
-@property (nonatomic ,strong)NSString*taskObjectName;
+@property (nonatomic ,strong)NSString*objectName;
 
 /**任务对象图片地址*/
-@property (nonatomic ,strong)NSString*taskObjectImagePath;
+@property (nonatomic ,strong)NSString*objectImagePath;
 
 /**任务所在容器*/
 @property (nonatomic ,strong)NSString*container;
 
 /**任务状态*/
-@property (nonatomic ,strong)NSString*state;
+@property (nonatomic ,strong)NSString*status;
 
 /**计划开始时间*/
 @property (nonatomic ,strong)NSString*planStartDate;
@@ -43,16 +43,25 @@
 @property (nonatomic ,strong)NSString*actualStartDate;
 
 /**实际结束时间*/
-@property (nonatomic ,strong)NSString*actualEneDate;
+@property (nonatomic ,strong)NSString*actualEndDate;
 
 /**发布时间*/
-@property (nonatomic ,strong)NSString*releseTime;
+@property (nonatomic ,strong)NSString*releaseTime;
+
+/**realFlow*/
+@property (nonatomic ,strong)NSString*realFlow;
 
 /**角色*/
 @property (nonatomic ,strong)NSString*role;
 
 /**责任人*/
-@property (nonatomic ,strong)NSString*ower;
+@property (nonatomic ,strong)NSString*owner;
+
+/**<#arg#>*/
+@property (nonatomic ,strong)NSString*moldPlanStartDate;
+
+/**<#arg#>*/
+@property (nonatomic ,strong)NSString*moldPlanEndDate;
 
 /**机床*/
 @property (nonatomic ,strong)NSString*machine;
@@ -76,12 +85,26 @@
 @property (nonatomic ,strong)NSString*machineMsg;
 
 /**是否失败*/
-@property (nonatomic ,strong)NSString*isQC;
+@property (nonatomic ,strong)NSString*QC;
 
 /**任务二维码图片地址*/
 @property (nonatomic ,strong)NSString*barCodePath;
 
 /**备注*/
 @property (nonatomic ,strong)NSString*remark;
+
+/**<#arg#>*/
+@property (nonatomic ,strong)NSString*usedWorkHour;
+
+/**<#arg#>*/
+@property (nonatomic ,strong)NSString*actualWorkHour;
+
+/**<#arg#>*/
+@property (nonatomic ,strong)NSString*groupAttr;
+
+/**<#arg#>*/
+@property (nonatomic ,strong)NSString*key;
+
+-(instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

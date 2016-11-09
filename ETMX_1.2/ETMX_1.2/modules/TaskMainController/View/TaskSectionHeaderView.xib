@@ -80,6 +80,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="containerCode" destination="csr-WN-qOE" id="H6j-IH-EqH"/>
+                <outlet property="containerPlace" destination="r5t-6c-57F" id="Ax5-lm-qaf"/>
                 <outlet property="planEndDate" destination="vhZ-0M-62L" id="63j-Xz-T8o"/>
                 <outlet property="planStartDate" destination="YbJ-B9-9i0" id="EtJ-A5-5jn"/>
             </connections>

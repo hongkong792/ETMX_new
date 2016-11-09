@@ -13,7 +13,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *objectName;
 @property (strong, nonatomic) IBOutlet UILabel *status;
 
-
 @property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) IBOutlet UITextField *state2;
 @property (strong, nonatomic) IBOutlet UITextField *operatorMsg;
@@ -23,6 +22,17 @@
 @property (strong, nonatomic) IBOutlet UITextField *usedWorkHour;
 @property (strong, nonatomic) IBOutlet UITextField *actualWorkHour;
 
+@property (strong, nonatomic) IBOutlet UILabel *taskCodePlace;
+@property (strong, nonatomic) IBOutlet UILabel *objectNamePlace;
+@property (strong, nonatomic) IBOutlet UILabel *statusPlace;
+@property (strong, nonatomic) IBOutlet UITextField *taskNamePlace;
+@property (strong, nonatomic) IBOutlet UITextField *status2Place;
+@property (strong, nonatomic) IBOutlet UITextField *operatorPlace;
+@property (strong, nonatomic) IBOutlet UITextField *machinePlace;
+@property (strong, nonatomic) IBOutlet UITextField *actStartDatePlace;
+@property (strong, nonatomic) IBOutlet UITextField *actEneDatePlace;
+@property (strong, nonatomic) IBOutlet UITextField *workHourPlace;
+@property (strong, nonatomic) IBOutlet UITextField *actWorkHourPlace;
 
 @end
 
@@ -31,6 +41,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.taskCodePlace.text =Localized(@"part code") ;
+    self.objectNamePlace.text =Localized(@"part name");
+    self.statusPlace.text = Localized(@"status");
+    self.taskNamePlace.text = Localized(@"task name");
+    self.status2Place.text = Localized(@"status");
+    self.operatorPlace.text = Localized(@"operator");
+    self.machinePlace.text = Localized(@"machine");
+    self.actStartDatePlace.text = Localized(@"actual start date");
+    self.actEneDatePlace.text = Localized(@"actual end date");
+    self.workHourPlace.text = Localized(@"used work hour");
+    self.actWorkHourPlace.text = Localized(@"actual work hour");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

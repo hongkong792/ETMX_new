@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ETMXTask.h"
 @interface ETMXTableViewCell1 : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIView *taskView;
 @property (nonatomic,strong)ETMXTask *task;
 
 @end

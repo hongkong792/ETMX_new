@@ -12,3 +12,37 @@
 "login" = "login";
 "changeIP" = "changeIP";
 "ScanQRCode" = "scanQRCode";
+
+//begin  任务界面
+"refresh"                    =               "refresh";
+"search"                    =               "search";
+"new mold"              =               "new mold";
+"change mold"       =               "change mold";
+"electrode"              =                "electrode";
+"add helper"            =               "add helper";
+"released"                 =               "released ";
+"inwork"                    =                   "inwork";
+"stopped"                   =               "stopped";
+"completed"             =               "completed";
+"mold code"             =               "mold code";
+"part code"             =               "part code";
+"part name"             =               "part name";
+"electrode name"    =           "electrode name";
+"status"                        =               "status";
+"task name"                =            "task name";
+"operator"                  =               "operator";
+"machine"                   =               "machine";
+"actual start date"     =               "actual start date";
+"actual end date"       =               "actual end date";
+"used work hour"            =           "used work hour";
+"actual work hour"        =             "actual work hour";
+"selecte all"                        =               "selecte all";
+"cancel selected"            =               "cancel selected";
+"start"                                 =                   "start";
+"stop"                          =                       "stop";
+"finish"                        =                       "finish";
+"scanf"                         =                       "scanf";
+"work start"                =                       "work start";
+"work end"                     =                    "work end";
+"exchange"                  =                       "exchange";
+//end  任务界面

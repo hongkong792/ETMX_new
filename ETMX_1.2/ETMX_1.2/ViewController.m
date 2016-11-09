@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "QRScanViewController.h"
 #import "LogiinViewController.h"
-
+#import "TaskMainControllerViewController.h"
 
 
 
@@ -292,6 +292,12 @@
 {
     
     
+}
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
+    [self.navigationController pushViewController:taskMainVC animated:YES];
 }
 
 @end

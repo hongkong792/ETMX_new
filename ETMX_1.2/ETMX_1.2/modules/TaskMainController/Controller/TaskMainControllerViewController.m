@@ -69,6 +69,9 @@ typedef enum : NSUInteger {
 //替换按钮
 @property (strong, nonatomic) IBOutlet CustomBtn *exchangeBtn;
 
+//任务展示tableview
+@property (strong, nonatomic) IBOutlet TaskContentTableView *tableView;
+
 //获得所有任务，未整理未排序,一维数组
 @property (nonatomic,strong) NSMutableArray *allTasks;
 
@@ -76,11 +79,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) NSMutableArray *sortTasks;
 
 //记录返回的状态，即未开始数、进行中数、已暂停数、已完成数
+//notstart->未开始   start->进行中   overdue-> 已超时    completed->已完成     stopped->已暂停
 @property (nonatomic,strong)NSMutableDictionary *allTaskState;
-
-//任务展示tableview
-@property (strong, nonatomic) IBOutlet TaskContentTableView *tableView;
-
 
 //任务类型
 @property(nonatomic,strong) NSString *taskType;
@@ -100,7 +100,7 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initNav];
+//    [self initNav];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.taskType = WTaskTypeMold;
     self.taskState =WTaskStateReleased;
@@ -115,9 +115,9 @@ typedef enum : NSUInteger {
 //    self.title = self.curAccount.fullName;
     self.title = @"何燦洪(生產主管)";
     UIButton *freshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [freshBtn setTitle:@"刷新" forState:UIControlStateNormal];
+    [freshBtn setTitle:Localized(@"refresh") forState:UIControlStateNormal];
     [freshBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [freshBtn setTitle:@"刷新" forState:UIControlStateHighlighted];
+    [freshBtn setTitle:Localized(@"refresh") forState:UIControlStateHighlighted];
     [freshBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [freshBtn setFrame:CGRectMake(0, 0, 40, 40)];
     [freshBtn addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchUpInside];
@@ -125,9 +125,9 @@ typedef enum : NSUInteger {
     self.navigationItem.leftBarButtonItem =refreshBarItem;
     
     UIButton *searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
+    [searchBtn setTitle:Localized(@"search") forState:UIControlStateNormal];
     [searchBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [searchBtn setTitle:@"搜索" forState:UIControlStateHighlighted];
+    [searchBtn setTitle:Localized(@"search") forState:UIControlStateHighlighted];
     [searchBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [searchBtn setFrame:CGRectMake(0, 0, 40, 40)];
     [searchBtn addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
@@ -208,11 +208,24 @@ typedef enum : NSUInteger {
 
 //刷新tableview
 -(void)refresh:(id)sender{
-
+    [self refreshBtns];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
-    
     [self.tableView reloadDataWithSortTasks:self.sortTasks];
 }
+
+//刷新按钮文字
+-(void)refreshBtns{
+    [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateNormal];
+    [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateHighlighted];
+    [self.typeSegment setTitle:Localized(@"new mold") forSegmentAtIndex:0];
+    [self.typeSegment setTitle:Localized(@"change mold") forSegmentAtIndex:1];
+    [self.typeSegment setTitle:Localized(@"electrode") forSegmentAtIndex:2];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"released"),[self.allTaskState valueForKey:@"notstart"]] forSegmentAtIndex:0];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),[self.allTaskState valueForKey:@"start"]] forSegmentAtIndex:1];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),[self.allTaskState valueForKey:@"stopped"]] forSegmentAtIndex:2];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),[self.allTaskState valueForKey:@"completed"]] forSegmentAtIndex:3];
+}
+
 
 //网络数据测试
 -(void)LoginTest{

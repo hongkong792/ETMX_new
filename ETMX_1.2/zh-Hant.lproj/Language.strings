@@ -12,3 +12,36 @@
 "login" = "登陸";
 "changeIP" = "修改ip";
 "ScanQRCode" = "掃碼登錄";
+//begin  任务界面
+"refresh"                    =               "刷新";
+"search"                    =               "搜索";
+"new mold"              =               "新模";
+"change mold"       =               "改模";
+"electrode"              =                "銅公";
+"add helper"            =               "添幫手";
+"released"                 =               "未開始 ";
+"inwork"                    =                   "進行中";
+"stopped"                   =               "已暫停";
+"completed"             =               "已完成";
+"mold code"             =               "模具編號";
+"part code"             =               "零件編號";
+"part name"             =               "零件名稱";
+"electrode name"    =           "銅公名稱";
+"status"                        =               "狀態";
+"task name"                =            "任務名稱";
+"operator"                  =               "操作者";
+"machine"                   =               "機床";
+"actual start date"     =               "實際開始";
+"actual end date"       =               "實際完成";
+"used work hour"            =           "已用時";
+"actual work hour"        =             "實際工時";
+"selecte all"                        =               "全選";
+"cancel selected"            =               "取消";
+"start"                                 =                   "啟動";
+"stop"                          =                       "暫停";
+"finish"                        =                       "完成";
+"scanf"                         =                       "掃描";
+"work start"                =                       "上班";
+"work end"                     =                    "下班";
+"exchange"                  =                       "替換";
+//end  任务界面

@@ -9,7 +9,8 @@
 #import "NetWorkManager.h"
 
 @implementation NetWorkManager
-+(void)sendRequestWith:(NSArray *)paramters url:(NSString *)urlStr method:(NSString *)methodName success:(HttpSuccess)success failure:(HttpFailure)failure{
+
++(void)sendRequestWithParameters:(NSArray *)paramters  url:(NSString *)urlStr method:(NSString *)methodName success:(HttpSuccess)success failure:(HttpFailure)failure{
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     //回复的序列化
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

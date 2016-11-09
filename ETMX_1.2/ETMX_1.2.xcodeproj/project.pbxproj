@@ -59,11 +59,13 @@
 		247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494831DD21B7400BD7711 /* CustomSegmentController.m */; };
 		247494941DD21B7400BD7711 /* ETMXTableViewCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */; };
 		247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */; };
-		247494961DD21B7400BD7711 /* ETMXTableViewCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494881DD21B7400BD7711 /* ETMXTableViewCell2.m */; };
-		247494971DD21B7400BD7711 /* ETMXTableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247494891DD21B7400BD7711 /* ETMXTableViewCell2.xib */; };
 		247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948B1DD21B7400BD7711 /* TaskContentTableView.m */; };
 		247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */; };
 		2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */; };
+		2474949F1DD35FE700BD7711 /* selected_image_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949B1DD35FE700BD7711 /* selected_image_checkmark@2x.png */; };
+		247494A01DD35FE700BD7711 /* selected_image_checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */; };
+		247494A11DD35FE700BD7711 /* selected_image_uncheckmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */; };
+		247494A21DD35FE700BD7711 /* selected_image_uncheckmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,14 +192,15 @@
 		247494841DD21B7400BD7711 /* ETMXTableViewCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETMXTableViewCell1.h; sourceTree = "<group>"; };
 		247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETMXTableViewCell1.m; sourceTree = "<group>"; };
 		247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETMXTableViewCell1.xib; sourceTree = "<group>"; };
-		247494871DD21B7400BD7711 /* ETMXTableViewCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETMXTableViewCell2.h; sourceTree = "<group>"; };
-		247494881DD21B7400BD7711 /* ETMXTableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETMXTableViewCell2.m; sourceTree = "<group>"; };
-		247494891DD21B7400BD7711 /* ETMXTableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETMXTableViewCell2.xib; sourceTree = "<group>"; };
 		2474948A1DD21B7400BD7711 /* TaskContentTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContentTableView.h; sourceTree = "<group>"; };
 		2474948B1DD21B7400BD7711 /* TaskContentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContentTableView.m; sourceTree = "<group>"; };
 		2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSectionHeaderView.h; sourceTree = "<group>"; };
 		2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSectionHeaderView.m; sourceTree = "<group>"; };
 		2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskSectionHeaderView.xib; sourceTree = "<group>"; };
+		2474949B1DD35FE700BD7711 /* selected_image_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_checkmark@2x.png"; sourceTree = "<group>"; };
+		2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_checkmark@3x.png"; sourceTree = "<group>"; };
+		2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_uncheckmark@2x.png"; sourceTree = "<group>"; };
+		2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_uncheckmark@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +535,10 @@
 		2474947B1DD21B7400BD7711 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				2474949B1DD35FE700BD7711 /* selected_image_checkmark@2x.png */,
+				2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */,
+				2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */,
+				2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -555,9 +562,6 @@
 				247494841DD21B7400BD7711 /* ETMXTableViewCell1.h */,
 				247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */,
 				247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */,
-				247494871DD21B7400BD7711 /* ETMXTableViewCell2.h */,
-				247494881DD21B7400BD7711 /* ETMXTableViewCell2.m */,
-				247494891DD21B7400BD7711 /* ETMXTableViewCell2.xib */,
 				2474948A1DD21B7400BD7711 /* TaskContentTableView.h */,
 				2474948B1DD21B7400BD7711 /* TaskContentTableView.m */,
 				2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */,
@@ -630,16 +634,19 @@
 			files = (
 				2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */,
 				0674B8991DD08AB0004FF173 /* LICENSE in Resources */,
-				247494971DD21B7400BD7711 /* ETMXTableViewCell2.xib in Resources */,
 				0674B7F11DD08971004FF173 /* Language.strings in Resources */,
 				247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */,
+				247494A21DD35FE700BD7711 /* selected_image_uncheckmark@3x.png in Resources */,
 				0674B89D1DD08AB0004FF173 /* zbar-back.png in Resources */,
 				0674B7E31DD086F7004FF173 /* LaunchScreen.storyboard in Resources */,
 				0674B7E01DD086F7004FF173 /* Assets.xcassets in Resources */,
 				0674B7DE1DD086F7004FF173 /* Main.storyboard in Resources */,
 				0674B8A01DD08AB0004FF173 /* zbar-samples.png in Resources */,
+				247494A01DD35FE700BD7711 /* selected_image_checkmark@3x.png in Resources */,
 				0674B89E1DD08AB0004FF173 /* zbar-help.html in Resources */,
 				247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */,
+				247494A11DD35FE700BD7711 /* selected_image_uncheckmark@2x.png in Resources */,
+				2474949F1DD35FE700BD7711 /* selected_image_checkmark@2x.png in Resources */,
 				0674B8851DD08AB0004FF173 /* LICENSE in Resources */,
 				0674B89F1DD08AB0004FF173 /* zbar-helpicons.png in Resources */,
 			);
@@ -687,7 +694,6 @@
 				0674B88E1DD08AB0004FF173 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0674B89B1DD08AB0004FF173 /* XMLReader.m in Sources */,
 				0674B8831DD08AB0004FF173 /* AFURLResponseSerialization.m in Sources */,
-				247494961DD21B7400BD7711 /* ETMXTableViewCell2.m in Sources */,
 				247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */,
 				0674B8841DD08AB0004FF173 /* AFURLSessionManager.m in Sources */,
 				0674B8981DD08AB0004FF173 /* LibraryTest.m in Sources */,

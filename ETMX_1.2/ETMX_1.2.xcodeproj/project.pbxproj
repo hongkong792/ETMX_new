@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065146311DD4851800BCDE13 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 065146301DD4851800BCDE13 /* Reachability.m */; };
 		0674B7D51DD086F7004FF173 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B7D41DD086F7004FF173 /* main.m */; };
 		0674B7D81DD086F7004FF173 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B7D71DD086F7004FF173 /* AppDelegate.m */; };
 		0674B7DB1DD086F7004FF173 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B7DA1DD086F7004FF173 /* ViewController.m */; };
@@ -66,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0651462F1DD4851800BCDE13 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		065146301DD4851800BCDE13 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0674B7D01DD086F7004FF173 /* ETMX_1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETMX_1.2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0674B7D41DD086F7004FF173 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0674B7D61DD086F7004FF173 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -209,6 +212,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0651462E1DD4850200BCDE13 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				0651462F1DD4851800BCDE13 /* Reachability.h */,
+				065146301DD4851800BCDE13 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		0674B7C71DD086F7004FF173 = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +301,7 @@
 		0674B8081DD08AAF004FF173 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				0651462E1DD4850200BCDE13 /* Reachability */,
 				0674B8091DD08AAF004FF173 /* AFNetworking */,
 				0674B8401DD08AAF004FF173 /* LibraryTest.h */,
 				0674B8411DD08AAF004FF173 /* LibraryTest.m */,
@@ -649,6 +662,7 @@
 				0674B7D81DD086F7004FF173 /* AppDelegate.m in Sources */,
 				0674B88A1DD08AB0004FF173 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				0674B89A1DD08AB0004FF173 /* README.md in Sources */,
+				065146311DD4851800BCDE13 /* Reachability.m in Sources */,
 				0674B88D1DD08AB0004FF173 /* UIProgressView+AFNetworking.m in Sources */,
 				0674B7D51DD086F7004FF173 /* main.m in Sources */,
 				247494911DD21B7400BD7711 /* EtmxMold.m in Sources */,

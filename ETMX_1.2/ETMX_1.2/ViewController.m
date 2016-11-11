@@ -221,6 +221,18 @@
 
     }
     
+    NSDictionary *dict = @{
+                           @"flag" : @"1",
+                           @"message" : @"lufy.png",
+                           @"IDw" : @"20",
+                           @"name" : @"wpq",
+                           @"fullName" : @"helloword",
+                           @"number" : @"1ssww110"
+                           };
+    LoginResponse *user2 = [LoginResponse mj_objectWithKeyValues:dict];
+    NSLog(@"user:%@",user2);
+    
+    
 }
 
 - (IBAction)changeIpClick:(id)sender {
@@ -276,6 +288,18 @@
     con.delegate = self;
     [self.navigationController pushViewController:con animated:YES];
     
+
+
+//    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        if (status!= AFNetworkReachabilityStatusNotReachable) {
+//            
+//            
+//            
+//            
+//            
+//        }
+//    }];
+    
 }
 
 # pragma dealScanning
@@ -298,6 +322,12 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
     [self.navigationController pushViewController:taskMainVC animated:YES];
+}
+
++(NSDictionary *)replacedKeyFromPropertyName{
+    
+    return  @{@"wpq":@"IDw"};
+    
 }
 
 @end

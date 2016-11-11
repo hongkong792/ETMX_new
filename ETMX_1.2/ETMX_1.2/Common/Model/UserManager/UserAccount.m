@@ -7,6 +7,7 @@
 //
 
 #import "UserAccount.h"
+#import "MJExtension.h"
 
 @implementation UserAccount
 

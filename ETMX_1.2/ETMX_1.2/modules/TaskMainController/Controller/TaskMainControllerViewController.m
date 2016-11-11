@@ -230,7 +230,7 @@ typedef enum : NSUInteger {
 //网络数据测试
 -(void)LoginTest{
 //    获取所有任务接口测试（getTasksByUserCode(String userCode)）
-        NSArray *paramters = @[@"SGS000359"];
+    NSArray *paramters = @[@"SGS000359"];
     NSString *urlStr = @"http://192.168.1.161:8085/ETMX/services/TaskScanExecution";
     NSString *methodName = @"getTasksByUserCode";
     [NetWorkManager sendRequestWithParameters:paramters url:urlStr method:methodName success:^(id data) {

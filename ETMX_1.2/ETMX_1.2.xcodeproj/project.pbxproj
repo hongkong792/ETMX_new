@@ -64,6 +64,7 @@
 		0674B8A61DD08AB0004FF173 /* ETMXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8771DD08AB0004FF173 /* ETMXApi.m */; };
 		0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B87A1DD08AB0004FF173 /* NetWorkManager.m */; };
 		06E0C8D21DD6BC98004648AA /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8D11DD6BC98004648AA /* MJExtensionConfig.m */; };
+		06E0C8D51DD6DBB6004648AA /* CheckNetWorkerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8D41DD6DBB6004648AA /* CheckNetWorkerTool.m */; };
 		2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */; };
 		247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */; };
 		247494911DD21B7400BD7711 /* EtmxMold.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474947E1DD21B7400BD7711 /* EtmxMold.m */; };
@@ -216,6 +217,8 @@
 		0674B8B51DD099E9004FF173 /* QRCodeCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeCommon.h; sourceTree = "<group>"; };
 		06E0C8D01DD6BC98004648AA /* MJExtensionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJExtensionConfig.h; path = ETMX_1.2/modules/MJExtensionConfig.h; sourceTree = SOURCE_ROOT; };
 		06E0C8D11DD6BC98004648AA /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJExtensionConfig.m; path = ETMX_1.2/modules/MJExtensionConfig.m; sourceTree = SOURCE_ROOT; };
+		06E0C8D31DD6DBB6004648AA /* CheckNetWorkerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetWorkerTool.h; sourceTree = "<group>"; };
+		06E0C8D41DD6DBB6004648AA /* CheckNetWorkerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetWorkerTool.m; sourceTree = "<group>"; };
 		247494781DD21B7400BD7711 /* TaskMainControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskMainControllerViewController.h; sourceTree = "<group>"; };
 		247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskMainControllerViewController.m; sourceTree = "<group>"; };
 		2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskMainControllerViewController.xib; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 			children = (
 				0651462F1DD4851800BCDE13 /* Reachability.h */,
 				065146301DD4851800BCDE13 /* Reachability.m */,
+				06E0C8D31DD6DBB6004648AA /* CheckNetWorkerTool.h */,
+				06E0C8D41DD6DBB6004648AA /* CheckNetWorkerTool.m */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 				066000B71DD5E87D005F2D80 /* MJPropertyKey.m in Sources */,
 				0674B8A41DD08AB0004FF173 /* UIView+QREasyFrame.m in Sources */,
 				2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */,
+				06E0C8D51DD6DBB6004648AA /* CheckNetWorkerTool.m in Sources */,
 				0674B8A21DD08AB0004FF173 /* QRScanViewController.m in Sources */,
 				0674B8811DD08AB0004FF173 /* AFSecurityPolicy.m in Sources */,
 				0674B8821DD08AB0004FF173 /* AFURLRequestSerialization.m in Sources */,

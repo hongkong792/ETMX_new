@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CheckNetWorkerTool.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   
+    //网络监控
+    [CheckNetWorkerTool sharedManager];
     // Override point for customization after application launch.
       [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];
     if (![[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"]) {
@@ -28,7 +32,6 @@
         }
     }
     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];
-    NSLog(@"language_:%@",Localized(@"language"));
     return YES;
 }
 

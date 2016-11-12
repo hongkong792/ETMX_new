@@ -10,6 +10,7 @@
 #import "QRScanViewController.h"
 #import "LogiinViewController.h"
 #import "TaskMainControllerViewController.h"
+#import "CheckNetWorkerTool.h"
 
 
 
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UIView *separatorThree;
 @property (strong, nonatomic) IBOutlet UIView *swparatorFour;
 @property (strong, nonatomic) IBOutlet UIView *separatorTwo;
+@property (copy,nonatomic)NSString * adressIp;
 
 
 
@@ -220,6 +222,10 @@
         [self presentViewController:alert animated:YES completion:nil];
 
     }
+    
+   BOOL status =  [[CheckNetWorkerTool sharedManager] isNetWorking];
+   NSLog(@"status:%d",status);
+    
 
 }
 
@@ -242,7 +248,7 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         //textField.textColor = [UIColor redColor];
         textField.text = @"";
-       // [textField addTarget:self action:@selector(username2DidChange:) forControlEvents:UIControlEventEditingChanged];
+        [textField addTarget:self action:@selector(ipChanged:) forControlEvents:UIControlEventEditingDidEnd];
        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(usernameDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
     }];
 
@@ -291,15 +297,24 @@
          didScanResult:(NSString *)result
             isTwoDCode:(BOOL)isTwoDCode
 {
+    
+    
+    
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
 }
 
 
 
-- (void)username2DidChange:(id)sender
+- (void)ipChanged:(id)sender
 {
-    
-    
+    UITextField * field = [[UITextField alloc] init];
+    field =  (UITextField *)sender;
+    //切换地址
+    [[NSUserDefaults standardUserDefaults] setObject:field.text forKey:ADRESSIP];
+    //重新启动网络
+    [CheckNetWorkerTool sharedManager];
+  
 }
 
 

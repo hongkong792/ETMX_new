@@ -25,7 +25,8 @@
     if (instance != nil) {
         instance = nil;
     }
-    instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:ADRESSIP]];
+    NSString *url = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
+    instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:url]];
     instance = [[self alloc] init];
     return instance;
 }
@@ -85,6 +86,7 @@
     }
     //暂时默认是通的
      [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:ISNETWORKING];
+     [[NSUserDefaults standardUserDefaults] synchronize];
     return YES;
 }
 

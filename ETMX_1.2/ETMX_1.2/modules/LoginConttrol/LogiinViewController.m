@@ -95,6 +95,7 @@ MJExtensionLogAllProperties
     if ([user.flag isEqualToString:@"1"] || [user.message isEqualToString:@"验证成功"]) {
         //用户登录成功
         [[NSUserDefaults standardUserDefaults] setObject:user forKey:LOGINUSER];//保存当前用户，全局使用
+        [[NSUserDefaults standardUserDefaults] synchronize];
         TaskMainControllerViewController  * taskCon = [[TaskMainControllerViewController alloc] init];
         [self.navigationController pushViewController:taskCon animated:YES];
         

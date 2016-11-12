@@ -100,7 +100,7 @@
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-qG-KIQ" userLabel="修改ip">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="SRZ-Hl-n3G"/>
-                                    <constraint firstAttribute="width" constant="100" id="aGX-nF-CF9"/>
+                                    <constraint firstAttribute="width" constant="170" id="aGX-nF-CF9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="修改ip">

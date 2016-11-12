@@ -192,11 +192,21 @@
     self.userNameLabel.text = Localized(@"username");
     self.passWordLabel.text = Localized(@"password");
     self.languageLabel.text = Localized(@"language");
-    self.loginLabel.titleLabel.text = Localized(@"login");
-    self.changeIPLabel.titleLabel.text = Localized(@"changeIP");
-    [self.changeIPLabel layoutIfNeeded];
-    self.QRCodeLabel.titleLabel.text = Localized(@"ScanQRCode");
+   // self.loginLabel.titleLabel.text = Localized(@"login");
+ //   self.changeIPLabel.titleLabel.text = Localized(@"changeIP");
+ //   self.QRCodeLabel.titleLabel.text = Localized(@"ScanQRCode");
     self.titleLabel.text = Localized(@"title");
+
+    [self.loginLabel setTitle:Localized(@"login") forState:UIControlStateNormal];
+    [self.loginLabel setTitle:Localized(@"login") forState:UIControlStateHighlighted];
+    
+    [self.changeIPLabel setTitle:Localized(@"changeIP") forState:UIControlStateNormal];
+    [self.changeIPLabel setTitle:Localized(@"changeIP") forState:UIControlStateHighlighted];
+    
+    [self.QRCodeLabel setTitle:Localized(@"ScanQRCode") forState:UIControlStateNormal];
+    [self.QRCodeLabel setTitle:Localized(@"ScanQRCode") forState:UIControlStateHighlighted];
+    
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
@@ -306,7 +316,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:field.text forKey:ADRESSIP];
     //重新启动网络
     [CheckNetWorkerTool sharedManager];
-    
     //以下為測試代碼
     SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     sea.preferredContentSize = CGSizeMake(800, 600);

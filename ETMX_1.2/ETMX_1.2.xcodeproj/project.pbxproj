@@ -65,6 +65,10 @@
 		0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B87A1DD08AB0004FF173 /* NetWorkManager.m */; };
 		06E0C8D21DD6BC98004648AA /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8D11DD6BC98004648AA /* MJExtensionConfig.m */; };
 		06E0C8D51DD6DBB6004648AA /* CheckNetWorkerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8D41DD6DBB6004648AA /* CheckNetWorkerTool.m */; };
+		06E0C8E11DD6FCDA004648AA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8DF1DD6FCDA004648AA /* SearchViewController.m */; };
+		06E0C8E21DD6FCDA004648AA /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E0C8E01DD6FCDA004648AA /* SearchViewController.xib */; };
+		06E0C8E71DD70833004648AA /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 06E0C8E41DD70833004648AA /* ico_make.png */; };
+		06E0C8E81DD70833004648AA /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8E61DD70833004648AA /* JSDropDownMenu.m */; };
 		2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */; };
 		247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */; };
 		247494911DD21B7400BD7711 /* EtmxMold.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474947E1DD21B7400BD7711 /* EtmxMold.m */; };
@@ -219,6 +223,12 @@
 		06E0C8D11DD6BC98004648AA /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJExtensionConfig.m; path = ETMX_1.2/modules/MJExtensionConfig.m; sourceTree = SOURCE_ROOT; };
 		06E0C8D31DD6DBB6004648AA /* CheckNetWorkerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetWorkerTool.h; sourceTree = "<group>"; };
 		06E0C8D41DD6DBB6004648AA /* CheckNetWorkerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetWorkerTool.m; sourceTree = "<group>"; };
+		06E0C8DE1DD6FCDA004648AA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		06E0C8DF1DD6FCDA004648AA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		06E0C8E01DD6FCDA004648AA /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		06E0C8E41DD70833004648AA /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
+		06E0C8E51DD70833004648AA /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
+		06E0C8E61DD70833004648AA /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
 		247494781DD21B7400BD7711 /* TaskMainControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskMainControllerViewController.h; sourceTree = "<group>"; };
 		247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskMainControllerViewController.m; sourceTree = "<group>"; };
 		2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskMainControllerViewController.xib; sourceTree = "<group>"; };
@@ -376,6 +386,7 @@
 		0674B8081DD08AAF004FF173 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				06E0C8E31DD70833004648AA /* JSDropDownMenu */,
 				0651462E1DD4850200BCDE13 /* Reachability */,
 				0674B8091DD08AAF004FF173 /* AFNetworking */,
 				0674B8401DD08AAF004FF173 /* LibraryTest.h */,
@@ -522,6 +533,8 @@
 		0674B8651DD08AAF004FF173 /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				06E0C8DD1DD6FC94004648AA /* AddHelper */,
+				06E0C8D61DD6FBE5004648AA /* SearchControl */,
 				0660009C1DD5E87D005F2D80 /* MJExtension */,
 				247494761DD21B7400BD7711 /* TaskMainController */,
 				0674B8B51DD099E9004FF173 /* QRCodeCommon.h */,
@@ -582,6 +595,33 @@
 				0674B87A1DD08AB0004FF173 /* NetWorkManager.m */,
 			);
 			path = tools;
+			sourceTree = "<group>";
+		};
+		06E0C8D61DD6FBE5004648AA /* SearchControl */ = {
+			isa = PBXGroup;
+			children = (
+				06E0C8DE1DD6FCDA004648AA /* SearchViewController.h */,
+				06E0C8DF1DD6FCDA004648AA /* SearchViewController.m */,
+				06E0C8E01DD6FCDA004648AA /* SearchViewController.xib */,
+			);
+			path = SearchControl;
+			sourceTree = "<group>";
+		};
+		06E0C8DD1DD6FC94004648AA /* AddHelper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddHelper;
+			sourceTree = "<group>";
+		};
+		06E0C8E31DD70833004648AA /* JSDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				06E0C8E41DD70833004648AA /* ico_make.png */,
+				06E0C8E51DD70833004648AA /* JSDropDownMenu.h */,
+				06E0C8E61DD70833004648AA /* JSDropDownMenu.m */,
+			);
+			path = JSDropDownMenu;
 			sourceTree = "<group>";
 		};
 		247494761DD21B7400BD7711 /* TaskMainController */ = {
@@ -706,7 +746,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */,
+				06E0C8E21DD6FCDA004648AA /* SearchViewController.xib in Resources */,
 				0674B8991DD08AB0004FF173 /* LICENSE in Resources */,
+				06E0C8E71DD70833004648AA /* ico_make.png in Resources */,
 				066000B31DD5E87D005F2D80 /* Info.plist in Resources */,
 				0674B7F11DD08971004FF173 /* Language.strings in Resources */,
 				247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */,
@@ -737,6 +779,7 @@
 				066000B91DD5E87D005F2D80 /* NSObject+MJClass.m in Sources */,
 				247494941DD21B7400BD7711 /* ETMXTableViewCell1.m in Sources */,
 				0674B7DB1DD086F7004FF173 /* ViewController.m in Sources */,
+				06E0C8E11DD6FCDA004648AA /* SearchViewController.m in Sources */,
 				0674B8A31DD08AB0004FF173 /* QRCodeGenerator.m in Sources */,
 				0674B8801DD08AB0004FF173 /* AFNetworkReachabilityManager.m in Sources */,
 				0674B87E1DD08AB0004FF173 /* UserManager.m in Sources */,
@@ -760,6 +803,7 @@
 				247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */,
 				066000B81DD5E87D005F2D80 /* MJPropertyType.m in Sources */,
 				0674B88C1DD08AB0004FF173 /* UIImageView+AFNetworking.m in Sources */,
+				06E0C8E81DD70833004648AA /* JSDropDownMenu.m in Sources */,
 				066000B71DD5E87D005F2D80 /* MJPropertyKey.m in Sources */,
 				0674B8A41DD08AB0004FF173 /* UIView+QREasyFrame.m in Sources */,
 				2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */,

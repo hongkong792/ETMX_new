@@ -69,9 +69,10 @@
     self.LanguagePicker.dataSource = self;
 
     self.passwordTest.placeholder = @"you password";
+    self.passwordTest.secureTextEntry = YES;
     self.userNameText.placeholder = @"you username";
-    self.passwordTest.textColor = [UIColor lightGrayColor];
-    self.userNameText.textColor = [UIColor lightGrayColor];
+    self.passwordTest.textColor = [UIColor blackColor];
+    self.userNameText.textColor = [UIColor blackColor];
     self.userNameText.font = [UIFont systemFontOfSize:25];
     self.passwordTest.font = [UIFont systemFontOfSize:25];
     
@@ -87,19 +88,10 @@
         self.changeIPLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         self.QRCodeLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         [self.passwordTest setSecureTextEntry:YES];
-
-//        CGRect userNameRect = self.userNameText.frame;
-//        userNameRect.size.width = 40;
-//        self.userNameText.frame = userNameRect;
-//        self.userNameText.font = [UIFont systemFontOfSize:30];
-//        
-//        CGRect passRect = self.passwordTest.frame;
-//        passRect.size.width = 40;
-//        self.passwordTest.frame = passRect;
-//        self.passwordTest.font = [UIFont systemFontOfSize:30];
   
         self.userNameText.font = [UIFont systemFontOfSize:25];
         self.passWordLabel.font = [UIFont systemFontOfSize:25];
+   
         
         NSLayoutConstraint * con_1 = [NSLayoutConstraint constraintWithItem:self.loginLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.separatorTwo attribute:NSLayoutAttributeBottom multiplier:1 constant:170];
         NSLayoutConstraint * con_2 = [NSLayoutConstraint constraintWithItem:self.separatorThree attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.loginLabel attribute:NSLayoutAttributeBottom multiplier:1 constant:10];

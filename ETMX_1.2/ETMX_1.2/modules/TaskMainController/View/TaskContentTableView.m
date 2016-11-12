@@ -71,27 +71,6 @@
     }
     cell.task = curTask;
     return cell;
-//    if ([self.selectedCells containsObject:indexPath]) {
-//        //展开状态
-//        NSString *taskCell1ID= @"TaskCellSpreadID";
-//        ETMXTableViewCell1 *cell = [tableView dequeueReusableCellWithIdentifier:taskCell1ID];
-//        if (cell == nil) {
-//            cell = (ETMXTableViewCell1 *)[[NSBundle mainBundle] loadNibNamed:@"ETMXTableViewCell1" owner:self options:nil].lastObject;
-//        }
-//
-//        cell.task =curTask;
-//        return cell;
-//    }else{
-//    //收缩状态
-//        NSString *taskCell2ID= @"TaskCellFoldID";
-//        ETMXTableViewCell2 *cell = [tableView dequeueReusableCellWithIdentifier:taskCell2ID];
-//        if (cell == nil) {
-//            cell = (ETMXTableViewCell2 *)[[NSBundle mainBundle] loadNibNamed:@"ETMXTableViewCell2" owner:self options:nil].lastObject;
-//            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//        }
-//        cell.task =curTask;
-//        return cell;
-//    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -164,11 +143,6 @@
 -(void)reloadDataWithSortTasks:(NSArray *)sortTasks{
     [self.mold loadMoldWithTasks:sortTasks];
     [self reloadData];
-    CGRect tempRect = self.frame;
-    tempRect.size.height = self.contentSize.height;
-    self.frame = tempRect;
-    [self layoutIfNeeded];
 }
-
 
 @end

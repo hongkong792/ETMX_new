@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserManager.h"
-#import "UserAccount.h"
+
 
 @interface TaskMainControllerViewController : UIViewController
-@property (nonatomic,strong) UserAccount *curAccount;
 @end

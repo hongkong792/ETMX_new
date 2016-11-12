@@ -12,6 +12,7 @@
 #import "TaskContentTableView.h"
 #import "CustomSegmentController.h"
 #import "CustomBtn.h"
+#import "LogiinViewController.h"
 
 #define WTaskTypeMold                    @"mold"                         //新模
 #define WTaskTypeChangeMold     @"changeMold"         //改模
@@ -72,9 +73,6 @@ typedef enum : NSUInteger {
 //任务展示tableview
 @property (strong, nonatomic) IBOutlet TaskContentTableView *tableView;
 
-//获得所有任务，未整理未排序,一维数组
-@property (nonatomic,strong) NSMutableArray *allTasks;
-
 //按照要求排序好的所有任务，二维数组
 @property (nonatomic,strong) NSMutableArray *sortTasks;
 
@@ -100,20 +98,38 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self initNav];
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    self.taskType = WTaskTypeMold;
-    self.taskState =WTaskStateReleased;
+    [self setup];
+    //网络判断
+    if ([[CheckNetWorkerTool sharedManager] isNetWorking]) {
+        [self sortAllTaskWithType:self.taskType andState:self.taskState];
+    }else{
+#warning todo:tip no connet to service
+    }
+}
+
+#pragma mark -- commen
+-(void)setup{
+    [self initNav];
+    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.taskType = WTaskTypeMold;                                      //默认是新模
+    self.taskState = WTaskStateReleased;                            //默认是未开始
     [self.typeSegment addTarget:self action:@selector(selecteType:) forControlEvents:UIControlEventValueChanged];
     [self.stateSegment addTarget:self action:@selector(selecteState:) forControlEvents:UIControlEventValueChanged];
-    [self LoginTest];
+    [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateNormal];
+    [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateHighlighted];
+    [self.typeSegment setTitle:Localized(@"new mold") forSegmentAtIndex:0];
+    [self.typeSegment setTitle:Localized(@"change mold") forSegmentAtIndex:1];
+    [self.typeSegment setTitle:Localized(@"electrode") forSegmentAtIndex:2];
+    [self.stateSegment setTitle:Localized(@"released") forSegmentAtIndex:0];
+    [self.stateSegment setTitle:Localized(@"inwork") forSegmentAtIndex:1];
+    [self.stateSegment setTitle:Localized(@"stopped") forSegmentAtIndex:2];
+    [self.stateSegment setTitle:Localized(@"completed") forSegmentAtIndex:3];
 }
 
 -(void)initNav{
-#warning todo:
-//    self.curAccount = [[UserManager instance] getCurAccount];
-//    self.title = self.curAccount.fullName;
-    self.title = @"何燦洪(生產主管)";
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    LoginResponse *response = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
+    self.title = response.fullName;
     UIButton *freshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [freshBtn setTitle:Localized(@"refresh") forState:UIControlStateNormal];
     [freshBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -134,6 +150,7 @@ typedef enum : NSUInteger {
     UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchBtn];
     self.navigationItem.rightBarButtonItem = searchBarItem;
 }
+
 -(void)selecteType:(UISegmentedControl *)sender{
     switch (sender.selectedSegmentIndex) {
         case 0:
@@ -174,19 +191,75 @@ typedef enum : NSUInteger {
     [self refresh:nil];
 }
 
+//刷新按钮文字
+-(void)refreshBtns{
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"released"),[self.allTaskState valueForKey:@"notstart"]] forSegmentAtIndex:0];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),[self.allTaskState valueForKey:@"start"]] forSegmentAtIndex:1];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),[self.allTaskState valueForKey:@"stopped"]] forSegmentAtIndex:2];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),[self.allTaskState valueForKey:@"completed"]] forSegmentAtIndex:3];
+}
 //按照segment的选择排列任务，即设置sortTasks
 -(void)sortAllTaskWithType:(NSString *)type andState:(NSString *)state{
-#warning  todo:setSortAllTasks
-    self.sortTasks = self.allTasks;
+    if ([[CheckNetWorkerTool sharedManager] isNetWorking]) {
+        LoginResponse *response = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
+        NSString *userCode = response.name;
+        NSArray *parameters = @[self.taskState,userCode,@"",@"",self.taskType];
+        NSString *methodName = @"queryFilterTasks";
+        [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+            [parser setDelegate:self];
+            [parser parse];
+        } failure:^(NSError *error) {
+#warning todo:tip
+        }];
+    }
+}
+
+#pragma mark -- functions
+//刷新
+-(void)refresh:(id)sender{
+    [self refreshBtns];
+    [self.tableView reloadDataWithSortTasks:self.sortTasks];
+}
+
+//搜索事件
+-(void)search:(id)sender{
+#warning todo:
+}
+
+//添帮手事件入口
+- (IBAction)addHelper:(UIButton *)sender {
+}
+
+//启动
+- (IBAction)startTask:(id)sender {
+}
+
+- (IBAction)stopTask:(id)sender {
+}
+
+- (IBAction)finishTask:(id)sender {
+}
+
+- (IBAction)scanTask:(id)sender {
+}
+
+- (IBAction)goWork:(id)sender {
+}
+
+- (IBAction)workOff:(id)sender {
+}
+
+- (IBAction)exchange:(id)sender {
+}
+
+- (IBAction)selecteAll:(id)sender {
+}
+
+- (IBAction)cancelSelected:(id)sender {
 }
 
 #pragma mark -- INIT
--(NSMutableArray *)allTasks{
-    if (_allTasks ==nil) {
-        _allTasks = [[NSMutableArray alloc] init];
-    }
-    return _allTasks;
-}
 
 -(NSMutableArray *)sortTasks{
     if (_sortTasks == nil) {
@@ -201,62 +274,14 @@ typedef enum : NSUInteger {
     }
     return _allTaskState;
 }
-//搜索事件
--(void)search:(id)sender{
-#warning todo:
-}
-
-//刷新tableview
--(void)refresh:(id)sender{
-    [self refreshBtns];
-    [self sortAllTaskWithType:self.taskType andState:self.taskState];
-    [self.tableView reloadDataWithSortTasks:self.sortTasks];
-}
-
-//刷新按钮文字
--(void)refreshBtns{
-    [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateNormal];
-    [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateHighlighted];
-    [self.typeSegment setTitle:Localized(@"new mold") forSegmentAtIndex:0];
-    [self.typeSegment setTitle:Localized(@"change mold") forSegmentAtIndex:1];
-    [self.typeSegment setTitle:Localized(@"electrode") forSegmentAtIndex:2];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"released"),[self.allTaskState valueForKey:@"notstart"]] forSegmentAtIndex:0];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),[self.allTaskState valueForKey:@"start"]] forSegmentAtIndex:1];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),[self.allTaskState valueForKey:@"stopped"]] forSegmentAtIndex:2];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),[self.allTaskState valueForKey:@"completed"]] forSegmentAtIndex:3];
-}
 
 
-//网络数据测试
--(void)LoginTest{
-//    获取所有任务接口测试（getTasksByUserCode(String userCode)）
-    NSArray *paramters = @[@"SGS000359"];
-    NSString *urlStr = @"http://192.168.1.161:8085/ETMX/services/TaskScanExecution";
-    NSString *methodName = @"getTasksByUserCode";
-    [NetWorkManager sendRequestWithParameters:paramters url:urlStr method:methodName success:^(id data) {
-#warning todo:解析数据
-        NSError *error = nil;
-        NSDictionary *dict = [XMLReader dictionaryForXMLData:data error:&error];
-        NSDictionary *dict1 = [dict valueForKey:@"soap:Envelope"];
-        NSDictionary *dict2 = [dict1 valueForKey:@"soap:Body"];
-        NSDictionary *dict3 = [dict2 valueForKey:@"ns1:getTasksByUserCodeResponse"];
-        NSDictionary *dict4 = [dict3 valueForKey:@"ns1:out"];
-        NSString *str = [dict4 valueForKey:@"text"];//该字段根据实践情况获得
-        NSData *newData = [str dataUsingEncoding:NSUTF8StringEncoding];
-        NSXMLParser *p = [[NSXMLParser alloc] initWithData:newData];
-        [p setDelegate:self];
-        [p parse];
-        
-    } failure:^(NSError *error) {
-        NSLog( @"%@",error);
-    }];
-}
 
 
 #pragma mark -- NSXMLParserDelegate数据解析
 -(void)parserDidStartDocument:(NSXMLParser *)parser{
     [self.allTaskState removeAllObjects];
-    [self.allTaskState removeAllObjects];
+    [self.sortTasks removeAllObjects];
 }
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     if ([elementName isEqualToString:@"Etmx"]) {
@@ -264,7 +289,7 @@ typedef enum : NSUInteger {
     }
     if ([elementName isEqualToString:@"Task"]) {
         ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
-        [self.allTasks addObject:task];
+        [self.sortTasks addObject:task];
     }
 }
 

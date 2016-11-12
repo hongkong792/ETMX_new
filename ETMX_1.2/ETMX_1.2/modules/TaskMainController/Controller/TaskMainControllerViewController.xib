@@ -67,8 +67,12 @@
                             <state key="normal" title="添帮手">
                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="addHelper:" destination="-1" eventType="touchUpInside" id="9y9-sS-ciQ"/>
+                            </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="BqQ-bx-arr" firstAttribute="top" secondItem="j4E-db-O3F" secondAttribute="top" constant="15" id="5Iq-Az-WLx"/>
                         <constraint firstItem="BqQ-bx-arr" firstAttribute="width" secondItem="j4E-db-O3F" secondAttribute="width" multiplier="0.6" id="F1t-ar-D9L"/>
@@ -94,6 +98,9 @@
                                     <state key="normal" title="扫描">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="scanTask:" destination="-1" eventType="touchUpInside" id="kS2-A4-Q05"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWM-Oe-ear" customClass="CustomBtn">
                                     <rect key="frame" x="415.5" y="9" width="31" height="30"/>
@@ -101,12 +108,18 @@
                                     <state key="normal" title="完成">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="finishTask:" destination="-1" eventType="touchUpInside" id="zdl-4d-d4c"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiG-dt-dzQ" customClass="CustomBtn">
                                     <rect key="frame" x="334.5" y="9" width="31" height="30"/>
                                     <state key="normal" title="暂停">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="stopTask:" destination="-1" eventType="touchUpInside" id="4mu-T4-wEo"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPT-Qg-gWq" customClass="CustomBtn">
                                     <rect key="frame" x="253.5" y="9" width="31" height="30"/>
@@ -114,6 +127,9 @@
                                     <state key="normal" title="启动">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="startTask:" destination="-1" eventType="touchUpInside" id="oam-4A-m3i"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTv-d6-D6X" customClass="CustomBtn">
                                     <rect key="frame" x="577.5" y="9" width="31" height="30"/>
@@ -121,6 +137,9 @@
                                     <state key="normal" title="上班">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="goWork:" destination="-1" eventType="touchUpInside" id="XW6-S6-QVv"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-UP-Pj9" customClass="CustomBtn">
                                     <rect key="frame" x="661.5" y="7" width="31" height="30"/>
@@ -128,6 +147,9 @@
                                     <state key="normal" title="下班">
                                         <color key="titleColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="workOff:" destination="-1" eventType="touchUpInside" id="49C-As-t3j"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okj-t4-6eb" customClass="CustomBtn">
                                     <rect key="frame" x="752.5" y="9" width="31" height="30"/>
@@ -135,6 +157,9 @@
                                     <state key="normal" title="替换">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="exchange:" destination="-1" eventType="touchUpInside" id="7qA-yf-cPm"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.93725490196078431" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -169,6 +194,9 @@
                                     <state key="normal" title="全选 ">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="selecteAll:" destination="-1" eventType="touchUpInside" id="SQI-oq-cmT"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phF-ZB-LKW" customClass="CustomBtn">
                                     <rect key="frame" x="99" y="35" width="31" height="30"/>
@@ -176,6 +204,9 @@
                                     <state key="normal" title="取消">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="cancelSelected:" destination="-1" eventType="touchUpInside" id="Qpg-fJ-3w2"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -200,22 +231,24 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bl-AG-cAJ" customClass="TaskContentTableView">
-                    <rect key="frame" x="5" y="150" width="1014" height="1062"/>
+                    <rect key="frame" x="0.0" y="245" width="1024" height="972"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="j4E-db-O3F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="0hr-dQ-nFJ"/>
-                <constraint firstItem="WxM-zi-His" firstAttribute="top" secondItem="3bl-AG-cAJ" secondAttribute="bottom" constant="5" id="3E7-TL-3e2"/>
-                <constraint firstAttribute="trailing" secondItem="3bl-AG-cAJ" secondAttribute="trailing" constant="5" id="41e-gq-FlD"/>
-                <constraint firstItem="3bl-AG-cAJ" firstAttribute="top" secondItem="j4E-db-O3F" secondAttribute="bottom" constant="5" id="8hU-lE-0aL"/>
                 <constraint firstItem="WxM-zi-His" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8kZ-0f-PZh"/>
                 <constraint firstAttribute="trailing" secondItem="j4E-db-O3F" secondAttribute="trailing" id="8oh-Tx-1t4"/>
-                <constraint firstItem="3bl-AG-cAJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="Rbq-HD-2Ao"/>
+                <constraint firstItem="WxM-zi-His" firstAttribute="top" secondItem="3bl-AG-cAJ" secondAttribute="bottom" id="MWe-CZ-J0i"/>
                 <constraint firstAttribute="bottom" secondItem="WxM-zi-His" secondAttribute="bottom" id="URY-SJ-1Ng"/>
+                <constraint firstItem="3bl-AG-cAJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VSw-Ru-y0l"/>
+                <constraint firstAttribute="trailing" secondItem="3bl-AG-cAJ" secondAttribute="trailing" id="Whb-u3-3Ee"/>
                 <constraint firstAttribute="trailing" secondItem="WxM-zi-His" secondAttribute="trailing" id="ago-bL-Oxu"/>
                 <constraint firstItem="j4E-db-O3F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hkJ-NO-XIR"/>
+                <constraint firstItem="3bl-AG-cAJ" firstAttribute="top" secondItem="j4E-db-O3F" secondAttribute="bottom" constant="100" id="yQA-PW-T3m"/>
             </constraints>
+            <point key="canvasLocation" x="484" y="127"/>
         </view>
     </objects>
 </document>

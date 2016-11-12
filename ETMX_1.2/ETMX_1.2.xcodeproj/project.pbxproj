@@ -83,6 +83,7 @@
 		247494A01DD35FE700BD7711 /* selected_image_checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */; };
 		247494A11DD35FE700BD7711 /* selected_image_uncheckmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */; };
 		247494A21DD35FE700BD7711 /* selected_image_uncheckmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */; };
+		24770FE11DD6E3B500DB4EED /* NetRequestParameter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24770FE01DD6E3B500DB4EED /* NetRequestParameter.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -250,6 +251,7 @@
 		2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_checkmark@3x.png"; sourceTree = "<group>"; };
 		2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_uncheckmark@2x.png"; sourceTree = "<group>"; };
 		2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_uncheckmark@3x.png"; sourceTree = "<group>"; };
+		24770FE01DD6E3B500DB4EED /* NetRequestParameter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NetRequestParameter.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				0674B7FE1DD08AAF004FF173 /* Model */,
+				24770FE01DD6E3B500DB4EED /* NetRequestParameter.plist */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24770FE11DD6E3B500DB4EED /* NetRequestParameter.plist in Resources */,
 				2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */,
 				06E0C8E21DD6FCDA004648AA /* SearchViewController.xib in Resources */,
 				0674B8991DD08AB0004FF173 /* LICENSE in Resources */,

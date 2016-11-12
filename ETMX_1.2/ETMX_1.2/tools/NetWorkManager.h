@@ -27,16 +27,9 @@ typedef void (^HttpFailure)(NSError *error);
  *  soap请求
  *
  *  @param paramters 请求参数数组，例如@[@"admin",@"admin"]
+ *  @param methodName 请求方法名，例如@"checkUserInfo"
  *  @param success   请求成功回调
  *  @param failure   请求失败回调
  */
-+(void)sendRequestWithParameters:(NSArray *)paramters  url:(NSString *)urlStr method:(NSString *)methodName success:(HttpSuccess)success failure:(HttpFailure)failure;
-
-
-//get请求
-+(void)getWithUrlString:(NSString *)urlString success:(HttpSuccess)success failure:(HttpFailure)failure;
-
-//post请求
-+(void)postWithUrlString:(NSString *)urlString parameters:(NSDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure;
-
++(void)sendRequestWithParameters:(NSArray *)paramters method:(NSString *)methodName success:(HttpSuccess )success failure:(HttpFailure)failure;
 @end

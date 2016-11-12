@@ -220,19 +220,7 @@
         [self presentViewController:alert animated:YES completion:nil];
 
     }
-    
-    NSDictionary *dict = @{
-                           @"flag" : @"1",
-                           @"message" : @"lufy.png",
-                           @"IDw" : @"20",
-                           @"name" : @"wpq",
-                           @"fullName" : @"helloword",
-                           @"number" : @"1ssww110"
-                           };
-    LoginResponse *user2 = [LoginResponse mj_objectWithKeyValues:dict];
-    NSLog(@"user:%@",user2);
-    
-    
+
 }
 
 - (IBAction)changeIpClick:(id)sender {
@@ -242,10 +230,6 @@
     __weak typeof(alert) weakAlert = alert;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
        NSLog(@"点击了确定按钮--%@-%@", [weakAlert.textFields.firstObject text], [weakAlert.textFields.lastObject text]);
-        
-        
-        
-        
         
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -322,12 +306,6 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
     [self.navigationController pushViewController:taskMainVC animated:YES];
-}
-
-+(NSDictionary *)replacedKeyFromPropertyName{
-    
-    return  @{@"wpq":@"IDw"};
-    
 }
 
 @end

@@ -9,35 +9,24 @@
 #import "LogiinViewController.h"
 #import "UserAccount.h"
 #import "NetWorkManager.h"
-
-@interface LogiinViewController ()
-
-@property(nonatomic,strong)AFHTTPSessionManager * manager;
-@property(nonatomic,strong)UserAccount * userAccount;
-
-@end
+#import "TaskMainControllerViewController.h"
 
 
 @implementation LoginResponse
 
-+(NSDictionary *)replacedKeyFromPropertyName{
-    
-    return  @{@"IDw":@"wpq"};
-    
-}
-
-
-+ (NSDictionary *)mj_replacedKeyFromPropertyName;
-{
-     return  @{@"IDw":@"wpq"};
-}
-+ (id)mj_replacedKeyFromPropertyName121:(NSString *)propertyName
-{    
-     return  @{@"wpq":@"IDw"};
-}
-
 MJExtensionLogAllProperties
 @end
+
+@interface LogiinViewController ()<NSXMLParserDelegate>
+
+@property(nonatomic,strong)AFHTTPSessionManager * manager;
+@property(nonatomic,strong)UserAccount * userAccount;
+@property(nonatomic,strong)LoginResponse * loginResult;
+
+@end
+
+
+
 
 @implementation LogiinViewController
 
@@ -88,13 +77,39 @@ MJExtensionLogAllProperties
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
 
     if ([elementName isEqualToString:@"User"]) {
-        UserAccount *user = [[UserAccount alloc] init];
-   
-
-        
+        LoginResponse *user = [LoginResponse mj_objectWithKeyValues:attributeDict];
+        if (user != nil) {
+            self.loginResult = [user copy];
+            [self checkUserAndSave:user];
+        }
     }
 }
 
 
+- (void)dealloc
+{
+    self.loginResult = nil;
+}
+- (void)checkUserAndSave:(LoginResponse *)user
+{
+    if ([user.flag isEqualToString:@"1"] || [user.message isEqualToString:@"验证成功"]) {
+        //用户登录成功
+        [[NSUserDefaults standardUserDefaults] setObject:user forKey:LOGINUSER];//保存当前用户，全局使用
+        TaskMainControllerViewController  * taskCon = [[TaskMainControllerViewController alloc] init];
+        [self.navigationController pushViewController:taskCon animated:YES];
+        
+        
+    }else{
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不正确" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            return ;
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
+    
+}
 
 @end

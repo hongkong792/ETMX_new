@@ -10,13 +10,14 @@
 #import "UserAccount.h"
 #import "NetWorkManager.h"
 #import "MJExtension.h"
+#import "MJExtensionConfig.h"
 
 
-@interface LoginResponse : NSObject
+@interface LoginResponse : MJExtensionConfig
 
-@property(nonatomic,assign)NSInteger flag;
+@property(nonatomic,assign)NSString* flag;
 @property(nonatomic,copy)NSString * message;
-@property(nonatomic,assign)NSInteger wpq;
+@property(copy, nonatomic)NSString *ID;
 @property(nonatomic,copy)NSString * name;
 @property(nonatomic,copy)NSString *fullName;
 @property(nonatomic,copy)NSString * number;

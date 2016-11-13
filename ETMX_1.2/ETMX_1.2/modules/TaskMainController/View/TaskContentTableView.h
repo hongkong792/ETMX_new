@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "EtmxMold.h"
-@interface TaskContentTableView : UITableView<UITableViewDataSource,UITableViewDelegate>
+#import "ETMXTableViewCell1.h"
+#import "TaskSectionHeaderView.h"
+@interface TaskContentTableView : UITableView<UITableViewDataSource,UITableViewDelegate,TaskSectionHeaderDelegate,ETXMTableViewCellDelegate>
 @property (nonatomic,strong) EtmxMold *mold;//数据源
+@property (nonatomic,strong) NSMutableArray *selectedTasks;
 -(void)reloadDataWithSortTasks:(NSArray *)sortTasks;
 @end

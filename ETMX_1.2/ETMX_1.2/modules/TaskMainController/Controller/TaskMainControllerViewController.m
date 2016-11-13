@@ -28,9 +28,10 @@
 #define WXMLParseNameGetTasksByUserCode @"ns1:getTasksByUserCodeResponse"         //根据用户号获得所有任务的解析字段
 
 typedef enum : NSUInteger {
-    GetTasksByUserCode,
-    QueryFilterTasks,
+    getFilterTasks2,
 } NetRequestName;
+
+
 
 @interface TaskMainControllerViewController ()<NSXMLParserDelegate>
 //xib中的控件
@@ -105,6 +106,7 @@ typedef enum : NSUInteger {
     }else{
 #warning todo:tip no connet to service
     }
+    [self refresh:nil];
 }
 
 #pragma mark -- commen
@@ -168,6 +170,7 @@ typedef enum : NSUInteger {
         default:
             break;
     }
+    [self sortAllTaskWithType:self.taskType andState:self.taskState];
     [self refresh:nil];
 }
 
@@ -188,6 +191,7 @@ typedef enum : NSUInteger {
         default:
             break;
     }
+    [self sortAllTaskWithType:self.taskType andState:self.taskState];
     [self refresh:nil];
 }
 
@@ -200,6 +204,7 @@ typedef enum : NSUInteger {
 }
 //按照segment的选择排列任务，即设置sortTasks
 -(void)sortAllTaskWithType:(NSString *)type andState:(NSString *)state{
+    self.netRequesetName = getFilterTasks2;
     if ([[CheckNetWorkerTool sharedManager] isNetWorking]) {
         LoginResponse *response = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
         NSString *userCode = response.name;
@@ -214,6 +219,8 @@ typedef enum : NSUInteger {
         }];
     }
 }
+
+
 
 #pragma mark -- functions
 //刷新
@@ -233,12 +240,66 @@ typedef enum : NSUInteger {
 
 //启动
 - (IBAction)startTask:(id)sender {
+    LoginResponse *loginResponse = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
+    NSArray *tasks = self.tableView.selectedTasks;
+    NSString *tasksStr = [[NSString alloc] init];
+    for (NSInteger i=0; i<tasks.count; i++) {
+        ETMXTask *task = tasks[i];
+        if (i!=tasks.count-1) {// 判断是否为最后一个
+            [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
+        }else{
+            [tasksStr stringByAppendingString:task.code];
+        }
+    }
+    NSArray *parameters = @[@"TS",loginResponse.name,tasksStr];
+    NSString *methodName = @"taskExecute";
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
-
+//暂停
 - (IBAction)stopTask:(id)sender {
+    LoginResponse *loginResponse = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
+    NSArray *tasks = self.tableView.selectedTasks;
+    NSString *tasksStr = [[NSString alloc] init];
+    for (NSInteger i=0; i<tasks.count; i++) {
+        ETMXTask *task = tasks[i];
+        if (i!=tasks.count-1) {// 判断是否为最后一个
+            [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
+        }else{
+            [tasksStr stringByAppendingString:task.code];
+        }
+    }
+    NSArray *parameters = @[@"TP",loginResponse.name,tasksStr];
+    NSString *methodName = @"taskExecute";
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
-
+//完成
 - (IBAction)finishTask:(id)sender {
+    LoginResponse *loginResponse = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
+    NSArray *tasks = self.tableView.selectedTasks;
+    NSString *tasksStr = [[NSString alloc] init];
+    for (NSInteger i=0; i<tasks.count; i++) {
+        ETMXTask *task = tasks[i];
+        if (i!=tasks.count-1) {// 判断是否为最后一个
+            [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
+        }else{
+            [tasksStr stringByAppendingString:task.code];
+        }
+    }
+    NSArray *parameters = @[@"TF",loginResponse.name,tasksStr];
+    NSString *methodName = @"taskExecute";
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (IBAction)scanTask:(id)sender {
@@ -280,16 +341,35 @@ typedef enum : NSUInteger {
 
 #pragma mark -- NSXMLParserDelegate数据解析
 -(void)parserDidStartDocument:(NSXMLParser *)parser{
-    [self.allTaskState removeAllObjects];
-    [self.sortTasks removeAllObjects];
+    switch (self.netRequesetName ) {
+        case getFilterTasks2:
+        {
+            [self.allTaskState removeAllObjects];
+            [self.sortTasks removeAllObjects];
+        }
+            break;
+            
+        default:
+            break;
+    }
+ 
 }
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
-    if ([elementName isEqualToString:@"Etmx"]) {
-        self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
-    }
-    if ([elementName isEqualToString:@"Task"]) {
-        ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
-        [self.sortTasks addObject:task];
+    switch (self.netRequesetName) {
+        case getFilterTasks2:
+        {
+            if ([elementName isEqualToString:@"Etmx"]) {
+                self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
+            }
+            if ([elementName isEqualToString:@"Task"]) {
+                ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
+                [self.sortTasks addObject:task];
+            }
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -298,7 +378,6 @@ typedef enum : NSUInteger {
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
-    [self refresh:nil];
 }
 
 @end

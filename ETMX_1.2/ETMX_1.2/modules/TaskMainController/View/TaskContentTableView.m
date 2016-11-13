@@ -8,8 +8,7 @@
 
 #import "TaskContentTableView.h"
 #import "ETMXTask.h"
-#import "ETMXTableViewCell1.h"
-#import "TaskSectionHeaderView.h"
+
 
 #define CellUnFoldStateHeight               91.0f              //展开时cell的高度
 #define CellFoldStateHeight                     45.0f               //折叠时cell的高度
@@ -70,6 +69,7 @@
         [cell.taskView setHidden:YES];
     }
     cell.task = curTask;
+    cell.cellDelegate = self;
     return cell;
 }
 
@@ -102,6 +102,7 @@
     headerView.tag = section;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [headerView addGestureRecognizer:tapGesture];
+    headerView.delegate = self;
     return headerView;
 }
 
@@ -140,9 +141,38 @@
     return _selectedCells;
 }
 
+-(NSMutableArray *)selectedTasks{
+    if (!_selectedTasks) {
+        _selectedTasks = [[NSMutableArray alloc] init];
+    }
+    return _selectedTasks;
+}
+
 -(void)reloadDataWithSortTasks:(NSArray *)sortTasks{
     [self.mold loadMoldWithTasks:sortTasks];
     [self reloadData];
+}
+
+#pragma mark -- TaskSectionHeaderDelegate
+-(void)selecteSectionWithTag:(NSInteger)tag status:(BOOL)isSelected{
+    NSArray *tasks = self.mold.dataSource[tag];
+    if (isSelected) {
+        for (ETMXTask *task in tasks) {
+            [self.selectedTasks removeObject:task];
+        }
+    }else{
+        for (ETMXTask *task in tasks) {
+            [self.selectedTasks addObject:task];
+        }
+    }
+}
+
+-(void)selecteCellWithTask:(ETMXTask *)task status:(BOOL)isSelectd{
+    if (isSelectd) {
+        [self.selectedTasks removeObject:task];
+    }else{
+        [self.selectedTasks addObject:task];
+    }
 }
 
 @end

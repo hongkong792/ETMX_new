@@ -33,6 +33,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *actEneDatePlace;
 @property (strong, nonatomic) IBOutlet UITextField *workHourPlace;
 @property (strong, nonatomic) IBOutlet UITextField *actWorkHourPlace;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedImageView1;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedImageView2;
 
 @end
 
@@ -52,12 +54,22 @@
     self.actEneDatePlace.text = Localized(@"actual end date");
     self.workHourPlace.text = Localized(@"used work hour");
     self.actWorkHourPlace.text = Localized(@"actual work hour");
+    UITapGestureRecognizer *tapGesture= [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
+    [self.selectedImageView1 addGestureRecognizer:tapGesture];
+    [self.selectedImageView2 addGestureRecognizer:tapGesture];
+}
+
+-(void)tapHandle:(UITapGestureRecognizer *)gesture{
+    self.cellSelected = !self.cellSelected;
+    if (self.cellDelegate && [self.cellDelegate respondsToSelector:@selector(selecteCellWithTask:status:)]) {
+        [self.cellDelegate selecteCellWithTask:self.task status:self.cellSelected];
+    }
+    self.selectedImageView1.image = self.cellSelected?[UIImage imageNamed:@"selected_image_checkmark"]:[UIImage imageNamed:@"selected_image_uncheckmark"];
+    self.selectedImageView2.image = self.cellSelected?[UIImage imageNamed:@"selected_image_checkmark"]:[UIImage imageNamed:@"selected_image_uncheckmark"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 -(void)setTask:(ETMXTask *)task{
     self.taskCode.text = [task valueForKey:@"code"];

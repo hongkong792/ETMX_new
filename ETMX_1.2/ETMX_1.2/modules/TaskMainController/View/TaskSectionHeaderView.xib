@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQP-vZ-upg">
                     <rect key="frame" x="0.0" y="5" width="667" height="40"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="aWr-4e-Ko4">
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="aWr-4e-Ko4">
                             <rect key="frame" x="5" y="14" width="12" height="12"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模具编号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5t-6c-57F">
@@ -83,6 +83,7 @@
                 <outlet property="containerPlace" destination="r5t-6c-57F" id="Ax5-lm-qaf"/>
                 <outlet property="planEndDate" destination="vhZ-0M-62L" id="63j-Xz-T8o"/>
                 <outlet property="planStartDate" destination="YbJ-B9-9i0" id="EtJ-A5-5jn"/>
+                <outlet property="selectedImageView" destination="aWr-4e-Ko4" id="MZJ-BA-0Dd"/>
             </connections>
         </view>
     </objects>

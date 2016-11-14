@@ -15,6 +15,7 @@
 
 "equipment" = "設備";
 "member"    = "組員";
+"searchConfirm" = "確定";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

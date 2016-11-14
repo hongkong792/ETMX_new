@@ -13,6 +13,7 @@
 #import "CustomSegmentController.h"
 #import "CustomBtn.h"
 #import "LogiinViewController.h"
+#import "SearchViewController.h"
 
 #define WTaskTypeMold                    @"mold"                         //新模
 #define WTaskTypeChangeMold     @"changeMold"         //改模
@@ -92,6 +93,8 @@ typedef enum : NSUInteger {
 
 //解析字段
 @property (nonatomic,strong) NSString *parseName;
+
+@property (strong,nonatomic) UIPopoverPresentationController *chooseImagePopoverController;
 
 @end
 
@@ -231,7 +234,19 @@ typedef enum : NSUInteger {
 
 //搜索事件
 -(void)search:(id)sender{
-#warning todo:
+
+    SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+    sea.preferredContentSize = CGSizeMake(800, 600);
+    sea.modalPresentationStyle = UIModalPresentationPopover;
+    // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
+    _chooseImagePopoverController = sea.popoverPresentationController;
+    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    //_chooseImagePopoverController.delegate = self;
+    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+    _chooseImagePopoverController.sourceView = sea.view;
+    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+    [self presentViewController:sea animated:YES completion:nil];
+
 }
 
 //添帮手事件入口

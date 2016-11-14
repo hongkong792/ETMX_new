@@ -31,7 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIView *swparatorFour;
 @property (strong, nonatomic) IBOutlet UIView *separatorTwo;
 @property (copy,nonatomic)NSString * adressIp;
-@property (strong,nonatomic) UIPopoverPresentationController *chooseImagePopoverController;
+
 
 
 
@@ -309,22 +309,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     //重新启动网络
     [CheckNetWorkerTool sharedManager];
-    //以下為測試代碼
-    SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
-    sea.preferredContentSize = CGSizeMake(800, 600);
-    sea.modalPresentationStyle = UIModalPresentationPopover;
-   // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
-    _chooseImagePopoverController = sea.popoverPresentationController;
-    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    //_chooseImagePopoverController.delegate = self;    
-      _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-    _chooseImagePopoverController.sourceView = sea.view;
-    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-    [self presentViewController:sea animated:YES completion:nil];
-    BOOL flag =  [[CheckNetWorkerTool sharedManager] isNetWorking];
-    if (flag) {
-        
-    }
+
+
     
     
 

@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController">
             <connections>
+                <outlet property="confirmBtn" destination="SEc-hb-dlX" id="geQ-Ol-IQ8"/>
                 <outlet property="equipmentLabel" destination="tDN-jw-6Pw" id="EGK-gX-3PF"/>
                 <outlet property="equipmentView" destination="CEw-UM-r0r" id="Q4k-ec-vH8"/>
                 <outlet property="memberLabel" destination="Rrz-ur-ZL1" id="Qf8-gh-n1P"/>
@@ -66,6 +67,15 @@
                     <frame key="frameInset" minX="163" minY="123" width="155" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEc-hb-dlX" userLabel="确定">
+                    <frame key="frameInset" minY="12" width="103" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="confirmClick:" destination="-1" eventType="touchUpInside" id="wes-Mw-cfw"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

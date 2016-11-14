@@ -24,6 +24,7 @@
 @property (strong, nonatomic)    JSDropDownMenu *equmenu;
 @property (strong, nonatomic) IBOutlet UILabel *equipmentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *memberLabel;
+@property (strong, nonatomic) IBOutlet UIButton *confirmBtn;
 
 
 @end
@@ -64,6 +65,8 @@
 {
     self.equipmentLabel.text = Localized(@"equipment");
     self.memberLabel.text = Localized(@"member");
+    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
+    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
 }
 
 
@@ -138,6 +141,22 @@
     }
 
   
+}
+- (IBAction)confirmClick:(id)sender {
+    
+  [self dismissViewControllerAnimated:YES completion:^{
+      
+      
+    NSLog(@"_currentData1Index:%@",_data2[_currentData1Index]);
+    NSLog(@"_currentData2Index:%@",_data2[_currentData2Index]);
+      
+      
+      
+      
+  }];
+    
+    
+    
 }
 
 @end

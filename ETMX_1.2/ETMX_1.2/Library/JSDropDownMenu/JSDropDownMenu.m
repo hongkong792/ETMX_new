@@ -586,7 +586,8 @@
         [view.superview addSubview:self];
         
         [UIView animateWithDuration:0.2 animations:^{
-            view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+           view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+            //view.backgroundColor = [UIColor whiteColor];
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{

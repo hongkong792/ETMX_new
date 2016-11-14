@@ -63,6 +63,8 @@
 		0674B8A51DD08AB0004FF173 /* UIImage+QRScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8741DD08AB0004FF173 /* UIImage+QRScale.m */; };
 		0674B8A61DD08AB0004FF173 /* ETMXApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8771DD08AB0004FF173 /* ETMXApi.m */; };
 		0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B87A1DD08AB0004FF173 /* NetWorkManager.m */; };
+		06776AAE1DD9AE9900A50053 /* AddHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06776AAC1DD9AE9900A50053 /* AddHelperViewController.m */; };
+		06776AAF1DD9AE9900A50053 /* AddHelperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06776AAD1DD9AE9900A50053 /* AddHelperViewController.xib */; };
 		06E0C8D21DD6BC98004648AA /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8D11DD6BC98004648AA /* MJExtensionConfig.m */; };
 		06E0C8D51DD6DBB6004648AA /* CheckNetWorkerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8D41DD6DBB6004648AA /* CheckNetWorkerTool.m */; };
 		06E0C8E11DD6FCDA004648AA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8DF1DD6FCDA004648AA /* SearchViewController.m */; };
@@ -79,10 +81,6 @@
 		247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948B1DD21B7400BD7711 /* TaskContentTableView.m */; };
 		247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */; };
 		2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */; };
-		2474949F1DD35FE700BD7711 /* selected_image_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949B1DD35FE700BD7711 /* selected_image_checkmark@2x.png */; };
-		247494A01DD35FE700BD7711 /* selected_image_checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */; };
-		247494A11DD35FE700BD7711 /* selected_image_uncheckmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */; };
-		247494A21DD35FE700BD7711 /* selected_image_uncheckmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */; };
 		24770FE11DD6E3B500DB4EED /* NetRequestParameter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24770FE01DD6E3B500DB4EED /* NetRequestParameter.plist */; };
 /* End PBXBuildFile section */
 
@@ -220,6 +218,9 @@
 		0674B8791DD08AB0004FF173 /* NetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkManager.h; sourceTree = "<group>"; };
 		0674B87A1DD08AB0004FF173 /* NetWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkManager.m; sourceTree = "<group>"; };
 		0674B8B51DD099E9004FF173 /* QRCodeCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeCommon.h; sourceTree = "<group>"; };
+		06776AAB1DD9AE9900A50053 /* AddHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHelperViewController.h; sourceTree = "<group>"; };
+		06776AAC1DD9AE9900A50053 /* AddHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHelperViewController.m; sourceTree = "<group>"; };
+		06776AAD1DD9AE9900A50053 /* AddHelperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddHelperViewController.xib; sourceTree = "<group>"; };
 		06E0C8D01DD6BC98004648AA /* MJExtensionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJExtensionConfig.h; path = ETMX_1.2/modules/MJExtensionConfig.h; sourceTree = SOURCE_ROOT; };
 		06E0C8D11DD6BC98004648AA /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJExtensionConfig.m; path = ETMX_1.2/modules/MJExtensionConfig.m; sourceTree = SOURCE_ROOT; };
 		06E0C8D31DD6DBB6004648AA /* CheckNetWorkerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetWorkerTool.h; sourceTree = "<group>"; };
@@ -247,10 +248,6 @@
 		2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSectionHeaderView.h; sourceTree = "<group>"; };
 		2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSectionHeaderView.m; sourceTree = "<group>"; };
 		2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskSectionHeaderView.xib; sourceTree = "<group>"; };
-		2474949B1DD35FE700BD7711 /* selected_image_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_checkmark@2x.png"; sourceTree = "<group>"; };
-		2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_checkmark@3x.png"; sourceTree = "<group>"; };
-		2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_uncheckmark@2x.png"; sourceTree = "<group>"; };
-		2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected_image_uncheckmark@3x.png"; sourceTree = "<group>"; };
 		24770FE01DD6E3B500DB4EED /* NetRequestParameter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NetRequestParameter.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -613,6 +610,9 @@
 		06E0C8DD1DD6FC94004648AA /* AddHelper */ = {
 			isa = PBXGroup;
 			children = (
+				06776AAB1DD9AE9900A50053 /* AddHelperViewController.h */,
+				06776AAC1DD9AE9900A50053 /* AddHelperViewController.m */,
+				06776AAD1DD9AE9900A50053 /* AddHelperViewController.xib */,
 			);
 			path = AddHelper;
 			sourceTree = "<group>";
@@ -631,7 +631,6 @@
 			isa = PBXGroup;
 			children = (
 				247494771DD21B7400BD7711 /* Controller */,
-				2474947B1DD21B7400BD7711 /* Image */,
 				2474947C1DD21B7400BD7711 /* Model */,
 				2474947F1DD21B7400BD7711 /* View */,
 			);
@@ -646,17 +645,6 @@
 				2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		2474947B1DD21B7400BD7711 /* Image */ = {
-			isa = PBXGroup;
-			children = (
-				2474949B1DD35FE700BD7711 /* selected_image_checkmark@2x.png */,
-				2474949C1DD35FE700BD7711 /* selected_image_checkmark@3x.png */,
-				2474949D1DD35FE700BD7711 /* selected_image_uncheckmark@2x.png */,
-				2474949E1DD35FE700BD7711 /* selected_image_uncheckmark@3x.png */,
-			);
-			path = Image;
 			sourceTree = "<group>";
 		};
 		2474947C1DD21B7400BD7711 /* Model */ = {
@@ -756,17 +744,14 @@
 				066000B31DD5E87D005F2D80 /* Info.plist in Resources */,
 				0674B7F11DD08971004FF173 /* Language.strings in Resources */,
 				247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */,
-				247494A21DD35FE700BD7711 /* selected_image_uncheckmark@3x.png in Resources */,
+				06776AAF1DD9AE9900A50053 /* AddHelperViewController.xib in Resources */,
 				0674B89D1DD08AB0004FF173 /* zbar-back.png in Resources */,
 				0674B7E31DD086F7004FF173 /* LaunchScreen.storyboard in Resources */,
 				0674B7E01DD086F7004FF173 /* Assets.xcassets in Resources */,
 				0674B7DE1DD086F7004FF173 /* Main.storyboard in Resources */,
 				0674B8A01DD08AB0004FF173 /* zbar-samples.png in Resources */,
-				247494A01DD35FE700BD7711 /* selected_image_checkmark@3x.png in Resources */,
 				0674B89E1DD08AB0004FF173 /* zbar-help.html in Resources */,
 				247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */,
-				247494A11DD35FE700BD7711 /* selected_image_uncheckmark@2x.png in Resources */,
-				2474949F1DD35FE700BD7711 /* selected_image_checkmark@2x.png in Resources */,
 				0674B8851DD08AB0004FF173 /* LICENSE in Resources */,
 				0674B89F1DD08AB0004FF173 /* zbar-helpicons.png in Resources */,
 			);
@@ -807,6 +792,7 @@
 				247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */,
 				066000B81DD5E87D005F2D80 /* MJPropertyType.m in Sources */,
 				0674B88C1DD08AB0004FF173 /* UIImageView+AFNetworking.m in Sources */,
+				06776AAE1DD9AE9900A50053 /* AddHelperViewController.m in Sources */,
 				06E0C8E81DD70833004648AA /* JSDropDownMenu.m in Sources */,
 				066000B71DD5E87D005F2D80 /* MJPropertyKey.m in Sources */,
 				0674B8A41DD08AB0004FF173 /* UIView+QREasyFrame.m in Sources */,

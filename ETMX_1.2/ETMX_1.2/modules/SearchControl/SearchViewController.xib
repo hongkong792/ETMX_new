@@ -8,7 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController">
             <connections>
+                <outlet property="equipmentLabel" destination="tDN-jw-6Pw" id="EGK-gX-3PF"/>
                 <outlet property="equipmentView" destination="CEw-UM-r0r" id="Q4k-ec-vH8"/>
+                <outlet property="memberLabel" destination="Rrz-ur-ZL1" id="Qf8-gh-n1P"/>
                 <outlet property="memberView" destination="IIb-cf-5lX" id="wtg-tc-eIJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -43,14 +45,14 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="設備" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDN-jw-6Pw">
-                    <frame key="frameInset" minX="40" minY="75" width="68" height="34"/>
+                    <frame key="frameInset" minX="40" minY="75" width="105" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="組員" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrz-ur-ZL1">
-                    <frame key="frameInset" minX="40" minY="127" width="68" height="34"/>
+                    <frame key="frameInset" minX="40" minY="127" width="105" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>

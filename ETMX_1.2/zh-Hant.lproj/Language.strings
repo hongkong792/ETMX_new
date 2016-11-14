@@ -12,6 +12,10 @@
 "login" = "登陸";
 "changeIP" = "修改ip";
 "ScanQRCode" = "掃碼登錄";
+
+"equipment" = "設備";
+"member"    = "組員";
+
 //begin  任务界面
 "refresh"                    =               "刷新";
 "search"                    =               "搜索";

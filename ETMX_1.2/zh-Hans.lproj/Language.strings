@@ -13,6 +13,10 @@
 "changeIP" = "修改ip";
 "ScanQRCode" = "扫码登陆";
 
+"equipment" = "设备";
+"member"    = "组员";
+
+
 //begin  任务界面
 "refresh"                    =               "刷新";
 "search"                    =               "搜索";

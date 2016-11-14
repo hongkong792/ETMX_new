@@ -306,6 +306,7 @@
     field =  (UITextField *)sender;
     //切换地址
     [[NSUserDefaults standardUserDefaults] setObject:field.text forKey:ADRESSIP];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     //重新启动网络
     [CheckNetWorkerTool sharedManager];
     //以下為測試代碼
@@ -315,11 +316,17 @@
    // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
     _chooseImagePopoverController = sea.popoverPresentationController;
     _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    //_chooseImagePopoverController.delegate = self;
-      _chooseImagePopoverController.sourceRect = CGRectMake(100, 100, 0, 0);
+    //_chooseImagePopoverController.delegate = self;    
+      _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
     _chooseImagePopoverController.sourceView = sea.view;
     _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
     [self presentViewController:sea animated:YES completion:nil];
+    BOOL flag =  [[CheckNetWorkerTool sharedManager] isNetWorking];
+    if (flag) {
+        
+    }
+    
+    
 
 }
 

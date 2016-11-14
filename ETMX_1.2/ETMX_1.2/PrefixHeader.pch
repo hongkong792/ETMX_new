@@ -25,6 +25,6 @@
 #import <Availability.h>
 #import "CheckNetWorkerTool.h"
 #define LOGINUSER @"user"
-#define ADRESSIP        @"http://baidu.com"
+#define ADRESSIP        @"http://www.baidu.com"
 #define ISNETWORKING    @"isNetWorking" //直接获取该参数来判断网络通不通  1 表示通 0 表示不同 都是NSString
 

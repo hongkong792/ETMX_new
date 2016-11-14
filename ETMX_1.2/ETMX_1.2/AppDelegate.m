@@ -19,6 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     //网络监控
+    [[NSUserDefaults standardUserDefaults] setObject:@"https://www.baidu.com/" forKey:ADRESSIP];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [CheckNetWorkerTool sharedManager];
     // Override point for customization after application launch.
       [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];

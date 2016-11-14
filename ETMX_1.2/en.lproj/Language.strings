@@ -12,6 +12,8 @@
 "login" = "login";
 "changeIP" = "changeIP";
 "ScanQRCode" = "scanQRCode";
+"equipment" = "equipment";
+"member"    = "member";
 
 //begin  任务界面
 "refresh"                    =               "refresh";

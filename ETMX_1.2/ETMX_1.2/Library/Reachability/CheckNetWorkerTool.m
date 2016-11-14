@@ -11,11 +11,11 @@
 @interface CheckNetWorkerTool()
 {
  
-    BOOL _staus;
+
 }
 
 @end
-
+static  BOOL _staus;
 @implementation CheckNetWorkerTool
 
 + (instancetype)sharedManager {
@@ -27,7 +27,8 @@
     }
     NSString *url = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
     instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:url]];
-    instance = [[self alloc] init];
+    instance = [instance init];
+    _staus = NO;
     return instance;
 }
 
@@ -46,10 +47,8 @@
             switch (status) {
                 case AFNetworkReachabilityStatusNotReachable:     // 无连线
                     NSLog(@"AFNetworkReachability Not Reachable");
-                    
-                    [weakSelf isNetWorking];
+                   // [weakSelf isNetWorking];
                     _staus = NO;
-                    
                     break;
                 case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
                     NSLog(@"AFNetworkReachability Reachable via WWAN");
@@ -78,16 +77,12 @@
 - (BOOL)isNetWorking
 {
     if (_staus == NO) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:ISNETWORKING];
         return NO;
     }else if(_staus == YES){
-         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:ISNETWORKING];
         return YES;
     }
-    //暂时默认是通的
-     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:ISNETWORKING];
-     [[NSUserDefaults standardUserDefaults] synchronize];
-    return YES;
+
+    return NO;
 }
 
 

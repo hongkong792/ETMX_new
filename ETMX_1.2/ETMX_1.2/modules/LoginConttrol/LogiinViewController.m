@@ -10,6 +10,7 @@
 #import "UserAccount.h"
 #import "NetWorkManager.h"
 #import "TaskMainControllerViewController.h"
+#import "UserManager.h"
 
 
 @implementation LoginResponse
@@ -23,6 +24,7 @@ MJExtensionLogAllProperties
 @property(nonatomic,strong)UserAccount * userAccount;
 @property(nonatomic,strong)LoginResponse * loginResult;
 
+
 @end
 
 
@@ -34,23 +36,29 @@ MJExtensionLogAllProperties
 - (instancetype)init
 {
     self = [super init];
-    self.manager =  [AFHTTPSessionManager manager];
+    self.manager =  [AFHTTPSessionManager manager];    
+
     return self;
     
 }
 
 
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
 }
 
 
 - (void)loginWithReq:(UserAccount *)user withUrl:(NSString *)url success:(HttpSuccess)success failure:(HttpFailure)failure
 {
     //    获取所有任务接口测试（getTasksByUserCode(String userCode)）
-    NSArray *paramters = [NSArray arrayWithObjects:user.number,nil];
+    NSMutableArray *paramters = [NSMutableArray array];
+    [paramters addObject:user.name];
+    [paramters  addObject:user.password];
     NSString *methodName = @"checkUserInfo";
     [NetWorkManager sendRequestWithParameters:paramters method:methodName success:^(id data) {
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
@@ -67,9 +75,21 @@ MJExtensionLogAllProperties
 
     if ([elementName isEqualToString:@"User"]) {
         LoginResponse *user = [LoginResponse mj_objectWithKeyValues:attributeDict];
+        UserAccount *userAccount = [UserAccount mj_objectWithKeyValues:attributeDict];
         if (user != nil) {
-            self.loginResult = [user copy];
-            [self checkUserAndSave:user];
+  
+            [[UserManager instance] setCurAccount:userAccount];
+            if ([user.flag isEqualToString:@"1"]) {
+                     [self checkUserAndSave];
+            }else{
+                
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不正确" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    return ;
+                }];
+                [alert addAction:action];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         }
     }
 }
@@ -79,26 +99,12 @@ MJExtensionLogAllProperties
 {
     self.loginResult = nil;
 }
-- (void)checkUserAndSave:(LoginResponse *)user
+- (void)checkUserAndSave
 {
-    if ([user.flag isEqualToString:@"1"] || [user.message isEqualToString:@"验证成功"]) {
-        //用户登录成功
-        [[NSUserDefaults standardUserDefaults] setObject:user forKey:LOGINUSER];//保存当前用户，全局使用
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        TaskMainControllerViewController  * taskCon = [[TaskMainControllerViewController alloc] init];
-        [self.navigationController pushViewController:taskCon animated:YES];
-        
-        
-    }else{
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不正确" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            return ;
-        }];
-        [alert addAction:action];
-        [self presentViewController:alert animated:YES completion:nil];
-        
-    }
+//    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
+//    [self.navigationController pushViewController:taskMainVC animated:YES];
     
+    [self.delegate loginSuccess];
 }
 
 @end

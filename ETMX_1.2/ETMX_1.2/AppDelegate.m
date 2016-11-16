@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     //网络监控
-    [[NSUserDefaults standardUserDefaults] setObject:@"https://www.baidu.com/" forKey:ADRESSIP];
+    [[NSUserDefaults standardUserDefaults] setObject:@"192.168.1.161" forKey:ADRESSIP];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [CheckNetWorkerTool sharedManager];
     // Override point for customization after application launch.
@@ -34,6 +34,7 @@
         }
     }
     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];
+    NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
     return YES;
 }
 

@@ -2,6 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>getScanTasks</key>
+	<dict>
+		<key>URI</key>
+		<string>/ETMX/services/TaskScanExecution</string>
+		<key>node</key>
+		<string>ns1:getScanTasksResponse</string>
+	</dict>
+	<key>taskExecution</key>
+	<dict>
+		<key>URI</key>
+		<string>/ETMX/services/TaskScanExecution</string>
+		<key>node</key>
+		<string>ns1:taskExecutionResponse</string>
+	</dict>
+	<key>getGroupMembersByUserCode</key>
+	<dict>
+		<key>URI</key>
+		<string>/ETMX/services/TaskScanExecution</string>
+		<key>node</key>
+		<string>ns1:getGroupMembersByUserCodeResponse</string>
+	</dict>
 	<key>checkUserInfo</key>
 	<dict>
 		<key>URI</key>

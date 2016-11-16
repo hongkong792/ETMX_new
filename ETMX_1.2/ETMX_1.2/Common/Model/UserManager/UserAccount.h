@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MJExtensionConfig.h"
 
-@interface UserAccount : NSObject
+@interface UserAccount : MJExtensionConfig
 
 /**用户名(用于登录)*/
 @property (nonatomic ,strong)NSString*name;

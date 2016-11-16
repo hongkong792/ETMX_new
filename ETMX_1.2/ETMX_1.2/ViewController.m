@@ -16,7 +16,7 @@
 
 
 
-@interface ViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,QRCodeScanDelegate>
+@interface ViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,QRCodeScanDelegate,loginSucess>
 @property (weak, nonatomic) IBOutlet UIPickerView *LanguagePicker;
 @property (strong, nonatomic) IBOutlet UIView *rootView;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -205,12 +205,13 @@
 - (IBAction)loginClick:(id)sender {
     
     LogiinViewController * loginCon = [[LogiinViewController alloc] init];
+    loginCon.delegate = self;
     UserAccount * user = [[UserAccount alloc] init];
     if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
         
         user.name = self.userNameText.text;
         user.password = self.passwordTest.text;
-        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login?wsdl";
+        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
         [loginCon loginWithReq:user withUrl:loginUrl success:^(id data) {
             
         } failure:^(NSError *error) {
@@ -225,12 +226,8 @@
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
-
     }
    
-
-
-    
 
 }
 
@@ -292,9 +289,6 @@
             isTwoDCode:(BOOL)isTwoDCode
 {
     
-    
-    
-    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
 }
 
@@ -310,20 +304,18 @@
     //重新启动网络
     [CheckNetWorkerTool sharedManager];
 
-
-    
-    
-
 }
 
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
-    [self.navigationController pushViewController:taskMainVC animated:YES];
-}
 
 -(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
     return UIModalPresentationOverCurrentContext;//不适配
 }
 
+
+- (void)loginSuccess
+{
+    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
+    [self.navigationController pushViewController:taskMainVC animated:YES];
+    
+}
 @end

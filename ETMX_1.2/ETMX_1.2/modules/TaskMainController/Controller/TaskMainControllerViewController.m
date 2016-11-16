@@ -14,6 +14,7 @@
 #import "CustomBtn.h"
 #import "LogiinViewController.h"
 #import "SearchViewController.h"
+#import "UserManager.h"
 
 #define WTaskTypeMold                    @"mold"                         //新模
 #define WTaskTypeChangeMold     @"changeMold"         //改模
@@ -102,12 +103,15 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setup];
+//    [self sortAllTaskWithType:self.taskType andState:self.taskState];
     //网络判断
     if ([[CheckNetWorkerTool sharedManager] isNetWorking]) {
         [self sortAllTaskWithType:self.taskType andState:self.taskState];
     }else{
 #warning todo:tip no connet to service
+        NSLog(@"hello");
     }
     [self refresh:nil];
 }
@@ -132,9 +136,8 @@ typedef enum : NSUInteger {
 }
 
 -(void)initNav{
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    LoginResponse *response = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
-    self.title = response.fullName;
+   NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
+    self.title =fullName;
     UIButton *freshBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [freshBtn setTitle:Localized(@"refresh") forState:UIControlStateNormal];
     [freshBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -205,25 +208,24 @@ typedef enum : NSUInteger {
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),[self.allTaskState valueForKey:@"stopped"]] forSegmentAtIndex:2];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),[self.allTaskState valueForKey:@"completed"]] forSegmentAtIndex:3];
 }
+
 //按照segment的选择排列任务，即设置sortTasks
 -(void)sortAllTaskWithType:(NSString *)type andState:(NSString *)state{
+    
     self.netRequesetName = getFilterTasks2;
-    if ([[CheckNetWorkerTool sharedManager] isNetWorking]) {
-        LoginResponse *response = [[NSUserDefaults standardUserDefaults] objectForKey:LOGINUSER];
-        NSString *userCode = response.name;
-        NSArray *parameters = @[self.taskState,userCode,@"",@"",self.taskType];
-        NSString *methodName = @"queryFilterTasks";
-        [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+    
+     NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
+    NSArray *parameters = @[self.taskState,userCode,@"",@"",self.taskType];
+    NSString *methodName = @"queryFilterTasks";
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
             [parser parse];
         } failure:^(NSError *error) {
 #warning todo:tip
         }];
-    }
 }
-
-
 
 #pragma mark -- functions
 //刷新

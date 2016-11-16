@@ -8,6 +8,12 @@
 
 #import "UserManager.h"
 
+@interface UserManager ()
+
+
+
+@end
+
 @implementation UserManager
 
 +(UserManager *)instance{
@@ -18,5 +24,23 @@
     });
     return sharedUserManager;
 }
+- (NSMutableDictionary *)dic
+{
+    if (_dic == nil) {
+        _dic = [NSMutableDictionary dictionary];
+        
+    }
+    return _dic;
+}
+
+- (void)setCurAccount:(UserAccount *)user
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:user.name forKey:@"name"];
+    [dic setObject:user.fullName forKey:@"fullName"];
+    [dic setObject:user.number forKey:@"number"];
+    self.dic = dic;
+}
+
 
 @end

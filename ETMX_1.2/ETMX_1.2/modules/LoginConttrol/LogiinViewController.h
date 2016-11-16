@@ -12,6 +12,10 @@
 #import "MJExtension.h"
 #import "MJExtensionConfig.h"
 
+@protocol loginSucess <NSObject>
+- (void)loginSuccess;
+@end
+
 
 @interface LoginResponse : MJExtensionConfig
 
@@ -27,5 +31,7 @@
 
 @interface LogiinViewController : UIViewController
 - (void)loginWithReq:(UserAccount *)user withUrl:(NSString *)url success:(HttpSuccess)success failure:(HttpFailure)failure;
+
+@property (nonatomic, strong)id <loginSucess>delegate;
 @end
 

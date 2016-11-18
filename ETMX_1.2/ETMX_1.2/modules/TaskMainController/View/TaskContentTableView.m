@@ -15,8 +15,10 @@
 #define SectionHeight                               50.0f               //section高度
 
 @interface TaskContentTableView()
-@property(nonatomic,strong) NSMutableArray *selectedSections;       //存储展开状态的section，数组中存储的事section
-@property(nonatomic,strong) NSMutableArray *selectedCells;              //存储展开状态的cells，数组中存储的事cells
+@property(nonatomic,strong) NSMutableArray *unfoldSections;       //存储展开状态的section，数组中存储的是section
+@property(nonatomic,strong) NSMutableArray *unfoldCells;              //存储展开状态的cells，数组中存储的是cells
+
+
 
 @end
 @implementation TaskContentTableView
@@ -45,7 +47,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:section]]) {
+    if ([self.unfoldSections containsObject:[NSNumber numberWithInteger:section]]) {
         //展开状态
         NSArray *arr = self.mold.dataSource[section];
         return arr.count;
@@ -62,7 +64,7 @@
     if (cell == nil) {
         cell = [[NSBundle mainBundle] loadNibNamed:@"ETMXTableViewCell1" owner:self options:nil].lastObject;
     }
-    if ([self.selectedCells containsObject:indexPath]) {
+    if ([self.unfoldCells containsObject:indexPath]) {
         //展开状态
         [cell.taskView setHidden:NO];
     }else{
@@ -70,21 +72,28 @@
     }
     cell.task = curTask;
     cell.cellDelegate = self;
+    if ([self.selectedTasks containsObject:curTask]) {
+        cell.selectedImageView1.image = [UIImage imageNamed:@"selected_image_checkmark"];
+        cell.selectedImageView2.image = [UIImage imageNamed:@"selected_image_checkmark"];
+    }else{
+        cell.selectedImageView1.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
+        cell.selectedImageView2.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.selectedCells containsObject:indexPath]) {
+    if ([self.unfoldCells containsObject:indexPath]) {
         //展开状态下点击
-        [self.selectedCells removeObject:indexPath];
+        [self.unfoldCells removeObject:indexPath];
     }else{
-        [self.selectedCells addObject:indexPath];
+        [self.unfoldCells addObject:indexPath];
     }
     [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.selectedCells containsObject:indexPath]) {
+    if ([self.unfoldCells containsObject:indexPath]) {
         //展开状态
         return CellUnFoldStateHeight;
     }
@@ -103,17 +112,22 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [headerView addGestureRecognizer:tapGesture];
     headerView.delegate = self;
+    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:section]]) {
+        headerView.selectedImageView.image = [UIImage imageNamed:@"selected_image_checkmark"];
+    }else{
+        headerView.selectedImageView.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
+    }
     return headerView;
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{
     UIView *curHeaderView = gesture.view;
     NSInteger tag = curHeaderView.tag;
-    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:tag]]) {
+    if ([self.unfoldSections containsObject:[NSNumber numberWithInteger:tag]]) {
         //头部展开状态
-        [self.selectedSections removeObject:[NSNumber numberWithInteger:tag]];
+        [self.unfoldSections removeObject:[NSNumber numberWithInteger:tag]];
     }else{
-        [self.selectedSections addObject:[NSNumber numberWithInteger:tag]];
+        [self.unfoldSections addObject:[NSNumber numberWithInteger:tag]];
     }
     [self reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationNone];
 }
@@ -127,22 +141,29 @@
     return _mold;
 }
 
+-(NSMutableArray *)unfoldSections{
+    if (!_unfoldSections) {
+        _unfoldSections = [[NSMutableArray alloc] init];
+    }
+    return _unfoldSections;
+}
+
+-(NSMutableArray *)unfoldCells{
+    if (!_unfoldCells) {
+        _unfoldCells = [[NSMutableArray alloc] init];
+    }
+    return _unfoldCells;
+}
+
 -(NSMutableArray *)selectedSections{
-    if (!_selectedSections) {
+    if (_selectedSections == nil) {
         _selectedSections = [[NSMutableArray alloc] init];
     }
     return _selectedSections;
 }
 
--(NSMutableArray *)selectedCells{
-    if (!_selectedCells) {
-        _selectedCells = [[NSMutableArray alloc] init];
-    }
-    return _selectedCells;
-}
-
 -(NSMutableArray *)selectedTasks{
-    if (!_selectedTasks) {
+    if (_selectedTasks == nil) {
         _selectedTasks = [[NSMutableArray alloc] init];
     }
     return _selectedTasks;
@@ -154,25 +175,29 @@
 }
 
 #pragma mark -- TaskSectionHeaderDelegate
--(void)selecteSectionWithTag:(NSInteger)tag status:(BOOL)isSelected{
-    NSArray *tasks = self.mold.dataSource[tag];
-    if (isSelected) {
-        for (ETMXTask *task in tasks) {
+-(void)selecteSectionWithTag:(NSInteger)tag{
+    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:tag]]) {
+        [self.selectedSections removeObject:[NSNumber numberWithInteger:tag]];
+        for (ETMXTask *task in self.mold.dataSource[tag]) {
             [self.selectedTasks removeObject:task];
         }
     }else{
-        for (ETMXTask *task in tasks) {
+        [self.unfoldSections addObject:[NSNumber numberWithInteger:tag]];
+        [self.selectedSections addObject:[NSNumber numberWithInteger:tag]];
+        for (ETMXTask *task in self.mold.dataSource[tag]) {
             [self.selectedTasks addObject:task];
         }
     }
+    [self reloadData];
 }
 
--(void)selecteCellWithTask:(ETMXTask *)task status:(BOOL)isSelectd{
-    if (isSelectd) {
+-(void)selecteCellWithTask:(ETMXTask *)task{
+    if ([self.selectedTasks containsObject:task]) {
         [self.selectedTasks removeObject:task];
     }else{
         [self.selectedTasks addObject:task];
     }
+    [self reloadData];
 }
 
 @end

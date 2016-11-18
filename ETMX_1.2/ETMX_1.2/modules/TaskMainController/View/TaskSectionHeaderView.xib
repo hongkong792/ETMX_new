@@ -70,7 +70,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fQP-vZ-upg" secondAttribute="trailing" id="4gN-kB-a2G"/>
                 <constraint firstItem="fQP-vZ-upg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dpP-4H-sn9"/>

@@ -13,7 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *containerCode;
 @property (strong, nonatomic) IBOutlet UILabel *planStartDate;
 @property (strong, nonatomic) IBOutlet UILabel *planEndDate;
-@property (strong, nonatomic) IBOutlet UIImageView *selectedImageView;
+
 
 
 @end
@@ -26,12 +26,9 @@
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{
-    self.sectionIsSelected = !self.sectionIsSelected;
-    NSInteger section =  self.tag;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(selecteSectionWithTag:status:)]) {
-        [self.delegate selecteSectionWithTag:section status:self.sectionIsSelected];
+    if (self.delegate  && [self.delegate respondsToSelector:@selector(selecteSectionWithTag:)]) {
+        [self.delegate selecteSectionWithTag:self.tag];
     }
-    self.selectedImageView.image = self.sectionIsSelected?[UIImage imageNamed:@"selected_image_checkmark"]:[UIImage imageNamed:@"selected_image_uncheckmark"];
 }
 
 

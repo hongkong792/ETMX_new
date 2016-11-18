@@ -9,7 +9,7 @@
 @protocol TaskSectionHeaderDelegate <NSObject>
 
 @optional
--(void)selecteSectionWithTag:(NSInteger)tag status:(BOOL)isSelected;
+-(void)selecteSectionWithTag:(NSInteger)tag;
 
 @end
 #import <UIKit/UIKit.h>
@@ -18,6 +18,6 @@
 @interface TaskSectionHeaderView : UITableViewHeaderFooterView
 /**任务对象*/
 @property (nonatomic ,strong)ETMXTask*task;
-@property (nonatomic,assign)BOOL sectionIsSelected;
 @property (nonatomic,weak)id<TaskSectionHeaderDelegate>delegate;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedImageView;
 @end

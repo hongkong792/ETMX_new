@@ -12,6 +12,7 @@
 #import "TaskSectionHeaderView.h"
 @interface TaskContentTableView : UITableView<UITableViewDataSource,UITableViewDelegate,TaskSectionHeaderDelegate,ETXMTableViewCellDelegate>
 @property (nonatomic,strong) EtmxMold *mold;//数据源
-@property (nonatomic,strong) NSMutableArray *selectedTasks;
 -(void)reloadDataWithSortTasks:(NSArray *)sortTasks;
+@property (nonatomic,strong) NSMutableArray *selectedTasks;         //被勾选的任务
+@property (nonatomic,strong) NSMutableArray *selectedSections;      //被勾选的section
 @end

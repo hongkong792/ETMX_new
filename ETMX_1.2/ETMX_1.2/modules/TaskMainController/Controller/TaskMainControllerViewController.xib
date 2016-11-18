@@ -231,7 +231,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bl-AG-cAJ" customClass="TaskContentTableView">
-                    <rect key="frame" x="0.0" y="245" width="1024" height="972"/>
+                    <rect key="frame" x="0.0" y="145" width="1024" height="1072"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -246,7 +246,7 @@
                 <constraint firstAttribute="trailing" secondItem="3bl-AG-cAJ" secondAttribute="trailing" id="Whb-u3-3Ee"/>
                 <constraint firstAttribute="trailing" secondItem="WxM-zi-His" secondAttribute="trailing" id="ago-bL-Oxu"/>
                 <constraint firstItem="j4E-db-O3F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hkJ-NO-XIR"/>
-                <constraint firstItem="3bl-AG-cAJ" firstAttribute="top" secondItem="j4E-db-O3F" secondAttribute="bottom" constant="100" id="yQA-PW-T3m"/>
+                <constraint firstItem="3bl-AG-cAJ" firstAttribute="top" secondItem="j4E-db-O3F" secondAttribute="bottom" id="yQA-PW-T3m"/>
             </constraints>
             <point key="canvasLocation" x="484" y="127"/>
         </view>

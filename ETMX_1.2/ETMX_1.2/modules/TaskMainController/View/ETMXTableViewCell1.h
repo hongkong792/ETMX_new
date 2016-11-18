@@ -8,7 +8,7 @@
 @class ETMXTask;
 @protocol ETXMTableViewCellDelegate <NSObject>
 @optional
--(void)selecteCellWithTask:(ETMXTask *)task status:(BOOL)isSelectd;
+-(void)selecteCellWithTask:(ETMXTask *)task;
 
 @end
 #import <UIKit/UIKit.h>
@@ -17,6 +17,7 @@
 @interface ETMXTableViewCell1 : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIView *taskView;
 @property (nonatomic,strong)ETMXTask *task;
-@property (nonatomic,assign)BOOL cellSelected;
 @property (nonatomic,weak)id<ETXMTableViewCellDelegate>cellDelegate;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedImageView1;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedImageView2;
 @end

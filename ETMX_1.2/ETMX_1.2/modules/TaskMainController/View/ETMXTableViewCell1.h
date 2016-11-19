@@ -13,11 +13,12 @@
 @end
 #import <UIKit/UIKit.h>
 #import "ETMXTask.h"
-
+typedef NSString *(^taskNameSelecteBlock)();
 @interface ETMXTableViewCell1 : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIView *taskView;
 @property (nonatomic,strong)ETMXTask *task;
 @property (nonatomic,weak)id<ETXMTableViewCellDelegate>cellDelegate;
 @property (strong, nonatomic) IBOutlet UIImageView *selectedImageView1;
 @property (strong, nonatomic) IBOutlet UIImageView *selectedImageView2;
+@property (nonatomic,copy) taskNameSelecteBlock block;
 @end

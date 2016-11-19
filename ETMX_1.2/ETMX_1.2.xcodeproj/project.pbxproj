@@ -722,7 +722,7 @@
 				TargetAttributes = {
 					0674B7CF1DD086F7004FF173 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = U6Z55XY4LH;
+						DevelopmentTeam = Z429JQWA8Q;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -974,15 +974,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = U6Z55XY4LH;
+				DEVELOPMENT_TEAM = Z429JQWA8Q;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ETMX_1.2/Library/ZBarSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ok.com.ETMX-1-2";
+				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -992,15 +993,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = U6Z55XY4LH;
+				DEVELOPMENT_TEAM = Z429JQWA8Q;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ETMX_1.2/Library/ZBarSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ok.com.ETMX-1-2";
+				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 			};

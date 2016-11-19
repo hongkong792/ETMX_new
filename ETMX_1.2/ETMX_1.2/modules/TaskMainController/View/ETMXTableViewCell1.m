@@ -42,7 +42,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.taskCodePlace.text =Localized(@"part code") ;
+    if (self.block) {
+        self.taskCodePlace.text = self.block();
+    }else{
+        self.taskCodePlace.text = Localized(@"part code");
+    }
     self.objectNamePlace.text =Localized(@"part name");
     self.statusPlace.text = Localized(@"status");
     self.taskNamePlace.text = Localized(@"task name");

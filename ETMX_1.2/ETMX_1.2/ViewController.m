@@ -32,6 +32,7 @@
 @property (strong, nonatomic) IBOutlet UIView *swparatorFour;
 @property (strong, nonatomic) IBOutlet UIView *separatorTwo;
 @property (copy,nonatomic)NSString * adressIp;
+@property (nonatomic,strong) QRScanViewController * qrViewCon;
 
 
 @property (nonatomic, strong)UILabel * titleLabel;
@@ -50,6 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.qrViewCon = nil;
     NSString * lan = [[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
     [self changeLanguageWithlan:lan];
     // Do any additional setup after loading the view, typically from a nib.
@@ -205,17 +207,17 @@
 //    
 //    [self presentViewController:con animated:YES completion:nil];
 //    
-    AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
-    helpcon.preferredContentSize = CGSizeMake(600, 1000);
-    helpcon.modalPresentationStyle = UIModalPresentationPopover;
-    _chooseImagePopoverController = helpcon.popoverPresentationController;
-    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    _chooseImagePopoverController.sourceRect = self.loginLabel.frame;//CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-    _chooseImagePopoverController.sourceView = helpcon.view;
-    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-    [self presentViewController:helpcon animated:YES completion:nil];
+//    AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+//    helpcon.preferredContentSize = CGSizeMake(600, 1000);
+//    helpcon.modalPresentationStyle = UIModalPresentationPopover;
+//    _chooseImagePopoverController = helpcon.popoverPresentationController;
+//    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+//    _chooseImagePopoverController.sourceRect = self.loginLabel.frame;//CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+//    _chooseImagePopoverController.sourceView = helpcon.view;
+//    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+//    [self presentViewController:helpcon animated:YES completion:nil];
     
-    /**
+  
     LogiinViewController * loginCon = [[LogiinViewController alloc] init];
     loginCon.delegate = self;
     UserAccount * user = [[UserAccount alloc] init];
@@ -239,7 +241,7 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
-   */
+ 
 
 }
 
@@ -269,18 +271,6 @@
 
     [self presentViewController:alert animated:YES completion:nil];
 
-//    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-//    {
-//        
-//        UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
-//        popPresenter.sourceView = self.changeIPLabel;
-//        popPresenter.sourceRect = self.changeIPLabel.bounds;
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }else{
-//        
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
-    
 
     
     
@@ -288,9 +278,9 @@
 
 - (IBAction)QRCodeClick:(id)sender {
     
-    QRScanViewController * con = [[QRScanViewController alloc] init];
-    con.delegate = self;
-    [self.navigationController pushViewController:con animated:YES];
+    self.qrViewCon = [[QRScanViewController alloc] init];
+    self.qrViewCon.delegate = self;
+    [self.navigationController pushViewController:self.qrViewCon animated:YES];
 
 }
 
@@ -300,7 +290,7 @@
             isTwoDCode:(BOOL)isTwoDCode
 {
     
-   // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
+   // [self.navigationController popViewControllerAnimated:YES];
     if (result.length > 0) {
         LogiinViewController * loginCon = [[LogiinViewController alloc] init];
         loginCon.delegate = self;
@@ -310,11 +300,9 @@
             NSString * method = @"checkCode";
              [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
                  
-                 
+                
                  
              } failure:^(NSError *error) {
-                 
-                 
                  
                  
              }];
@@ -327,8 +315,6 @@
             [alert addAction:action];
             [self presentViewController:alert animated:YES completion:nil];
         }
-        
- 
     
 }
 
@@ -354,8 +340,14 @@
 #pragma loginSucessDelegate
 - (void)loginSuccess
 {
-    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
-    [self.navigationController pushViewController:taskMainVC animated:YES];
+//    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
+    
+//    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:([self.navigationController.viewControllers count] -2)] animated:YES];
+     //  [self.navigationController popViewControllerAnimated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] initWithNibName:@"TaskMainControllerViewController" bundle:nil];
+        [self.navigationController pushViewController:taskMainVC animated:YES];
+    });
     
 }
 - (void)loginFail

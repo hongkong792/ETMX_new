@@ -10,6 +10,7 @@
 #import "UIView+QREasyFrame.h"
 #import <AVFoundation/AVFoundation.h>
 #import "QRCodeCommon.h"
+#import "TaskMainControllerViewController.h"
 
 
 
@@ -345,12 +346,15 @@
                             
                         }];
                         
-                        UIAlertController *alterVC = [UIAlertController alertControllerWithTitle:@"提示" message:codeObj.stringValue preferredStyle:UIAlertControllerStyleAlert];
-                        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-                        [alterVC addAction:confirmAction];
-                        [self presentViewController:alterVC animated:YES completion:nil];
+//                        UIAlertController *alterVC = [UIAlertController alertControllerWithTitle:@"提示" message:codeObj.stringValue preferredStyle:UIAlertControllerStyleAlert];
+//                        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+//                        [alterVC addAction:confirmAction];
+//                        [self presentViewController:alterVC animated:YES completion:nil];
                         
-                        if ([self.delegate respondsToSelector:@selector(scanController:didScanResult:isTwoDCode:)]) {
+//                        if ([self.delegate respondsToSelector:@selector(scanController:didScanResult:isTwoDCode:)]) {
+                        if (codeObj.stringValue != nil) {
+//                             TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] initWithNibName:@"TaskMainControllerViewController" bundle:nil];
+//                            [self.navigationController pushViewController:taskMainVC animated:YES];
                             [self.delegate scanController:self didScanResult:codeObj.stringValue isTwoDCode:[codeObj.type isEqualToString:AVMetadataObjectTypeQRCode]];
                         }
                         

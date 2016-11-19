@@ -47,11 +47,12 @@
 "inwork"                    =                   "inwork";
 "stopped"                   =               "stopped";
 "completed"             =               "completed";
-"mold code"             =               "mold code";
-"part code"             =               "part code";
-"part name"             =               "part name";
-"electrode name"    =           "electrode name";
-"status"                        =               "status";
+"mold code"             =               "mold code:";
+"part code"             =               "part code:";
+"part name"             =               "part name:";
+"electrode name"    =           "electrode name:";
+"status:"                        =               "status:";
+"status"                        =                   "status";
 "task name"                =            "task name";
 "operator"                  =               "operator";
 "machine"                   =               "machine";
@@ -68,4 +69,5 @@
 "work start"                =                       "work start";
 "work end"                     =                    "work end";
 "exchange"                  =                       "exchange";
+"please check the net"          =                   "please check the net";
 //end  任务界面

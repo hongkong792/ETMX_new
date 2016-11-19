@@ -48,11 +48,12 @@
 "inwork"                    =                   "進行中";
 "stopped"                   =               "已暫停";
 "completed"             =               "已完成";
-"mold code"             =               "模具編號";
-"part code"             =               "零件編號";
-"part name"             =               "零件名稱";
-"electrode name"    =           "銅公名稱";
-"status"                        =               "狀態";
+"mold code"             =               "模具編號:";
+"part code"             =               "零件編號:";
+"part name"             =               "零件名稱:";
+"electrode name"    =           "銅公名稱:";
+"status:"                        =               "狀態:";
+"status"                        =                 "狀態";
 "task name"                =            "任務名稱";
 "operator"                  =               "操作者";
 "machine"                   =               "機床";
@@ -69,4 +70,5 @@
 "work start"                =                       "上班";
 "work end"                     =                    "下班";
 "exchange"                  =                       "替換";
+"please check the net"              =                  "網絡訪問錯誤，請檢查網路環境";
 //end  任务界面

@@ -26,4 +26,8 @@
 /**账户工号*/
 @property (nonatomic ,strong)NSString*number;
 
+/**用户类型*/
+@property (nonatomic ,strong)NSString*userType;
+ 
+
 @end

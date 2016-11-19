@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MJExtensionConfig.h"
 
-@interface ETMXMachine : NSObject
+@interface ETMXMachine : MJExtensionConfig
 
 /**机床id*/
 @property (nonatomic ,strong)NSString*machineID;

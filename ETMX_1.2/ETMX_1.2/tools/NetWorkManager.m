@@ -13,8 +13,10 @@
 +(void)sendRequestWithParameters:(NSArray *)paramters method:(NSString *)methodName success:(HttpSuccess )success failure:(HttpFailure)failure{
     NSString *urlStr = [self getURLByRequestName:methodName];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
     //回复的序列化
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
     [[manager dataTaskWithRequest:[self loadRequestWithParameter:paramters url:urlStr methodName:methodName] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (!error) {
             NSString *node =  [NetWorkManager getNodeByRequestName:methodName];
@@ -84,6 +86,7 @@
                              ];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    req.timeoutInterval = 10;
     NSString *msgLength = [NSString stringWithFormat:@"%ld",[soapMessage length]];
     // 添加请求的详细信息，与请求报文前半部分的各字段对应
     [req addValue:@"application/soap+xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];

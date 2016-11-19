@@ -59,15 +59,16 @@ MJExtensionLogAllProperties
     }else if ([method isEqualToString:@"checkCode"]){
         [paramters addObject:user.number];
     }
-
     NSString *methodName = method;
     self.loginType = method;
     //网络检测
     if (![[CheckNetWorkerTool sharedManager] isNetWorking]) {
         [self.delegate neeNotWorking];
     }
+    
     [NetWorkManager sendRequestWithParameters:paramters method:methodName success:^(id data) {
-       NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+        NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:self];
         [p parse];
     } failure:^(NSError *error) {
@@ -91,16 +92,20 @@ MJExtensionLogAllProperties
                 [self.delegate loginFail];
             }
         }
-    }else if ([self.loginType isEqualToString:@"checkCode"] && [elementName isEqualToString:@"XXXX"]){///二维码登录
+    }else if ([self.loginType isEqualToString:@"checkCode"] && [elementName isEqualToString:@"Task"]){///二维码登录
         
+        LoginResponse *user = [LoginResponse mj_objectWithKeyValues:attributeDict];
+        UserAccount *userAccount = [[UserAccount alloc] init];
+        userAccount.name = user.objectName;
+        userAccount.number = user.objectCode;
+        userAccount.fullName = user.objectAlias;
+       if ([user.flag isEqualToString:@"1"]) {
+            [[UserManager instance] setCurAccount:userAccount];
+            [self.delegate loginSuccess];
+       }else{
+            [self.delegate loginFail];
+       }
         //处理解析
-        
-        
-        
-        
-    }else{
-        //登录出错，错误提示
-        [self.delegate loginFail];
         
     }
     

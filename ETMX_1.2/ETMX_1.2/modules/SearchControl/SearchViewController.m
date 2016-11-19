@@ -8,14 +8,17 @@
 
 #import "SearchViewController.h"
 #import "JSDropDownMenu.h"
+#import "UserManager.h"
+#import "NetWorkManager.h"
+#import "ETMXMachine.h"
 
-@interface SearchViewController ()<JSDropDownMenuDataSource,JSDropDownMenuDelegate>
+@interface SearchViewController ()<JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
     
     NSInteger _currentData1Index;
     NSMutableArray *_data1;
-      NSInteger _currentData2Index;
-      NSMutableArray *_data2;
+    NSInteger _currentData2Index;
+    NSMutableArray *_data2;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *equipmentView;
@@ -35,6 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _data2 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    //_data2 = [NSMutableArray array];
     CGPoint point= self.memberView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(point.x , point.y) andHeight:45];
     self.menu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
@@ -44,8 +48,8 @@
     self.menu.delegate = self;
     [self.view addSubview:self.menu];
     
-    
-    _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+        _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    //_data1 = [NSMutableArray array];
     CGPoint equoint= self.equipmentView.frame.origin;
     self.equmenu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(equoint.x , equoint.y) andHeight:45];
     self.equmenu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
@@ -54,11 +58,40 @@
     self.equmenu.dataSource = self;
     self.equmenu.delegate = self;
     [self.view addSubview:self.equmenu];
+    //獲取數據
+    NSString * equMethod = @"getEquipmentsByUserCode";
+    NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
+    NSArray * paramArr = [NSArray arrayWithObjects:userCode, nil];
+    __weak typeof(self) weakSelf = self;
+    [NetWorkManager sendRequestWithParameters:paramArr method:equMethod success:^(id data) {
+        NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+        [p setDelegate:weakSelf];
+        [p parse];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    NSString * userMethod = @"getGroupMembersByUserCode";
+    NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
+    NSArray * paramUserArr = [NSArray arrayWithObjects:userNumber, nil];
+    
+    
+    [NetWorkManager sendRequestWithParameters:paramUserArr method:userMethod success:^(id data) {
+        NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+        [p setDelegate:weakSelf];
+        [p parse];
+        
+    } failure:^(NSError *error) {
+        
+        
+        
+    }];
     
     
     
- //   [self.equipmentView addSubview:menu];
-
 
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -67,6 +100,10 @@
     self.memberLabel.text = Localized(@"member");
     [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
     [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
+    if (_data1.count > 0) {
+     //   [NSThread sleepForTimeInterval:5];
+    }
+        
 }
 
 
@@ -96,8 +133,11 @@
 - (NSInteger)menu:(JSDropDownMenu *)menu numberOfRowsInColumn:(NSInteger)column leftOrRight:(NSInteger)leftOrRight leftRow:(NSInteger)leftRow{
 
     if ([menu isEqual:self.equmenu]) {
+        
         return _data1.count;
+        
     }else if ([menu isEqual:self.menu]){
+        
       return _data2.count;
         
     }
@@ -150,13 +190,34 @@
     NSLog(@"_currentData1Index:%@",_data2[_currentData1Index]);
     NSLog(@"_currentData2Index:%@",_data2[_currentData2Index]);
       
-      
-      
-      
   }];
     
+}
+
+
+#pragma mark -- NSXMLParserDelegate数据解析
+
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
+    if ([elementName isEqualToString:@"Equipment"]) {
+        ETMXMachine * machine = [[ETMXMachine alloc] init];
+        machine.machineID = [attributeDict objectForKey:@"id"];
+        machine.machineCode = [attributeDict objectForKey:@"code"];
+        machine.machineName = [attributeDict objectForKey:@"name"];
+        machine.machineModel = [attributeDict objectForKey:@"model"];        
+        [_data1 addObject:machine];
+        
+    }else if([elementName isEqualToString:@"User"]){
+ 
+        UserAccount *userAccount = [[UserAccount alloc] init];
+        userAccount.id = [attributeDict objectForKey:@"id"];
+        userAccount.name = [attributeDict objectForKey:@"name"];
+        userAccount.fullName = [attributeDict objectForKey:@"fullName"];
+        userAccount.number = [attributeDict objectForKey:@"code"];
+        [_data2 addObject:userAccount];
+    }
     
     
+
 }
 
 @end

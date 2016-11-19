@@ -79,6 +79,14 @@
         cell.selectedImageView1.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
         cell.selectedImageView2.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
     }
+    cell.block = ^NSString *(){
+        if (self.isElectrode) {
+            return Localized(@"electrode name");
+            
+        }else{
+            return Localized(@"part code");
+        }
+    };
     return cell;
 }
 
@@ -112,7 +120,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [headerView addGestureRecognizer:tapGesture];
     headerView.delegate = self;
-    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:section]]) {
+    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:section]]||[self allSeletctdInSection:section]) {
         headerView.selectedImageView.image = [UIImage imageNamed:@"selected_image_checkmark"];
     }else{
         headerView.selectedImageView.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
@@ -185,19 +193,61 @@
         [self.unfoldSections addObject:[NSNumber numberWithInteger:tag]];
         [self.selectedSections addObject:[NSNumber numberWithInteger:tag]];
         for (ETMXTask *task in self.mold.dataSource[tag]) {
-            [self.selectedTasks addObject:task];
+            if (![self.selectedTasks containsObject:task]) {
+                [self.selectedTasks addObject:task];
+            }
         }
+    }
+    if (self.block) {
+        self.block();
     }
     [self reloadData];
 }
 
 -(void)selecteCellWithTask:(ETMXTask *)task{
+    NSIndexPath *taskIndexPath = [self getIndexPathWithTask:task];
     if ([self.selectedTasks containsObject:task]) {
         [self.selectedTasks removeObject:task];
+        [self.selectedSections removeObject:[NSNumber numberWithInteger:taskIndexPath.section]];
     }else{
-        [self.selectedTasks addObject:task];
+        if (![self.selectedTasks containsObject:task]) {
+            [self.selectedTasks addObject:task];
+        }
+        BOOL allTaskSelected = YES;
+        allTaskSelected = [self allSeletctdInSection:taskIndexPath.section];
+        if (allTaskSelected) {
+            [self.selectedSections addObject:[NSNumber numberWithInteger:taskIndexPath.section]];
+        }
+    }
+    if (self.block) {
+        self.block();
     }
     [self reloadData];
+}
+
+-(NSIndexPath *)getIndexPathWithTask:(ETMXTask *)task{
+    NSIndexPath *indexPath = [[NSIndexPath alloc] init];
+    for (NSInteger i = 0; i<self.mold.dataSource.count; i++) {
+        NSArray *arr  = self.mold.dataSource[i];
+        for (NSInteger j = 0; j<arr.count; j++) {
+            if (task == arr[j]) {
+                indexPath = [NSIndexPath indexPathForRow:j inSection:i];
+                break;
+            }
+        }
+    }
+    return indexPath;
+}
+-(BOOL)allSeletctdInSection:(NSInteger)section{
+    BOOL isAllSelected = YES;
+    NSArray *arr = self.mold.dataSource[section];
+    for (ETMXTask *task in arr) {
+        if (![self.selectedTasks containsObject:task]) {
+            isAllSelected = NO;
+            break;
+        }
+    }
+    return isAllSelected;
 }
 
 @end

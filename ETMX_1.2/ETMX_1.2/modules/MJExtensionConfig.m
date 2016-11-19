@@ -8,6 +8,7 @@
 
 #import "MJExtensionConfig.h"
 #import "MJExtension.h"
+#import "ETMXMachine.h"
 //#import "MJBag.h"
 //#import "MJUser.h"
 //#import "MJStatusResult.h"
@@ -28,6 +29,9 @@
                  @"ID" : @"id"
                  };
     }];
+    
+    
+
  /*
 #pragma mark MJUser类的只有name、icon属性参与字典转模型
 //    [MJUser mj_setupAllowedPropertyNames:^NSArray *{

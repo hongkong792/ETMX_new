@@ -10,12 +10,15 @@
 #import "TaskTableViewCell.h"
 #import "MemberTableViewCell.h"
 #import "JSDropDownMenu.h"
+#import "UserAccount.h"
+#import "UserManager.h"
 #define TASKINFO @"TaskTableViewCell"
 #define MEMBER   @"MemberTableViewCell"
 
 
 
-@interface AddHelperViewController ()<UITableViewDelegate,UITableViewDataSource,JSDropDownMenuDataSource,JSDropDownMenuDelegate>
+
+@interface AddHelperViewController ()<UITableViewDelegate,UITableViewDataSource,JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
     NSInteger _currentData1Index;
     NSMutableArray *_data1;
@@ -29,7 +32,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *partInMemberLabel;
 @property (strong, nonatomic) IBOutlet UIView *flagView;
 @property (strong, nonatomic)    JSDropDownMenu *menu;
-
+@property (strong, nonatomic) NSMutableArray * currentUser;
 
 
 @end
@@ -40,6 +43,7 @@
     
     
     [super viewDidLoad];
+    self.currentUser = [NSMutableArray array];
     self.taskInfoTable.delegate = self;
     self.taskInfoTable.dataSource = self;
     self.memberInfoTable.dataSource = self;
@@ -58,7 +62,22 @@
     self.menu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     self.menu.dataSource = self;
     self.menu.delegate = self;
-  
+    
+    NSString * userMethod = @"getCurrentOperators";
+    NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
+    NSArray * paramArr = [NSArray arrayWithObjects:@"001",@"zh-CN|zh-TW|en", nil];
+    __weak typeof(self) weakSelf = self;
+    [NetWorkManager sendRequestWithParameters:paramArr method:userMethod success:^(id data) {
+        NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+        [p setDelegate:weakSelf];
+        [p parse];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
     [self.view addSubview:self.menu];
     
     
@@ -248,13 +267,9 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         
-        
         NSLog(@"_currentData1Index:%@",_data1[_currentData1Index]);
 
-        
-        
-        
-        
+                
     }];
     
     
@@ -270,7 +285,19 @@
 }
 
 
+#pragma mark -- NSXMLParserDelegate数据解析
 
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
+    if([elementName isEqualToString:@"User"]){
+        UserAccount *userAccount = [[UserAccount alloc] init];
+        userAccount.id = [attributeDict objectForKey:@"id"];
+        userAccount.name = [attributeDict objectForKey:@"name"];
+        userAccount.fullName = [attributeDict objectForKey:@"fullName"];
+        userAccount.number = [attributeDict objectForKey:@"code"];
+        userAccount.userType =  [attributeDict objectForKey:@"userType"];
+        [self.currentUser addObject:userAccount];
+    }
+}
 
 
 @end

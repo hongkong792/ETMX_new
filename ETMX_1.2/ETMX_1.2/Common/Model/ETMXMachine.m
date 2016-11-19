@@ -7,7 +7,11 @@
 //
 
 #import "ETMXMachine.h"
+#import "MJExtensionConfig.h"
+#import "NSObject+MJProperty.h"
+
 
 @implementation ETMXMachine
+
 
 @end

@@ -16,6 +16,9 @@
 #import "SearchViewController.h"
 #import "UserManager.h"
 
+#import "AddHelperViewController.h"
+
+
 #define WTaskTypeMold                    @"mold"                         //新模
 #define WTaskTypeChangeMold     @"changeMold"         //改模
 #define WTaskTypeElectrode           @"electrode"                //铜公
@@ -252,6 +255,20 @@ typedef enum : NSUInteger {
 
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
+    
+    AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+    helpcon.preferredContentSize = CGSizeMake(800, 600);
+    helpcon.modalPresentationStyle = UIModalPresentationPopover;
+    // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
+    _chooseImagePopoverController = helpcon.popoverPresentationController;
+    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    //_chooseImagePopoverController.delegate = self;
+    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+    _chooseImagePopoverController.sourceView = helpcon.view;
+    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+    [self presentViewController:helpcon animated:YES completion:nil];
+
+
 }
 
 //启动

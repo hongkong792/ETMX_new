@@ -276,7 +276,7 @@
 #pragma mark - init method
 - (instancetype)initWithOrigin:(CGPoint)origin andHeight:(CGFloat)height {
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    self = [self initWithFrame:CGRectMake(origin.x, origin.y, screenSize.width/2, height)];
+    self = [self initWithFrame:CGRectMake(origin.x, origin.y, height*3, height)];
     if (self) {
         _origin = origin;
         _currentSelectedMenudIndex = -1;
@@ -318,14 +318,14 @@
         [self addGestureRecognizer:tapGesture];
         
         //background init and tapped
-        _backGroundView = [[UIView alloc] initWithFrame:CGRectMake(origin.x, origin.y, screenSize.width, screenSize.height)];
+        _backGroundView = [[UIView alloc] initWithFrame:CGRectMake(origin.x, origin.y, height*3, screenSize.height)];
         _backGroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
         _backGroundView.opaque = NO;
         UIGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
         [_backGroundView addGestureRecognizer:gesture];
         
         //add bottom shadow
-        _bottomShadow = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-0.5, screenSize.width, 0.5)];
+        _bottomShadow = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-0.5, height*3, 0.5)];
         [self addSubview:_bottomShadow];
     }
     return self;

@@ -16,6 +16,26 @@
 "member"    = "member";
 "searchConfirm" = "confirm";
 
+//添加帮手
+
+"addMemberInfo" = "addMember";
+"ChooseMember"  = "ChooseMember";
+"TaskInfo"      = "TaskInfo";
+"TaskObject"    = "TaskObject";
+"TaskName"      = "TaskName";
+"TaskStart"     = "TaskStart";
+
+"PartInMember" = "PartInMember";
+"PartIn_Name" =  "Name";
+"PartInProperty" = "Property";
+"PartInUsingTime" = "UsingTime";
+"PartInOper" = "PartInOper";
+
+"delete" = "delete";
+"pause" = "pause";
+"finish" = "finish";
+
+
 //begin  任务界面
 "refresh"                    =               "refresh";
 "search"                    =               "search";

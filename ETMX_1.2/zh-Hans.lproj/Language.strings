@@ -17,6 +17,24 @@
 "member"    = "组员";
 "searchConfirm" = "确定";
 
+"addMemberInfo" = "添加人员信息";
+"ChooseMember"  = "选择组员";
+"TaskInfo"      = "任务信息";
+"TaskObject"    = "任务对象";
+"TaskName"      = "任务名称";
+"TaskStart"     = "计划开始";
+
+"PartInMember" = "参与人员";
+"PartIn_Name" =  "名称";
+"PartInProperty" = "属性";
+"PartInUsingTime" = "已用工时";
+"PartInOper" = "操作";
+
+"delete" = "删除";
+"pause" = "暂停";
+"finish" = "完成";
+
+
 
 //begin  任务界面
 "refresh"                    =               "刷新";

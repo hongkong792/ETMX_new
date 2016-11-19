@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061DEF831DE01F4A0089C2FF /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061DEF811DE01F4A0089C2FF /* TaskTableViewCell.m */; };
+		061DEF841DE01F4A0089C2FF /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061DEF821DE01F4A0089C2FF /* TaskTableViewCell.xib */; };
+		061DEF881DE01F580089C2FF /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061DEF861DE01F580089C2FF /* MemberTableViewCell.m */; };
+		061DEF891DE01F580089C2FF /* MemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061DEF871DE01F580089C2FF /* MemberTableViewCell.xib */; };
 		065146311DD4851800BCDE13 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 065146301DD4851800BCDE13 /* Reachability.m */; };
 		066000B31DD5E87D005F2D80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0660009D1DD5E87D005F2D80 /* Info.plist */; };
 		066000B41DD5E87D005F2D80 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 066000A01DD5E87D005F2D80 /* MJExtensionConst.m */; };
@@ -85,6 +89,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		061DEF801DE01F4A0089C2FF /* TaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
+		061DEF811DE01F4A0089C2FF /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
+		061DEF821DE01F4A0089C2FF /* TaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		061DEF851DE01F580089C2FF /* MemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
+		061DEF861DE01F580089C2FF /* MemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
+		061DEF871DE01F580089C2FF /* MemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberTableViewCell.xib; sourceTree = "<group>"; };
 		0651462F1DD4851800BCDE13 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		065146301DD4851800BCDE13 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0660009D1DD5E87D005F2D80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -613,6 +623,12 @@
 				06776AAB1DD9AE9900A50053 /* AddHelperViewController.h */,
 				06776AAC1DD9AE9900A50053 /* AddHelperViewController.m */,
 				06776AAD1DD9AE9900A50053 /* AddHelperViewController.xib */,
+				061DEF801DE01F4A0089C2FF /* TaskTableViewCell.h */,
+				061DEF811DE01F4A0089C2FF /* TaskTableViewCell.m */,
+				061DEF821DE01F4A0089C2FF /* TaskTableViewCell.xib */,
+				061DEF851DE01F580089C2FF /* MemberTableViewCell.h */,
+				061DEF861DE01F580089C2FF /* MemberTableViewCell.m */,
+				061DEF871DE01F580089C2FF /* MemberTableViewCell.xib */,
 			);
 			path = AddHelper;
 			sourceTree = "<group>";
@@ -750,10 +766,12 @@
 				0674B7E01DD086F7004FF173 /* Assets.xcassets in Resources */,
 				0674B7DE1DD086F7004FF173 /* Main.storyboard in Resources */,
 				0674B8A01DD08AB0004FF173 /* zbar-samples.png in Resources */,
+				061DEF841DE01F4A0089C2FF /* TaskTableViewCell.xib in Resources */,
 				0674B89E1DD08AB0004FF173 /* zbar-help.html in Resources */,
 				247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */,
 				0674B8851DD08AB0004FF173 /* LICENSE in Resources */,
 				0674B89F1DD08AB0004FF173 /* zbar-helpicons.png in Resources */,
+				061DEF891DE01F580089C2FF /* MemberTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,6 +793,7 @@
 				0674B87C1DD08AB0004FF173 /* ETMXTask.m in Sources */,
 				0674B7D81DD086F7004FF173 /* AppDelegate.m in Sources */,
 				0674B88A1DD08AB0004FF173 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				061DEF831DE01F4A0089C2FF /* TaskTableViewCell.m in Sources */,
 				066000BB1DD5E87D005F2D80 /* NSObject+MJKeyValue.m in Sources */,
 				0674B89A1DD08AB0004FF173 /* README.md in Sources */,
 				065146311DD4851800BCDE13 /* Reachability.m in Sources */,
@@ -798,6 +817,7 @@
 				0674B8A41DD08AB0004FF173 /* UIView+QREasyFrame.m in Sources */,
 				2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */,
 				06E0C8D51DD6DBB6004648AA /* CheckNetWorkerTool.m in Sources */,
+				061DEF881DE01F580089C2FF /* MemberTableViewCell.m in Sources */,
 				0674B8A21DD08AB0004FF173 /* QRScanViewController.m in Sources */,
 				0674B8811DD08AB0004FF173 /* AFSecurityPolicy.m in Sources */,
 				0674B8821DD08AB0004FF173 /* AFURLRequestSerialization.m in Sources */,

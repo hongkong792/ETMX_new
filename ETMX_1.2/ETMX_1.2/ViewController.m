@@ -12,11 +12,12 @@
 #import "TaskMainControllerViewController.h"
 #import "CheckNetWorkerTool.h"
 #import "SearchViewController.h"
+#import "AddHelperViewController.h"
 
 
 
 
-@interface ViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,QRCodeScanDelegate,loginSucess>
+@interface ViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,QRCodeScanDelegate,loginSucessDelegate>
 @property (weak, nonatomic) IBOutlet UIPickerView *LanguagePicker;
 @property (strong, nonatomic) IBOutlet UIView *rootView;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -33,11 +34,8 @@
 @property (copy,nonatomic)NSString * adressIp;
 
 
-
-
-
-
 @property (nonatomic, strong)UILabel * titleLabel;
+@property (strong,nonatomic) UIPopoverPresentationController *chooseImagePopoverController;
 @end
 
 @implementation ViewController
@@ -203,7 +201,21 @@
     
 }
 - (IBAction)loginClick:(id)sender {
+//    AddHelperViewController * con = [[AddHelperViewController alloc] init];
+//    
+//    [self presentViewController:con animated:YES completion:nil];
+//    
+    AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+    helpcon.preferredContentSize = CGSizeMake(600, 1000);
+    helpcon.modalPresentationStyle = UIModalPresentationPopover;
+    _chooseImagePopoverController = helpcon.popoverPresentationController;
+    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    _chooseImagePopoverController.sourceRect = self.loginLabel.frame;//CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+    _chooseImagePopoverController.sourceView = helpcon.view;
+    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+    [self presentViewController:helpcon animated:YES completion:nil];
     
+    /**
     LogiinViewController * loginCon = [[LogiinViewController alloc] init];
     loginCon.delegate = self;
     UserAccount * user = [[UserAccount alloc] init];
@@ -212,13 +224,13 @@
         user.name = self.userNameText.text;
         user.password = self.passwordTest.text;
         NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
-        [loginCon loginWithReq:user withUrl:loginUrl success:^(id data) {
+        NSString * method = @"checkUserInfo";
+        [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
             
         } failure:^(NSError *error) {
             
         }];
-        
-        
+
     }else{
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -227,7 +239,7 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
-   
+   */
 
 }
 
@@ -280,7 +292,6 @@
     con.delegate = self;
     [self.navigationController pushViewController:con animated:YES];
 
-    
 }
 
 # pragma dealScanning
@@ -289,7 +300,36 @@
             isTwoDCode:(BOOL)isTwoDCode
 {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
+   // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
+    if (result.length > 0) {
+        LogiinViewController * loginCon = [[LogiinViewController alloc] init];
+        loginCon.delegate = self;
+        UserAccount * user = [[UserAccount alloc] init];
+            user.number = result;
+            NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/TaskScanExecution";
+            NSString * method = @"checkCode";
+             [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
+                 
+                 
+                 
+             } failure:^(NSError *error) {
+                 
+                 
+                 
+                 
+             }];
+        
+        }else{
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                return ;
+            }];
+            [alert addAction:action];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        
+ 
+    
 }
 
 
@@ -311,11 +351,34 @@
     return UIModalPresentationOverCurrentContext;//不适配
 }
 
-
+#pragma loginSucessDelegate
 - (void)loginSuccess
 {
     TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
     [self.navigationController pushViewController:taskMainVC animated:YES];
     
 }
+- (void)loginFail
+{
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"登录失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        return ;
+    }];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+    self.passwordTest.text = @"";
+    
+}
+
+- (void)neeNotWorking
+{
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"网络连接失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        return ;
+    }];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
 @end

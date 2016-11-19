@@ -23,6 +23,7 @@ MJExtensionLogAllProperties
 @property(nonatomic,strong)AFHTTPSessionManager * manager;
 @property(nonatomic,strong)UserAccount * userAccount;
 @property(nonatomic,strong)LoginResponse * loginResult;
+@property (nonatomic,strong)NSString * loginType ;
 
 
 @end
@@ -36,32 +37,37 @@ MJExtensionLogAllProperties
 - (instancetype)init
 {
     self = [super init];
-    self.manager =  [AFHTTPSessionManager manager];    
-
+    self.manager =  [AFHTTPSessionManager manager];
     return self;
     
 }
 
-
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  
 
 }
 
 
-- (void)loginWithReq:(UserAccount *)user withUrl:(NSString *)url success:(HttpSuccess)success failure:(HttpFailure)failure
+- (void)loginWithReq:(UserAccount *)user withUrl:(NSString *)url method:(NSString *)method success:(HttpSuccess)success failure:(HttpFailure)failure
 {
     //    获取所有任务接口测试（getTasksByUserCode(String userCode)）
     NSMutableArray *paramters = [NSMutableArray array];
-    [paramters addObject:user.name];
-    [paramters  addObject:user.password];
-    NSString *methodName = @"checkUserInfo";
+    if ([method isEqualToString:@"checkUserInfo"] ) {
+        [paramters addObject:user.name];
+        [paramters  addObject:user.password];
+    }else if ([method isEqualToString:@"checkCode"]){
+        [paramters addObject:user.number];
+    }
+
+    NSString *methodName = method;
+    self.loginType = method;
+    //网络检测
+    if (![[CheckNetWorkerTool sharedManager] isNetWorking]) {
+        [self.delegate neeNotWorking];
+    }
     [NetWorkManager sendRequestWithParameters:paramters method:methodName success:^(id data) {
-        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+       NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:self];
         [p parse];
     } failure:^(NSError *error) {
@@ -73,38 +79,41 @@ MJExtensionLogAllProperties
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
 
-    if ([elementName isEqualToString:@"User"]) {
+    if ([elementName isEqualToString:@"User"] && [self.loginType isEqualToString:@"checkUserInfo"]) {
         LoginResponse *user = [LoginResponse mj_objectWithKeyValues:attributeDict];
         UserAccount *userAccount = [UserAccount mj_objectWithKeyValues:attributeDict];
         if (user != nil) {
   
             [[UserManager instance] setCurAccount:userAccount];
             if ([user.flag isEqualToString:@"1"]) {
-                     [self checkUserAndSave];
+                    [self.delegate loginSuccess];
             }else{
-                
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不正确" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    return ;
-                }];
-                [alert addAction:action];
-                [self presentViewController:alert animated:YES completion:nil];
+                [self.delegate loginFail];
             }
         }
+    }else if ([self.loginType isEqualToString:@"checkCode"] && [elementName isEqualToString:@"XXXX"]){///二维码登录
+        
+        //处理解析
+        
+        
+        
+        
+    }else{
+        //登录出错，错误提示
+        [self.delegate loginFail];
+        
     }
+    
+    
 }
+
+
+
 
 
 - (void)dealloc
 {
     self.loginResult = nil;
+    self.loginType = nil;
 }
-- (void)checkUserAndSave
-{
-//    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
-//    [self.navigationController pushViewController:taskMainVC animated:YES];
-    
-    [self.delegate loginSuccess];
-}
-
 @end

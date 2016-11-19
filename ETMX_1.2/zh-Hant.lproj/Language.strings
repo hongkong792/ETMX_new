@@ -17,6 +17,26 @@
 "member"    = "組員";
 "searchConfirm" = "確定";
 
+
+"addMemberInfo" = "添加人員信息";
+"ChooseMember"  = "選擇組員";
+"TaskInfo"      = "任務信息";
+"TaskObject"    = "任務對象";
+"TaskName"      = "任務名稱";
+"TaskStart"     = "計畫開始";
+
+"PartInMember" = "參與人員";
+"PartIn_Name" =  "名稱";
+"PartInProperty" = "屬性";
+"PartInUsingTime" = "已用工時";
+"PartInOper" = "操作";
+
+"delete" = "刪除";
+"pause" = "暫停";
+"finish" = "完成";
+
+
+
 //begin  任务界面
 "refresh"                    =               "刷新";
 "search"                    =               "搜索";

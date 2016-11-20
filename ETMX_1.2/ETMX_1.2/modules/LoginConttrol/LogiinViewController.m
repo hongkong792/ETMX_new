@@ -84,7 +84,6 @@ MJExtensionLogAllProperties
         LoginResponse *user = [LoginResponse mj_objectWithKeyValues:attributeDict];
         UserAccount *userAccount = [UserAccount mj_objectWithKeyValues:attributeDict];
         if (user != nil) {
-  
             [[UserManager instance] setCurAccount:userAccount];
             if ([user.flag isEqualToString:@"1"]) {
                     [self.delegate loginSuccess];
@@ -106,14 +105,9 @@ MJExtensionLogAllProperties
             [self.delegate loginFail];
        }
         //处理解析
-        
     }
     
-    
 }
-
-
-
 
 
 - (void)dealloc

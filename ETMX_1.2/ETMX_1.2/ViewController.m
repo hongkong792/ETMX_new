@@ -37,6 +37,8 @@
 
 @property (nonatomic, strong)UILabel * titleLabel;
 @property (strong,nonatomic) UIPopoverPresentationController *chooseImagePopoverController;
+@property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
+
 @end
 
 @implementation ViewController
@@ -51,6 +53,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
+    _indicatorView.backgroundColor = [UIColor lightGrayColor];
+    _indicatorView.frame = CGRectMake(0, 0,self.view.frame.size.width , self.view.frame.size.height);
+    //_indicatorView.frame = self.view.frame;
+    self.indicatorView.alpha = 0.5;
+    
+    
+    
     self.qrViewCon = nil;
     NSString * lan = [[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
     [self changeLanguageWithlan:lan];
@@ -203,21 +217,20 @@
     
 }
 - (IBAction)loginClick:(id)sender {
-//    AddHelperViewController * con = [[AddHelperViewController alloc] init];
+//    SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+//    sea.preferredContentSize = CGSizeMake(500, 800);
+//    sea.modalPresentationStyle = UIModalPresentationPopover;
 //    
-//    [self presentViewController:con animated:YES completion:nil];
-//    
-//    AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
-//    helpcon.preferredContentSize = CGSizeMake(600, 1000);
-//    helpcon.modalPresentationStyle = UIModalPresentationPopover;
-//    _chooseImagePopoverController = helpcon.popoverPresentationController;
+//    _chooseImagePopoverController = sea.popoverPresentationController;
 //    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-//    _chooseImagePopoverController.sourceRect = self.loginLabel.frame;//CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-//    _chooseImagePopoverController.sourceView = helpcon.view;
+//    
+//    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+//    _chooseImagePopoverController.sourceView = sea.view;
 //    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-//    [self presentViewController:helpcon animated:YES completion:nil];
-    
-  
+//    [self presentViewController:sea animated:YES completion:nil];
+    [self.view addSubview:self.indicatorView];
+    [self.indicatorView startAnimating];
+
     LogiinViewController * loginCon = [[LogiinViewController alloc] init];
     loginCon.delegate = self;
     UserAccount * user = [[UserAccount alloc] init];
@@ -230,6 +243,9 @@
         [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
             
         } failure:^(NSError *error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertView show];
+            
             
         }];
 
@@ -303,7 +319,8 @@
                 
                  
              } failure:^(NSError *error) {
-                 
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                 [alertView show];
                  
              }];
         
@@ -344,7 +361,9 @@
     
 //    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:([self.navigationController.viewControllers count] -2)] animated:YES];
      //  [self.navigationController popViewControllerAnimated:YES];
+    [self.indicatorView stopAnimating];
     dispatch_async(dispatch_get_main_queue(), ^{
+       
         TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] initWithNibName:@"TaskMainControllerViewController" bundle:nil];
         [self.navigationController pushViewController:taskMainVC animated:YES];
     });

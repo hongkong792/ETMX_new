@@ -19,6 +19,7 @@
     NSMutableArray *_data1;
     NSInteger _currentData2Index;
     NSMutableArray *_data2;
+
 }
 
 @property (strong, nonatomic) IBOutlet UIView *equipmentView;
@@ -28,14 +29,25 @@
 @property (strong, nonatomic) IBOutlet UILabel *equipmentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *memberLabel;
 @property (strong, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
 
 
 @end
 
 @implementation SearchViewController
 
+static BOOL equFinish = NO;
+static BOOL memberFinish = NO;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
+    _indicatorView.backgroundColor = [UIColor lightGrayColor];
+    _indicatorView.frame = CGRectMake(0, 0, 600, 800);
+    //_indicatorView.frame = self.view.frame;
+    self.indicatorView.alpha = 0.5;
+ 
     // Do any additional setup after loading the view from its nib.
     _data2 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
     //_data2 = [NSMutableArray array];
@@ -46,7 +58,7 @@
     self.menu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     self.menu.dataSource = self;
     self.menu.delegate = self;
-    [self.view addSubview:self.menu];
+
     
         _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
     //_data1 = [NSMutableArray array];
@@ -57,7 +69,10 @@
     self.equmenu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     self.equmenu.dataSource = self;
     self.equmenu.delegate = self;
-    [self.view addSubview:self.equmenu];
+ 
+    
+    
+
     //獲取數據
     NSString * equMethod = @"getEquipmentsByUserCode";
     NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
@@ -68,29 +83,47 @@
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:weakSelf];
         [p parse];
-        
+        equFinish = YES;
+        [weakSelf laodDataFinish];
+    
     } failure:^(NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
         
     }];
+    
     
     NSString * userMethod = @"getGroupMembersByUserCode";
     NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
     NSArray * paramUserArr = [NSArray arrayWithObjects:userNumber, nil];
-    
-    
+
     [NetWorkManager sendRequestWithParameters:paramUserArr method:userMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:weakSelf];
         [p parse];
+        memberFinish = YES;
+        [weakSelf laodDataFinish];
+
         
     } failure:^(NSError *error) {
-        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
         
         
     }];
     
     
+    [self.view addSubview:self.indicatorView];
+    [self.indicatorView startAnimating];
+    
+    
+    
+    
+//    
+//    
+//    [self.view addSubview:self.menu];
+//    [self.view addSubview:self.equmenu];
     
 
 }
@@ -162,9 +195,17 @@
     
     
     if ([menu isEqual:self.equmenu]) {
-        return _data1[indexPath.row];
+        
+        if (_data1.count > indexPath.row+1) {
+            return _data1[indexPath.row];
+        }
+        
     }else if ([menu isEqual:self.menu]){
-        return _data2[indexPath.row];
+        if (_data2.count > indexPath.row+1) {
+              return _data2[indexPath.row];
+        }
+        
+      
         
     }
     return nil;
@@ -174,9 +215,18 @@
 
 - (void)menu:(JSDropDownMenu *)menu didSelectRowAtIndexPath:(JSIndexPath *)indexPath {
     if ([menu isEqual:self.equmenu]) {
-         _currentData1Index = indexPath.row;
+       
+        if (indexPath.row+1 < _data1.count) {
+              _currentData1Index = indexPath.row;
+        }
+        
+        
     }else if ([menu isEqual:self.menu]){
-        _currentData2Index =  indexPath.row;
+        
+        if (indexPath.row+1 < _data2.count) {
+            _currentData2Index =  indexPath.row;
+
+        }
 
     }
 
@@ -187,7 +237,7 @@
   [self dismissViewControllerAnimated:YES completion:^{
       
       
-    NSLog(@"_currentData1Index:%@",_data2[_currentData1Index]);
+    NSLog(@"_currentData1Index:%@",_data1[_currentData1Index]);
     NSLog(@"_currentData2Index:%@",_data2[_currentData2Index]);
       
   }];
@@ -203,8 +253,11 @@
         machine.machineID = [attributeDict objectForKey:@"id"];
         machine.machineCode = [attributeDict objectForKey:@"code"];
         machine.machineName = [attributeDict objectForKey:@"name"];
-        machine.machineModel = [attributeDict objectForKey:@"model"];        
-        [_data1 addObject:machine];
+        machine.machineModel = [attributeDict objectForKey:@"model"];
+        if (machine != nil) {
+          [_data1 addObject:machine.machineName];
+        }
+      
         
     }else if([elementName isEqualToString:@"User"]){
  
@@ -213,11 +266,28 @@
         userAccount.name = [attributeDict objectForKey:@"name"];
         userAccount.fullName = [attributeDict objectForKey:@"fullName"];
         userAccount.number = [attributeDict objectForKey:@"code"];
-        [_data2 addObject:userAccount];
+        if (userAccount.fullName != nil) {
+            [_data2 addObject:userAccount.fullName];
+        }
     }
     
     
 
 }
+- (void) laodDataFinish
+{
+    if (equFinish && memberFinish) {
+        [self.indicatorView stopAnimating];
+        [self.view addSubview:self.menu];
+        [self.view addSubview:self.equmenu];
+    }else{
+        
+        return ;
+    }
+    
+    
+}
+
+
 
 @end

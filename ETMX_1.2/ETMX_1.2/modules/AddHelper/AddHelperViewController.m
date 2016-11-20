@@ -16,12 +16,10 @@
 #define MEMBER   @"MemberTableViewCell"
 
 
-
-
 @interface AddHelperViewController ()<UITableViewDelegate,UITableViewDataSource,JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
     NSInteger _currentData1Index;
-    NSMutableArray *_data1;
+    NSMutableArray *_memberData;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *taskInfoTable;
@@ -32,36 +30,49 @@
 @property (strong, nonatomic) IBOutlet UILabel *partInMemberLabel;
 @property (strong, nonatomic) IBOutlet UIView *flagView;
 @property (strong, nonatomic)    JSDropDownMenu *menu;
-@property (strong, nonatomic) NSMutableArray * currentUser;
+@property (strong, nonatomic) NSMutableArray * currentOperUser;
+@property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
 
 
 @end
 
 @implementation AddHelperViewController
 
+static BOOL memberFinish = NO;
+static BOOL operatorsFinish = NO;
 - (void)viewDidLoad {
     
     
     [super viewDidLoad];
-    self.currentUser = [NSMutableArray array];
+    self.currentOperUser = [NSMutableArray array];
     self.taskInfoTable.delegate = self;
     self.taskInfoTable.dataSource = self;
     self.memberInfoTable.dataSource = self;
     self.memberInfoTable.delegate = self;
     
     
+    _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
+    _indicatorView.backgroundColor = [UIColor lightGrayColor];
+    _indicatorView.frame = CGRectMake(0, 0, 600, 800);
+    //_indicatorView.frame = self.view.frame;
+    self.indicatorView.alpha = 0.5;
+    
+    
     [self.taskInfoTable registerNib:[UINib nibWithNibName:@"TaskTableViewCell" bundle:nil] forCellReuseIdentifier:TASKINFO];
     [self.memberInfoTable registerNib:[UINib nibWithNibName:@"MemberTableViewCell" bundle:nil] forCellReuseIdentifier:MEMBER];
     
     //添加菜單
-    _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
-    CGPoint equoint= self.flagView.frame.origin;
-    self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(equoint.x , equoint.y) andHeight:45];
+    _memberData = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    CGPoint memint= self.flagView.frame.origin;
+    self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(memint.x , memint.y) andHeight:45];
     self.menu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
     self.menu.separatorColor = [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0];
     self.menu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     self.menu.dataSource = self;
     self.menu.delegate = self;
+    
+    
     
     NSString * userMethod = @"getCurrentOperators";
     NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
@@ -72,17 +83,43 @@
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:weakSelf];
         [p parse];
+        operatorsFinish = YES;
+        [weakSelf laodDataFinish];
         
     } failure:^(NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }];
+
+    
+    
+    NSString * userMberMethod = @"getGroupMembersByUserCode";
+    NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
+    NSArray * paramUserArr = [NSArray arrayWithObjects:userNumber, nil];
+    [NetWorkManager sendRequestWithParameters:paramUserArr method:userMberMethod success:^(id data) {
+        NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+        [p setDelegate:weakSelf];
+        [p parse];
+        memberFinish = YES;
+        [weakSelf laodDataFinish];
+        
+        
+    } failure:^(NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        
         
     }];
-    
-    
-    [self.view addSubview:self.menu];
+    [self.view addSubview:self.indicatorView];
+    [self.indicatorView startAnimating];
+
     
     
 }
 
+
+#pragma UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.memberInfoTable) {
@@ -140,6 +177,8 @@
         
         //數據設置
         
+            
+        
         
         
         return taskCell;
@@ -181,6 +220,8 @@
         [memberCell.deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
         [memberCell.pauseBtn addTarget:self action:@selector(pauseClick:) forControlEvents:UIControlEventTouchUpInside];
         [memberCell.finishBtn addTarget:self action:@selector(finishClick:) forControlEvents:UIControlEventTouchUpInside];
+      
+        
         
         
         return memberCell;
@@ -235,14 +276,14 @@
 - (NSInteger)menu:(JSDropDownMenu *)menu numberOfRowsInColumn:(NSInteger)column leftOrRight:(NSInteger)leftOrRight leftRow:(NSInteger)leftRow{
     
 
-        return _data1.count;
+        return _memberData.count;
 
 }
 
 - (NSString *)menu:(JSDropDownMenu *)menu titleForColumn:(NSInteger)column{
     
 
-        return _data1[0];
+        return _memberData[0];
 
     return nil;
     
@@ -251,7 +292,7 @@
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
     
 
-        return _data1[indexPath.row];
+        return _memberData[indexPath.row];
 
     
 }
@@ -263,21 +304,17 @@
     
     
 }
-- (IBAction)confirmClick:(id)sender {
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        NSLog(@"_currentData1Index:%@",_data1[_currentData1Index]);
 
-                
-    }];
-    
-    
-    
-}
 
 #pragma bottomBtnClick
 - (IBAction)confirm:(id)sender {
+    
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        
+    }];
+    
 }
 - (IBAction)useIt:(id)sender {
 }
@@ -288,16 +325,48 @@
 #pragma mark -- NSXMLParserDelegate数据解析
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
-    if([elementName isEqualToString:@"User"]){
+    if(attributeDict.count > 4){
         UserAccount *userAccount = [[UserAccount alloc] init];
         userAccount.id = [attributeDict objectForKey:@"id"];
         userAccount.name = [attributeDict objectForKey:@"name"];
         userAccount.fullName = [attributeDict objectForKey:@"fullName"];
         userAccount.number = [attributeDict objectForKey:@"code"];
         userAccount.userType =  [attributeDict objectForKey:@"userType"];
-        [self.currentUser addObject:userAccount];
+        if (userAccount != nil) {
+            
+            [self.currentOperUser addObject:userAccount];
+
+        }
+        
+    }else{
+        
+        UserAccount *user = [[UserAccount alloc] init];
+        user.id = [attributeDict objectForKey:@"id"];
+        user.name = [attributeDict objectForKey:@"name"];
+        user.fullName = [attributeDict objectForKey:@"fullName"];
+        user.number = [attributeDict objectForKey:@"code"];
+        user.userType =  [attributeDict objectForKey:@"userType"];
+        if (user.fullName != nil) {
+            [_memberData addObject:user.fullName];
+        }
+        
+    }
+    
+}
+
+
+
+- (void) laodDataFinish
+{
+    if (memberFinish && operatorsFinish) {
+        [self.indicatorView stopAnimating];
+        [self.view addSubview:self.menu];
+
+    }else{
+        return ;
     }
 }
+
 
 
 @end

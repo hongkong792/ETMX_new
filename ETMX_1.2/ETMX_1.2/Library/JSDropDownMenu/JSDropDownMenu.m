@@ -276,7 +276,7 @@
 #pragma mark - init method
 - (instancetype)initWithOrigin:(CGPoint)origin andHeight:(CGFloat)height {
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    self = [self initWithFrame:CGRectMake(origin.x, origin.y, height*3, height)];
+    self = [self initWithFrame:CGRectMake(origin.x, origin.y, height*5, height)];
     if (self) {
         _origin = origin;
         _currentSelectedMenudIndex = -1;
@@ -318,7 +318,7 @@
         [self addGestureRecognizer:tapGesture];
         
         //background init and tapped
-        _backGroundView = [[UIView alloc] initWithFrame:CGRectMake(origin.x, origin.y, height*3, screenSize.height)];
+        _backGroundView = [[UIView alloc] initWithFrame:CGRectMake(origin.x, origin.y, height*5, height*6)];
         _backGroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
         _backGroundView.opaque = NO;
         UIGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
@@ -617,7 +617,8 @@
             leftTableView.frame = CGRectMake(_origin.x, self.frame.origin.y + self.frame.size.height, self.frame.size.width*ratio, 0);
             [self.superview addSubview:leftTableView];
             
-            leftTableViewHeight = ([leftTableView numberOfRowsInSection:0] > 5) ? (5 * leftTableView.rowHeight) : ([leftTableView numberOfRowsInSection:0] * leftTableView.rowHeight);
+            leftTableViewHeight = ([leftTableView numberOfRowsInSection:0] > 5) ? (6 * leftTableView.rowHeight) : ([leftTableView numberOfRowsInSection:0] * leftTableView.rowHeight);
+//            leftTableViewHeight = ([leftTableView numberOfRowsInSection:0] * leftTableView.rowHeight);
 
         }
         

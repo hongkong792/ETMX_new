@@ -25,6 +25,10 @@
 "TaskName"      = "任務名稱";
 "TaskStart"     = "計畫開始";
 
+"TaskPlaneFinish" = "計畫完成";
+"TaskRealStart" = "實際開始";
+"TaskRealFinish" = "實際完成";
+
 "PartInMember" = "參與人員";
 "PartIn_Name" =  "名稱";
 "PartInProperty" = "屬性";

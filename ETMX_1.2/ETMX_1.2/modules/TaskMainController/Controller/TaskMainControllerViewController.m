@@ -5,8 +5,6 @@
 //  Created by wenpq on 16/11/2.
 //  Copyright © 2016年 杨香港. All rights reserved.
 //
-
-
 #import "TaskMainControllerViewController.h"
 #import "NetWorkManager.h"
 #import "TaskContentTableView.h"
@@ -17,6 +15,7 @@
 #import "UserManager.h"
 
 #import "AddHelperViewController.h"
+#import "CurrentTask.h"
 
 
 #define WTaskTypeMold                    @"mold"                         //新模
@@ -120,10 +119,14 @@ typedef enum : NSUInteger {
     self.tableView.block = ^(){
         __strong typeof(self) strong = weakSelf;
         [strong refreshBtns];
+        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
     };
     [self setup];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
     [self refresh:nil];
+    [[CurrentTask sharedManager] setCurrentTask:self.currentTask];
+  
+    
 }
 
 #pragma mark -- commen
@@ -290,15 +293,34 @@ typedef enum : NSUInteger {
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
     
-    AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
-    helpcon.preferredContentSize = CGSizeMake(600, 1000);
-    helpcon.modalPresentationStyle = UIModalPresentationPopover;
-    _chooseImagePopoverController = helpcon.popoverPresentationController;
-    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-    _chooseImagePopoverController.sourceView = helpcon.view;
-    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-    [self presentViewController:helpcon animated:YES completion:nil];
+
+    if (self.currentTask == nil) {
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            return ;
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+
+        
+    }else{
+        [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
+        AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+        helpcon.preferredContentSize = CGSizeMake(600, 1000);
+        helpcon.modalPresentationStyle = UIModalPresentationPopover;
+        _chooseImagePopoverController = helpcon.popoverPresentationController;
+        _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+        _chooseImagePopoverController.sourceView = helpcon.view;
+        _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+        helpcon.currentTask = self.currentTask;
+        [self presentViewController:helpcon animated:YES completion:nil];
+        
+    }
+    
+    
+
 
 
 }
@@ -506,7 +528,6 @@ typedef enum : NSUInteger {
             [self.tableView.selectedSections removeAllObjects];
             [self sortAllTaskWithType:self.taskType andState:self.taskState];
         }
-            
         default:
             break;
     }

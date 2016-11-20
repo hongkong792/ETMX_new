@@ -23,6 +23,11 @@
 "TaskObject"    = "任务对象";
 "TaskName"      = "任务名称";
 "TaskStart"     = "计划开始";
+"TaskPlaneFinish" = "计划完成";
+"TaskRealStart" = "实际开始";
+"TaskRealFinish" = "实际完成";
+
+
 
 "PartInMember" = "参与人员";
 "PartIn_Name" =  "名称";

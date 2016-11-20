@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ETMXTask.h"
 
 @interface AddHelperViewController : UIViewController
-
+@property (nonatomic,strong)ETMXTask * currentTask;
 @end

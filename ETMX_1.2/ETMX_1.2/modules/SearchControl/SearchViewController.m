@@ -14,7 +14,6 @@
 
 @interface SearchViewController ()<JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
-    
     NSInteger _currentData1Index;
     NSMutableArray *_data1;
     NSInteger _currentData2Index;
@@ -49,8 +48,8 @@ static BOOL memberFinish = NO;
     self.indicatorView.alpha = 0.5;
  
     // Do any additional setup after loading the view from its nib.
-    _data2 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
-    //_data2 = [NSMutableArray array];
+//    _data2 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    _data2 = [NSMutableArray array];
     CGPoint point= self.memberView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(point.x , point.y) andHeight:45];
     self.menu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
@@ -60,8 +59,8 @@ static BOOL memberFinish = NO;
     self.menu.delegate = self;
 
     
-        _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
-    //_data1 = [NSMutableArray array];
+//        _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    _data1 = [NSMutableArray array];
     CGPoint equoint= self.equipmentView.frame.origin;
     self.equmenu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(equoint.x , equoint.y) andHeight:45];
     self.equmenu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
@@ -182,9 +181,9 @@ static BOOL memberFinish = NO;
     
     
     if ([menu isEqual:self.equmenu]) {
-        return _data1[0];
+        return @"請選擇";
     }else if ([menu isEqual:self.menu]){
-        return _data2[0];
+        return  @"請選擇";
         
     }
     return nil;

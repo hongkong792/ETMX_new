@@ -25,6 +25,10 @@
 "TaskName"      = "TaskName";
 "TaskStart"     = "TaskStart";
 
+"TaskPlaneFinish" = "PlaneFinish";
+"TaskRealStart" = "RealStart";
+"TaskRealFinish" = "RealFinish";
+
 "PartInMember" = "PartInMember";
 "PartIn_Name" =  "Name";
 "PartInProperty" = "Property";
@@ -34,6 +38,8 @@
 "delete" = "delete";
 "pause" = "pause";
 "finish" = "finish";
+
+
 
 
 //begin  任务界面

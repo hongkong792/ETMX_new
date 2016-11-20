@@ -104,7 +104,7 @@ MJExtensionLogAllProperties
        }else{
             [self.delegate loginFail];
        }
-        //处理解析
+
     }
     
 }

@@ -5,6 +5,8 @@
 //  Created by wenpq on 16/11/2.
 //  Copyright © 2016年 杨香港. All rights reserved.
 //
+
+
 #import "TaskMainControllerViewController.h"
 #import "NetWorkManager.h"
 #import "TaskContentTableView.h"
@@ -13,10 +15,9 @@
 #import "LogiinViewController.h"
 #import "SearchViewController.h"
 #import "UserManager.h"
-
+#import "ExchangeOperatorViewController.h"
 #import "AddHelperViewController.h"
 #import "CurrentTask.h"
-
 
 #define WTaskTypeMold                    @"mold"                         //新模
 #define WTaskTypeChangeMold     @"changeMold"         //改模
@@ -37,6 +38,7 @@ typedef enum : NSUInteger {
     taskExecutionTP,            //暂停
     taskExecutionTF,            //完成
     taskExecutionDO,            //上班
+    taskExecutionDF,            //下班
 } NetRequestName;
 
 
@@ -113,6 +115,7 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self creatTableView];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     __block typeof(self) weakSelf = self;
@@ -120,13 +123,12 @@ typedef enum : NSUInteger {
         __strong typeof(self) strong = weakSelf;
         [strong refreshBtns];
         weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
+        
     };
     [self setup];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
     [self refresh:nil];
     [[CurrentTask sharedManager] setCurrentTask:self.currentTask];
-  
-    
 }
 
 #pragma mark -- commen
@@ -149,7 +151,7 @@ typedef enum : NSUInteger {
 }
 
 -(void)initNav{
-   NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
+    NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
     self.title =fullName;
     
     CustomBtn *freshBtn = (CustomBtn*)[UIButton buttonWithType:UIButtonTypeCustom];
@@ -173,23 +175,13 @@ typedef enum : NSUInteger {
     self.navigationItem.rightBarButtonItem = searchBarItem;
 }
 
-//-(void)creatTableView{
-//    TaskContentTableView *tableView = [[TaskContentTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//    [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [self.headerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [self.footerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    self.tableView = tableView;
-//    [self.view addSubview:tableView];
-//    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.headerView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-//    [tableView addConstraint:topConstraint];
-//    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
-//    [self.view addConstraint:leftConstraint];
-//    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.footerView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
-//    [tableView addConstraint:bottomConstraint];
-//    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
-//    [self.view addConstraint:rightConstraint];
-//}
+-(void)creatTableView{
+    TaskContentTableView *tableView = [[TaskContentTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headerView.frame), self.view.frame.size.width, self.view.frame.size.height - self.footerView.frame.size.height-self.headerView.frame.size.height) style:UITableViewStylePlain];
+    self.tableView =tableView;
+    [tableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+    [self.view addSubview:self.tableView];
+    [self.view bringSubviewToFront:self.indicatorView];
+}
 -(void)selecteType:(UISegmentedControl *)sender{
     switch (sender.selectedSegmentIndex) {
         case 0:
@@ -251,19 +243,18 @@ typedef enum : NSUInteger {
 //按照segment的选择排列任务，即设置sortTasks
 -(void)sortAllTaskWithType:(NSString *)type andState:(NSString *)state{
     self.netRequesetName = getFilterTasks2;
-     NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
+    NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
     NSArray *parameters = @[self.taskState,userCode,@"",@"",self.taskType];
     NSString *methodName = @"queryFilterTasks";
     [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
-            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-            [parser setDelegate:self];
-            [parser parse];
-        } failure:^(NSError *error) {
-            [self.indicatorView stopAnimating];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alertView show];
-        }];
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+        [parser setDelegate:self];
+        [parser parse];
+    } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
+        [self showNetTip];
+    }];
 }
 
 #pragma mark -- functions
@@ -275,9 +266,9 @@ typedef enum : NSUInteger {
 
 //搜索事件
 -(void)search:(id)sender{
-
+    
     SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
-    sea.preferredContentSize = CGSizeMake(600, 800);
+    sea.preferredContentSize = CGSizeMake(800, 600);
     sea.modalPresentationStyle = UIModalPresentationPopover;
     // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
     _chooseImagePopoverController = sea.popoverPresentationController;
@@ -287,13 +278,12 @@ typedef enum : NSUInteger {
     _chooseImagePopoverController.sourceView = sea.view;
     _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
     [self presentViewController:sea animated:YES completion:nil];
-
+    
 }
 
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
     
-
     if (self.currentTask == nil) {
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -302,7 +292,7 @@ typedef enum : NSUInteger {
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
-
+        
         
     }else{
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
@@ -320,8 +310,7 @@ typedef enum : NSUInteger {
     }
     
     
-
-
+    
 
 }
 
@@ -339,7 +328,7 @@ typedef enum : NSUInteger {
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
-        
+        [self showNetTip];
     }];
 }
 //暂停
@@ -356,7 +345,7 @@ typedef enum : NSUInteger {
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
-        
+        [self showNetTip];
     }];
 }
 //完成
@@ -373,35 +362,57 @@ typedef enum : NSUInteger {
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
-        
+        [self showNetTip];
     }];
 }
 
 - (IBAction)scanTask:(id)sender {
 }
-
+//上班
 - (IBAction)goWork:(id)sender {
-    self.netRequesetName = taskExecutionTP;
+    self.netRequesetName = taskExecutionDO;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = self.tableView.selectedTasks;
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
-    NSArray *parameters = @[@"TF",userCode,tasksStr];
+    NSArray *parameters = @[@"DO",userCode,tasksStr];
     NSString *methodName = @"taskExecution";
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
-        
+        [self showNetTip];
     }];
     
 }
-
+//下班
 - (IBAction)workOff:(id)sender {
+    
+    self.netRequesetName = taskExecutionDF;
+    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+    NSArray *tasks = self.tableView.selectedTasks;
+    NSString *tasksStr = [[NSString alloc] init];
+    tasksStr = [self appendTaskStrWithTasks:tasks];
+    NSArray *parameters = @[@"DF",userCode,tasksStr];
+    NSString *methodName = @"taskExecution";
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+        [parser setDelegate:self];
+        [parser parse];
+    } failure:^(NSError *error) {
+        [self showNetTip];
+    }];
 }
-
+//替換
 - (IBAction)exchange:(id)sender {
+    ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
+    exchangOpVC.selecedTasks = self.tableView.selectedTasks;
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height*0.75;
+    popover.popoverContentSize =CGSizeMake(width, height);
+    [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
 - (IBAction)selecteAll:(id)sender {
@@ -449,7 +460,7 @@ typedef enum : NSUInteger {
         default:
             break;
     }
- 
+    
 }
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     switch (self.netRequesetName) {
@@ -484,7 +495,7 @@ typedef enum : NSUInteger {
                     [alertView show];
                 }
             }
-
+            
         }
             break;
         case taskExecutionTF:
@@ -498,7 +509,27 @@ typedef enum : NSUInteger {
             }
             
         }
+        case taskExecutionDO:
+        {
+            if ([elementName isEqualToString:@"Task"]) {
+                NSString *message = [attributeDict valueForKey:@"message"];
+                if (message && message.length>0) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
+            }
+        }
             break;
+        case taskExecutionDF:
+        {
+            if ([elementName isEqualToString:@"Task"]) {
+                NSString *message = [attributeDict valueForKey:@"message"];
+                if (message && message.length>0) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
+            }
+        }
         default:
             break;
     }
@@ -519,15 +550,16 @@ typedef enum : NSUInteger {
         {
             [self.tableView.selectedTasks removeAllObjects];
             [self.tableView.selectedSections removeAllObjects];
-            [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            [self.tableView reloadData];
         }
             break;
         case taskExecutionTF:
         {
             [self.tableView.selectedTasks removeAllObjects];
             [self.tableView.selectedSections removeAllObjects];
-            [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            [self.tableView reloadData];
         }
+            
         default:
             break;
     }
@@ -538,12 +570,16 @@ typedef enum : NSUInteger {
     for (NSInteger i=0; i<arr.count; i++) {
         ETMXTask *task = arr[i];
         if (i!=arr.count-1) {// 判断是否为最后一个
-          tasksStr =  [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
+            tasksStr =  [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
         }else{
-          tasksStr =  [tasksStr stringByAppendingString:task.code];
+            tasksStr =  [tasksStr stringByAppendingString:task.code];
         }
     }
     return tasksStr;
 }
 
+-(void)showNetTip{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+}
 @end

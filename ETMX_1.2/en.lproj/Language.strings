@@ -1,10 +1,10 @@
-/* 
-  Language.strings
-  ETMX_1.2
-
-  Created by 杨香港 on 2016/11/7.
-  Copyright © 2016年 杨香港. All rights reserved.
-*/
+/*
+ Language.strings
+ ETMX_1.2
+ 
+ Created by 杨香港 on 2016/11/7.
+ Copyright © 2016年 杨香港. All rights reserved.
+ */
 "title" = "welcome to ETMX";
 "username" = "UserName";
 "password" =  "PassWord";
@@ -38,8 +38,6 @@
 "delete" = "delete";
 "pause" = "pause";
 "finish" = "finish";
-
-
 
 
 //begin  任务界面
@@ -77,3 +75,10 @@
 "exchange"                  =                       "exchange";
 "please check the net"          =                   "please check the net";
 //end  任务界面
+
+//begin 替换界面
+
+"submit"                    =                   "submit";
+"groupMembers"              =                   "groupMembers";
+"please selecte task"      =                   "please selecte task ！";
+//end  替换界面

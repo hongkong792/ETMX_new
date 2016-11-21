@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQP-vZ-upg">
-                    <rect key="frame" x="0.0" y="5" width="667" height="40"/>
+                    <rect key="frame" x="0.0" y="0.0" width="667" height="40"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="aWr-4e-Ko4">
                             <rect key="frame" x="5" y="14" width="12" height="12"/>
@@ -74,7 +74,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fQP-vZ-upg" secondAttribute="trailing" id="4gN-kB-a2G"/>
                 <constraint firstItem="fQP-vZ-upg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dpP-4H-sn9"/>
-                <constraint firstItem="fQP-vZ-upg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="jJ8-xC-VQl"/>
+                <constraint firstItem="fQP-vZ-upg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jJ8-xC-VQl"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

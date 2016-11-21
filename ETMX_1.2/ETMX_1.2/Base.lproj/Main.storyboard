@@ -12,7 +12,8 @@
         <!--Navigation Controller-->
         <scene sceneID="B85-OW-i7f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="76P-8o-SEp" sceneMemberID="viewController">
+                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="76P-8o-SEp" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jVH-kR-czS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

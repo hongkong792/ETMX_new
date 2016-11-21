@@ -1,10 +1,10 @@
-/* 
-  Language.strings
-  ETMX_1.2
-
-  Created by 杨香港 on 2016/11/7.
-  Copyright © 2016年 杨香港. All rights reserved.
-*/
+/*
+ Language.strings
+ ETMX_1.2
+ 
+ Created by 杨香港 on 2016/11/7.
+ Copyright © 2016年 杨香港. All rights reserved.
+ */
 "title" = "欢迎使用 ETMX";
 "username" = "用户名";
 "password" =  "密码";
@@ -23,10 +23,10 @@
 "TaskObject"    = "任务对象";
 "TaskName"      = "任务名称";
 "TaskStart"     = "计划开始";
+
 "TaskPlaneFinish" = "计划完成";
 "TaskRealStart" = "实际开始";
 "TaskRealFinish" = "实际完成";
-
 
 
 "PartInMember" = "参与人员";
@@ -76,3 +76,10 @@
 "exchange"                  =                       "替换";
 "please check the net"          =               "网络访问错误，请检查网络环境";
 //end  任务界面
+
+//begin 替换界面
+
+"submit"                    =                   "确定";
+"groupMembers"              =                   "组员";
+"please selecte task"      =                   "请选择任务！";
+//end  替换界面

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ETMXTask.h"
 
-
 @interface TaskMainControllerViewController : UIViewController
 
 @property (nonatomic,strong)ETMXTask * currentTask;

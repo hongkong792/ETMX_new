@@ -112,6 +112,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     TaskSectionHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"TaskSectionHeaderView" owner:self options:nil].lastObject;
     NSArray *tasks = self.mold.dataSource[section];
     ETMXTask *curTask = tasks.firstObject;

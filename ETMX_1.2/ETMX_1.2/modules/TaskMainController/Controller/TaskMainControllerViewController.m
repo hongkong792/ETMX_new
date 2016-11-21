@@ -294,17 +294,17 @@ typedef enum : NSUInteger {
 - (IBAction)addHelper:(UIButton *)sender {
     
 
-    if (self.currentTask == nil) {
-        
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            return ;
-        }];
-        [alert addAction:action];
-        [self presentViewController:alert animated:YES completion:nil];
-
-        
-    }else{
+//    if (self.currentTask == nil) {
+//        
+//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//            return ;
+//        }];
+//        [alert addAction:action];
+//        [self presentViewController:alert animated:YES completion:nil];
+//
+//        
+//    }else{
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
         AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
         helpcon.preferredContentSize = CGSizeMake(600, 1000);
@@ -317,8 +317,8 @@ typedef enum : NSUInteger {
         helpcon.currentTask = self.currentTask;
         [self presentViewController:helpcon animated:YES completion:nil];
         
-    }
-    
+//    }
+//    
     
 
 

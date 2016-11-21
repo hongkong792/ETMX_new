@@ -35,16 +35,15 @@
 @property (strong, nonatomic) NSMutableArray * currentOperUser;
 @property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong)TaskMainControllerViewController * taskCon;
-
-
-
+@property (nonatomic,strong)  UserAccount * tempUser;
 @end
 
 @implementation AddHelperViewController
 
 static BOOL memberFinish = NO;
 static BOOL operatorsFinish = NO;
-
+static BOOL clickFinish = NO;
+static BOOL lastThree = NO;
 
 
 - (void)viewDidLoad {
@@ -54,7 +53,7 @@ static BOOL operatorsFinish = NO;
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
     self.currentOperUser = [NSMutableArray array];
-
+    
     
     
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -69,7 +68,7 @@ static BOOL operatorsFinish = NO;
     [self.memberInfoTable registerNib:[UINib nibWithNibName:@"MemberTableViewCell" bundle:nil] forCellReuseIdentifier:MEMBER];
     
     //添加菜單
-//    _memberData = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    //    _memberData = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
     _memberData = [NSMutableArray array];
     CGPoint memint= self.flagView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(memint.x , memint.y) andHeight:45];
@@ -79,29 +78,26 @@ static BOOL operatorsFinish = NO;
     self.menu.dataSource = self;
     self.menu.delegate = self;
     self.currentTask  =   [CurrentTask sharedManager].currentTask;
- 
-
     [self loadAllData];
-    
 }
 
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self loadAllData];
+    //    [self loadAllData];
     self.taskInfoTable.delegate = self;
     self.taskInfoTable.dataSource = self;
     self.memberInfoTable.dataSource = self;
     self.memberInfoTable.delegate = self;
     [super viewWillAppear:animated];
-
+    
 }
 - (void)loadAllData
 {
     NSString * opearatorMethod = @"getCurrentOperators";
     NSMutableArray * paramArr = [NSMutableArray array];
-       NSString * taskId =  [CurrentTask sharedManager].taskId;
+    NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:taskId];
     [paramArr addObject:@"zh-CN|zh-TW|en"];
     
@@ -136,7 +132,6 @@ static BOOL operatorsFinish = NO;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
         
-        
     }];
     
     
@@ -168,8 +163,8 @@ static BOOL operatorsFinish = NO;
             return 1;
         }else if (section == 2){
             
-        NSLog(@"currentOperUser:%lu",(unsigned long)self.currentOperUser.count);
-          return   self.currentOperUser.count;
+            NSLog(@"currentOperUser:%lu",(unsigned long)self.currentOperUser.count);
+            return   self.currentOperUser.count;
         }
         
         
@@ -186,7 +181,7 @@ static BOOL operatorsFinish = NO;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     
     if (tableView == self.taskInfoTable) {
         
@@ -207,7 +202,7 @@ static BOOL operatorsFinish = NO;
         }
         
         if (indexPath.row == 2) {
-
+            
             taskCell.taskObject.text = Localized(@"TaskPlaneFinish");
             taskCell.taskObject.backgroundColor = [UIColor lightGrayColor];
             taskCell.taskNameLabel.text = Localized(@"TaskRealStart");
@@ -235,7 +230,7 @@ static BOOL operatorsFinish = NO;
         [taskCell.startLabel.layer setBorderColor:colorref];
         
         //數據設置
-
+        
         return taskCell;
         
     }else if (tableView == self.memberInfoTable){
@@ -266,22 +261,30 @@ static BOOL operatorsFinish = NO;
             return memberCell;
             
         }
+        
+        self.tempUser  = [[UserAccount alloc] init];
         if (indexPath.row == 0 && indexPath.section == 1) {
             for (UserAccount * user in self.currentOperUser) {
                 if ([user.userType isEqualToString:@"任務啟動者"]) {
                     memberCell.nameLabel.text = user.name;
                     memberCell.propertyLabel.text = user.userType;
+                    self.tempUser = user;
+                    
                 }
             }
-             return memberCell;
+            return memberCell;
         }
+//        [self.currentOperUser removeObject:self.tempUser];
+//        if (self.currentOperUser.count<=0 ) {
+//            return nil;
+//        }
         NSArray *subviews = [[NSArray alloc] initWithArray:memberCell.contentView.subviews];
         for (UILabel *subview in subviews) {
             
             if ([subview isKindOfClass:[UILabel class]]) {
-              //  subview.text = @"";
+                //  subview.text = @"";
             }
-           // [subview removeFromSuperview];
+            // [subview removeFromSuperview];
         }
         UserAccount * user = self.currentOperUser[indexPath.row];
         if (![user.userType isEqualToString:@"任務啟動者"]) {
@@ -295,7 +298,6 @@ static BOOL operatorsFinish = NO;
         [memberCell.pauseBtn setTitle:Localized(@"pause") forState:UIControlStateHighlighted];
         [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateNormal];
         [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateHighlighted];
-
         
         //數據設置
         [memberCell.deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -312,27 +314,27 @@ static BOOL operatorsFinish = NO;
 
 - (void)deleteClick:(id)sender
 {
-
+    
     [self operClick:@"delete"];
     
 }
 - (void)pauseClick:(id)sender
 {
-     [self operClick:@"pause"];
+    [self operClick:@"pause"];
     
 }
 - (void)finishClick:(id)sender
 {
     
-      [self operClick:@"complete"];
+    [self operClick:@"complete"];
 }
 
 - (void)operClick:(NSString *)operType
 {
-    NSString * opearatorMethod = @"getCurrentOperators";
+    NSString * opearatorMethod = @"handleChildTaskOperation";
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
-  
+    
     [paramArr addObject:taskId];
     NSDictionary * dic = [UserManager instance].dic;
     [paramArr addObject: [dic objectForKey:@"id"]];
@@ -345,8 +347,8 @@ static BOOL operatorsFinish = NO;
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:weakSelf];
         [p parse];
-        operatorsFinish = YES;
-        [weakSelf laodDataFinish];
+        clickFinish = YES;
+      //  [weakSelf laodDataFinish];
         
     } failure:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -391,9 +393,6 @@ static BOOL operatorsFinish = NO;
     
     
     return @"請選擇";
-    
-
-    
 }
 
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
@@ -415,6 +414,24 @@ static BOOL operatorsFinish = NO;
 
 #pragma bottomBtnClick
 - (IBAction)confirm:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    //    NSString * userIDs =  sender;
+        
+        
+        
+        
+    }];
+    
+}
+- (IBAction)useIt:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        
+    }];
+}
+- (IBAction)cancel:(id)sender {
     
     
     [self dismissViewControllerAnimated:YES completion:^{
@@ -423,10 +440,42 @@ static BOOL operatorsFinish = NO;
     }];
     
 }
-- (IBAction)useIt:(id)sender {
+
+- (void)clickOper:(NSString*)type
+{
+    
+    NSString * opearatorMethod = @"joinInTask";
+    NSMutableArray * paramArr = [NSMutableArray array];
+    NSString * taskId =  [CurrentTask sharedManager].taskId;
+    
+    [paramArr addObject:taskId];
+    NSDictionary * dic = [UserManager instance].dic;
+    [paramArr addObject: [dic objectForKey:@"id"]];
+    [paramArr addObject:type];
+    [paramArr addObject:@"zh-CN|zh-TW|en"];
+    
+    __weak typeof(self) weakSelf = self;
+    [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
+        NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
+        [p setDelegate:weakSelf];
+        [p parse];
+        lastThree = YES;
+        
+    } failure:^(NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }];
+    
+    
+    
+    
 }
-- (IBAction)cancel:(id)sender {
-}
+
+
+
+
+
 
 
 #pragma mark -- NSXMLParserDelegate数据解析
@@ -459,11 +508,8 @@ static BOOL operatorsFinish = NO;
             //success 临时写法
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"操作成功") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
-            
-            
+            [self.memberInfoTable reloadData];
         }
-        
-        
         
     }
     
@@ -474,7 +520,7 @@ static BOOL operatorsFinish = NO;
         [self.indicatorView stopAnimating];
         [self.view addSubview:self.menu];
         [self.memberInfoTable reloadData];
-
+        
     }else{
         return ;
     }

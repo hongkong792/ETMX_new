@@ -118,23 +118,14 @@ typedef enum : NSUInteger {
     [self creatTableView];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    __block typeof(self) weakSelf = self;
-    self.tableView.block = ^(){
-        __strong typeof(self) strong = weakSelf;
-        [strong refreshBtns];
-        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
-        
-    };
     [self setup];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
-    [self refresh:nil];
     [[CurrentTask sharedManager] setCurrentTask:self.currentTask];
 }
 
 #pragma mark -- commen
 -(void)setup{
     [self initNav];
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.taskType = WTaskTypeMold;                                      //默认是新模
     self.taskState = WTaskStateReleased;                            //默认是未开始
     [self.typeSegment addTarget:self action:@selector(selecteType:) forControlEvents:UIControlEventValueChanged];
@@ -153,7 +144,6 @@ typedef enum : NSUInteger {
 -(void)initNav{
     NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
     self.title =fullName;
-    
     CustomBtn *freshBtn = (CustomBtn*)[UIButton buttonWithType:UIButtonTypeCustom];
     [freshBtn setTitle:Localized(@"refresh") forState:UIControlStateNormal];
     [freshBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -163,7 +153,6 @@ typedef enum : NSUInteger {
     [freshBtn addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *refreshBarItem = [[UIBarButtonItem alloc] initWithCustomView:freshBtn];
     self.navigationItem.leftBarButtonItem =refreshBarItem;
-    
     CustomBtn *searchBtn = (CustomBtn *)[UIButton buttonWithType:UIButtonTypeCustom];
     [searchBtn setTitle:Localized(@"search") forState:UIControlStateNormal];
     [searchBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -178,10 +167,17 @@ typedef enum : NSUInteger {
 -(void)creatTableView{
     TaskContentTableView *tableView = [[TaskContentTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headerView.frame), self.view.frame.size.width, self.view.frame.size.height - self.footerView.frame.size.height-self.headerView.frame.size.height) style:UITableViewStylePlain];
     self.tableView =tableView;
+    __block typeof(self) weakSelf = self;
+    self.tableView.block = ^(){
+        __strong typeof(self) strong = weakSelf;
+        [strong refreshBtns];
+        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
+    };
     [tableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
     [self.view addSubview:self.tableView];
     [self.view bringSubviewToFront:self.indicatorView];
 }
+
 -(void)selecteType:(UISegmentedControl *)sender{
     switch (sender.selectedSegmentIndex) {
         case 0:
@@ -205,7 +201,6 @@ typedef enum : NSUInteger {
     [self.tableView.selectedSections removeAllObjects];
     [self.tableView.selectedTasks removeAllObjects];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
-    [self refresh:nil];
 }
 
 -(void)selecteState:(UISegmentedControl *)sender{
@@ -261,7 +256,11 @@ typedef enum : NSUInteger {
 //刷新
 -(void)refresh:(id)sender{
     [self refreshBtns];
-    [self.tableView reloadDataWithSortTasks:self.sortTasks];
+    [self.tableView.selectedTasks removeAllObjects];
+    [self.tableView.selectedSections removeAllObjects];
+    NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
+    self.title =fullName;
+    [self sortAllTaskWithType:self.taskType andState:self.taskState];
 }
 
 //搜索事件
@@ -331,6 +330,7 @@ typedef enum : NSUInteger {
         [self showNetTip];
     }];
 }
+
 //暂停
 - (IBAction)stopTask:(id)sender {
     self.netRequesetName = taskExecutionTP;
@@ -482,7 +482,6 @@ typedef enum : NSUInteger {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alertView show];
                 }
-                
             }
         }
             break;
@@ -542,7 +541,8 @@ typedef enum : NSUInteger {
     switch (self.netRequesetName) {
         case getFilterTasks2:
         {
-            [self refresh:nil];
+            [self refreshBtns];
+            [self.tableView reloadDataWithSortTasks:self.sortTasks];
             [self.indicatorView stopAnimating];
         }
             break;
@@ -551,6 +551,15 @@ typedef enum : NSUInteger {
             [self.tableView.selectedTasks removeAllObjects];
             [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
+            [self refreshBtns];
+        }
+            break;
+        case taskExecutionTP:
+        {
+            [self.tableView.selectedTasks removeAllObjects];
+            [self.tableView.selectedSections removeAllObjects];
+            [self.tableView reloadData];
+            [self refreshBtns];
         }
             break;
         case taskExecutionTF:
@@ -558,8 +567,25 @@ typedef enum : NSUInteger {
             [self.tableView.selectedTasks removeAllObjects];
             [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
+            [self refreshBtns];
         }
-            
+            break;
+        case taskExecutionDO:
+        {
+            [self.tableView.selectedTasks removeAllObjects];
+            [self.tableView.selectedSections removeAllObjects];
+            [self.tableView reloadData];
+            [self refreshBtns];
+        }
+            break;
+        case taskExecutionDF:
+        {
+            [self.tableView.selectedTasks removeAllObjects];
+            [self.tableView.selectedSections removeAllObjects];
+            [self.tableView reloadData];
+            [self refreshBtns];
+        }
+            break;
         default:
             break;
     }

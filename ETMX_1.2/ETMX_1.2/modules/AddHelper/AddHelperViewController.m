@@ -50,54 +50,32 @@ static BOOL lastThree = NO;
     
     
     [super viewDidLoad];
+
     
     self.currentOperUser = [NSMutableArray array];
+
     
-    UserAccount *userAccount = [[UserAccount alloc] init];
-    userAccount.name = @"hec01";
-    userAccount.fullName = @"fu01";
-    userAccount.userType = @"任務啟動者";
+
     
-    UserAccount *userAccount2 = [[UserAccount alloc] init];
-    userAccount2.name = @"hec02";
-    userAccount2.fullName = @"fu02";
-    userAccount2.userType = @"任务参与者002";
+//    [self.currentOperUser addObject:userAccount];
+//    [self.currentOperUser addObject:userAccount2];
+//    [self.currentOperUser addObject:userAccount3];
+//    [self.currentOperUser addObject:userAccount4];
     
-    UserAccount *userAccount3 = [[UserAccount alloc] init];
-    userAccount3.name = @"hec03";
-    userAccount3.fullName = @"fu03";
-    userAccount3.userType = @"任务参与者003";
+//    for (int i = 0; i<20; i++) {
+//        
+//        UserAccount *userAccount = [[UserAccount alloc] init];
+//        userAccount.name = [NSString stringWithFormat:@"%d",i];
+//        userAccount.fullName = @"fu01";
+//        userAccount.userType = @"任務ca者";
+//        
+//        [self.currentOperUser addObject:userAccount];
+//        
+//        
+//    }
     
-    UserAccount *userAccount4 = [[UserAccount alloc] init];
-    userAccount4.name = @"hec04";
-    userAccount4.fullName = @"fu04";
-    userAccount4.userType = @"任务参与者004";
-    
-    [self.currentOperUser addObject:userAccount];
-    [self.currentOperUser addObject:userAccount2];
-    [self.currentOperUser addObject:userAccount3];
-    [self.currentOperUser addObject:userAccount4];
-    
-    for (int i = 0; i<20; i++) {
-        
-        UserAccount *userAccount = [[UserAccount alloc] init];
-        userAccount.name = [NSString stringWithFormat:@"%d",i];
-        userAccount.fullName = @"fu01";
-        userAccount.userType = @"任務ca者";
-        
-        [self.currentOperUser addObject:userAccount];
-        
-        
-    }
-    
-    
-    
-    
-    for (UserAccount * ac in self.currentOperUser) {
-        
-        NSLog(@"logg:%@,%ld",ac.name,self.currentOperUser.count);
-        
-    }
+
+
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -120,7 +98,8 @@ static BOOL lastThree = NO;
     self.menu.dataSource = self;
     self.menu.delegate = self;
     self.currentTask  =   [CurrentTask sharedManager].currentTask;
-    //   [self loadAllData];
+    [self loadAllData];
+
     
 }
 
@@ -204,12 +183,10 @@ static BOOL lastThree = NO;
             return 1;
         }else if (section == 2){
             
-            
-            NSLog(@"currentOperUser:%lu",(unsigned long)self.currentOperUser.count);
+
             return   self.currentOperUser.count - 1;
             
         }
-        
         
     }
     return 0;
@@ -275,7 +252,7 @@ static BOOL lastThree = NO;
         
         NSLog(@"indexpath:%ld,%ld",(long)indexPath.section,(long)indexPath.row);
         MemberTableViewCell * memberCell = [tableView dequeueReusableCellWithIdentifier:MEMBER forIndexPath:indexPath];
-        NSMutableArray * tempArray  = [NSMutableArray arrayWithArray:self.currentOperUser];
+      //  NSMutableArray * tempArray  = [NSMutableArray arrayWithArray:self.currentOperUser];
         NSArray *subviews = [[NSArray alloc] initWithArray:memberCell.contentView.subviews];
         for (UILabel *subview in subviews) {
             if ([subview isKindOfClass:[UILabel class]]) {
@@ -325,46 +302,46 @@ static BOOL lastThree = NO;
             memberCell.finishBtn.hidden = YES;
             
             UserAccount * userTemp  = [[UserAccount alloc] init];
-            for (UserAccount * user in tempArray) {
+            for (UserAccount * user in self.currentOperUser) {
                 if ([user.userType isEqualToString:@"任務啟動者"]) {
                     memberCell.nameLabel.text = user.name;
                     memberCell.propertyLabel.text = user.userType;
                 }
             }
-            [tempArray removeObject:userTemp];
+           // [tempArray removeObject:userTemp];
             return memberCell;
         }
 
-    
-    /////////////参与者
-    // [self.currentOperUser removeObject:self.tempUser];
-    NSInteger * tag;
-    UserAccount * user = [tempArray objectAtIndex:indexPath.row+1];
-    tag = indexPath.row+1;
-    
-    memberCell.nameLabel.text = user.name;
-    memberCell.propertyLabel.text = user.userType;
-    
-    NSLog(@"Userr_:%@,%@",user.name,user.userType);
-    
-    
-    [memberCell.deleteBtn setTitle:Localized(@"delete") forState:UIControlStateNormal];
-    [memberCell.deleteBtn setTitle:Localized(@"delete") forState:UIControlStateHighlighted];
-    [memberCell.pauseBtn setTitle:Localized(@"pause") forState:UIControlStateNormal];
-    [memberCell.pauseBtn setTitle:Localized(@"pause") forState:UIControlStateHighlighted];
-    [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateNormal];
-    [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateHighlighted];
-    
-    memberCell.deleteBtn.tag = tag;
-    [memberCell.deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
-    [memberCell.pauseBtn addTarget:self action:@selector(pauseClick:) forControlEvents:UIControlEventTouchUpInside];
-    [memberCell.finishBtn addTarget:self action:@selector(finishClick:) forControlEvents:UIControlEventTouchUpInside];
-    memberCell.deleteBtn.hidden = NO;
-    memberCell.pauseBtn.hidden = NO;
-    memberCell.finishBtn.hidden = NO;
-    return memberCell;
-}
-return nil;
+        
+        
+        /////////////参与者
+        // [self.currentOperUser removeObject:self.tempUser];
+        NSInteger * tag;
+        UserAccount * user = [self.currentOperUser objectAtIndex:indexPath.row+1];
+        tag = indexPath.row+1;
+        
+        memberCell.nameLabel.text = user.name;
+        memberCell.propertyLabel.text = user.userType;
+        
+        NSLog(@"Userr_:%@,%@",user.name,user.userType);
+        [memberCell.deleteBtn setTitle:Localized(@"delete") forState:UIControlStateNormal];
+        [memberCell.deleteBtn setTitle:Localized(@"delete") forState:UIControlStateHighlighted];
+        [memberCell.pauseBtn setTitle:Localized(@"pause") forState:UIControlStateNormal];
+        [memberCell.pauseBtn setTitle:Localized(@"pause") forState:UIControlStateHighlighted];
+        [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateNormal];
+        [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateHighlighted];
+        
+        memberCell.deleteBtn.tag = tag;
+        [memberCell.deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
+        [memberCell.pauseBtn addTarget:self action:@selector(pauseClick:) forControlEvents:UIControlEventTouchUpInside];
+        [memberCell.finishBtn addTarget:self action:@selector(finishClick:) forControlEvents:UIControlEventTouchUpInside];
+        memberCell.deleteBtn.hidden = NO;
+        memberCell.pauseBtn.hidden = NO;
+        memberCell.finishBtn.hidden = NO;
+        return memberCell;
+    }
+    return nil;
+
 }
 
 
@@ -373,7 +350,7 @@ return nil;
 - (void)deleteClick:(id)sender
 {
     
-    //[self operClick:@"TD"];
+    [self operClick:@"TD"];
     
     [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
     [self.memberInfoTable reloadData];
@@ -536,7 +513,6 @@ return nil;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
     }];
-    
 
 }
 

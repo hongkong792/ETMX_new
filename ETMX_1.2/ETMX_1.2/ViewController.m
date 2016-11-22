@@ -53,17 +53,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
     _indicatorView.backgroundColor = [UIColor lightGrayColor];
     _indicatorView.frame = CGRectMake(0, 0,self.view.frame.size.width , self.view.frame.size.height);
     //_indicatorView.frame = self.view.frame;
     self.indicatorView.alpha = 0.5;
-    
-    
     
     self.qrViewCon = nil;
     NSString * lan = [[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
@@ -217,46 +212,50 @@
     
 }
 - (IBAction)loginClick:(id)sender {
-//    SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
-//    sea.preferredContentSize = CGSizeMake(500, 800);
-//    sea.modalPresentationStyle = UIModalPresentationPopover;
-//    
-//    _chooseImagePopoverController = sea.popoverPresentationController;
-//    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-//    
-//    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-//    _chooseImagePopoverController.sourceView = sea.view;
-//    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+    
+    AddHelperViewController * sea = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+   // SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+    sea.preferredContentSize = CGSizeMake(500, 800);
+    sea.modalPresentationStyle = UIModalPresentationPopover;
+    
+    _chooseImagePopoverController = sea.popoverPresentationController;
+    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    
+    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+    _chooseImagePopoverController.sourceView = sea.view;
+    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
 //    [self presentViewController:sea animated:YES completion:nil];
-    [self.view addSubview:self.indicatorView];
-    [self.indicatorView startAnimating];
+    
+    [self.navigationController pushViewController:sea animated:YES];
+//    [self.view addSubview:self.indicatorView];
+//    [self.indicatorView startAnimating];
 
-    LogiinViewController * loginCon = [[LogiinViewController alloc] init];
-    loginCon.delegate = self;
-    UserAccount * user = [[UserAccount alloc] init];
-    if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
-        
-        user.name = self.userNameText.text;
-        user.password = self.passwordTest.text;
-        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
-        NSString * method = @"checkUserInfo";
-        [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
-            
-        } failure:^(NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alertView show];
-            
-            
-        }];
-
-    }else{
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            return ;
-        }];
-        [alert addAction:action];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+//    LogiinViewController * loginCon = [[LogiinViewController alloc] init];
+//    loginCon.delegate = self;
+//    UserAccount * user = [[UserAccount alloc] init];
+//    if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
+//        
+//        user.name = self.userNameText.text;
+//        user.password = self.passwordTest.text;
+//        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
+//        NSString * method = @"checkUserInfo";
+//        [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
+//            
+//        } failure:^(NSError *error) {
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alertView show];
+//            
+//            
+//        }];
+//
+//    }else{
+//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//            return ;
+//        }];
+//        [alert addAction:action];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }
  
 
 }

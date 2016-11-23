@@ -51,7 +51,6 @@
 		0674B88D1DD08AB0004FF173 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B82A1DD08AAF004FF173 /* UIProgressView+AFNetworking.m */; };
 		0674B88E1DD08AB0004FF173 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B82C1DD08AAF004FF173 /* UIRefreshControl+AFNetworking.m */; };
 		0674B88F1DD08AB0004FF173 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B82E1DD08AAF004FF173 /* UIWebView+AFNetworking.m */; };
-		0674B8981DD08AB0004FF173 /* LibraryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8411DD08AAF004FF173 /* LibraryTest.m */; };
 		0674B8991DD08AB0004FF173 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0674B8431DD08AAF004FF173 /* LICENSE */; };
 		0674B89A1DD08AB0004FF173 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8441DD08AAF004FF173 /* README.md */; };
 		0674B89B1DD08AB0004FF173 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B8461DD08AAF004FF173 /* XMLReader.m */; };
@@ -185,8 +184,6 @@
 		0674B82C1DD08AAF004FF173 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		0674B82D1DD08AAF004FF173 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		0674B82E1DD08AAF004FF173 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		0674B8401DD08AAF004FF173 /* LibraryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryTest.h; sourceTree = "<group>"; };
-		0674B8411DD08AAF004FF173 /* LibraryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryTest.m; sourceTree = "<group>"; };
 		0674B8431DD08AAF004FF173 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		0674B8441DD08AAF004FF173 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0674B8451DD08AAF004FF173 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
@@ -413,8 +410,6 @@
 				06E0C8E31DD70833004648AA /* JSDropDownMenu */,
 				0651462E1DD4850200BCDE13 /* Reachability */,
 				0674B8091DD08AAF004FF173 /* AFNetworking */,
-				0674B8401DD08AAF004FF173 /* LibraryTest.h */,
-				0674B8411DD08AAF004FF173 /* LibraryTest.m */,
 				0674B8421DD08AAF004FF173 /* XMLReader-Arc */,
 				0674B8471DD08AAF004FF173 /* ZBarSDK */,
 			);
@@ -861,7 +856,6 @@
 				0674B8831DD08AB0004FF173 /* AFURLResponseSerialization.m in Sources */,
 				247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */,
 				0674B8841DD08AB0004FF173 /* AFURLSessionManager.m in Sources */,
-				0674B8981DD08AB0004FF173 /* LibraryTest.m in Sources */,
 				0674B8A61DD08AB0004FF173 /* ETMXApi.m in Sources */,
 				066000BA1DD5E87D005F2D80 /* NSObject+MJCoding.m in Sources */,
 				0674B87F1DD08AB0004FF173 /* AFHTTPSessionManager.m in Sources */,
@@ -1013,7 +1007,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1032,7 +1026,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

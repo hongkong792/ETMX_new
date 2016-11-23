@@ -53,6 +53,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    QRScanViewController * con = [[QRScanViewController alloc] init];
+    [self.navigationController pushViewController:con animated:YES];
+
+
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
     _indicatorView.backgroundColor = [UIColor lightGrayColor];

@@ -121,7 +121,6 @@
     [self.view.layer addSublayer:self.leftLabel];
     
     
-    
     //添加四个小图片和边框
     
     {//上边
@@ -532,5 +531,29 @@
     }
     return _activityView;
 }
+#pragma
 
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+//
+//{
+//    
+//    return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+//    
+//}
+
+- (BOOL)shouldAutorotate
+
+{
+    
+    return NO;
+    
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+
+{
+    
+    return UIInterfaceOrientationMaskPortrait;//只支持这一个方向(正常的方向)
+    
+}
 @end

@@ -19,6 +19,8 @@
 #import "AddHelperViewController.h"
 #import "CurrentTask.h"
 
+
+
 #define WTaskTypeMold                    @"mold"                         //新模
 #define WTaskTypeChangeMold     @"changeMold"         //改模
 #define WTaskTypeElectrode           @"electrode"                //铜公
@@ -283,6 +285,8 @@ typedef enum : NSUInteger {
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
     
+    
+
     if (self.currentTask == nil) {
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -295,6 +299,7 @@ typedef enum : NSUInteger {
         
     }else{
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
+        [[CurrentTask sharedManager]  setCurrentTask:self.currentTask];
         AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
         helpcon.preferredContentSize = CGSizeMake(600, 1000);
         helpcon.modalPresentationStyle = UIModalPresentationPopover;

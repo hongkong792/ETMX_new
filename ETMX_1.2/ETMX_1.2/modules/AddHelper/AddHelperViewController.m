@@ -466,25 +466,21 @@ static BOOL lastThree = NO;
 - (IBAction)confirm:(id)sender {
     
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        
-        //    NSString * userIDs =  sender;
-        
-        
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self clickOper:@"TF"];
     
 }
 - (IBAction)useIt:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+     [self clickOper:@"TU"];
+    
 }
 - (IBAction)cancel:(id)sender {
     
     
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+     [self clickOper:@"TC"];
     
 }
 

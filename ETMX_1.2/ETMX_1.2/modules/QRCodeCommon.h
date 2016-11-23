@@ -18,8 +18,8 @@
 #define kScreenWidth  [[UIScreen mainScreen] bounds].size.width        //屏幕宽
 #define kScreenHeight [[UIScreen mainScreen] bounds].size.height       //屏幕高
 
-#define kQRReaderScanWidth      (kScreenWidth - 300)
-#define kQRReaderScanHeight     (kScreenWidth - 300)
+#define kQRReaderScanWidth      (kScreenWidth - 700)
+#define kQRReaderScanHeight     (kScreenWidth - 700)
 #define kQRReaderScanExpandWidth     (50)
 #define kQRReaderScanExpandHeight    (50)
 #define kQRReaderScanLabelSpace 10

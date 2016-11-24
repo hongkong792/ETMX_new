@@ -117,7 +117,7 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self creatTableView];
+//    [self creatTableView];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self setup];
@@ -269,7 +269,7 @@ typedef enum : NSUInteger {
 -(void)search:(id)sender{
     
     SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
-    sea.preferredContentSize = CGSizeMake(800, 600);
+    sea.preferredContentSize = CGSizeMake(600, 1000);
     sea.modalPresentationStyle = UIModalPresentationPopover;
     // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
     _chooseImagePopoverController = sea.popoverPresentationController;

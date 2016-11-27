@@ -53,7 +53,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
     _indicatorView.backgroundColor = [UIColor lightGrayColor];
@@ -226,23 +225,21 @@
 //    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
 //    [self.navigationController pushViewController:sea animated:YES];
     [self.view addSubview:self.indicatorView];
-    [self.indicatorView startAnimating];
+  
 
     LogiinViewController * loginCon = [[LogiinViewController alloc] init];
     loginCon.delegate = self;
     UserAccount * user = [[UserAccount alloc] init];
     if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
-        
+        [self.indicatorView startAnimating];
         user.name = self.userNameText.text;
         user.password = self.passwordTest.text;
         NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
         NSString * method = @"checkUserInfo";
         [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
-            
         } failure:^(NSError *error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
-            
             
         }];
 

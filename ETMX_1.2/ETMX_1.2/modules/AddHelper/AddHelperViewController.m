@@ -448,7 +448,13 @@ static BOOL lastThree = NO;
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
     
     
-    return _memberData[indexPath.row];
+
+    UserAccount * user =  _memberData[indexPath.row];
+    if (user.fullName != nil) {
+        return user.fullName;
+    }
+    return nil;
+   
     
     
 }
@@ -490,13 +496,16 @@ static BOOL lastThree = NO;
     NSString * opearatorMethod = @"joinInTask";
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
-    
     [paramArr addObject:taskId];
     NSDictionary * dic = [UserManager instance].dic;
+    
     [paramArr addObject: [dic objectForKey:@"id"]];
+     UserAccount * user =_memberData[_currentData1Index];
+    if (user.id.length >0) {
+        [paramArr addObject:user.id];
+    }
     [paramArr addObject:type];
     [paramArr addObject:@"zh-CN|zh-TW|en"];
-    
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -509,7 +518,6 @@ static BOOL lastThree = NO;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
     }];
-
 }
 
 
@@ -528,7 +536,7 @@ static BOOL lastThree = NO;
             [self.currentOperUser addObject:userAccount];
         }
         
-    }else if(attributeDict.count ==4){//组员
+    }else if(attributeDict.count == 4){//组员
         UserAccount *user = [[UserAccount alloc] init];
         user.id = [attributeDict objectForKey:@"id"];
         user.name = [attributeDict objectForKey:@"name"];
@@ -536,7 +544,7 @@ static BOOL lastThree = NO;
         user.number = [attributeDict objectForKey:@"code"];
         user.userType =  [attributeDict objectForKey:@"userType"];
         if (user.fullName != nil) {
-            [_memberData addObject:user.fullName];
+            [_memberData addObject:user];
         }
     }else if ([elementName isEqualToString: @"Task"]){
         if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"1"]) {

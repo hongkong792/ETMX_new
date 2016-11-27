@@ -238,7 +238,8 @@ static BOOL memberFinish = NO;
       
     NSLog(@"_currentData1Index:%@",_data1[_currentData1Index]);
     NSLog(@"_currentData2Index:%@",_data2[_currentData2Index]);
-      
+    NSString * userName = _data2[_currentData2Index];
+      [self.delegate userNameOnSelected:userName];
   }];
     
 }

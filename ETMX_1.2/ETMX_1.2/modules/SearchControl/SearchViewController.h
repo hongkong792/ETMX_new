@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SearchSelectedDelegate <NSObject>
+
+- (NSString *)userNameOnSelected:(NSString *)userName;
+
+@end
+
+
 @interface SearchViewController : UIViewController
+
+@property (nonatomic,strong)id<SearchSelectedDelegate>delegate;
 
 @end

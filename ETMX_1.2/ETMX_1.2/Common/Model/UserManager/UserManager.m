@@ -28,7 +28,6 @@
 {
     if (_dic == nil) {
         _dic = [NSMutableDictionary dictionary];
-        
     }
     return _dic;
 }
@@ -36,9 +35,10 @@
 - (void)setCurAccount:(UserAccount *)user
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:user.name forKey:@"name"];
-    [dic setObject:user.fullName forKey:@"fullName"];
-    [dic setObject:user.number forKey:@"number"];
+    [dic setValue:user.name forKey:@"name"];
+    [dic setValue:user.fullName forKey:@"fullName"];
+    [dic setValue:user.number forKey:@"number"];
+    [dic setValue:user.id forKey:@"id"];
     self.dic = dic;
 }
 

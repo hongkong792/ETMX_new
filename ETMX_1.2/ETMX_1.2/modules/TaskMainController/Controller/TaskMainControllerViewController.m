@@ -45,7 +45,7 @@ typedef enum : NSUInteger {
 
 
 
-@interface TaskMainControllerViewController ()<NSXMLParserDelegate>
+@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate>
 //xib中的控件
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *footerView;
@@ -275,17 +275,21 @@ typedef enum : NSUInteger {
 //搜索事件
 -(void)search:(id)sender{
     
+    
     SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+    sea.delegate = self;
     sea.preferredContentSize = CGSizeMake(600, 1000);
     sea.modalPresentationStyle = UIModalPresentationPopover;
-    // _chooseImagePopoverController = [[UIPopoverPresentationController alloc] initWithPresentedViewController:sea presentingViewController:self];
     _chooseImagePopoverController = sea.popoverPresentationController;
     _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    //_chooseImagePopoverController.delegate = self;
     _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
     _chooseImagePopoverController.sourceView = sea.view;
     _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
     [self presentViewController:sea animated:YES completion:nil];
+    
+    
+    
+    
     
 }
 
@@ -620,4 +624,21 @@ typedef enum : NSUInteger {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
 }
+
+#pragma SearchSelectedDelegate
+- (NSString *)userNameOnSelected:(NSString *)userName
+{
+    if (userName != nil) {
+        return userName;
+    }
+    //刷新主界面
+    
+    
+    
+    
+    
+    
+    return nil;
+}
+
 @end

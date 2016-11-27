@@ -118,6 +118,13 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self creatTableView];
+    __block typeof(self) weakSelf = self;
+    self.tableView.block = ^(){
+        __strong typeof(self) strong = weakSelf;
+        [strong refreshBtns];
+        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
+    };
+
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self setup];

@@ -73,10 +73,10 @@
     [self.view addSubview:self.titleLabel];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:100]];
-
+    
     self.LanguagePicker.delegate = self;
     self.LanguagePicker.dataSource = self;
-
+    
     self.passwordTest.placeholder = @"you password";
     self.passwordTest.secureTextEntry = YES;
     self.userNameText.placeholder = @"you username";
@@ -92,15 +92,15 @@
         self.titleLabel.font = [UIFont systemFontOfSize:35];
         self.userNameLabel.font = [UIFont systemFontOfSize:30];
         self.passWordLabel.font = [UIFont systemFontOfSize:30];
-        self.languageLabel.font = [UIFont systemFontOfSize:30];        
+        self.languageLabel.font = [UIFont systemFontOfSize:30];
         self.loginLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         self.changeIPLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         self.QRCodeLabel.titleLabel.font= [UIFont systemFontOfSize:30];
         [self.passwordTest setSecureTextEntry:YES];
-  
+        
         self.userNameText.font = [UIFont systemFontOfSize:25];
         self.passWordLabel.font = [UIFont systemFontOfSize:25];
-   
+        
         
         NSLayoutConstraint * con_1 = [NSLayoutConstraint constraintWithItem:self.loginLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.separatorTwo attribute:NSLayoutAttributeBottom multiplier:1 constant:170];
         NSLayoutConstraint * con_2 = [NSLayoutConstraint constraintWithItem:self.separatorThree attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.loginLabel attribute:NSLayoutAttributeBottom multiplier:1 constant:10];
@@ -130,7 +130,7 @@
     return 1;
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{    
+{
     return 3;
 }
 #pragma UIPickerViewDelegate
@@ -159,12 +159,12 @@
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-
+    
     if (row == 1) {
-
+        
         [self changeLanguageWithlan:@"zh-Hans"];
     }else if (row == 0){
-
+        
         [self changeLanguageWithlan:@"zh-Hant"];
     }else if (row == 2){
         
@@ -180,24 +180,24 @@
 - (void)changeLanguageWithlan:(NSString*)lan
 {
     
-//    NSString *language = [[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"];
-//    if ([language isEqualToString: @"en"]) {
-//        [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:@"appLanguage"];
-//    }else {
-//        [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
-//    }
-//
-
-  [[NSUserDefaults standardUserDefaults] setObject:lan forKey:@"appLanguage"];
-
+    //    NSString *language = [[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"];
+    //    if ([language isEqualToString: @"en"]) {
+    //        [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:@"appLanguage"];
+    //    }else {
+    //        [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
+    //    }
+    //
+    
+    [[NSUserDefaults standardUserDefaults] setObject:lan forKey:@"appLanguage"];
+    
     self.userNameLabel.text = Localized(@"username");
     self.passWordLabel.text = Localized(@"password");
     self.languageLabel.text = Localized(@"language");
-   // self.loginLabel.titleLabel.text = Localized(@"login");
- //   self.changeIPLabel.titleLabel.text = Localized(@"changeIP");
- //   self.QRCodeLabel.titleLabel.text = Localized(@"ScanQRCode");
+    // self.loginLabel.titleLabel.text = Localized(@"login");
+    //   self.changeIPLabel.titleLabel.text = Localized(@"changeIP");
+    //   self.QRCodeLabel.titleLabel.text = Localized(@"ScanQRCode");
     self.titleLabel.text = Localized(@"title");
-
+    
     [self.loginLabel setTitle:Localized(@"login") forState:UIControlStateNormal];
     [self.loginLabel setTitle:Localized(@"login") forState:UIControlStateHighlighted];
     
@@ -213,20 +213,22 @@
 }
 - (IBAction)loginClick:(id)sender {
     
-//    AddHelperViewController * sea = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
-//
-//    sea.preferredContentSize = CGSizeMake(500, 800);
-//    sea.modalPresentationStyle = UIModalPresentationPopover;
-//    _chooseImagePopoverController = sea.popoverPresentationController;
-//    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-//    
-//    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-//    _chooseImagePopoverController.sourceView = sea.view;
-//    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-//    [self.navigationController pushViewController:sea animated:YES];
+    //    AddHelperViewController * sea = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+    //
+    //    sea.preferredContentSize = CGSizeMake(500, 800);
+    //    sea.modalPresentationStyle = UIModalPresentationPopover;
+    //    _chooseImagePopoverController = sea.popoverPresentationController;
+    //    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    //
+    //    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+    //    _chooseImagePopoverController.sourceView = sea.view;
+    //    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+    //    [self.navigationController pushViewController:sea animated:YES];
+   
+    if ( ![[CheckNetWorkerTool sharedManager] isNetWorking]) {
+        [self neeNotWorking];
+    }
     [self.view addSubview:self.indicatorView];
-  
-
     LogiinViewController * loginCon = [[LogiinViewController alloc] init];
     loginCon.delegate = self;
     UserAccount * user = [[UserAccount alloc] init];
@@ -238,11 +240,13 @@
         NSString * method = @"checkUserInfo";
         [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
         } failure:^(NSError *error) {
+            
+            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
             
         }];
-
+        
     }else{
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -251,8 +255,8 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
- 
-
+    
+    
 }
 
 - (IBAction)changeIpClick:(id)sender {
@@ -261,7 +265,7 @@
     // 添加按钮
     __weak typeof(alert) weakAlert = alert;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-       NSLog(@"点击了确定按钮--%@-%@", [weakAlert.textFields.firstObject text], [weakAlert.textFields.lastObject text]);
+        NSLog(@"点击了确定按钮--%@-%@", [weakAlert.textFields.firstObject text], [weakAlert.textFields.lastObject text]);
         
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -275,23 +279,26 @@
         //textField.textColor = [UIColor redColor];
         textField.text = @"";
         [textField addTarget:self action:@selector(ipChanged:) forControlEvents:UIControlEventEditingDidEnd];
-       //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(usernameDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(usernameDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
     }];
-
-
+    
+    
     [self presentViewController:alert animated:YES completion:nil];
-
-
+    
+    
     
     
 }
 
 - (IBAction)QRCodeClick:(id)sender {
     
+    if ( ![[CheckNetWorkerTool sharedManager] isNetWorking]) {
+        [self neeNotWorking];
+    }
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
-
+    
 }
 
 # pragma dealScanning
@@ -300,32 +307,32 @@
             isTwoDCode:(BOOL)isTwoDCode
 {
     
-   // [self.navigationController popViewControllerAnimated:YES];
+    // [self.navigationController popViewControllerAnimated:YES];
     if (result.length > 0) {
         LogiinViewController * loginCon = [[LogiinViewController alloc] init];
         loginCon.delegate = self;
         UserAccount * user = [[UserAccount alloc] init];
-            user.number = result;
-            NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/TaskScanExecution";
-            NSString * method = @"checkCode";
-             [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
-                 
-                
-                 
-             } failure:^(NSError *error) {
-                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                 [alertView show];
-                 
-             }];
+        user.number = result;
+        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/TaskScanExecution";
+        NSString * method = @"checkCode";
+        [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
+            
+            
+            
+        } failure:^(NSError *error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }];
         
-        }else{
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                return ;
-            }];
-            [alert addAction:action];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+    }else{
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            return ;
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
 }
 
@@ -340,7 +347,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     //重新启动网络
     [CheckNetWorkerTool sharedManager];
-
+    
 }
 
 
@@ -351,13 +358,13 @@
 #pragma loginSucessDelegate
 - (void)loginSuccess
 {
-//    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
+    //    TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] init];
     
-//    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:([self.navigationController.viewControllers count] -2)] animated:YES];
-     //  [self.navigationController popViewControllerAnimated:YES];
+    //    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:([self.navigationController.viewControllers count] -2)] animated:YES];
+    //  [self.navigationController popViewControllerAnimated:YES];
     [self.indicatorView stopAnimating];
     dispatch_async(dispatch_get_main_queue(), ^{
-       
+        
         TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] initWithNibName:@"TaskMainControllerViewController" bundle:nil];
         [self.navigationController pushViewController:taskMainVC animated:YES];
     });
@@ -377,6 +384,7 @@
 
 - (void)neeNotWorking
 {
+    [self.indicatorView stopAnimating];
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"网络连接失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         return ;

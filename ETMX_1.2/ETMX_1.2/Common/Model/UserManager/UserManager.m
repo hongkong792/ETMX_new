@@ -35,10 +35,10 @@
 - (void)setCurAccount:(UserAccount *)user
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:user.name forKey:@"name"];
-    [dic setValue:user.fullName forKey:@"fullName"];
-    [dic setValue:user.number forKey:@"number"];
-    [dic setValue:user.id forKey:@"id"];
+    [dic setValue:SAFE_FORMAT_STRING(user.name) forKey:@"name"];
+    [dic setValue:SAFE_FORMAT_STRING(user.fullName) forKey:@"fullName"];
+    [dic setValue:SAFE_FORMAT_STRING(user.number) forKey:@"number"];
+    [dic setValue:SAFE_FORMAT_STRING(user.id) forKey:@"id"];
     self.dic = dic;
 }
 

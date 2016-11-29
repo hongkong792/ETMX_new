@@ -16,6 +16,7 @@
 - (void)loginSuccess;
 - (void)loginFail;
 - (void)neeNotWorking;
+- (void)loginFailTimeOut;
 
 
 @end

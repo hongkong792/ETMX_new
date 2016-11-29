@@ -79,6 +79,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -263,6 +264,7 @@
     AVCaptureMetadataOutput *captureOutput = [[AVCaptureMetadataOutput alloc] init];
     [captureOutput setMetadataObjectsDelegate:self queue:_queue];
     self.captureOutput = captureOutput;
+
     
     self.captureSession = [[AVCaptureSession alloc] init];
     
@@ -289,6 +291,7 @@
     if (!self.prevLayer) {
         self.prevLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
     }
+    self.prevLayer.connection.videoOrientation = [self videoOrientationFromCurrentDeviceOrientation];
     // NSLog(@"prev %p %@", self.prevLayer, self.prevLayer);
     self.prevLayer.frame = bounds;
     self.prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -328,6 +331,9 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
+    
+    
+ //   connection.videoOrientation = [self videoOrientationFromCurrentDeviceOrientation];
     if (!_scanFinished) {
         if ([metadataObjects count]) {
             for (AVMetadataObject *obj in metadataObjects) {
@@ -555,5 +561,24 @@
     
     return UIInterfaceOrientationMaskPortrait;//只支持这一个方向(正常的方向)
     
+}
+
+
+- (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation {
+    switch (self.interfaceOrientation) {
+        case UIInterfaceOrientationPortrait: {
+            return AVCaptureVideoOrientationPortrait;
+        }
+        case UIInterfaceOrientationLandscapeLeft: {
+            return AVCaptureVideoOrientationLandscapeLeft;
+        }
+        case UIInterfaceOrientationLandscapeRight: {
+            return AVCaptureVideoOrientationLandscapeRight;
+        }
+        case UIInterfaceOrientationPortraitUpsideDown: {
+            return AVCaptureVideoOrientationPortraitUpsideDown;
+        }
+    }
+    return nil;
 }
 @end

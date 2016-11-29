@@ -372,6 +372,7 @@
 }
 - (void)loginFail
 {
+    [self.indicatorView stopAnimating];
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"登录失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         return ;
@@ -382,6 +383,19 @@
     
 }
 
+
+- (void)loginFailTimeOut
+{
+    [self.indicatorView stopAnimating];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"登录超时" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        return ;
+    }];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+    self.passwordTest.text = @"";
+    
+}
 - (void)neeNotWorking
 {
     [self.indicatorView stopAnimating];
@@ -391,6 +405,15 @@
     }];
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+///正则表达式验证ip
+- (BOOL)validateNumber:(NSString *) textString
+{
+    NSString* number=@"((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)";
+    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
+    return [numberPre evaluateWithObject:textString];
 }
 
 

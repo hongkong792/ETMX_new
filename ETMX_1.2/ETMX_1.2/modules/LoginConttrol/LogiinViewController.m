@@ -72,8 +72,9 @@ MJExtensionLogAllProperties
         [p setDelegate:self];
         [p parse];
     } failure:^(NSError *error) {
+         [self.delegate loginFailTimeOut:error];
         if (error.code == -1001) {
-            [self.delegate loginFailTimeOut];
+            [self.delegate loginFailTimeOut:error];
         }
         NSLog( @"errorCode:%ld",error);
     }];

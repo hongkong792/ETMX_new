@@ -384,10 +384,11 @@
 }
 
 
-- (void)loginFailTimeOut
+- (void)loginFailTimeOut:(NSError *)error
 {
+    
     [self.indicatorView stopAnimating];
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"登录超时" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"登录失败" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         return ;
     }];

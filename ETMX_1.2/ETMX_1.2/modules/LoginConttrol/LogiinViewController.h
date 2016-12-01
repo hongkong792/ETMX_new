@@ -16,7 +16,7 @@
 - (void)loginSuccess;
 - (void)loginFail;
 - (void)neeNotWorking;
-- (void)loginFailTimeOut;
+- (void)loginFailTimeOut:(NSError *)error;
 
 
 @end

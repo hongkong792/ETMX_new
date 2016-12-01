@@ -1000,7 +1000,7 @@
 				DEVELOPMENT_TEAM = G8KS8T2N5W;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1020,7 +1020,7 @@
 				DEVELOPMENT_TEAM = G8KS8T2N5W;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

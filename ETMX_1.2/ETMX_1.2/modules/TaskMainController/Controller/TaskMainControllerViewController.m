@@ -694,7 +694,7 @@ typedef enum : NSUInteger {
         self.netRequesetName = taskExecutionSC_noTask;
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
         NSArray *parameters = @[userCode,result];
-        NSString *methodName = @"personalViewExecute";
+        NSString *methodName = @"getScanTasks";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];

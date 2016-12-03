@@ -90,6 +90,7 @@
     self.actualEndDate.text = [task valueForKey: @"actualEndDate"];
     self.usedWorkHour.text = [task valueForKey:@"usedWorkHour"];
     self.actualWorkHour.text = [task valueForKey:@"actualWorkHour"];
+    self.objectNamePlace.text = self.block();
 }
 
 @end

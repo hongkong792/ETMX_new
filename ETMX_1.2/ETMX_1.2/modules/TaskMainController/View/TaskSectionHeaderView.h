@@ -20,4 +20,5 @@
 @property (nonatomic ,strong)ETMXTask*task;
 @property (nonatomic,weak)id<TaskSectionHeaderDelegate>delegate;
 @property (strong, nonatomic) IBOutlet UIImageView *selectedImageView;
+@property (nonatomic,assign) NSInteger tasksCount;
 @end

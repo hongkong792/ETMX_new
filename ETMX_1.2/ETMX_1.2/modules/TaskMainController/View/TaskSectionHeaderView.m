@@ -33,7 +33,9 @@
 
 
 -(void)setTask:(ETMXTask *)task{
-    self.containerCode.text = [task valueForKey:@"container"];
+//    self.containerCode.text = [task valueForKey:@"container"];
+    NSString *str = [task valueForKey:@"container"];
+    self.containerCode.text = [NSString stringWithFormat:@"%@(%ld)",str,self.tasksCount];
     self.planStartDate.text = [task valueForKey:@"planStartDate"];
     self.planEndDate.text = [task valueForKey:@"planEndDate"];
 }

@@ -70,6 +70,14 @@
     }else{
         [cell.taskView setHidden:YES];
     }
+    cell.block = ^NSString *(){
+        if (self.isElectrode) {
+            return Localized(@"electrode name");
+            
+        }else{
+            return Localized(@"part code");
+        }
+    };
     cell.task = curTask;
     cell.cellDelegate = self;
     if ([self.selectedTasks containsObject:curTask]) {
@@ -79,14 +87,6 @@
         cell.selectedImageView1.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
         cell.selectedImageView2.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
     }
-    cell.block = ^NSString *(){
-        if (self.isElectrode) {
-            return Localized(@"electrode name");
-            
-        }else{
-            return Localized(@"part code");
-        }
-    };
     return cell;
 }
 
@@ -116,6 +116,7 @@
     TaskSectionHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"TaskSectionHeaderView" owner:self options:nil].lastObject;
     NSArray *tasks = self.mold.dataSource[section];
     ETMXTask *curTask = tasks.firstObject;
+    headerView.tasksCount = tasks.count;
     headerView.task = curTask;
     headerView.tag = section;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];

@@ -18,6 +18,7 @@
 #import "ExchangeOperatorViewController.h"
 #import "AddHelperViewController.h"
 #import "CurrentTask.h"
+#import "QRScanViewController.h"
 
 
 
@@ -41,11 +42,14 @@ typedef enum : NSUInteger {
     taskExecutionTF,            //完成
     taskExecutionDO,            //上班
     taskExecutionDF,            //下班
+    taskExecutionSC_withTask,   //勾选任务扫描
+    taskExecutionSC_noTask,     //不勾选任务扫描
 } NetRequestName;
 
 
 
-@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate>
+
+@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate,QRCodeScanDelegate>
 //xib中的控件
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *footerView;
@@ -111,6 +115,8 @@ typedef enum : NSUInteger {
 @property (strong,nonatomic) UIPopoverPresentationController *chooseImagePopoverController;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+
+@property (nonatomic,strong) QRScanViewController * qrViewCon;
 @end
 
 @implementation TaskMainControllerViewController
@@ -289,13 +295,10 @@ typedef enum : NSUInteger {
     
     
     
-    
-    
 }
 
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
-    
     
 
     if (self.currentTask == nil) {
@@ -383,6 +386,13 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)scanTask:(id)sender {
+    
+
+    self.qrViewCon = [[QRScanViewController alloc] init];
+    self.qrViewCon.delegate = self;
+    [self.navigationController pushViewController:self.qrViewCon animated:YES];
+
+    
 }
 //上班
 - (IBAction)goWork:(id)sender {
@@ -545,6 +555,23 @@ typedef enum : NSUInteger {
                 }
             }
         }
+        case taskExecutionSC_noTask:
+        {
+            if ([elementName isEqualToString:@"Etmx"]) {
+                self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
+            }
+            if ([elementName isEqualToString:@"Task"]) {
+                ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
+                [self.sortTasks addObject:task];
+            }
+        }
+        case taskExecutionSC_withTask:
+        {
+            if ([elementName isEqualToString:@"Etmx"]) {
+                self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
+            }
+        }
+            
         default:
             break;
     }
@@ -601,6 +628,20 @@ typedef enum : NSUInteger {
             [self.tableView reloadData];
             [self refreshBtns];
         }
+        case taskExecutionSC_noTask:
+        {
+            [self.tableView.selectedTasks removeAllObjects];
+            [self.tableView.selectedSections removeAllObjects];
+            [self.tableView reloadData];
+            [self refreshBtns];
+        }
+        case taskExecutionSC_withTask:
+        {
+            [self.tableView.selectedTasks removeAllObjects];
+            [self.tableView.selectedSections removeAllObjects];
+            [self.tableView reloadData];
+            [self refreshBtns];
+        }
             break;
         default:
             break;
@@ -640,5 +681,46 @@ typedef enum : NSUInteger {
     
     return nil;
 }
+
+
+# pragma dealScanning
+- (void)scanController:(QRScanViewController *)scanController
+         didScanResult:(NSString *)result
+            isTwoDCode:(BOOL)isTwoDCode
+{
+    
+    
+    if (self.currentTask == nil) {//不勾选任务扫描
+        self.netRequesetName = taskExecutionSC_noTask;
+        NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+        NSArray *parameters = @[userCode,result];
+        NSString *methodName = @"personalViewExecute";
+        [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+            [parser setDelegate:self];
+            [parser parse];
+        } failure:^(NSError *error) {
+            [self showNetTip];
+        }];
+        
+    }else{
+        self.netRequesetName = taskExecutionSC_withTask;
+        NSArray *tasks = self.tableView.selectedTasks;
+        NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
+        NSArray *parameters = @[tasksStr,result];
+        NSString *methodName = @"scanOperatorOrEquipment";
+        [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+            [parser setDelegate:self];
+            [parser parse];
+        } failure:^(NSError *error) {
+            [self showNetTip];
+        }];
+        
+    }
+
+    
+}
+
 
 @end

@@ -15,8 +15,6 @@
 #import "AddHelperViewController.h"
 
 
-
-
 @interface ViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,QRCodeScanDelegate,loginSucessDelegate>
 @property (weak, nonatomic) IBOutlet UIPickerView *LanguagePicker;
 @property (strong, nonatomic) IBOutlet UIView *rootView;
@@ -48,8 +46,6 @@
     self = [super init];
     return self;
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -113,8 +109,6 @@
         [self.view addConstraint:con_3];
         [self.view addConstraint:con_4];
         [self.view addConstraint:con_5];
-        
-        
         
     }
     
@@ -342,6 +336,11 @@
 {
     UITextField * field = [[UITextField alloc] init];
     field =  (UITextField *)sender;
+    //验证ip
+    if (![self validateNumber:field.text]) {
+        [self warn:@"ip格式不正确"];
+        return;
+    }
     //切换地址
     [[NSUserDefaults standardUserDefaults] setObject:field.text forKey:ADRESSIP];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -380,7 +379,6 @@
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
     self.passwordTest.text = @"";
-    
 }
 
 
@@ -408,11 +406,19 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-
+- (void)warn:(NSString *)tips
+{
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:tips message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        return ;
+    }];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];    
+}
 ///正则表达式验证ip
 - (BOOL)validateNumber:(NSString *) textString
 {
-    NSString* number=@"((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)";
+    NSString* number=@"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$";
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:textString];
 }

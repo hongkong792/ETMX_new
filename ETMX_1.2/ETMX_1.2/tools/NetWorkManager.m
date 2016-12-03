@@ -32,8 +32,7 @@
         } else {
             failure(error);
         }
-    }] resume];
-    
+    }] resume];    
     
 }
 //根据方法名获取url

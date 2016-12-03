@@ -422,6 +422,4 @@
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:textString];
 }
-
-
 @end

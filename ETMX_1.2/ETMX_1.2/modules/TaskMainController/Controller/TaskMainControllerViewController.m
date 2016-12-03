@@ -130,7 +130,6 @@ typedef enum : NSUInteger {
         [strong refreshBtns];
         weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
     };
-
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self setup];

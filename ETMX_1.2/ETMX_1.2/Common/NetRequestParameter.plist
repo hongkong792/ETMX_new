@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>joinInTask</key>
+	<dict>
+		<key>URI</key>
+		<string>/ETMX/services/TaskOperationExecution</string>
+		<key>node</key>
+		<string>joinInTaskResponse</string>
+	</dict>
 	<key>getScanTasks</key>
 	<dict>
 		<key>URI</key>

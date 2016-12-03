@@ -201,7 +201,8 @@ static BOOL memberFinish = NO;
         
     }else if ([menu isEqual:self.menu]){
         if (_data2.count > indexPath.row+1) {
-              return _data2[indexPath.row];
+            UserAccount * user = _data2[indexPath.row];
+            return user.fullName;
         }
         
       
@@ -238,8 +239,10 @@ static BOOL memberFinish = NO;
       
     NSLog(@"_currentData1Index:%@",_data1[_currentData1Index]);
     NSLog(@"_currentData2Index:%@",_data2[_currentData2Index]);
-    NSString * userName = _data2[_currentData2Index];
-      [self.delegate userNameOnSelected:userName];
+      UserAccount * user = _data2[_currentData2Index];
+      [[UserManager instance] setCurAccount:user];
+      [self.delegate userNameOnSelected:user.number];
+      
   }];
     
 }
@@ -266,8 +269,8 @@ static BOOL memberFinish = NO;
         userAccount.name = [attributeDict objectForKey:@"name"];
         userAccount.fullName = [attributeDict objectForKey:@"fullName"];
         userAccount.number = [attributeDict objectForKey:@"code"];
-        if (userAccount.fullName != nil) {
-            [_data2 addObject:userAccount.fullName];
+        if (userAccount.id != nil) {
+            [_data2 addObject:userAccount];
         }
     }
     

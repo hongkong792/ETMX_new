@@ -10,7 +10,7 @@
 
 @protocol SearchSelectedDelegate <NSObject>
 
-- (NSString *)userNameOnSelected:(NSString *)userName;
+- (void)userNameOnSelected:(NSString *)userCode;
 
 @end
 

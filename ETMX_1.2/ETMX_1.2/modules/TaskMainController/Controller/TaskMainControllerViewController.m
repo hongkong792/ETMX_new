@@ -384,7 +384,7 @@ typedef enum : NSUInteger {
         [self showNetTip];
     }];
 }
-
+//扫描
 - (IBAction)scanTask:(id)sender {
     
 
@@ -667,19 +667,15 @@ typedef enum : NSUInteger {
 }
 
 #pragma SearchSelectedDelegate
-- (NSString *)userNameOnSelected:(NSString *)userName
+- (void)userNameOnSelected:(NSString *)userCode;
 {
-    if (userName != nil) {
-        return userName;
+    if (userCode != nil) {
+          //刷新主界面
+        [self refresh:nil];
+      
     }
-    //刷新主界面
-    
-    
-    
-    
-    
-    
-    return nil;
+  
+
 }
 
 
@@ -688,7 +684,6 @@ typedef enum : NSUInteger {
          didScanResult:(NSString *)result
             isTwoDCode:(BOOL)isTwoDCode
 {
-    
     
     if (self.currentTask == nil) {//不勾选任务扫描
         self.netRequesetName = taskExecutionSC_noTask;
@@ -701,8 +696,7 @@ typedef enum : NSUInteger {
             [parser parse];
         } failure:^(NSError *error) {
             [self showNetTip];
-        }];
-        
+        }];        
     }else{
         self.netRequesetName = taskExecutionSC_withTask;
         NSArray *tasks = self.tableView.selectedTasks;

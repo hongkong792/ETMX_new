@@ -18,6 +18,13 @@
 #define MEMBER   @"MemberTableViewCell"
 
 
+typedef NS_ENUM(NSInteger,requestName) {
+    
+    TaskOpertots =100 ,
+    MembersInTeam,
+    
+};
+
 @interface AddHelperViewController ()<UITableViewDelegate,UITableViewDataSource,JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
     NSInteger _currentData1Index;
@@ -34,6 +41,8 @@
 @property (strong, nonatomic) NSMutableArray * currentOperUser;
 @property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong)TaskMainControllerViewController * taskCon;
+
+@property (nonatomic,strong) NSString * requestName;
 
 @end
 
@@ -53,28 +62,6 @@ static BOOL lastThree = NO;
 
     
     self.currentOperUser = [NSMutableArray array];
-
-    
-
-    
-//    [self.currentOperUser addObject:userAccount];
-//    [self.currentOperUser addObject:userAccount2];
-//    [self.currentOperUser addObject:userAccount3];
-//    [self.currentOperUser addObject:userAccount4];
-    
-//    for (int i = 0; i<20; i++) {
-//        
-//        UserAccount *userAccount = [[UserAccount alloc] init];
-//        userAccount.name = [NSString stringWithFormat:@"%d",i];
-//        userAccount.fullName = @"fu01";
-//        userAccount.userType = @"任務ca者";
-//        
-//        [self.currentOperUser addObject:userAccount];
-//        
-//        
-//    }
-    
-
 
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
@@ -117,6 +104,7 @@ static BOOL lastThree = NO;
 }
 - (void)loadAllData
 {
+    
     NSString * opearatorMethod = @"getCurrentOperators";
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
@@ -486,7 +474,7 @@ static BOOL lastThree = NO;
     
     
     [self dismissViewControllerAnimated:YES completion:nil];
-     [self clickOper:@"TC"];
+
     
 }
 
@@ -515,7 +503,7 @@ static BOOL lastThree = NO;
         lastThree = YES;
         
     } failure:^(NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
     }];
 }

@@ -23,6 +23,11 @@ typedef NS_ENUM(NSInteger,requestName) {
     TaskOpertots =100 ,
     MembersInTeam,
     
+    ///任务参与者
+    SelectedPartner_Delete = 300,
+    SelectedPartner_Finish ,
+    SelectedPartner_Pause,
+    
 };
 
 @interface AddHelperViewController ()<UITableViewDelegate,UITableViewDataSource,JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
@@ -42,7 +47,7 @@ typedef NS_ENUM(NSInteger,requestName) {
 @property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong)TaskMainControllerViewController * taskCon;
 
-@property (nonatomic,strong) NSString * requestName;
+@property (nonatomic,assign) NSInteger  requestName;
 
 @end
 
@@ -320,6 +325,8 @@ static BOOL lastThree = NO;
         [memberCell.finishBtn setTitle:Localized(@"finish") forState:UIControlStateHighlighted];
         
         memberCell.deleteBtn.tag = tag;
+        memberCell.pauseBtn.tag = tag;
+        memberCell.finishBtn.tag = tag;
         [memberCell.deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
         [memberCell.pauseBtn addTarget:self action:@selector(pauseClick:) forControlEvents:UIControlEventTouchUpInside];
         [memberCell.finishBtn addTarget:self action:@selector(finishClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -337,9 +344,9 @@ static BOOL lastThree = NO;
 
 - (void)deleteClick:(id)sender
 {
-    
-    [self operClick:@"TD"];
-    
+       self.requestName = SelectedPartner_Delete;
+    UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
+    [self operClick:@"TD" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
     [self.memberInfoTable reloadData];
     
@@ -347,29 +354,40 @@ static BOOL lastThree = NO;
 }
 - (void)pauseClick:(id)sender
 {
+    self.requestName = SelectedPartner_Delete;
+    UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
+    [self operClick:@"TP" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
+    [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
+    [self.memberInfoTable reloadData];
     
-    [self operClick:@"TP"];
+
     
     
 }
 - (void)finishClick:(id)sender
 {
+    self.requestName = SelectedPartner_Delete;
+    UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
+    [self operClick:@"TF" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
+    [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
+    [self.memberInfoTable reloadData];
     
-    [self operClick:@"TF"];
     
 }
 
-- (void)operClick:(NSString *)operType
+- (void)operClick:(NSString *)operType withSelectUser:(NSString *)userId;
 {
-    NSString * opearatorMethod = @"getCurrentOperators";
+    NSString * opearatorMethod = @"handleChildTaskOperation";
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
-    
     [paramArr addObject:taskId];
     NSDictionary * dic = [UserManager instance].dic;
     [paramArr addObject: [dic objectForKey:@"id"]];
     [paramArr addObject:operType];
     [paramArr addObject:@"zh-CN|zh-TW|en"];
+    //操作者ID
+    
+    
     
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
@@ -465,13 +483,11 @@ static BOOL lastThree = NO;
     
 }
 - (IBAction)useIt:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+
      [self clickOper:@"TU"];
     
 }
 - (IBAction)cancel:(id)sender {
-    
-    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -492,7 +508,6 @@ static BOOL lastThree = NO;
     if (user.id.length >0) {
         [paramArr addObject:user.id];
     }
-    [paramArr addObject:type];
     [paramArr addObject:@"zh-CN|zh-TW|en"];
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
@@ -546,6 +561,26 @@ static BOOL lastThree = NO;
     }
     
 }
+////解析结束
+-(void)parserDidEndDocument:(NSXMLParser *)parser{
+    switch (self.requestName) {
+        case SelectedPartner_Delete:
+            
+            
+        case SelectedPartner_Finish:
+            
+            
+            
+         case SelectedPartner_Pause:
+            break;
+        default:
+            break;
+    }
+}
+
+
+
+
 - (void) laodDataFinish
 {
     if (memberFinish && operatorsFinish) {

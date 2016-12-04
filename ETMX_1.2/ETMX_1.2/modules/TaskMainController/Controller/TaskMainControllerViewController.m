@@ -12,6 +12,7 @@
 #import "TaskContentTableView.h"
 #import "CustomSegmentController.h"
 #import "CustomBtn.h"
+#import "CustomeBtn2.h"
 #import "LogiinViewController.h"
 #import "SearchViewController.h"
 #import "UserManager.h"
@@ -70,25 +71,32 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) IBOutlet CustomBtn *cancelBtn;
 
 //启动按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *startBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *startBtn;
+
 
 //暂停按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *stopBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *stopBtn;
+
 
 //完成按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *finishBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *finishBtn;
+
 
 //扫描按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *scanBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *scanBtn;
+
 
 //上班按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *workBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *workBtn;
+
 
 //下班按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *workOffBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *workOffBtn;
+
 
 //替换按钮
-@property (strong, nonatomic) IBOutlet CustomBtn *exchangeBtn;
+@property (strong, nonatomic) IBOutlet CustomeBtn2 *exchangeBtn;
+
 
 //任务展示tableview
 @property (strong, nonatomic) IBOutlet TaskContentTableView *tableView;

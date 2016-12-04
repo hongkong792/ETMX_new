@@ -88,6 +88,7 @@
 		24896ACB1DE332060028FCFE /* ExchangeOperatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24896AC71DE332060028FCFE /* ExchangeOperatorViewController.m */; };
 		24896ACC1DE332060028FCFE /* ExchangeOperatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24896AC81DE332060028FCFE /* ExchangeOperatorViewController.xib */; };
 		24896ACD1DE332060028FCFE /* MembersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24896ACA1DE332060028FCFE /* MembersTableViewController.m */; };
+		248F28221DF3056000EE6D07 /* CustomeBtn2.m in Sources */ = {isa = PBXBuildFile; fileRef = 248F28211DF3056000EE6D07 /* CustomeBtn2.m */; };
 		316AA2FE1DE1C54A00905D7A /* CurrentTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 316AA2FD1DE1C54A00905D7A /* CurrentTask.m */; };
 		316AA3011DE1D8D400905D7A /* MemberOperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316AA3001DE1D8D400905D7A /* MemberOperViewController.m */; };
 /* End PBXBuildFile section */
@@ -266,6 +267,8 @@
 		24896AC81DE332060028FCFE /* ExchangeOperatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExchangeOperatorViewController.xib; sourceTree = "<group>"; };
 		24896AC91DE332060028FCFE /* MembersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembersTableViewController.h; sourceTree = "<group>"; };
 		24896ACA1DE332060028FCFE /* MembersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewController.m; sourceTree = "<group>"; };
+		248F28201DF3056000EE6D07 /* CustomeBtn2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomeBtn2.h; sourceTree = "<group>"; };
+		248F28211DF3056000EE6D07 /* CustomeBtn2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomeBtn2.m; sourceTree = "<group>"; };
 		316AA2FC1DE1C54A00905D7A /* CurrentTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentTask.h; sourceTree = "<group>"; };
 		316AA2FD1DE1C54A00905D7A /* CurrentTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentTask.m; sourceTree = "<group>"; };
 		316AA2FF1DE1D8D400905D7A /* MemberOperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberOperViewController.h; sourceTree = "<group>"; };
@@ -705,6 +708,8 @@
 				2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */,
 				2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */,
 				2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */,
+				248F28201DF3056000EE6D07 /* CustomeBtn2.h */,
+				248F28211DF3056000EE6D07 /* CustomeBtn2.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -845,6 +850,7 @@
 				0674B8821DD08AB0004FF173 /* AFURLRequestSerialization.m in Sources */,
 				0674B87D1DD08AB0004FF173 /* UserAccount.m in Sources */,
 				0674B88F1DD08AB0004FF173 /* UIWebView+AFNetworking.m in Sources */,
+				248F28221DF3056000EE6D07 /* CustomeBtn2.m in Sources */,
 				066000B51DD5E87D005F2D80 /* MJFoundation.m in Sources */,
 				247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */,
 				247494921DD21B7400BD7711 /* CustomBtn.m in Sources */,

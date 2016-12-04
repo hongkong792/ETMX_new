@@ -235,10 +235,6 @@ static BOOL memberFinish = NO;
 - (IBAction)confirmClick:(id)sender {
     
   [self dismissViewControllerAnimated:YES completion:^{
-      
-      
-    NSLog(@"_currentData1Index:%@",_data1[_currentData1Index]);
-    NSLog(@"_currentData2Index:%@",_data2[_currentData2Index]);
       UserAccount * user = _data2[_currentData2Index];
       [[UserManager instance] setCurAccount:user];
       [self.delegate userNameOnSelected:user.number];

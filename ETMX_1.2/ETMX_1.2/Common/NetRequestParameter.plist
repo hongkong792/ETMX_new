@@ -7,7 +7,7 @@
 		<key>URI</key>
 		<string>/ETMX/services/TaskOperationExecution</string>
 		<key>node</key>
-		<string>joinInTaskResponse</string>
+		<string>ns1:joinInTaskResponse</string>
 	</dict>
 	<key>getScanTasks</key>
 	<dict>

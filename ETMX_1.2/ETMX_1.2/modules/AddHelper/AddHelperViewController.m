@@ -64,10 +64,10 @@ static BOOL lastThree = NO;
     
     
     [super viewDidLoad];
-
+    
     
     self.currentOperUser = [NSMutableArray array];
-
+    
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -91,11 +91,9 @@ static BOOL lastThree = NO;
     self.menu.delegate = self;
     self.currentTask  =   [CurrentTask sharedManager].currentTask;
     [self loadAllData];
-
+    
     
 }
-
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -176,7 +174,7 @@ static BOOL lastThree = NO;
             return 1;
         }else if (section == 2){
             
-
+            
             return   self.currentOperUser.count - 1;
             
         }
@@ -245,7 +243,7 @@ static BOOL lastThree = NO;
         
         NSLog(@"indexpath:%ld,%ld",(long)indexPath.section,(long)indexPath.row);
         MemberTableViewCell * memberCell = [tableView dequeueReusableCellWithIdentifier:MEMBER forIndexPath:indexPath];
-      //  NSMutableArray * tempArray  = [NSMutableArray arrayWithArray:self.currentOperUser];
+        //  NSMutableArray * tempArray  = [NSMutableArray arrayWithArray:self.currentOperUser];
         NSArray *subviews = [[NSArray alloc] initWithArray:memberCell.contentView.subviews];
         for (UILabel *subview in subviews) {
             if ([subview isKindOfClass:[UILabel class]]) {
@@ -301,10 +299,10 @@ static BOOL lastThree = NO;
                     memberCell.propertyLabel.text = user.userType;
                 }
             }
-           // [tempArray removeObject:userTemp];
+            // [tempArray removeObject:userTemp];
             return memberCell;
         }
-
+        
         
         
         /////////////参与者
@@ -336,20 +334,16 @@ static BOOL lastThree = NO;
         return memberCell;
     }
     return nil;
-
+    
 }
-
-
 
 
 - (void)deleteClick:(id)sender
 {
-       self.requestName = SelectedPartner_Delete;
+    self.requestName = SelectedPartner_Delete;
     UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
     [self operClick:@"TD" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
-    [self.memberInfoTable reloadData];
-    
     
 }
 - (void)pauseClick:(id)sender
@@ -358,10 +352,6 @@ static BOOL lastThree = NO;
     UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
     [self operClick:@"TP" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
-    [self.memberInfoTable reloadData];
-    
-
-    
     
 }
 - (void)finishClick:(id)sender
@@ -370,9 +360,6 @@ static BOOL lastThree = NO;
     UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
     [self operClick:@"TF" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     [self.currentOperUser removeObjectAtIndex:((UIButton *)sender).tag];
-    [self.memberInfoTable reloadData];
-    
-    
 }
 
 - (void)operClick:(NSString *)operType withSelectUser:(NSString *)userId;
@@ -386,9 +373,7 @@ static BOOL lastThree = NO;
     [paramArr addObject:operType];
     [paramArr addObject:@"zh-CN|zh-TW|en"];
     //操作者ID
-    
-    
-    
+    [paramArr addObject:userId];
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -454,13 +439,13 @@ static BOOL lastThree = NO;
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
     
     
-
+    
     UserAccount * user =  _memberData[indexPath.row];
     if (user.fullName != nil) {
         return user.fullName;
     }
     return nil;
-   
+    
     
     
 }
@@ -483,14 +468,14 @@ static BOOL lastThree = NO;
     
 }
 - (IBAction)useIt:(id)sender {
-
-     [self clickOper:@"TU"];
+    
+    [self clickOper:@"TU"];
     
 }
 - (IBAction)cancel:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
     
 }
 
@@ -504,7 +489,7 @@ static BOOL lastThree = NO;
     NSDictionary * dic = [UserManager instance].dic;
     
     [paramArr addObject: [dic objectForKey:@"id"]];
-     UserAccount * user =_memberData[_currentData1Index];
+    UserAccount * user =_memberData[_currentData1Index];
     if (user.id.length >0) {
         [paramArr addObject:user.id];
     }
@@ -565,13 +550,18 @@ static BOOL lastThree = NO;
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     switch (self.requestName) {
         case SelectedPartner_Delete:
+ 
+            [self.memberInfoTable reloadData];
             
             
         case SelectedPartner_Finish:
+    
+            [self.memberInfoTable reloadData];
             
             
-            
-         case SelectedPartner_Pause:
+        case SelectedPartner_Pause:
+   
+            [self.memberInfoTable reloadData];
             break;
         default:
             break;

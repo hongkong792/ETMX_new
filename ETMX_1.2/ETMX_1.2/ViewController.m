@@ -31,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIView *separatorTwo;
 @property (copy,nonatomic)NSString * adressIp;
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
+@property (nonatomic,strong) UITextField * field;
 
 
 @property (nonatomic, strong)UILabel * titleLabel;
@@ -51,6 +52,8 @@
     [super viewDidLoad];
     
     
+    [self.userNameText addTarget:self action:@selector(exitBoardUserName) forControlEvents:UIControlEventEditingDidEnd];
+    [self.passwordTest addTarget:self action:@selector(exitBoardPasss) forControlEvents:UIControlEventEditingDidEnd];
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
     _indicatorView.backgroundColor = [UIColor lightGrayColor];
@@ -119,6 +122,17 @@
 }
 
 
+//编辑结束，隐藏键盘
+- (void)exitBoardUserName
+{
+    [self.userNameText resignFirstResponder];
+    
+}
+-(void) exitBoardPasss
+{
+    [self.passwordTest resignFirstResponder];
+    
+}
 
 #pragma UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -210,49 +224,49 @@
 - (IBAction)loginClick:(id)sender {
     
     
-    AddHelperViewController * sea = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
-    
-    sea.preferredContentSize = CGSizeMake(500, 800);
-    sea.modalPresentationStyle = UIModalPresentationPopover;
-    _chooseImagePopoverController = sea.popoverPresentationController;
-    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    
-    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
-    _chooseImagePopoverController.sourceView = sea.view;
-    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-    [self.navigationController pushViewController:sea animated:YES];
-    
+//    AddHelperViewController * sea = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+//    
+//    sea.preferredContentSize = CGSizeMake(500, 800);
+//    sea.modalPresentationStyle = UIModalPresentationPopover;
+//    _chooseImagePopoverController = sea.popoverPresentationController;
+//    _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+//    
+//    _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+//    _chooseImagePopoverController.sourceView = sea.view;
+//    _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+//    [self.navigationController pushViewController:sea animated:YES];
+//    
 //    return;
-//    if ( ![[CheckNetWorkerTool sharedManager] isNetWorking]) {
-//        [self neeNotWorking];
-//    }
-//    [self.view addSubview:self.indicatorView];
-//    LogiinViewController * loginCon = [[LogiinViewController alloc] init];
-//    loginCon.delegate = self;
-//    UserAccount * user = [[UserAccount alloc] init];
-//    if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
-//        [self.indicatorView startAnimating];
-//        user.name = self.userNameText.text;
-//        user.password = self.passwordTest.text;
-//        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
-//        NSString * method = @"checkUserInfo";
-//        [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
-//        } failure:^(NSError *error) {
-//            
-//            
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alertView show];
-//            
-//        }];
-//        
-//    }else{
-//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//            return ;
-//        }];
-//        [alert addAction:action];
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
+    if ( ![[CheckNetWorkerTool sharedManager] isNetWorking]) {
+        [self neeNotWorking];
+    }
+    [self.view addSubview:self.indicatorView];
+    LogiinViewController * loginCon = [[LogiinViewController alloc] init];
+    loginCon.delegate = self;
+    UserAccount * user = [[UserAccount alloc] init];
+    if (self.userNameText.text.length >0 &&self.passwordTest.text.length>0) {
+        [self.indicatorView startAnimating];
+        user.name = self.userNameText.text;
+        user.password = self.passwordTest.text;
+        NSString * loginUrl = @"http://192.168.1.161:8085/ETMX/services/Login";
+        NSString * method = @"checkUserInfo";
+        [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
+        } failure:^(NSError *error) {
+            
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertView show];
+            
+        }];
+        
+    }else{
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"用户名或密码不能为空" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            return ;
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
     
 }
@@ -338,18 +352,25 @@
 
 - (void)ipChanged:(id)sender
 {
-    UITextField * field = [[UITextField alloc] init];
-    field =  (UITextField *)sender;
-    //验证ip
-    if (![self validateNumber:field.text]) {
-        [self warn:@"ip格式不正确"];
-        return;
-    }
+    self.field = [[UITextField alloc] init];
+    [self.field addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
+    self.field =  (UITextField *)sender;
     //切换地址
-    [[NSUserDefaults standardUserDefaults] setObject:field.text forKey:ADRESSIP];
+    [[NSUserDefaults standardUserDefaults] setObject:self.field.text forKey:ADRESSIP];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //重新启动网络
     [CheckNetWorkerTool sharedManager];
+    
+}
+- (void)textChange
+{
+    if (self.field.text != nil) {
+        if (![self validateNumber:self.field.text]) {
+            [self warn:@"ip格式不正确"];
+            return;
+        }
+    }
+    
     
 }
 

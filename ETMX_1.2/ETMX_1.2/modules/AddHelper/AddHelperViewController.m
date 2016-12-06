@@ -28,12 +28,19 @@ typedef NS_ENUM(NSInteger,RequestName) {
     SelectedPartner_Finish ,
     SelectedPartner_Pause,
     
+    
+    ///确定应用
+    AddMemberConfirm = 600,
+    AddMemberUseIt,
+    
 };
 
 @interface AddHelperViewController ()<UITableViewDelegate,UITableViewDataSource,JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
     NSInteger _currentData1Index;
     NSMutableArray *_memberData;//组员
+    UserAccount * _tempUser;
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *taskInfoTable;
 @property (strong, nonatomic) IBOutlet UITableView *memberInfoTable;
@@ -50,11 +57,13 @@ typedef NS_ENUM(NSInteger,RequestName) {
 @property (nonatomic,assign) RequestName  requestName;
 @property (nonatomic,assign)NSInteger  selectedMember;
 @property (nonatomic,assign)NSIndexPath * selectedIndexPath;
+@property (nonatomic,strong) MemberTableViewCell * memberCell ;
+
 
 @end
 
 @implementation AddHelperViewController
-
+static NSInteger taskStartMan;//任务启动者
 static BOOL memberFinish = NO;
 static BOOL operatorsFinish = NO;
 static BOOL clickFinish = NO;
@@ -64,10 +73,7 @@ static BOOL lastThree = NO;
 
 - (void)viewDidLoad {
     
-    
     [super viewDidLoad];
-
-    
     
     self.currentOperUser = [NSMutableArray array];
     for (int i=0; i<20; i++) {
@@ -78,7 +84,6 @@ static BOOL lastThree = NO;
         user.userType = [NSString stringWithFormat:@"usertype_%d",i];
         [self.currentOperUser addObject:SAFE_FORMAT_STRING(user)];
     }
-    
     
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
@@ -92,8 +97,8 @@ static BOOL lastThree = NO;
     [self.memberInfoTable registerNib:[UINib nibWithNibName:@"MemberTableViewCell" bundle:nil] forCellReuseIdentifier:MEMBER];
     
     //添加菜單
-      _memberData = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
-   // _memberData = [NSMutableArray array];
+    // _memberData = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    _memberData = [NSMutableArray array];
     CGPoint memint= self.flagView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(memint.x , memint.y) andHeight:45];
     self.menu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
@@ -103,7 +108,6 @@ static BOOL lastThree = NO;
     self.menu.delegate = self;
     self.currentTask  =   [CurrentTask sharedManager].currentTask;
     [self loadAllData];
-    
     
 }
 
@@ -137,9 +141,9 @@ static BOOL lastThree = NO;
         [weakSelf laodDataFinish];
         
     } failure:^(NSError *error) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alertView show];
-          [self showAlert:Localized(@"please check the net")];
+        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        //        [alertView show];
+        [self showAlert:Localized(@"please check the net")];
     }];
     
     NSString * userMberMethod = @"getGroupMembersByUserCode";
@@ -155,13 +159,38 @@ static BOOL lastThree = NO;
         
         
     } failure:^(NSError *error) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alertView show];
-          [self showAlert:Localized(@"please check the net")];
+        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        //        [alertView show];
+        [self showAlert:Localized(@"please check the net")];
         
     }];
     [self.view addSubview:self.indicatorView];
- //   [self.indicatorView startAnimating];
+    [self.indicatorView startAnimating];
+}
+
+//添加组员
+- (IBAction)addMember:(id)sender {
+    //只用于页面
+    
+    self.memberCell.deleteBtn.hidden = NO;
+    self.memberCell.pauseBtn.hidden = YES;
+    self.memberCell.finishBtn.hidden = YES;
+    NSDictionary * dic = [UserManager instance].dic;
+    UserAccount * user =_memberData[_currentData1Index];
+    if (user.id.length >0) {
+        [self.currentOperUser addObject:user];
+    }else{
+        [self showAlert:@"请选择组员"];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
+        [self showAlert:@"不能添加自己"];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    
+    [self.memberInfoTable reloadData];
 }
 
 
@@ -171,7 +200,7 @@ static BOOL lastThree = NO;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.memberInfoTable) {
-        return 3;
+        return 2;
     }
     return 1;
 }
@@ -182,16 +211,9 @@ static BOOL lastThree = NO;
     }else if (tableView == self.memberInfoTable){
         if (section == 0) {
             return 1;
-        }else if (section == 1)
-        {
-            return 1;
-        }else if (section == 2){
-            
-            
-            return   self.currentOperUser.count - 1;
-            
+        }else if (section == 1){
+            return   self.currentOperUser.count;
         }
-        
     }
     return 0;
 }
@@ -256,7 +278,23 @@ static BOOL lastThree = NO;
         
         NSLog(@"indexpath:%ld,%ld",(long)indexPath.section,(long)indexPath.row);
         MemberTableViewCell * memberCell = [tableView dequeueReusableCellWithIdentifier:MEMBER forIndexPath:indexPath];
-        //  NSMutableArray * tempArray  = [NSMutableArray arrayWithArray:self.currentOperUser];
+        self.memberCell = memberCell;
+        memberCell.deleteBtn.hidden = NO;
+        memberCell.pauseBtn.hidden = NO;
+        memberCell.finishBtn.hidden = NO;
+     
+        _tempUser = [[UserAccount alloc] init];
+        for (_tempUser in self.currentOperUser) {
+            if ([_tempUser.userType isEqualToString:@"任務啟動者"]) {
+                taskStartMan  =  [self.currentOperUser indexOfObject:_tempUser];
+                break;
+            }
+        }
+       [self.currentOperUser removeObjectAtIndex:taskStartMan];
+        if (_tempUser.id == nil) {
+            _tempUser = [[UserAccount alloc] init];
+        }
+       [self.currentOperUser insertObject:_tempUser atIndex:0];
         NSArray *subviews = [[NSArray alloc] initWithArray:memberCell.contentView.subviews];
         for (UILabel *subview in subviews) {
             if ([subview isKindOfClass:[UILabel class]]) {
@@ -305,24 +343,15 @@ static BOOL lastThree = NO;
             memberCell.pauseBtn.hidden = YES;
             memberCell.finishBtn.hidden = YES;
             
-            UserAccount * userTemp  = [[UserAccount alloc] init];
-            for (UserAccount * user in self.currentOperUser) {
-                if ([user.userType isEqualToString:@"任務啟動者"]) {
-                    memberCell.nameLabel.text = user.name;
-                    memberCell.propertyLabel.text = user.userType;
-                }
-            }
             // [tempArray removeObject:userTemp];
-            return memberCell;
+            // return memberCell;
         }
-        
-        
         
         /////////////参与者
         // [self.currentOperUser removeObject:self.tempUser];
         NSInteger  tag;
-        UserAccount * user = [self.currentOperUser objectAtIndex:indexPath.row+1];
-        tag = indexPath.row+1;
+        UserAccount * user = [self.currentOperUser objectAtIndex:indexPath.row];
+        tag = indexPath.row;
         
         memberCell.nameLabel.text = user.name;
         memberCell.propertyLabel.text = user.userType;
@@ -341,9 +370,7 @@ static BOOL lastThree = NO;
         [memberCell.deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
         [memberCell.pauseBtn addTarget:self action:@selector(pauseClick:) forControlEvents:UIControlEventTouchUpInside];
         [memberCell.finishBtn addTarget:self action:@selector(finishClick:) forControlEvents:UIControlEventTouchUpInside];
-        memberCell.deleteBtn.hidden = NO;
-        memberCell.pauseBtn.hidden = NO;
-        memberCell.finishBtn.hidden = NO;
+        
         return memberCell;
     }
     return nil;
@@ -355,7 +382,7 @@ static BOOL lastThree = NO;
 {
     self.requestName = SelectedPartner_Delete;
     UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
-  //  [self operClick:@"TD" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
+    [self operClick:@"TD" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     self.selectedMember = ((UIButton *)sender).tag;
     if (self.requestName == SelectedPartner_Delete) {
         [self.currentOperUser removeObjectAtIndex:self.selectedMember];
@@ -389,12 +416,13 @@ static BOOL lastThree = NO;
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
-    NSDictionary * dic = [UserManager instance].dic;
-    [paramArr addObject: [dic objectForKey:@"id"]];
-    [paramArr addObject:SAFE_FORMAT_STRING(operType)];
-    [paramArr addObject:@"zh-CN|zh-TW|en"];
     //操作者ID
     [paramArr addObject:SAFE_FORMAT_STRING(userId)];
+    [paramArr addObject:SAFE_FORMAT_STRING(operType)];
+    NSDictionary * dic = [UserManager instance].dic;
+    [paramArr addObject: [dic objectForKey:@"id"]];
+    [paramArr addObject:@"zh-CN|zh-TW|en"];
+    
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -410,8 +438,8 @@ static BOOL lastThree = NO;
         
         
     } failure:^(NSError *error) {
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alertView show];
+        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        //        [alertView show];
         [self showAlert:Localized(@"please check the net")];
     }];
     
@@ -454,8 +482,6 @@ static BOOL lastThree = NO;
     
     return @"請選擇";
     
-    
-    
 }
 
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
@@ -476,21 +502,24 @@ static BOOL lastThree = NO;
     
     _currentData1Index = indexPath.row;
     
-    
-    
 }
 
 
 #pragma bottomBtnClick
 - (IBAction)confirm:(id)sender {
     
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.requestName = AddMemberConfirm;
     [self clickOper:@"TF"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+    
+    
     
 }
 - (IBAction)useIt:(id)sender {
     
+    self.requestName = AddMemberUseIt;
     [self clickOper:@"TU"];
     
 }
@@ -503,19 +532,30 @@ static BOOL lastThree = NO;
 
 - (void)clickOper:(NSString*)type
 {
+    
     NSDictionary * dic = [UserManager instance].dic;
     NSString * opearatorMethod = @"joinInTask";
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
     
-    
-    [paramArr addObject: [dic objectForKey:@"id"]];
     UserAccount * user =_memberData[_currentData1Index];
     if (user.id.length >0) {
-        [paramArr addObject:user.id];
+        [paramArr addObject:SAFE_FORMAT_STRING(user.id)];
+    }else{
+        [self showAlert:@"请选择组员"];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
     }
-    [paramArr addObject:@"zh-CN|zh-TW|en"];
+    if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
+        [self showAlert:@"不能添加自己"];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    
+    //[paramArr addObject:@"zh-CN|zh-TW|en"];
+    [paramArr addObject:@"ZH"];
+    [paramArr addObject:SAFE_FORMAT_STRING([dic objectForKey:@"id"])];
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -555,21 +595,48 @@ static BOOL lastThree = NO;
         if (user.fullName != nil) {
             [_memberData addObject:user];
         }
-    }else if ([elementName isEqualToString: @"Task"]){
+    }else if (self.requestName == AddMemberConfirm || self.requestName == AddMemberUseIt ){
+        
         if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"1"]) {
-            //success 临时写法
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"操作成功") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alertView show];
-            if (self.requestName == SelectedPartner_Delete) {
-                [self.currentOperUser removeObjectAtIndex:self.selectedMember];
-            }
+            
             [self showAlert:@"操作成功"];
+            //数据源添加数据
         }else{
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"添加失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alertView show];
-            [self showAlert:@"操作失败"];
+            
+            //  [self showAlert:@"操作失败"];
             
         }
+        
+    }else if (self.requestName == SelectedPartner_Delete){
+        if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"1"]) {
+            
+            if (self.selectedMember < self.currentOperUser.count && self.selectedMember >=  0) {
+                [self.currentOperUser removeObjectAtIndex:self.selectedMember];
+                //  [self showAlert:@"操作成功"];
+            }
+        }
+        
+    }else if (self.requestName == SelectedPartner_Pause){
+        if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"1"]) {
+            
+            [self showAlert:@"操作成功"];
+        }else{
+            
+            //  [self showAlert:@"操作失败"];
+            
+        }
+        
+        
+    }else if (self.requestName == SelectedPartner_Finish){
+        if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"1"]) {
+            
+            [self showAlert:@"操作成功"];
+        }else{
+            
+            //  [self showAlert:@"操作失败"];
+            
+        }
+        
         
     }
     
@@ -578,7 +645,7 @@ static BOOL lastThree = NO;
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     switch (self.requestName) {
         case SelectedPartner_Delete:
-
+            
             [self.memberInfoTable reloadData];
             
             
@@ -591,6 +658,20 @@ static BOOL lastThree = NO;
             
             [self.memberInfoTable reloadData];
             break;
+            
+        case AddMemberUseIt:
+            //   [self.currentOperUser addObject:_memberData[_currentData1Index]];
+            self.memberCell.pauseBtn.hidden = NO;
+            self.memberCell.finishBtn.hidden = NO;
+            [self.memberInfoTable reloadData];
+            break;
+        case AddMemberConfirm:
+            //   [self.currentOperUser addObject:_memberData[_currentData1Index]];
+            self.memberCell.pauseBtn.hidden = NO;
+            self.memberCell.finishBtn.hidden = NO;
+            [self.memberInfoTable reloadData];
+            break;
+            
         default:
             break;
     }
@@ -601,8 +682,9 @@ static BOOL lastThree = NO;
     if (memberFinish && operatorsFinish) {
         [self.indicatorView stopAnimating];
         [self.view addSubview:self.menu];
-        [self.memberInfoTable reloadData];
         
+        
+        [self.memberInfoTable reloadData];
     }else{
         return ;
     }
@@ -615,8 +697,6 @@ static BOOL lastThree = NO;
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
     [alertCon addAction:action];
     [self presentViewController:alertCon animated:YES completion:nil];
-
-    
     
 }
 

@@ -70,13 +70,8 @@
     }else{
         [cell.taskView setHidden:YES];
     }
-    cell.block = ^NSString *(){
-        if (self.isElectrode) {
-            return Localized(@"electrode name");
-            
-        }else{
-            return Localized(@"part code");
-        }
+    cell.block = ^BOOL(){
+        return self.isElectrode;
     };
     cell.task = curTask;
     cell.cellDelegate = self;

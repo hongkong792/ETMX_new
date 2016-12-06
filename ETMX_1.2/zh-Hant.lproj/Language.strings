@@ -56,6 +56,7 @@
 "completed"             =               "已完成";
 "mold code"             =               "模具編號:";
 "part code"             =               "零件編號:";
+"electrode code"        =               "銅公編號:";
 "part name"             =               "零件名稱:";
 "electrode name"    =           "銅公名稱:";
 "status:"                        =               "狀態:";

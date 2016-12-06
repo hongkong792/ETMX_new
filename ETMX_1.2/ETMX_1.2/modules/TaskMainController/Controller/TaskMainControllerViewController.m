@@ -541,6 +541,7 @@ typedef enum : NSUInteger {
             }
             
         }
+            break;
         case taskExecutionDO:
         {
             if ([elementName isEqualToString:@"Task"]) {
@@ -562,6 +563,7 @@ typedef enum : NSUInteger {
                 }
             }
         }
+            break;
         case taskExecutionSC_noTask:
         {
             if ([elementName isEqualToString:@"Etmx"]) {
@@ -572,13 +574,14 @@ typedef enum : NSUInteger {
                 [self.sortTasks addObject:task];
             }
         }
+            break;
         case taskExecutionSC_withTask:
         {
             if ([elementName isEqualToString:@"Etmx"]) {
                 self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
         }
-            
+            break;
         default:
             break;
     }
@@ -598,43 +601,44 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionTS:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+//            [self.tableView.selectedTasks removeAllObjects];
+//            [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
             [self refreshBtns];
         }
             break;
         case taskExecutionTP:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+//            [self.tableView.selectedTasks removeAllObjects];
+//            [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
             [self refreshBtns];
         }
             break;
         case taskExecutionTF:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+//            [self.tableView.selectedTasks removeAllObjects];
+//            [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
             [self refreshBtns];
         }
             break;
         case taskExecutionDO:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+//            [self.tableView.selectedTasks removeAllObjects];
+//            [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
             [self refreshBtns];
         }
             break;
         case taskExecutionDF:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+//            [self.tableView.selectedTasks removeAllObjects];
+//            [self.tableView.selectedSections removeAllObjects];
             [self.tableView reloadData];
             [self refreshBtns];
         }
+            break;
         case taskExecutionSC_noTask:
         {
             [self.tableView.selectedTasks removeAllObjects];
@@ -642,6 +646,7 @@ typedef enum : NSUInteger {
             [self.tableView reloadData];
             [self refreshBtns];
         }
+            break;
         case taskExecutionSC_withTask:
         {
             [self.tableView.selectedTasks removeAllObjects];

@@ -43,11 +43,14 @@
     [super awakeFromNib];
     // Initialization code
     if (self.block) {
-        self.taskCodePlace.text = self.block();
+        if (self.block()) {
+            self.taskCodePlace.text = Localized(@"electrode code");
+            self.objectNamePlace.text = Localized(@"electrode name");
+        }
     }else{
         self.taskCodePlace.text = Localized(@"part code");
+        self.objectNamePlace.text =Localized(@"part name");
     }
-    self.objectNamePlace.text =Localized(@"part name");
     self.statusPlace.text = Localized(@"status");
     self.taskNamePlace.text = Localized(@"task name");
     self.status2Place.text = Localized(@"status");
@@ -85,12 +88,20 @@
     self.name.text = [task valueForKey:@"name"];
     self.state2.text = [task valueForKey:@"status"];
     self.operatorMsg.text = [task valueForKey:@"operatorMsg"];
-    self.machine.text = [task valueForKey:@"machine"];
+    self.machine.text = [task valueForKey:@"machineMsg"];
     self.actualStartDate.text = [task valueForKey:@"actualStartDate"];
     self.actualEndDate.text = [task valueForKey: @"actualEndDate"];
     self.usedWorkHour.text = [task valueForKey:@"usedWorkHour"];
     self.actualWorkHour.text = [task valueForKey:@"actualWorkHour"];
-    self.objectNamePlace.text = self.block();
+    if (self.block) {
+        if (self.block()) {
+            self.taskCodePlace.text = Localized(@"electrode code");
+            self.objectNamePlace.text = Localized(@"electrode name");
+        }
+    }else{
+        self.taskCodePlace.text = Localized(@"part code");
+        self.objectNamePlace.text =Localized(@"part name");
+    }
 }
 
 @end

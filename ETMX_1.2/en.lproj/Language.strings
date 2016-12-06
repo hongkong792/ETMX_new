@@ -53,6 +53,7 @@
 "completed"             =               "completed";
 "mold code"             =               "mold code:";
 "part code"             =               "part code:";
+"electrode code"        =               "electrode code:";
 "part name"             =               "part name:";
 "electrode name"    =           "electrode name:";
 "status:"                        =               "status:";

@@ -177,6 +177,7 @@ typedef enum : NSUInteger {
 }
 
 -(void)showNetTip{
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
 }
@@ -189,9 +190,7 @@ typedef enum : NSUInteger {
         [self.showMembersBtn setTitle:str forState:UIControlStateHighlighted];
         
     }
-    
-    
-    [self.pop dismissPopoverAnimated:YES];
+ 
 }
 
 @end

@@ -360,6 +360,7 @@
                         if (codeObj.stringValue != nil) {
 //                             TaskMainControllerViewController *taskMainVC = [[TaskMainControllerViewController alloc] initWithNibName:@"TaskMainControllerViewController" bundle:nil];
 //                            [self.navigationController pushViewController:taskMainVC animated:YES];
+                            [self dismissViewControllerAnimated:YES completion:nil];
                             [self.delegate scanController:self didScanResult:codeObj.stringValue isTwoDCode:[codeObj.type isEqualToString:AVMetadataObjectTypeQRCode]];
                         }
                         

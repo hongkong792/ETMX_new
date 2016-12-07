@@ -76,14 +76,14 @@ static BOOL lastThree = NO;
     [super viewDidLoad];
     
     self.currentOperUser = [NSMutableArray array];
-    for (int i=0; i<20; i++) {
-        UserAccount * user = [[UserAccount alloc] init];
-        user.id = [NSString stringWithFormat:@"id_%d",i];
-        user.name = [NSString stringWithFormat:@"name_%d",i];
-        user.fullName =  [NSString stringWithFormat:@"fullName_%d",i];
-        user.userType = [NSString stringWithFormat:@"usertype_%d",i];
-        [self.currentOperUser addObject:SAFE_FORMAT_STRING(user)];
-    }
+//    for (int i=0; i<20; i++) {
+//        UserAccount * user = [[UserAccount alloc] init];
+//        user.id = [NSString stringWithFormat:@"id_%d",i];
+//        user.name = [NSString stringWithFormat:@"name_%d",i];
+//        user.fullName =  [NSString stringWithFormat:@"fullName_%d",i];
+//        user.userType = [NSString stringWithFormat:@"usertype_%d",i];
+//        [self.currentOperUser addObject:SAFE_FORMAT_STRING(user)];
+//    }
     
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
@@ -172,11 +172,17 @@ static BOOL lastThree = NO;
 - (IBAction)addMember:(id)sender {
     //只用于页面
     
-    self.memberCell.deleteBtn.hidden = NO;
-    self.memberCell.pauseBtn.hidden = YES;
-    self.memberCell.finishBtn.hidden = YES;
+//    self.memberCell.deleteBtn.hidden = NO;
+//    self.memberCell.pauseBtn.hidden = YES;
+//    self.memberCell.finishBtn.hidden = YES;
     NSDictionary * dic = [UserManager instance].dic;
     UserAccount * user =_memberData[_currentData1Index];
+    if ([self.currentOperUser containsObject:user]) {
+       [self showAlert:@"不能重复添加"];
+        return;
+    }
+    
+    user.userType = @"任務參與者";
     if (user.id.length >0) {
         [self.currentOperUser addObject:user];
     }else{
@@ -277,7 +283,8 @@ static BOOL lastThree = NO;
     }else if (tableView == self.memberInfoTable){
         
         NSLog(@"indexpath:%ld,%ld",(long)indexPath.section,(long)indexPath.row);
-        MemberTableViewCell * memberCell = [tableView dequeueReusableCellWithIdentifier:MEMBER forIndexPath:indexPath];
+       MemberTableViewCell * memberCell = [tableView dequeueReusableCellWithIdentifier:MEMBER forIndexPath:indexPath];
+     //   MemberTableViewCell * memberCell = [[NSBundle mainBundle] loadNibNamed:@"MemberTableViewCell" owner:self options:nil];
         self.memberCell = memberCell;
         memberCell.deleteBtn.hidden = NO;
         memberCell.pauseBtn.hidden = NO;
@@ -290,11 +297,11 @@ static BOOL lastThree = NO;
                 break;
             }
         }
-       [self.currentOperUser removeObjectAtIndex:taskStartMan];
-        if (_tempUser.id == nil) {
-            _tempUser = [[UserAccount alloc] init];
+        if (_tempUser.id != nil) {
+            [self.currentOperUser removeObjectAtIndex:taskStartMan];
+            [self.currentOperUser insertObject:_tempUser atIndex:0];
+            
         }
-       [self.currentOperUser insertObject:_tempUser atIndex:0];
         NSArray *subviews = [[NSArray alloc] initWithArray:memberCell.contentView.subviews];
         for (UILabel *subview in subviews) {
             if ([subview isKindOfClass:[UILabel class]]) {
@@ -647,11 +654,13 @@ static BOOL lastThree = NO;
         case SelectedPartner_Delete:
             
             [self.memberInfoTable reloadData];
+            break;
             
             
         case SelectedPartner_Finish:
             
             [self.memberInfoTable reloadData];
+            break;
             
             
         case SelectedPartner_Pause:

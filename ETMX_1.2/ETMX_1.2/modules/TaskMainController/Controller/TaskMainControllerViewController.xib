@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,18 +30,15 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TDB-OQ-YEB" customClass="TaskContentTableView">
-                    <rect key="frame" x="0.0" y="145" width="768" height="679"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4E-db-O3F" userLabel="headerView">
-                    <rect key="frame" x="0.0" y="15" width="768" height="130"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BqQ-bx-arr" userLabel="typeSegment" customClass="CustomSegmentController">
-                            <rect key="frame" x="0.0" y="15" width="461" height="41"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="3cg-kG-muD"/>
                             </constraints>
@@ -55,7 +49,6 @@
                             </segments>
                         </segmentedControl>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="l4y-ro-VPG" customClass="CustomSegmentController">
-                            <rect key="frame" x="0.0" y="75" width="615" height="41"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="JKW-08-OK9"/>
                             </constraints>
@@ -67,7 +60,6 @@
                             </segments>
                         </segmentedControl>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9k-9j-oDb" customClass="CustomBtn">
-                            <rect key="frame" x="614" y="15" width="153" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="aLq-E4-KsV"/>
                             </constraints>
@@ -94,13 +86,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxM-zi-His" userLabel="footerView">
-                    <rect key="frame" x="0.0" y="824" width="768" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFN-wf-OO6" userLabel="operaterView">
-                            <rect key="frame" x="0.0" y="100" width="768" height="100"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBE-vH-Rz8" customClass="CustomeBtn2">
-                                    <rect key="frame" x="364.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="d8Z-95-m1U"/>
@@ -114,7 +103,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWM-Oe-ear" customClass="CustomeBtn2">
-                                    <rect key="frame" x="274.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="完成" image="finish">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -124,7 +112,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiG-dt-dzQ" customClass="CustomeBtn2">
-                                    <rect key="frame" x="184.5" y="20.5" width="40" height="60"/>
                                     <state key="normal" title="暂停" image="pause">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -133,7 +120,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPT-Qg-gWq" customClass="CustomeBtn2">
-                                    <rect key="frame" x="94.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="启动" image="start">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -143,7 +129,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTv-d6-D6X" customClass="CustomeBtn2">
-                                    <rect key="frame" x="454.5" y="21" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="上班" image="on_duty">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -153,7 +138,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-UP-Pj9" customClass="CustomeBtn2">
-                                    <rect key="frame" x="544.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="下班" image="off_duty">
                                         <color key="titleColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
@@ -163,7 +147,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okj-t4-6eb" customClass="CustomeBtn2">
-                                    <rect key="frame" x="634.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="替换" image="replace">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,10 +188,8 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7l-Hv-s9a">
-                            <rect key="frame" x="0.0" y="0.0" width="768" height="100"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHl-If-T84" customClass="CustomBtn">
-                                    <rect key="frame" x="44" y="35" width="35" height="30"/>
                                     <color key="backgroundColor" red="0.89411764705882357" green="0.89411764705882357" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="全选 ">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -218,7 +199,6 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phF-ZB-LKW" customClass="CustomBtn">
-                                    <rect key="frame" x="99" y="35" width="31" height="30"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="取消">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -250,7 +230,6 @@
                     </constraints>
                 </view>
                 <activityIndicatorView opaque="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fDK-RV-Z16">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
             </subviews>

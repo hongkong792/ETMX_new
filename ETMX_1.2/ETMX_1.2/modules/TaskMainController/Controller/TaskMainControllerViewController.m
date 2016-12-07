@@ -590,17 +590,26 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_noTask:
         {
+         
             if ([elementName isEqualToString:@"Etmx"]) {
                 self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
             if ([elementName isEqualToString:@"Task"]) {
-                ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
-                [self.sortTasks addObject:task];
+                if(attributeDict.count > 2){
+                    ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
+                    if (task != nil) {
+                        [self.sortTasks addObject:task];
+                    }
+                    
+                }
+                
+
             }
         }
             break;
         case taskExecutionSC_withTask:
         {
+         
             if ([elementName isEqualToString:@"Etmx"]) {
                 self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
@@ -710,7 +719,6 @@ typedef enum : NSUInteger {
         [self refresh:nil];
       
     }
-  
 
 }
 
@@ -724,18 +732,21 @@ typedef enum : NSUInteger {
     if (self.currentTask == nil) {//不勾选任务扫描
         self.netRequesetName = taskExecutionSC_noTask;
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-        
 //        Status 状态为released|inwork|stopped|completed
 //        released=未开始
 //        inwork=正在工作
 //        stopped=暂停
 //        completed=完成
-        NSArray *parameters = @[userCode,result,@"inwork"];
+        NSArray *parameters = @[@"inwork",userCode,result,@""];
         NSString *methodName = @"getScanTasks";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
+            [self.sortTasks removeAllObjects];
             [parser parse];
+             [self creatTableView];
+            [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
              NSLog(@"scanDrror:%@",error);
             [self showNetTip];
@@ -743,21 +754,26 @@ typedef enum : NSUInteger {
     }else{
         self.netRequesetName = taskExecutionSC_withTask;
         NSArray *tasks = self.tableView.selectedTasks;
+      
         NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
         NSArray *parameters = @[tasksStr,result];
         NSString *methodName = @"scanOperatorOrEquipment";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
+            [self.sortTasks removeAllObjects];
             [parser parse];
+            [self creatTableView];
+            [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
             NSLog(@"scanDrror:%@",error);
             [self showNetTip];
         }];
         
     }
-
-    
+ 
+  
 }
 
 

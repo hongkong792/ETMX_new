@@ -67,13 +67,13 @@
 "actual work hour"        =             "actual work hour";
 "selecte all"                        =               "selecte all";
 "cancel selected"            =               "cancel selected";
-"start"                                 =                   "start";
-"stop"                          =                       "stop";
-"finish"                        =                       "finish";
-"scanf"                         =                       "scanf";
-"work start"                =                       "work start";
-"work end"                     =                    "work end";
-"exchange"                  =                       "exchange";
+"start"                                 =                   "TS";
+"stop"                          =                       "TP";
+"finish"                        =                       "TF";
+"scanf"                         =                       "SC";
+"work start"                =                       "DO";
+"work end"                     =                    "DF";
+"exchange"                  =                       "EX";
 "please check the net"          =                   "please check the net";
 //end  任务界面
 

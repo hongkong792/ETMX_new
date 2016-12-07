@@ -255,6 +255,30 @@ typedef enum : NSUInteger {
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),[self.allTaskState valueForKey:@"completed"]] forSegmentAtIndex:3];
     [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),self.tableView.selectedTasks.count] forState:UIControlStateNormal];
     [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),self.tableView.selectedTasks.count] forState:UIControlStateHighlighted];
+    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
+    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
+    
+    
+    [self.startBtn setTitle:Localized(@"start") forState:UIControlStateNormal];
+    [self.startBtn setTitle:Localized(@"start") forState:UIControlStateHighlighted];
+    
+    [self.stopBtn setTitle:Localized(@"stop") forState:UIControlStateNormal];
+    [self.stopBtn setTitle:Localized(@"stop") forState:UIControlStateHighlighted];
+    
+    [self.finishBtn setTitle:Localized(@"finish") forState:UIControlStateNormal];
+    [self.finishBtn setTitle:Localized(@"finish") forState:UIControlStateHighlighted];
+    
+    [self.scanBtn setTitle:Localized(@"scanf") forState:UIControlStateNormal];
+    [self.scanBtn setTitle:Localized(@"scanf") forState:UIControlStateHighlighted];
+    
+    [self.workBtn setTitle:Localized(@"work start") forState:UIControlStateNormal];
+    [self.workBtn setTitle:Localized(@"work start") forState:UIControlStateHighlighted];
+    
+    [self.workOffBtn setTitle:Localized(@"work end") forState:UIControlStateNormal];
+    [self.workOffBtn setTitle:Localized(@"work end") forState:UIControlStateHighlighted];
+    
+    [self.exchangeBtn setTitle:Localized(@"exchange") forState:UIControlStateNormal];
+    [self.exchangeBtn setTitle:Localized(@"exchange") forState:UIControlStateHighlighted];
 }
 
 //按照segment的选择排列任务，即设置sortTasks

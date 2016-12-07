@@ -100,8 +100,12 @@
                             <rect key="frame" x="0.0" y="100" width="768" height="100"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBE-vH-Rz8" customClass="CustomeBtn2">
-                                    <rect key="frame" x="350" y="31.5" width="69" height="38"/>
+                                    <rect key="frame" x="364.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="d8Z-95-m1U"/>
+                                        <constraint firstAttribute="width" constant="40" id="u81-aQ-lnQ"/>
+                                    </constraints>
                                     <state key="normal" title="扫描" image="scan">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -110,7 +114,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWM-Oe-ear" customClass="CustomeBtn2">
-                                    <rect key="frame" x="246" y="31.5" width="69" height="38"/>
+                                    <rect key="frame" x="274.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="完成" image="finish">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -120,7 +124,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiG-dt-dzQ" customClass="CustomeBtn2">
-                                    <rect key="frame" x="142" y="31.5" width="69" height="38"/>
+                                    <rect key="frame" x="184.5" y="20.5" width="40" height="60"/>
                                     <state key="normal" title="暂停" image="pause">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -129,7 +133,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPT-Qg-gWq" customClass="CustomeBtn2">
-                                    <rect key="frame" x="38" y="31.5" width="69" height="38"/>
+                                    <rect key="frame" x="94.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="启动" image="start">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -139,7 +143,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTv-d6-D6X" customClass="CustomeBtn2">
-                                    <rect key="frame" x="454" y="32" width="69" height="38"/>
+                                    <rect key="frame" x="454.5" y="21" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="上班" image="on_duty">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -149,7 +153,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-UP-Pj9" customClass="CustomeBtn2">
-                                    <rect key="frame" x="558" y="31.5" width="69" height="38"/>
+                                    <rect key="frame" x="544.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="下班" image="off_duty">
                                         <color key="titleColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
@@ -159,7 +163,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okj-t4-6eb" customClass="CustomeBtn2">
-                                    <rect key="frame" x="662" y="31.5" width="69" height="38"/>
+                                    <rect key="frame" x="634.5" y="20.5" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="替换" image="replace">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -172,28 +176,28 @@
                             <color key="backgroundColor" red="0.93725490196078431" green="0.95686274509803926" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="EBE-vH-Rz8" firstAttribute="centerY" secondItem="LFN-wf-OO6" secondAttribute="centerY" id="2cb-gR-YgQ"/>
-                                <constraint firstItem="eTv-d6-D6X" firstAttribute="leading" secondItem="EBE-vH-Rz8" secondAttribute="trailing" constant="35" id="3ZY-Ko-6f5"/>
-                                <constraint firstItem="okj-t4-6eb" firstAttribute="leading" secondItem="5aG-UP-Pj9" secondAttribute="trailing" constant="35" id="6hS-8m-zHI"/>
-                                <constraint firstItem="QiG-dt-dzQ" firstAttribute="leading" secondItem="vPT-Qg-gWq" secondAttribute="trailing" constant="35" id="6yY-uN-NLQ"/>
+                                <constraint firstItem="eTv-d6-D6X" firstAttribute="leading" secondItem="EBE-vH-Rz8" secondAttribute="trailing" constant="50" id="3ZY-Ko-6f5"/>
+                                <constraint firstItem="okj-t4-6eb" firstAttribute="leading" secondItem="5aG-UP-Pj9" secondAttribute="trailing" constant="50" id="6hS-8m-zHI"/>
+                                <constraint firstItem="QiG-dt-dzQ" firstAttribute="leading" secondItem="vPT-Qg-gWq" secondAttribute="trailing" constant="50" id="6yY-uN-NLQ"/>
                                 <constraint firstItem="5aG-UP-Pj9" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="Amd-k4-QOy"/>
                                 <constraint firstItem="QiG-dt-dzQ" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="HKm-Kg-qgi"/>
                                 <constraint firstItem="pWM-Oe-ear" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="Ibo-cx-Q6w"/>
                                 <constraint firstItem="eTv-d6-D6X" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="JHy-Ra-sI2"/>
                                 <constraint firstItem="QiG-dt-dzQ" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="LjT-6V-STq"/>
                                 <constraint firstItem="eTv-d6-D6X" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="M5w-wJ-Uh3"/>
-                                <constraint firstItem="5aG-UP-Pj9" firstAttribute="leading" secondItem="eTv-d6-D6X" secondAttribute="trailing" constant="35" id="N4F-t0-LrU"/>
+                                <constraint firstItem="5aG-UP-Pj9" firstAttribute="leading" secondItem="eTv-d6-D6X" secondAttribute="trailing" constant="50" id="N4F-t0-LrU"/>
                                 <constraint firstItem="okj-t4-6eb" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="NLs-8k-d9u"/>
                                 <constraint firstItem="vPT-Qg-gWq" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="Qvq-iA-BSh"/>
                                 <constraint firstItem="vPT-Qg-gWq" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="UuH-n2-QgV"/>
                                 <constraint firstItem="okj-t4-6eb" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="VQk-N1-iKV"/>
                                 <constraint firstItem="pWM-Oe-ear" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="Wta-ma-9e7"/>
                                 <constraint firstItem="5aG-UP-Pj9" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="Y9l-Oo-aRt"/>
-                                <constraint firstItem="EBE-vH-Rz8" firstAttribute="leading" secondItem="pWM-Oe-ear" secondAttribute="trailing" constant="35" id="cQa-Bz-lGN"/>
+                                <constraint firstItem="EBE-vH-Rz8" firstAttribute="leading" secondItem="pWM-Oe-ear" secondAttribute="trailing" constant="50" id="cQa-Bz-lGN"/>
                                 <constraint firstItem="QiG-dt-dzQ" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="cf5-2b-A62"/>
                                 <constraint firstItem="eTv-d6-D6X" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="h5I-ck-RGR"/>
                                 <constraint firstItem="pWM-Oe-ear" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="ic1-Hn-wjb"/>
                                 <constraint firstAttribute="height" constant="100" id="jVS-9l-pgC"/>
-                                <constraint firstItem="pWM-Oe-ear" firstAttribute="leading" secondItem="QiG-dt-dzQ" secondAttribute="trailing" constant="35" id="mMj-I3-GnP"/>
+                                <constraint firstItem="pWM-Oe-ear" firstAttribute="leading" secondItem="QiG-dt-dzQ" secondAttribute="trailing" constant="50" id="mMj-I3-GnP"/>
                                 <constraint firstItem="okj-t4-6eb" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="niz-ML-rLh"/>
                                 <constraint firstItem="5aG-UP-Pj9" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="uCf-pa-4tM"/>
                                 <constraint firstItem="vPT-Qg-gWq" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="uwL-Sy-lKs"/>

@@ -77,10 +77,10 @@
                         </constraints>
                     </view>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="tmT-l9-0Mv">
-                        <rect key="frame" x="4" y="7.5" width="30" height="30"/>
+                        <rect key="frame" x="9" y="10" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="o0Q-oo-Sr7"/>
-                            <constraint firstAttribute="width" constant="30" id="xCc-5B-feI"/>
+                            <constraint firstAttribute="height" constant="25" id="o0Q-oo-Sr7"/>
+                            <constraint firstAttribute="width" constant="25" id="xCc-5B-feI"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1m-CI-688">
@@ -192,10 +192,10 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="xhB-RG-idQ">
-                                <rect key="frame" x="2" y="6.5" width="30" height="30"/>
+                                <rect key="frame" x="7" y="9" width="25" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="QX2-Fy-7gc"/>
-                                    <constraint firstAttribute="width" constant="30" id="l0z-hb-g80"/>
+                                    <constraint firstAttribute="height" constant="25" id="QX2-Fy-7gc"/>
+                                    <constraint firstAttribute="width" constant="25" id="l0z-hb-g80"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CKn-cU-fDs" userLabel="实际完成">

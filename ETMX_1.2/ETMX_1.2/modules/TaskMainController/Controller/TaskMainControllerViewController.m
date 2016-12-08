@@ -124,6 +124,7 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
+@property (nonatomic,assign)BOOL flag;
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
 @end
 
@@ -131,7 +132,6 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self creatTableView];
     __block typeof(self) weakSelf = self;
     self.tableView.block = ^(){
         __strong typeof(self) strong = weakSelf;
@@ -331,7 +331,6 @@ typedef enum : NSUInteger {
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
     
-
     if (self.currentTask == nil) {
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -372,11 +371,13 @@ typedef enum : NSUInteger {
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TS",userCode,tasksStr];
     NSString *methodName = @"taskExecution";
+    [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
 }
@@ -390,35 +391,37 @@ typedef enum : NSUInteger {
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TP",userCode,tasksStr];
     NSString *methodName = @"taskExecution";
+    [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
 }
 //完成
 - (IBAction)finishTask:(id)sender {
-    self.netRequesetName = taskExecutionTP;
+    self.netRequesetName = taskExecutionTF;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = self.tableView.selectedTasks;
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TF",userCode,tasksStr];
     NSString *methodName = @"taskExecution";
+    [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
 }
 //扫描
 - (IBAction)scanTask:(id)sender {
-    
-
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
@@ -434,11 +437,13 @@ typedef enum : NSUInteger {
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"DO",userCode,tasksStr];
     NSString *methodName = @"taskExecution";
+    [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
     
@@ -453,11 +458,13 @@ typedef enum : NSUInteger {
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"DF",userCode,tasksStr];
     NSString *methodName = @"taskExecution";
+    [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
     } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
 }
@@ -534,6 +541,12 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionTS:{
             if ([elementName isEqualToString:@"Task"]) {
+                NSString *flag = [attributeDict valueForKey:@"flag"];
+                if ([flag isEqualToString:@"0"]) {
+                    self.flag = NO;
+                }else{
+                    self.flag = YES;
+                }
                 NSString *message = [attributeDict valueForKey:@"message"];
                 if (message && message.length>0) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -545,6 +558,12 @@ typedef enum : NSUInteger {
         case taskExecutionTP:
         {
             if ([elementName isEqualToString:@"Task"]) {
+                NSString *flag = [attributeDict valueForKey:@"flag"];
+                if ([flag isEqualToString:@"0"]) {
+                    self.flag = NO;
+                }else{
+                    self.flag = YES;
+                }
                 NSString *message = [attributeDict valueForKey:@"message"];
                 if (message && message.length>0) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -557,6 +576,12 @@ typedef enum : NSUInteger {
         case taskExecutionTF:
         {
             if ([elementName isEqualToString:@"Task"]) {
+                NSString *flag = [attributeDict valueForKey:@"flag"];
+                if ([flag isEqualToString:@"0"]) {
+                    self.flag = NO;
+                }else{
+                    self.flag = YES;
+                }
                 NSString *message = [attributeDict valueForKey:@"message"];
                 if (message && message.length>0) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -569,6 +594,12 @@ typedef enum : NSUInteger {
         case taskExecutionDO:
         {
             if ([elementName isEqualToString:@"Task"]) {
+                NSString *flag = [attributeDict valueForKey:@"flag"];
+                if ([flag isEqualToString:@"0"]) {
+                    self.flag = NO;
+                }else{
+                    self.flag = YES;
+                }
                 NSString *message = [attributeDict valueForKey:@"message"];
                 if (message && message.length>0) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -580,6 +611,12 @@ typedef enum : NSUInteger {
         case taskExecutionDF:
         {
             if ([elementName isEqualToString:@"Task"]) {
+                NSString *flag = [attributeDict valueForKey:@"flag"];
+                if ([flag isEqualToString:@"0"]) {
+                    self.flag = NO;
+                }else{
+                    self.flag = YES;
+                }
                 NSString *message = [attributeDict valueForKey:@"message"];
                 if (message && message.length>0) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -634,42 +671,63 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionTS:
         {
-//            [self.tableView.selectedTasks removeAllObjects];
-//            [self.tableView.selectedSections removeAllObjects];
-            [self.tableView reloadData];
-            [self refreshBtns];
+            if (self.flag) {
+                self.stateSegment.selectedSegmentIndex = 1;
+                self.taskState = WTaskStateInwork;
+                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            }else{
+                [self.tableView reloadData];
+                [self refreshBtns];
+                [self.indicatorView stopAnimating];
+            }
         }
             break;
         case taskExecutionTP:
         {
-//            [self.tableView.selectedTasks removeAllObjects];
-//            [self.tableView.selectedSections removeAllObjects];
-            [self.tableView reloadData];
-            [self refreshBtns];
+            if (self.flag) {
+                self.stateSegment.selectedSegmentIndex = 2;
+                self.taskState = WTaskStateStopped;
+                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            }else{
+                [self.tableView reloadData];
+                [self refreshBtns];
+                [self.indicatorView stopAnimating];
+            }
         }
             break;
         case taskExecutionTF:
         {
-//            [self.tableView.selectedTasks removeAllObjects];
-//            [self.tableView.selectedSections removeAllObjects];
-            [self.tableView reloadData];
-            [self refreshBtns];
+            if (self.flag) {
+                self.stateSegment.selectedSegmentIndex = 4;
+                self.taskState = WTaskStateCompleted;
+                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            }else{
+                [self.tableView reloadData];
+                [self refreshBtns];
+                [self.indicatorView stopAnimating];
+            }
         }
             break;
         case taskExecutionDO:
         {
-//            [self.tableView.selectedTasks removeAllObjects];
-//            [self.tableView.selectedSections removeAllObjects];
-            [self.tableView reloadData];
-            [self refreshBtns];
+            if (self.flag) {
+                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            }else{
+                [self.tableView reloadData];
+                [self refreshBtns];
+                [self.indicatorView stopAnimating];
+            }
         }
             break;
         case taskExecutionDF:
         {
-//            [self.tableView.selectedTasks removeAllObjects];
-//            [self.tableView.selectedSections removeAllObjects];
-            [self.tableView reloadData];
-            [self refreshBtns];
+            if (self.flag) {
+                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            }else{
+                [self.tableView reloadData];
+                [self refreshBtns];
+                [self.indicatorView stopAnimating];
+            }
         }
             break;
         case taskExecutionSC_noTask:

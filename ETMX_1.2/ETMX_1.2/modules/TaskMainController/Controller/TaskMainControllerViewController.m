@@ -754,8 +754,8 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_noTask:
         {
-
-            [self.tableView reloadData];
+            
+            [self.tableView reloadDataWithSortTasks:self.sortTasks];
             [self refreshBtns];
             [self.indicatorView stopAnimating];
         }
@@ -763,7 +763,7 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
 
-            [self.tableView reloadData];
+            [self.tableView reloadDataWithSortTasks:self.sortTasks];
             [self refreshBtns];
             [self.indicatorView stopAnimating];
         }

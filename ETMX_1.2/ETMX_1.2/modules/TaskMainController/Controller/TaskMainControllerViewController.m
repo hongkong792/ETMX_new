@@ -50,7 +50,7 @@ typedef enum : NSUInteger {
 
 
 
-@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate,QRCodeScanDelegate>
+@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate,QRCodeScanDelegate,UIPopoverControllerDelegate>
 //xib中的控件
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *footerView;
@@ -125,6 +125,8 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @property (nonatomic,assign)BOOL flag;
+@property (nonatomic,strong) UIView *maskView;
+
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
 @end
 
@@ -143,6 +145,11 @@ typedef enum : NSUInteger {
     [self setup];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
     [[CurrentTask sharedManager] setCurrentTask:self.currentTask];
+    self.maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.maskView.backgroundColor = [UIColor blackColor];
+    self.maskView.alpha =0.5;
+    [self.maskView setHidden:YES];
+    [self.view addSubview:self.maskView];
 }
 
 #pragma mark -- commen
@@ -472,11 +479,18 @@ typedef enum : NSUInteger {
 - (IBAction)exchange:(id)sender {
     ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
     exchangOpVC.selecedTasks = self.tableView.selectedTasks;
+    __weak typeof(self) weakSelf = self;
+    exchangOpVC.block = ^(){
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf.maskView setHidden:YES];
+    };
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
+    
     CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;
     CGFloat height = [UIScreen mainScreen].bounds.size.height*0.75;
     popover.popoverContentSize =CGSizeMake(width, height);
     [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self.maskView setHidden:NO];
 }
 
 - (IBAction)selecteAll:(id)sender {
@@ -833,6 +847,5 @@ typedef enum : NSUInteger {
  
   
 }
-
 
 @end

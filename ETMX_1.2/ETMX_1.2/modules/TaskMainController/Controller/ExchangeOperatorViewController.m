@@ -35,6 +35,13 @@ typedef enum : NSUInteger {
     // Do any additional setup after loading the view from its nib.
     [self initSubViews];
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (self.block) {
+        self.block();
+    }
+}
+
 -(void)initSubViews{
     [self.submitBtn setTitle:Localized(@"submit") forState:UIControlStateNormal];
     [self.submitBtn setTitle:Localized(@"submit") forState:UIControlStateHighlighted];

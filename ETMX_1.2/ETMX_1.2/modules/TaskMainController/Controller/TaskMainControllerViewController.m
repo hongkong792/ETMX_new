@@ -754,18 +754,18 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_noTask:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+
             [self.tableView reloadData];
             [self refreshBtns];
+            [self.indicatorView stopAnimating];
         }
             break;
         case taskExecutionSC_withTask:
         {
-            [self.tableView.selectedTasks removeAllObjects];
-            [self.tableView.selectedSections removeAllObjects];
+
             [self.tableView reloadData];
             [self refreshBtns];
+            [self.indicatorView stopAnimating];
         }
             break;
         default:
@@ -828,7 +828,7 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-            [self creatTableView];
+          //  [self creatTableView];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
@@ -846,7 +846,7 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-            [self creatTableView];
+//            [self creatTableView];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];

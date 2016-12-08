@@ -117,8 +117,6 @@
         
     }
     
-    
-    
 }
 
 
@@ -251,8 +249,6 @@
         NSString * method = @"checkUserInfo";
         [loginCon loginWithReq:user withUrl:loginUrl method:method success:^(id data) {
         } failure:^(NSError *error) {
-            
-            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
             

@@ -363,10 +363,6 @@ typedef enum : NSUInteger {
         [self presentViewController:helpcon animated:YES completion:nil];
         
     }
-    
-    
-    
-    
 }
 
 //启动
@@ -483,6 +479,7 @@ typedef enum : NSUInteger {
     exchangOpVC.block = ^(){
         __strong typeof(self) strongSelf = weakSelf;
         [strongSelf.maskView setHidden:YES];
+        [strongSelf.view bringSubviewToFront:strongSelf.maskView];
     };
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
     
@@ -491,6 +488,7 @@ typedef enum : NSUInteger {
     popover.popoverContentSize =CGSizeMake(width, height);
     [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
     [self.maskView setHidden:NO];
+    [self.view bringSubviewToFront:self.maskView];
 }
 
 - (IBAction)selecteAll:(id)sender {
@@ -688,6 +686,8 @@ typedef enum : NSUInteger {
             if (self.flag) {
                 self.stateSegment.selectedSegmentIndex = 1;
                 self.taskState = WTaskStateInwork;
+                [self.tableView.selectedSections removeAllObjects];
+                [self.tableView.selectedTasks removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -701,6 +701,8 @@ typedef enum : NSUInteger {
             if (self.flag) {
                 self.stateSegment.selectedSegmentIndex = 2;
                 self.taskState = WTaskStateStopped;
+                [self.tableView.selectedSections removeAllObjects];
+                [self.tableView.selectedTasks removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -714,6 +716,8 @@ typedef enum : NSUInteger {
             if (self.flag) {
                 self.stateSegment.selectedSegmentIndex = 4;
                 self.taskState = WTaskStateCompleted;
+                [self.tableView.selectedSections removeAllObjects];
+                [self.tableView.selectedTasks removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -725,6 +729,8 @@ typedef enum : NSUInteger {
         case taskExecutionDO:
         {
             if (self.flag) {
+                [self.tableView.selectedSections removeAllObjects];
+                [self.tableView.selectedTasks removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -736,6 +742,8 @@ typedef enum : NSUInteger {
         case taskExecutionDF:
         {
             if (self.flag) {
+                [self.tableView.selectedSections removeAllObjects];
+                [self.tableView.selectedTasks removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];

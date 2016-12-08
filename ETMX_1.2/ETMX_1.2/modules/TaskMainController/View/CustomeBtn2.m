@@ -8,20 +8,15 @@
 
 #import "CustomeBtn2.h"
 
-#define ImageViewAndLabelMargin     10
 
 @implementation CustomeBtn2
-
 -(void)layoutSubviews{
-   [super layoutSubviews];
+    [super layoutSubviews];
     CGRect rect = self.frame;
-    CGRect tempImageViewRect = self.imageView.frame;
-    CGRect tempLabelRect = self.titleLabel.frame;
-    CGFloat width = tempImageViewRect.size.width>tempLabelRect.size.width?tempImageViewRect.size.width:tempLabelRect.size.width;
-    CGFloat height = tempLabelRect.size.height + tempImageViewRect.size.height;
-    self.frame = CGRectMake(rect.origin.x, rect.origin.y,width+5 , height +ImageViewAndLabelMargin);
+    self.frame = CGRectMake(rect.origin.x, rect.origin.y, 40, 60);
     self.imageView.frame = CGRectMake(0, 0, 32, 32);
-    self.titleLabel.frame = CGRectMake(0, 32, width+5,height - 32);
+    self.titleLabel.frame = CGRectMake(0, 32, 40, 60-32);
 }
+    
 
 @end

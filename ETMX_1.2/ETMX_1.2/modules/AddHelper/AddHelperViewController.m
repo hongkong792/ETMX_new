@@ -576,8 +576,7 @@ static BOOL lastThree = NO;
         [p parse];
         lastThree = YES;
     } failure:^(NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
+        [self showAlert:error.localizedDescription];
     }];
 }
 

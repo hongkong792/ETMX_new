@@ -17,13 +17,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
+    
     //网络监控
-    [[NSUserDefaults standardUserDefaults] setObject:@"61.144.177.123" forKey:ADRESSIP];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
+    if (obj == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"61.144.177.123:8085" forKey:ADRESSIP];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     [CheckNetWorkerTool sharedManager];
     // Override point for customization after application launch.
-      [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];
     if (![[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"]) {
         NSArray *languages = [NSLocale preferredLanguages];
         NSString *language = [languages objectAtIndex:0];
@@ -34,7 +37,6 @@
         }
     }
     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];
-    NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
     return YES;
 }
 

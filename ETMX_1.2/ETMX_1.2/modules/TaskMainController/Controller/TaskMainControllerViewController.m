@@ -366,7 +366,7 @@ typedef enum : NSUInteger {
     
     
     
-
+    
 }
 
 //启动
@@ -432,7 +432,7 @@ typedef enum : NSUInteger {
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
-
+    
     
 }
 //上班
@@ -641,7 +641,7 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_noTask:
         {
-         
+            
             if ([elementName isEqualToString:@"Etmx"]) {
                 self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
@@ -654,13 +654,13 @@ typedef enum : NSUInteger {
                     
                 }
                 
-
+                
             }
         }
             break;
         case taskExecutionSC_withTask:
         {
-         
+            
             if ([elementName isEqualToString:@"Etmx"]) {
                 self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
@@ -787,11 +787,11 @@ typedef enum : NSUInteger {
 - (void)userNameOnSelected:(NSString *)userCode;
 {
     if (userCode != nil) {
-          //刷新主界面
+        //刷新主界面
         [self refresh:nil];
-      
+        
     }
-
+    
 }
 
 
@@ -806,12 +806,12 @@ typedef enum : NSUInteger {
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
         
         
-      
-//        Status 状态为released|inwork|stopped|completed
-//        released=未开始
-//        inwork=正在工作
-//        stopped=暂停
-//        completed=完成
+        
+        //        Status 状态为released|inwork|stopped|completed
+        //        released=未开始
+        //        inwork=正在工作
+        //        stopped=暂停
+        //        completed=完成
         NSArray *parameters = @[self.taskState,userCode,result,@"",self.taskType];
         NSString *methodName = @"getScanTasks2";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
@@ -820,16 +820,15 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-             [self creatTableView];
+            [self creatTableView];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
-             NSLog(@"scanDrror:%@",error);
-            [self showNetTip];
-        }];        
+            [self showAlert:error.localizedDescription];
+        }];
     }else{
         self.netRequesetName = taskExecutionSC_withTask;
         NSArray *tasks = self.tableView.selectedTasks;
-      
+        
         NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
         NSArray *parameters = @[result,tasksStr];
         NSString *methodName = @"scanOperatorOrEquipment";
@@ -842,13 +841,22 @@ typedef enum : NSUInteger {
             [self creatTableView];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
-            NSLog(@"scanDrror:%@",error);
-            [self showNetTip];
+            [self showAlert:error.localizedDescription];
         }];
         
     }
- 
-  
+    
+    
+}
+
+
+- (void)showAlert:(NSString *)tips
+{
+    UIAlertController * alertCon = [UIAlertController alertControllerWithTitle:tips message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
+    [alertCon addAction:action];
+    [self presentViewController:alertCon animated:YES completion:nil];
+    
 }
 
 @end

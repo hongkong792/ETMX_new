@@ -20,10 +20,11 @@
     
     //网络监控
     NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
-    if (obj == nil) {
+    if (obj.length > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:@"61.144.177.123:8085" forKey:ADRESSIP];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
     [CheckNetWorkerTool sharedManager];
     // Override point for customization after application launch.
     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];

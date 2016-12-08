@@ -804,13 +804,16 @@ typedef enum : NSUInteger {
     if (self.currentTask == nil) {//不勾选任务扫描
         self.netRequesetName = taskExecutionSC_noTask;
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+        
+        
+      
 //        Status 状态为released|inwork|stopped|completed
 //        released=未开始
 //        inwork=正在工作
 //        stopped=暂停
 //        completed=完成
-        NSArray *parameters = @[@"inwork",userCode,result,@""];
-        NSString *methodName = @"getScanTasks";
+        NSArray *parameters = @[self.taskState,userCode,result,@"",self.taskType];
+        NSString *methodName = @"getScanTasks2";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
             NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
@@ -828,7 +831,7 @@ typedef enum : NSUInteger {
         NSArray *tasks = self.tableView.selectedTasks;
       
         NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
-        NSArray *parameters = @[tasksStr,result];
+        NSArray *parameters = @[result,tasksStr];
         NSString *methodName = @"scanOperatorOrEquipment";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

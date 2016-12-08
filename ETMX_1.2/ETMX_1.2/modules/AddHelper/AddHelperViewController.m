@@ -183,19 +183,24 @@ static BOOL lastThree = NO;
     }
     
     user.userType = @"任務參與者";
-    if (user.id.length >0) {
-        [self.currentOperUser addObject:user];
+    if (user.id.length >0 ) {
+        if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
+            [self showAlert:@"不能添加自己"];
+            
+            //[self dismissViewControllerAnimated:YES completion:nil];
+            return;
+        }else{
+            
+            [self.currentOperUser addObject:user];
+        }
+        
+        
     }else{
         [self showAlert:@"请选择组员"];
-        [self dismissViewControllerAnimated:YES completion:nil];
+       // [self dismissViewControllerAnimated:YES completion:nil];
         return;
     }
-    if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
-        [self showAlert:@"不能添加自己"];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return;
-    }
-    
+
     [self.memberInfoTable reloadData];
 }
 

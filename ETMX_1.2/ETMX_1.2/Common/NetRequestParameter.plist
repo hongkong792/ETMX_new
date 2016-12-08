@@ -9,7 +9,7 @@
 		<key>node</key>
 		<string>ns1:joinInTaskResponse</string>
 	</dict>
-	<key>getScanTasks</key>
+	<key>getScanTasks2</key>
 	<dict>
 		<key>URI</key>
 		<string>/ETMX/services/TaskScanExecution</string>

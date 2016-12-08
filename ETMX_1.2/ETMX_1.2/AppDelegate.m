@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     //网络监控
-    [[NSUserDefaults standardUserDefaults] setObject:@"61.141.191.12" forKey:ADRESSIP];
+    [[NSUserDefaults standardUserDefaults] setObject:@"61.144.177.123" forKey:ADRESSIP];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [CheckNetWorkerTool sharedManager];
     // Override point for customization after application launch.

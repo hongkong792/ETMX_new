@@ -64,7 +64,7 @@
 //获得服务器url不包括uri部分
 +(NSString *)getServiceURL{
     NSString *ipStr = [[NSUserDefaults standardUserDefaults] valueForKey:ADRESSIP];
-    NSString *serviceURL = [NSString stringWithFormat:@"http://%@:8085",ipStr];
+    NSString *serviceURL = [NSString stringWithFormat:@"http://%@",ipStr];
     return serviceURL;
 }
 

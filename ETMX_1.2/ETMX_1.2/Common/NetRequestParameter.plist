@@ -14,7 +14,7 @@
 		<key>URI</key>
 		<string>/ETMX/services/TaskScanExecution</string>
 		<key>node</key>
-		<string>ns1:getScanTasksResponse</string>
+		<string>ns1:getScanTasks2Response</string>
 	</dict>
 	<key>taskExecution</key>
 	<dict>

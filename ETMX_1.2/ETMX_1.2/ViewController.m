@@ -52,6 +52,8 @@
     [super viewDidLoad];
     
     self.field = [[UITextField alloc] init];
+    [self.userNameText setDelegate:self];
+    [self.passwordTest setDelegate:self];
    // [self.field addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
     [self.userNameText addTarget:self action:@selector(exitBoardUserName) forControlEvents:UIControlEventEditingDidEnd];
     [self.passwordTest addTarget:self action:@selector(exitBoardPasss) forControlEvents:UIControlEventEditingDidEnd];
@@ -444,6 +446,72 @@
     NSString* number=@"((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?[1-9])))(\:\d)*)";
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:textString];
+}
+
+#pragma mark UITextFieldDelegate
+
+
+
+// 设置输入框，是否可以被修改
+// NO-将无法修改，不出现键盘
+// YES-可以修改，默认值
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return YES;
+    
+}
+
+// 当点击键盘的返回键（右下角）时，执行该方法。
+// 一般用来隐藏键盘
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.userNameText)
+    {
+        [self.passwordTest becomeFirstResponder];
+    }
+    else if (textField == self.passwordTest)
+    {
+        [self loginClick:nil];
+    }
+    
+    return YES;
+}
+
+// 当输入框获得焦点时，执行该方法。
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldDidBeginEditing");
+    
+}
+
+// 指定是否允许文本字段结束编辑，允许的话，文本字段会失去first responder
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    return YES;
+    
+}
+
+// 文本框失去first responder 时，执行
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField == self.userNameText)
+    {
+        [self.passwordTest becomeFirstResponder];
+    }
+    else if (textField == self.passwordTest)
+    {
+        [self loginClick:nil];
+    }
+    
+}
+
+
+// 指明是否允许根据用户请求清除内容
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+    NSLog(@"textFieldDidEndEditing");
+    return YES;
+}
+
+// 文本框的文本，是否能被修改
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    return YES;
+    
 }
 
 @end

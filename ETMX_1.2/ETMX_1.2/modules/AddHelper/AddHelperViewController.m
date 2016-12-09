@@ -178,7 +178,7 @@ static BOOL lastThree = NO;
     NSDictionary * dic = [UserManager instance].dic;
     UserAccount * user =_memberData[_currentData1Index];
     if ([self.currentOperUser containsObject:user]) {
-       [self showAlert:@"不能重复添加"];
+       [self showAlert:Localized(@"can not add again")];
         return;
     }
     

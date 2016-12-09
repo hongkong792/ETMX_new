@@ -42,6 +42,7 @@
 "loginFail" = "登录失败";
 "netError" = "网络连接失败";
 "NamePassNotNull" = "用户名或者密码不能为空";
+"can not add again" = "不能重复添加";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

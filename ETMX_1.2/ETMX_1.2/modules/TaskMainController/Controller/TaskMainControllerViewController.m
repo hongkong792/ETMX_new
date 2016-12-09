@@ -34,6 +34,7 @@
 #define WTaskStateCompleted            @"completed"      //已完成
 #define WTaskStateOverdue                 @"overdue"            //已超期
 
+
 #define WXMLParseNameGetTasksByUserCode @"ns1:getTasksByUserCodeResponse"         //根据用户号获得所有任务的解析字段
 
 typedef enum : NSUInteger {
@@ -128,6 +129,7 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIView *maskView;
 
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
+@property (nonatomic,strong)UIView  * maskViewInAddHelper;
 @end
 
 @implementation TaskMainControllerViewController
@@ -150,6 +152,8 @@ typedef enum : NSUInteger {
     self.maskView.alpha =0.5;
     [self.maskView setHidden:YES];
     [self.view addSubview:self.maskView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMaskView) name:REMOVEMASKVIEW object:nil];
+    
 }
 
 #pragma mark -- commen
@@ -349,6 +353,16 @@ typedef enum : NSUInteger {
         
         
     }else{
+        
+//        self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+        self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].origin.x, [[UIScreen mainScreen] bounds].origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+     //   [self.maskViewInAddHelper setBackgroundColor:[UIColor lightGrayColor]];
+        [self.maskViewInAddHelper setBackgroundColor:RGB(0xf9, 0xf9, 0xf9)];
+        
+      UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
+        [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
+      //  [[UIApplication sharedApplication] windows];
+        [self.view addSubview:self.maskViewInAddHelper];
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
         [[CurrentTask sharedManager]  setCurrentTask:self.currentTask];
         AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
@@ -361,7 +375,6 @@ typedef enum : NSUInteger {
         _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
         helpcon.currentTask = self.currentTask;
         [self presentViewController:helpcon animated:YES completion:nil];
-        
     }
 }
 
@@ -669,7 +682,7 @@ typedef enum : NSUInteger {
                 if ([flag integerValue] == 0) {
                     [self showAlert:message];
                 }
-               // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
+                // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
         }
             break;
@@ -771,12 +784,12 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_withTask:
         {
-
-
+            
+            
             [self.tableView reloadDataWithSortTasks:self.sortTasks];
-
-//            [self.tableView reloadData];
-//>>>>>>> Stashed changes
+            
+            //            [self.tableView reloadData];
+            //>>>>>>> Stashed changes
             
             
             
@@ -841,7 +854,7 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-          //  [self creatTableView];
+            //  [self creatTableView];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
@@ -857,10 +870,10 @@ typedef enum : NSUInteger {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
-           // [self.sortTasks removeAllObjects];
+            // [self.sortTasks removeAllObjects];
             [parser parse];
-//            [self creatTableView];
-           
+            //            [self creatTableView];
+            
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
@@ -878,5 +891,18 @@ typedef enum : NSUInteger {
     [self presentViewController:alertCon animated:YES completion:nil];
     
 }
+
+
+#pragma REMOVEMASKVIEW
+
+- (void)removeMaskView
+{
+    if (self.maskViewInAddHelper && [self.maskViewInAddHelper superview]) {
+           [self.maskViewInAddHelper removeFromSuperview];
+    }
+    
+ 
+}
+
 
 @end

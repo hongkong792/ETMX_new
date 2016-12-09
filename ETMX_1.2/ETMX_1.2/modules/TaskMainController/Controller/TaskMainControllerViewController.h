@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ETMXTask.h"
+#define REMOVEMASKVIEW       @"RemoveMaskView"
 
 @interface TaskMainControllerViewController : UIViewController
 

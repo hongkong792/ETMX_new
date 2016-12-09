@@ -523,9 +523,10 @@ static BOOL lastThree = NO;
     self.requestName = AddMemberConfirm;
     [self clickOper:@"TF"];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
+        
     });
-    
     
     
 }
@@ -536,7 +537,7 @@ static BOOL lastThree = NO;
     
 }
 - (IBAction)cancel:(id)sender {
-    
+        [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
     
     

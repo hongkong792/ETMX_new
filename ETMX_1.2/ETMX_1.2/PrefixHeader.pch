@@ -30,4 +30,7 @@
 #define SAFE_FORMAT_STRING(p)	p ? p : @"" //判空处理
 #define SAFE_FORMAT_OBJECT(p)	p ? p : @"" //判空处理
 #define GETADDRES [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
-
+#ifndef RGB
+#define RGB(r, g, b) \
+[UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#endif

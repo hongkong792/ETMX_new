@@ -464,14 +464,14 @@
 // 一般用来隐藏键盘
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == self.userNameText)
-    {
-        [self.passwordTest becomeFirstResponder];
-    }
-    else if (textField == self.passwordTest)
-    {
-        [self loginClick:nil];
-    }
+//    if (textField == self.userNameText)
+//    {
+//        [self.passwordTest becomeFirstResponder];
+//    }
+//    else if (textField == self.passwordTest)
+//    {
+//        [self loginClick:nil];
+//    }
     
     return YES;
 }

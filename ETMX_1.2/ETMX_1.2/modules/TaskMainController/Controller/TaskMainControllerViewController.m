@@ -260,10 +260,14 @@ typedef enum : NSUInteger {
 
 //刷新按钮文字
 -(void)refreshBtns{
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"released"),[self.allTaskState valueForKey:@"notstart"]] forSegmentAtIndex:0];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),[self.allTaskState valueForKey:@"start"]] forSegmentAtIndex:1];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),[self.allTaskState valueForKey:@"stopped"]] forSegmentAtIndex:2];
-    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),[self.allTaskState valueForKey:@"completed"]] forSegmentAtIndex:3];
+    NSString *releasedStr = [self.allTaskState valueForKey:@"notstart"];
+    NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
+    NSString *stoppedStr = [self.allTaskState valueForKey:@"stopped"];
+    NSString *completedStr = [self.allTaskState valueForKey:@"completed"];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"released"),releasedStr?releasedStr:@"0"] forSegmentAtIndex:0];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),inworkStr?inworkStr:@"0"] forSegmentAtIndex:1];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),stoppedStr?stoppedStr:@"0"] forSegmentAtIndex:2];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),completedStr?completedStr:@"0"] forSegmentAtIndex:3];
     [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),self.tableView.selectedTasks.count] forState:UIControlStateNormal];
     [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),self.tableView.selectedTasks.count] forState:UIControlStateHighlighted];
     [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];

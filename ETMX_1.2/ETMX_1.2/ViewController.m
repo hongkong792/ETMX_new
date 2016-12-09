@@ -51,7 +51,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.field = [[UITextField alloc] init];
+   // [self.field addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
     [self.userNameText addTarget:self action:@selector(exitBoardUserName) forControlEvents:UIControlEventEditingDidEnd];
     [self.passwordTest addTarget:self action:@selector(exitBoardPasss) forControlEvents:UIControlEventEditingDidEnd];
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -267,7 +268,7 @@
 }
 
 - (IBAction)changeIpClick:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改IP" message:@"你的操作时合法的，您要继续吗" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改IP" message:@"请输入ip地址和端口号" preferredStyle:UIAlertControllerStyleAlert];
     
     // 添加按钮
     __weak typeof(alert) weakAlert = alert;
@@ -284,7 +285,7 @@
     // 添加文本框
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         //textField.textColor = [UIColor redColor];
-        textField.text = @"";
+        textField.text = GETADDRES;
         [textField addTarget:self action:@selector(ipChanged:) forControlEvents:UIControlEventEditingDidEnd];
         //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(usernameDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
     }];
@@ -347,26 +348,28 @@
 
 - (void)ipChanged:(id)sender
 {
-    self.field = [[UITextField alloc] init];
-    [self.field addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
+
     self.field =  (UITextField *)sender;
+//    if (self.field.text != nil) {
+//        if (![self validateNumber:self.field.text]) {
+//            [self warn:@"ip格式不正确"];
+//            return;
+//        }
+//    }
     //切换地址
     [[NSUserDefaults standardUserDefaults] setObject:self.field.text forKey:ADRESSIP];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    //重新启动网络
-    [CheckNetWorkerTool sharedManager];
+
     
 }
 - (void)textChange
 {
-    if (self.field.text != nil) {
-        if (![self validateNumber:self.field.text]) {
-            [self warn:@"ip格式不正确"];
-            return;
-        }
-    }
-    
-    
+//    if (self.field.text != nil) {
+//        if (![self validateNumber:self.field.text]) {
+//            [self warn:@"ip格式不正确"];
+//            return;
+//        }
+//    }    
 }
 
 
@@ -438,7 +441,7 @@
 ///正则表达式验证ip
 - (BOOL)validateNumber:(NSString *) textString
 {
-    NSString* number=@"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$";
+    NSString* number=@"((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?[1-9])))(\:\d)*)";
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:textString];
 }

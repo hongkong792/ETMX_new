@@ -659,8 +659,17 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
             
-            if ([elementName isEqualToString:@"Etmx"]) {
-                self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
+            if ([elementName isEqualToString:@"Task"]) {
+                NSString * flag = [attributeDict objectForKey:@"flag"];
+                NSString *message = [attributeDict objectForKey:@"message"];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+                if ([flag integerValue] == 0) {
+                    [self showAlert:message];
+                }
+               // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
         }
             break;
@@ -763,7 +772,14 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
 
+
             [self.tableView reloadDataWithSortTasks:self.sortTasks];
+
+//            [self.tableView reloadData];
+//>>>>>>> Stashed changes
+            
+            
+            
             [self refreshBtns];
             [self.indicatorView stopAnimating];
         }
@@ -812,9 +828,6 @@ typedef enum : NSUInteger {
     if (self.currentTask == nil) {//不勾选任务扫描
         self.netRequesetName = taskExecutionSC_noTask;
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-        
-        
-        
         //        Status 状态为released|inwork|stopped|completed
         //        released=未开始
         //        inwork=正在工作
@@ -844,16 +857,15 @@ typedef enum : NSUInteger {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
-            [self.sortTasks removeAllObjects];
+           // [self.sortTasks removeAllObjects];
             [parser parse];
 //            [self creatTableView];
-            [self.navigationController popViewControllerAnimated:YES];
+           
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
         
     }
-    
     
 }
 

@@ -38,8 +38,10 @@
 "delete" = "删除";
 "pause" = "暂停";
 "finish" = "完成";
-
-
+"ip_Port" = "请输入ip地址和端口号";
+"loginFail" = "登录失败";
+"netError" = "网络连接失败";
+"NamePassNotNull" = "用户名或者密码不能为空";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

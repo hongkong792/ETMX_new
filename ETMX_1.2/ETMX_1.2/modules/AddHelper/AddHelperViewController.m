@@ -707,7 +707,7 @@ static BOOL lastThree = NO;
 - (void)showAlert:(NSString *)tips
 {
     UIAlertController * alertCon = [UIAlertController alertControllerWithTitle:tips message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:nil];
     [alertCon addAction:action];
     [self presentViewController:alertCon animated:YES completion:nil];
     

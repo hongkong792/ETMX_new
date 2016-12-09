@@ -40,6 +40,13 @@
 "finish" = "finish";
 
 
+
+"ip_Port" = "please enter ip and port";
+"loginFail" = "login fail";
+
+"netError" = "net not working";
+"NamePassNotNull" = "NamePassNotNull";
+
 //begin  任务界面
 "refresh"                    =               "refresh";
 "search"                    =               "search";

@@ -40,8 +40,10 @@
 "delete" = "刪除";
 "pause" = "暫停";
 "finish" = "完成";
-
-
+"ip_Port" = "請輸入ip地址和端口號";
+"loginFail" = "登陸失敗";
+"netError" = "網絡連接失敗";
+"NamePassNotNull" = "用戶名或者密碼不能為空";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,11 +37,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TDB-OQ-YEB" customClass="TaskContentTableView">
+                    <rect key="frame" x="0.0" y="145" width="375" height="382"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4E-db-O3F" userLabel="headerView">
+                    <rect key="frame" x="0.0" y="15" width="375" height="130"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BqQ-bx-arr" userLabel="typeSegment" customClass="CustomSegmentController">
+                            <rect key="frame" x="0.0" y="15" width="225" height="41"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="3cg-kG-muD"/>
                             </constraints>
@@ -49,6 +55,7 @@
                             </segments>
                         </segmentedControl>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="l4y-ro-VPG" customClass="CustomSegmentController">
+                            <rect key="frame" x="0.0" y="75" width="300" height="41"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="JKW-08-OK9"/>
                             </constraints>
@@ -60,6 +67,7 @@
                             </segments>
                         </segmentedControl>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9k-9j-oDb" customClass="CustomBtn">
+                            <rect key="frame" x="299" y="15" width="75" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="aLq-E4-KsV"/>
                             </constraints>
@@ -86,10 +94,13 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxM-zi-His" userLabel="footerView">
+                    <rect key="frame" x="0.0" y="527" width="375" height="140"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFN-wf-OO6" userLabel="operaterView">
+                            <rect key="frame" x="0.0" y="60" width="375" height="80"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBE-vH-Rz8" customClass="CustomeBtn2">
+                                    <rect key="frame" x="167.5" y="10" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="d8Z-95-m1U"/>
@@ -103,6 +114,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWM-Oe-ear" customClass="CustomeBtn2">
+                                    <rect key="frame" x="77.5" y="10" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="完成" image="finish">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -112,6 +124,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiG-dt-dzQ" customClass="CustomeBtn2">
+                                    <rect key="frame" x="-12.5" y="10" width="40" height="60"/>
                                     <state key="normal" title="暂停" image="pause">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -120,6 +133,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPT-Qg-gWq" customClass="CustomeBtn2">
+                                    <rect key="frame" x="-102.5" y="10" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="启动" image="start">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -129,6 +143,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTv-d6-D6X" customClass="CustomeBtn2">
+                                    <rect key="frame" x="257.5" y="10" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="上班" image="on_duty">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -138,6 +153,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aG-UP-Pj9" customClass="CustomeBtn2">
+                                    <rect key="frame" x="347.5" y="10" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="下班" image="off_duty">
                                         <color key="titleColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,6 +163,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okj-t4-6eb" customClass="CustomeBtn2">
+                                    <rect key="frame" x="437.5" y="10" width="40" height="60"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="替换" image="replace">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -179,7 +196,7 @@
                                 <constraint firstItem="QiG-dt-dzQ" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="cf5-2b-A62"/>
                                 <constraint firstItem="eTv-d6-D6X" firstAttribute="width" secondItem="EBE-vH-Rz8" secondAttribute="width" id="h5I-ck-RGR"/>
                                 <constraint firstItem="pWM-Oe-ear" firstAttribute="centerY" secondItem="EBE-vH-Rz8" secondAttribute="centerY" id="ic1-Hn-wjb"/>
-                                <constraint firstAttribute="height" constant="100" id="jVS-9l-pgC"/>
+                                <constraint firstAttribute="height" constant="80" id="jVS-9l-pgC"/>
                                 <constraint firstItem="pWM-Oe-ear" firstAttribute="leading" secondItem="QiG-dt-dzQ" secondAttribute="trailing" constant="50" id="mMj-I3-GnP"/>
                                 <constraint firstItem="okj-t4-6eb" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="niz-ML-rLh"/>
                                 <constraint firstItem="5aG-UP-Pj9" firstAttribute="height" secondItem="EBE-vH-Rz8" secondAttribute="height" id="uCf-pa-4tM"/>
@@ -188,8 +205,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7l-Hv-s9a">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHl-If-T84" customClass="CustomBtn">
+                                    <rect key="frame" x="44" y="15" width="35" height="30"/>
                                     <color key="backgroundColor" red="0.89411764705882357" green="0.89411764705882357" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="全选 ">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,6 +218,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phF-ZB-LKW" customClass="CustomBtn">
+                                    <rect key="frame" x="99" y="15" width="31" height="30"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="取消">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -222,7 +242,7 @@
                         <constraint firstAttribute="trailing" secondItem="m7l-Hv-s9a" secondAttribute="trailing" id="8Q1-GP-LAu"/>
                         <constraint firstAttribute="trailing" secondItem="LFN-wf-OO6" secondAttribute="trailing" id="Aeo-wa-Sue"/>
                         <constraint firstAttribute="bottom" secondItem="LFN-wf-OO6" secondAttribute="bottom" id="DWt-zx-Aap"/>
-                        <constraint firstAttribute="height" constant="200" id="MWn-GZ-vv0"/>
+                        <constraint firstAttribute="height" constant="140" id="MWn-GZ-vv0"/>
                         <constraint firstItem="LFN-wf-OO6" firstAttribute="leading" secondItem="WxM-zi-His" secondAttribute="leading" id="X4N-0K-nSZ"/>
                         <constraint firstItem="m7l-Hv-s9a" firstAttribute="leading" secondItem="WxM-zi-His" secondAttribute="leading" id="X6P-xb-vbU"/>
                         <constraint firstItem="m7l-Hv-s9a" firstAttribute="top" secondItem="WxM-zi-His" secondAttribute="top" id="b4p-xu-5kp"/>
@@ -230,6 +250,7 @@
                     </constraints>
                 </view>
                 <activityIndicatorView opaque="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fDK-RV-Z16">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
             </subviews>

@@ -47,6 +47,7 @@
 "can not add again" = "不能重複添加";
 
 "please select" = "請選擇組員";
+"please select task" = "請選擇任務";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

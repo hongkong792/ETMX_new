@@ -11,6 +11,7 @@
 #import "UserManager.h"
 #import "NetWorkManager.h"
 #import "ETMXMachine.h"
+#import "TaskMainControllerViewController.h"
 
 @interface SearchViewController ()<JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *memberLabel;
 @property (strong, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 
 
 @end
@@ -115,14 +117,7 @@ static BOOL memberFinish = NO;
     
     [self.view addSubview:self.indicatorView];
     [self.indicatorView startAnimating];
-    
-    
-    
-    
-//    
-//    
-//    [self.view addSubview:self.menu];
-//    [self.view addSubview:self.equmenu];
+
     
 
 }
@@ -132,9 +127,10 @@ static BOOL memberFinish = NO;
     self.memberLabel.text = Localized(@"member");
     [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
     [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
-    if (_data1.count > 0) {
-     //   [NSThread sleepForTimeInterval:5];
-    }
+
+    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
+    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
+
         
 }
 
@@ -234,12 +230,27 @@ static BOOL memberFinish = NO;
 }
 - (IBAction)confirmClick:(id)sender {
     
+    
+    
   [self dismissViewControllerAnimated:YES completion:^{
       UserAccount * user = _data2[_currentData2Index];
       [[UserManager instance] setCurAccount:user];
       [self.delegate userNameOnSelected:user.number];
+     [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
+    
       
   }];
+    
+}
+- (IBAction)cancelClick:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
+        
+        
+    }];
+    
     
 }
 
@@ -270,8 +281,6 @@ static BOOL memberFinish = NO;
         }
     }
     
-    
-
 }
 - (void) laodDataFinish
 {

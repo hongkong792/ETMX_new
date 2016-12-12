@@ -46,6 +46,8 @@
 
 "please select" = "请选择组员";
 
+"please select task" = "请选择任务";
+
 //begin  任务界面
 "refresh"                    =               "刷新";
 "search"                    =               "搜索";

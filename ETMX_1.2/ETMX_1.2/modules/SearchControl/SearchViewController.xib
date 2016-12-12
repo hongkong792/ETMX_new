@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController">
             <connections>
+                <outlet property="cancelBtn" destination="gXg-xD-X4o" id="hOQ-59-bra"/>
                 <outlet property="confirmBtn" destination="SEc-hb-dlX" id="geQ-Ol-IQ8"/>
                 <outlet property="equipmentLabel" destination="tDN-jw-6Pw" id="EGK-gX-3PF"/>
                 <outlet property="equipmentView" destination="CEw-UM-r0r" id="Q4k-ec-vH8"/>
@@ -74,6 +75,16 @@
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="confirmClick:" destination="-1" eventType="touchUpInside" id="wes-Mw-cfw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXg-xD-X4o" userLabel="取消">
+                    <frame key="frameInset" minX="136" minY="12" width="103" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelClick:" destination="-1" eventType="touchUpInside" id="KTH-Vc-NhF"/>
+                        <action selector="confirmClick:" destination="-1" eventType="touchUpInside" id="xiC-01-esJ"/>
                     </connections>
                 </button>
             </subviews>

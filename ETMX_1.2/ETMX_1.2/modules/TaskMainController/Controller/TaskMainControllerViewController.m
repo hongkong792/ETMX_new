@@ -328,7 +328,14 @@ typedef enum : NSUInteger {
 //搜索事件
 -(void)search:(id)sender{
     
-    
+//    self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].origin.x, [[UIScreen mainScreen] bounds].origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+    self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
+    [self.maskViewInAddHelper setAlpha:0.5];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
+    [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
+
+    [self.view addSubview:self.maskViewInAddHelper];
     SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     sea.delegate = self;
     sea.preferredContentSize = CGSizeMake(600, 1000);
@@ -338,7 +345,8 @@ typedef enum : NSUInteger {
     _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
     _chooseImagePopoverController.sourceView = sea.view;
     _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
-    [self presentViewController:sea animated:YES completion:nil];
+    _chooseImagePopoverController.delegate = self;
+    [self presentViewController:sea animated:NO completion:nil];
     
     
     
@@ -349,8 +357,8 @@ typedef enum : NSUInteger {
     
     if (self.currentTask == nil) {
         
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請選擇任務" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:Localized(@"please select task") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             return ;
         }];
         [alert addAction:action];
@@ -358,15 +366,16 @@ typedef enum : NSUInteger {
         
         
     }else{
-        
-//        self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+        if ([self.taskState isEqualToString:@"completed"] ) {
+            [self showAlert:@"不能为已完成任务添加帮手"];
+            return;
+        }
         self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].origin.x, [[UIScreen mainScreen] bounds].origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
-     //   [self.maskViewInAddHelper setBackgroundColor:[UIColor lightGrayColor]];
-        [self.maskViewInAddHelper setBackgroundColor:RGB(0xf9, 0xf9, 0xf9)];
-        
-      UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
+        [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
+        [self.maskViewInAddHelper setAlpha:0.5];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
         [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
-      //  [[UIApplication sharedApplication] windows];
+        //  [[UIApplication sharedApplication] windows];
         [self.view addSubview:self.maskViewInAddHelper];
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
         [[CurrentTask sharedManager]  setCurrentTask:self.currentTask];
@@ -913,10 +922,10 @@ typedef enum : NSUInteger {
 - (void)removeMaskView
 {
     if (self.maskViewInAddHelper && [self.maskViewInAddHelper superview]) {
-           [self.maskViewInAddHelper removeFromSuperview];
+        [self.maskViewInAddHelper removeFromSuperview];
     }
     
- 
+    
 }
 //UIPopoverPresentationControllerDelegate,只有返回UIModalPresentationNone才可以让popover在手机上按照我们在preferredContentSize中返回的size显示。这是一个枚举，可以尝试换成其他的值尝试。
 //- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{

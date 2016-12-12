@@ -378,6 +378,7 @@ typedef enum : NSUInteger {
         _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
         _chooseImagePopoverController.sourceView = helpcon.view;
         _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+        _chooseImagePopoverController.delegate = self;
         helpcon.currentTask = self.currentTask;
         [self presentViewController:helpcon animated:YES completion:nil];
     }
@@ -906,6 +907,14 @@ typedef enum : NSUInteger {
     
  
 }
+//UIPopoverPresentationControllerDelegate,只有返回UIModalPresentationNone才可以让popover在手机上按照我们在preferredContentSize中返回的size显示。这是一个枚举，可以尝试换成其他的值尝试。
+//- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+//    return UIModalPresentationNone;
+//}
 
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+    //no点击蒙版popover不消失， 默认yes
+    return NO;
+}
 
 @end

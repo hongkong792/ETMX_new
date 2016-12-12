@@ -52,7 +52,7 @@
     [super viewDidLoad];
     
     self.field = [[UITextField alloc] init];
-    [self.userNameText setDelegate:self];
+ //   [self.userNameText setDelegate:self];
     [self.passwordTest setDelegate:self];
    // [self.field addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
     [self.userNameText addTarget:self action:@selector(exitBoardUserName) forControlEvents:UIControlEventEditingDidEnd];

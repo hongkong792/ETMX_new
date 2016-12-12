@@ -23,7 +23,6 @@
 		066000BB1DD5E87D005F2D80 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 066000AE1DD5E87D005F2D80 /* NSObject+MJKeyValue.m */; };
 		066000BC1DD5E87D005F2D80 /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 066000B01DD5E87D005F2D80 /* NSObject+MJProperty.m */; };
 		066000BD1DD5E87D005F2D80 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 066000B21DD5E87D005F2D80 /* NSString+MJExtension.m */; };
-		06692C081DFD4EE200DAF25A /* UIPopoverPresentationController+mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 06692C071DFD4EE200DAF25A /* UIPopoverPresentationController+mask.m */; };
 		0674B7D51DD086F7004FF173 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B7D41DD086F7004FF173 /* main.m */; };
 		0674B7D81DD086F7004FF173 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B7D71DD086F7004FF173 /* AppDelegate.m */; };
 		0674B7DB1DD086F7004FF173 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B7DA1DD086F7004FF173 /* ViewController.m */; };
@@ -125,8 +124,6 @@
 		066000B01DD5E87D005F2D80 /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		066000B11DD5E87D005F2D80 /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		066000B21DD5E87D005F2D80 /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
-		06692C061DFD4EE200DAF25A /* UIPopoverPresentationController+mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverPresentationController+mask.h"; sourceTree = "<group>"; };
-		06692C071DFD4EE200DAF25A /* UIPopoverPresentationController+mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverPresentationController+mask.m"; sourceTree = "<group>"; };
 		0674B7D01DD086F7004FF173 /* ETMX_1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETMX_1.2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0674B7D41DD086F7004FF173 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0674B7D61DD086F7004FF173 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -683,8 +680,6 @@
 				247494781DD21B7400BD7711 /* TaskMainControllerViewController.h */,
 				247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */,
 				2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */,
-				06692C061DFD4EE200DAF25A /* UIPopoverPresentationController+mask.h */,
-				06692C071DFD4EE200DAF25A /* UIPopoverPresentationController+mask.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -825,7 +820,6 @@
 				061DEF831DE01F4A0089C2FF /* TaskTableViewCell.m in Sources */,
 				066000BB1DD5E87D005F2D80 /* NSObject+MJKeyValue.m in Sources */,
 				0674B89A1DD08AB0004FF173 /* README.md in Sources */,
-				06692C081DFD4EE200DAF25A /* UIPopoverPresentationController+mask.m in Sources */,
 				065146311DD4851800BCDE13 /* Reachability.m in Sources */,
 				0674B88D1DD08AB0004FF173 /* UIProgressView+AFNetworking.m in Sources */,
 				066000BD1DD5E87D005F2D80 /* NSString+MJExtension.m in Sources */,

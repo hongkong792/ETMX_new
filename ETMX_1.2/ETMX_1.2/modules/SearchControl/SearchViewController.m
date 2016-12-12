@@ -181,9 +181,9 @@ static BOOL memberFinish = NO;
     
     
     if ([menu isEqual:self.equmenu]) {
-        return @"請選擇";
+        return Localized(@"please select");
     }else if ([menu isEqual:self.menu]){
-        return  @"請選擇";
+        return  Localized(@"please select");
         
     }
     return nil;

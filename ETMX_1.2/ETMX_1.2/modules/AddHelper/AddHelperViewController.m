@@ -58,6 +58,7 @@ typedef NS_ENUM(NSInteger,RequestName) {
 @property (nonatomic,assign)NSInteger  selectedMember;
 @property (nonatomic,assign)NSIndexPath * selectedIndexPath;
 @property (nonatomic,strong) MemberTableViewCell * memberCell ;
+@property (weak, nonatomic) IBOutlet UIButton *addMemberSamePart;
 
 
 @end

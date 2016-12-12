@@ -47,7 +47,7 @@
 "netError" = "net not working";
 "NamePassNotNull" = "NamePassNotNull";
 "can not add again" = "can not add again";
-
+"please select" = "please select number";
 
 //begin  任务界面
 "refresh"                    =               "refresh";

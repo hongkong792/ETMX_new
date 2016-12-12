@@ -130,6 +130,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
 @property (nonatomic,strong)UIView  * maskViewInAddHelper;
+@property (nonatomic,assign)NSInteger flagWithTask;
 @end
 
 @implementation TaskMainControllerViewController
@@ -684,6 +685,7 @@ typedef enum : NSUInteger {
                     [self.navigationController popViewControllerAnimated:YES];
                 });
                 if ([flag integerValue] == 0) {
+                    self.flagWithTask = 0;
                     [self showAlert:message];
                 }
                 // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
@@ -788,16 +790,13 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_withTask:
         {
-            
-            
-            [self.tableView reloadDataWithSortTasks:self.sortTasks];
-            
-            //            [self.tableView reloadData];
-            //>>>>>>> Stashed changes
-            
-            
-            
-            [self refreshBtns];
+            if (self.flagWithTask != 0) {
+                [self.tableView reloadDataWithSortTasks:self.sortTasks];
+                
+                // [self.tableView reloadData];
+                //>>>>>>> Stashed changes
+                [self refreshBtns];
+            }
             [self.indicatorView stopAnimating];
         }
             break;

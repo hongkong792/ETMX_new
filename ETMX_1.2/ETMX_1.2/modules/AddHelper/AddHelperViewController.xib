@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddHelperViewController">
             <connections>
+                <outlet property="addMemberSamePart" destination="Iql-6k-2H9" id="HrU-wn-wwE"/>
                 <outlet property="chooseMemberLabel" destination="abp-MF-ILO" id="7HX-oi-nMM"/>
                 <outlet property="flagView" destination="LS4-Ex-Rkn" id="HK8-5J-kwF"/>
                 <outlet property="memberInfoTable" destination="Z0n-9P-yYD" id="ttw-cA-EpH"/>

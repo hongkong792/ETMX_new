@@ -447,8 +447,6 @@ typedef enum : NSUInteger {
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
-    
-    
 }
 //上班
 - (IBAction)goWork:(id)sender {
@@ -492,22 +490,35 @@ typedef enum : NSUInteger {
 }
 //替換
 - (IBAction)exchange:(id)sender {
-    ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
-    exchangOpVC.selecedTasks = self.tableView.selectedTasks;
-    __weak typeof(self) weakSelf = self;
-    exchangOpVC.block = ^(){
-        __strong typeof(self) strongSelf = weakSelf;
-        [strongSelf.maskView setHidden:YES];
-        [strongSelf.view bringSubviewToFront:strongSelf.maskView];
-    };
-    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
+    if (self.tableView.selectedTasks && self.tableView.selectedTasks.count > 1) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"task can't beyond one") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }else{
+        if ([self.taskState isEqualToString:WTaskStateCompleted]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"task is finished") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertView show];
+        }else{
+            ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
+            exchangOpVC.selecedTasks = self.tableView.selectedTasks;
+            __weak typeof(self) weakSelf = self;
+            exchangOpVC.block = ^(){
+                __strong typeof(self) strongSelf = weakSelf;
+                [strongSelf.maskView setHidden:YES];
+                [strongSelf.view bringSubviewToFront:strongSelf.maskView];
+            };
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
+            
+            CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;
+            CGFloat height = [UIScreen mainScreen].bounds.size.height*0.75;
+            popover.popoverContentSize =CGSizeMake(width, height);
+            [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+            [self.maskView setHidden:NO];
+            [self.view bringSubviewToFront:self.maskView];
+        }
+    }
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height*0.75;
-    popover.popoverContentSize =CGSizeMake(width, height);
-    [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
-    [self.maskView setHidden:NO];
-    [self.view bringSubviewToFront:self.maskView];
+    
+    
 }
 
 - (IBAction)selecteAll:(id)sender {

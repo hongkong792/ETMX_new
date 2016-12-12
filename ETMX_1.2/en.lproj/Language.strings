@@ -84,6 +84,8 @@
 "work end"                     =                    "DF";
 "exchange"                  =                       "EX";
 "please check the net"          =                   "please check the net";
+"task can't beyond one"     =                   "task can't beyond one";
+"task is finished"          =                   "task is finished";
 //end  任务界面
 
 //begin 替换界面

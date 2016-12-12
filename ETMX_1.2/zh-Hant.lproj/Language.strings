@@ -83,6 +83,8 @@
 "work end"                     =                    "下班";
 "exchange"                  =                       "替換";
 "please check the net"              =                  "網絡訪問錯誤，請檢查網路環境";
+"task can't beyond one"     =                   "任務數只能有一個";
+"task is finished"          =                   "任務已完成，不用替換;
 //end  任务界面
 
 //begin 替换界面

@@ -49,6 +49,7 @@
 "can not add again" = "can not add again";
 "please select" = "please select number";
 "please select task" = "please select task";
+"can't add member to completed task" = "can't add member to completed task";
 
 //begin  任务界面
 "refresh"                    =               "refresh";

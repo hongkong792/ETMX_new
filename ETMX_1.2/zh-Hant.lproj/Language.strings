@@ -48,6 +48,7 @@
 
 "please select" = "請選擇組員";
 "please select task" = "請選擇任務";
+"can't add member to completed task" = "不能為已完成任務添加幫手";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

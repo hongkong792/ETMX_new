@@ -367,7 +367,7 @@ typedef enum : NSUInteger {
         
     }else{
         if ([self.taskState isEqualToString:@"completed"] ) {
-            [self showAlert:@"不能为已完成任务添加帮手"];
+            [self showAlert:Localized(@"can't add member to completed task")];
             return;
         }
         self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].origin.x, [[UIScreen mainScreen] bounds].origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];

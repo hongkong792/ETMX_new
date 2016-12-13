@@ -208,8 +208,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHl-If-T84" customClass="CustomBtn">
-                                    <rect key="frame" x="44" y="15" width="35" height="30"/>
-                                    <color key="backgroundColor" red="0.89411764705882357" green="0.89411764705882357" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                    <rect key="frame" x="44" y="12" width="46" height="36"/>
+                                    <color key="backgroundColor" red="0.90980392156862744" green="0.92549019607843142" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <state key="normal" title="全选 ">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
@@ -218,8 +219,9 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phF-ZB-LKW" customClass="CustomBtn">
-                                    <rect key="frame" x="99" y="15" width="31" height="30"/>
+                                    <rect key="frame" x="110" y="12" width="41" height="36"/>
                                     <color key="backgroundColor" red="0.90980392160000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <state key="normal" title="取消">
                                         <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>

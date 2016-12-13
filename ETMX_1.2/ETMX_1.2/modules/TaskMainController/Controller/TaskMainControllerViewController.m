@@ -763,7 +763,7 @@ typedef enum : NSUInteger {
         case taskExecutionTF:
         {
             if (self.flag) {
-                self.stateSegment.selectedSegmentIndex = 4;
+                self.stateSegment.selectedSegmentIndex = 3;
                 self.taskState = WTaskStateCompleted;
                 [self.tableView.selectedSections removeAllObjects];
                 [self.tableView.selectedTasks removeAllObjects];

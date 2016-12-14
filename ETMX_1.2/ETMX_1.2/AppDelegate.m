@@ -21,7 +21,7 @@
     //网络监控
     NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
     if ((obj == nil ||[obj isEqualToString:@""])) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"61.141.153.33:8085" forKey:ADRESSIP];
+        [[NSUserDefaults standardUserDefaults] setObject:@"59.40.65.87:8085" forKey:ADRESSIP];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     

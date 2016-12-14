@@ -398,9 +398,9 @@ static BOOL lastThree = NO;
     [self operClick:@"TD" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     self.selectedMember = ((UIButton *)sender).tag;
     if (self.requestName == SelectedPartner_Delete) {
-        [self.currentOperUser removeObjectAtIndex:self.selectedMember];
+     //   [self.currentOperUser removeObjectAtIndex:self.selectedMember];
     }
-    [self.memberInfoTable reloadData];
+    //[self.memberInfoTable reloadData];
     
     
 }
@@ -443,10 +443,10 @@ static BOOL lastThree = NO;
         [p setDelegate:weakSelf];
         [p parse];
         
-        operatorsFinish = YES;
-        [weakSelf laodDataFinish];
-        
-        clickFinish = YES;
+//        operatorsFinish = YES;
+//        [weakSelf laodDataFinish];
+//        
+//        clickFinish = YES;
         //  [weakSelf laodDataFinish];
         
         
@@ -627,6 +627,10 @@ static BOOL lastThree = NO;
                 [self.currentOperUser removeObjectAtIndex:self.selectedMember];
                 //  [self showAlert:@"操作成功"];
             }
+        }else if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"0"]){
+            
+            [self showAlert:[attributeDict objectForKey:@"message"]];
+            
         }
         
     }else if (self.requestName == SelectedPartner_Pause){

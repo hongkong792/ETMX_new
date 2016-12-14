@@ -390,6 +390,10 @@ typedef enum : NSUInteger {
         _chooseImagePopoverController.delegate = self;
         helpcon.currentTask = self.currentTask;
         [self presentViewController:helpcon animated:YES completion:nil];
+        self.currentTask = nil;
+ 
+        
+        
     }
 }
 
@@ -453,6 +457,10 @@ typedef enum : NSUInteger {
 }
 //扫描
 - (IBAction)scanTask:(id)sender {
+    if ([self.taskState isEqualToString:@"completed"] ) {
+        [self showAlert:Localized(@"can't add member to completed task")];
+        return;
+    }
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
@@ -708,6 +716,7 @@ typedef enum : NSUInteger {
                 if ([flag integerValue] == 0) {
                     self.flagWithTask = 0;
                     [self showAlert:message];
+ 
                 }
                 // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
@@ -812,11 +821,10 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
             if (self.flagWithTask != 0) {
+                self.tableView.selectedTasks = nil;
                 [self.tableView reloadDataWithSortTasks:self.sortTasks];
-                
-                // [self.tableView reloadData];
-                //>>>>>>> Stashed changes
                 [self refreshBtns];
+                [self refresh:nil];
             }
             [self.indicatorView stopAnimating];
         }
@@ -850,7 +858,6 @@ typedef enum : NSUInteger {
     if (userCode != nil) {
         //刷新主界面
         [self refresh:nil];
-        
     }
     
 }
@@ -884,6 +891,7 @@ typedef enum : NSUInteger {
             [self showAlert:error.localizedDescription];
         }];
     }else{
+
         self.netRequesetName = taskExecutionSC_withTask;
         NSArray *tasks = self.tableView.selectedTasks;
         
@@ -894,10 +902,7 @@ typedef enum : NSUInteger {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
-            // [self.sortTasks removeAllObjects];
             [parser parse];
-            //            [self creatTableView];
-            
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
@@ -923,9 +928,9 @@ typedef enum : NSUInteger {
 {
     if (self.maskViewInAddHelper && [self.maskViewInAddHelper superview]) {
         [self.maskViewInAddHelper removeFromSuperview];
+        [self.tableView reloadDataWithSortTasks:self.sortTasks];
+        [self refreshBtns];
     }
-    
-    
 }
 //UIPopoverPresentationControllerDelegate,只有返回UIModalPresentationNone才可以让popover在手机上按照我们在preferredContentSize中返回的size显示。这是一个枚举，可以尝试换成其他的值尝试。
 //- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
@@ -933,7 +938,6 @@ typedef enum : NSUInteger {
 //}
 
 - (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
-    //no点击蒙版popover不消失， 默认yes
     return NO;
 }
 

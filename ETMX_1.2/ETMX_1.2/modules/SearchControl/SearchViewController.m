@@ -114,7 +114,6 @@ static BOOL memberFinish = NO;
         
     }];
     
-    
     [self.view addSubview:self.indicatorView];
     [self.indicatorView startAnimating];
 

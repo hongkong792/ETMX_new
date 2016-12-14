@@ -67,7 +67,7 @@
 "part name"             =               "零件名稱:";
 "electrode name"    =           "銅公名稱:";
 "status:"                        =               "狀態:";
-"status"                        =                 "狀態";
+"status"                        =                 "類型";
 "task name"                =            "任務名稱";
 "operator"                  =               "操作者";
 "machine"                   =               "機床";
@@ -87,6 +87,8 @@
 "please check the net"              =                  "網絡訪問錯誤，請檢查網路環境";
 "task can't beyond one"     =                   "任務數只能有一個";
 "task is finished"          =                   "任務已完成，不用替換";
+"taskMoldType"                  =                   "模具";
+"taskLingType"                  =                   "零件";
 //end  任务界面
 
 //begin 替换界面

@@ -86,7 +86,11 @@
     self.objectName.text = [task valueForKey:@"objectName"];
     self.status.text = [task valueForKey:@"status"];
     self.name.text = [task valueForKey:@"name"];
-    self.state2.text = [task valueForKey:@"status"];
+    if ([task.container isEqualToString:task.object]) {
+        self.state2.text = Localized(@"taskMoldType");
+    }else{
+        self.state2.text = Localized(@"taskLingType");
+    }
     self.operatorMsg.text = [task valueForKey:@"operatorMsg"];
     self.machine.text = [task valueForKey:@"machineMsg"];
     self.actualStartDate.text = [task valueForKey:@"actualStartDate"];

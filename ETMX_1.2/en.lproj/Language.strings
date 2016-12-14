@@ -68,7 +68,7 @@
 "part name"             =               "part name:";
 "electrode name"    =           "electrode name:";
 "status:"                        =               "status:";
-"status"                        =                   "status";
+"status"                        =                   "type";
 "task name"                =            "task name";
 "operator"                  =               "operator";
 "machine"                   =               "machine";
@@ -88,6 +88,8 @@
 "please check the net"          =                   "please check the net";
 "task can't beyond one"     =                   "task can't beyond one";
 "task is finished"          =                   "task is finished";
+"taskMoldType"                  =                   "mold";
+"taskLingType"                  =                   "submold";
 //end  任务界面
 
 //begin 替换界面

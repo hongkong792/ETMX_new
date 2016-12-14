@@ -67,7 +67,7 @@
 "part name"             =               "零件名称:";
 "electrode name"    =           "铜公名称:";
 "status:"                        =               "状态:";
-"status"                =               "状态";
+"status"                =               "类型";
 "task name"                =            "任务名称";
 "operator"                  =               "操作者";
 "machine"                   =               "机床";
@@ -87,6 +87,8 @@
 "please check the net"          =               "网络访问错误，请检查网络环境";
 "task can't beyond one"     =                   "任务数只能有一个";
 "task is finished"          =                   "任务已完成，不用替换";
+"taskMoldType"                  =                   "模具";
+"taskLingType"                  =                   "零件";
 //end  任务界面
 
 //begin 替换界面

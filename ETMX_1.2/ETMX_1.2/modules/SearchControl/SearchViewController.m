@@ -45,7 +45,7 @@ static BOOL memberFinish = NO;
      _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
     _indicatorView.backgroundColor = [UIColor lightGrayColor];
-    _indicatorView.frame = CGRectMake(0, 0, 600, 800);
+    _indicatorView.frame = CGRectMake(0, 0, 600, 1000);
     //_indicatorView.frame = self.view.frame;
     self.indicatorView.alpha = 0.5;
  

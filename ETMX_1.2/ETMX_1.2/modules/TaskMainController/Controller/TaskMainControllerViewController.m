@@ -823,8 +823,8 @@ typedef enum : NSUInteger {
             if (self.flagWithTask != 0) {
                 self.tableView.selectedTasks = nil;
                 [self.tableView reloadDataWithSortTasks:self.sortTasks];
-                [self refreshBtns];
                 [self refresh:nil];
+                [self cancelSelected:nil];
             }
             [self.indicatorView stopAnimating];
         }
@@ -928,8 +928,7 @@ typedef enum : NSUInteger {
 {
     if (self.maskViewInAddHelper && [self.maskViewInAddHelper superview]) {
         [self.maskViewInAddHelper removeFromSuperview];
-        [self.tableView reloadDataWithSortTasks:self.sortTasks];
-        [self refreshBtns];
+        [self cancelSelected:nil];
     }
 }
 //UIPopoverPresentationControllerDelegate,只有返回UIModalPresentationNone才可以让popover在手机上按照我们在preferredContentSize中返回的size显示。这是一个枚举，可以尝试换成其他的值尝试。

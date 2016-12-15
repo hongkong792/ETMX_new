@@ -48,7 +48,7 @@
 
 "please select task" = "请选择任务";
 "can't add member to completed task" = "不能为已完成任务添加帮手";
-
+"can't scan With completed task" = "不能为已完成的任务扫描";
 
 //begin  任务界面
 "refresh"                    =               "刷新";

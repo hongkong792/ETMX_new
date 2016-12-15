@@ -50,6 +50,7 @@
 "please select" = "please select number";
 "please select task" = "please select task";
 "can't add member to completed task" = "can't add member to completed task";
+"can't scan With completed task" = "can't scan With completed task";
 
 //begin  任务界面
 "refresh"                    =               "refresh";

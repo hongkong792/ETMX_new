@@ -328,7 +328,6 @@ typedef enum : NSUInteger {
 //搜索事件
 -(void)search:(id)sender{
     
-//    self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].origin.x, [[UIScreen mainScreen] bounds].origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
     self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
     [self.maskViewInAddHelper setAlpha:0.5];
@@ -458,9 +457,11 @@ typedef enum : NSUInteger {
 //扫描
 - (IBAction)scanTask:(id)sender {
     if ([self.taskState isEqualToString:@"completed"] ) {
-        [self showAlert:Localized(@"can't add member to completed task")];
+        [self showAlert:Localized(@"can't scan With completed task")];
         return;
     }
+    
+    //[self scanWithTask];
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
@@ -717,6 +718,9 @@ typedef enum : NSUInteger {
                     self.flagWithTask = 0;
                     [self showAlert:message];
  
+                }else{
+                    
+                    self.flagWithTask = 1;
                 }
                 // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
@@ -821,10 +825,12 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
             if (self.flagWithTask != 0) {
-                self.tableView.selectedTasks = nil;
-                [self.tableView reloadDataWithSortTasks:self.sortTasks];
-                [self refresh:nil];
-                [self cancelSelected:nil];
+
+                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+//                self.tableView.selectedTasks = nil;
+//                [self.tableView reloadDataWithSortTasks:self.sortTasks];
+//                [self refresh:nil];
+//                [self cancelSelected:nil];
             }
             [self.indicatorView stopAnimating];
         }
@@ -938,6 +944,24 @@ typedef enum : NSUInteger {
 
 - (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
     return NO;
+}
+
+// scan with task
+- (void)scanWithTask
+{
+    self.netRequesetName = taskExecutionSC_withTask;
+    NSArray *tasks = self.tableView.selectedTasks;
+    NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
+    NSArray *parameters = @[@"SGS000615",tasksStr];
+    NSString *methodName = @"scanOperatorOrEquipment";
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+        [parser setDelegate:self];
+        [parser parse];
+    } failure:^(NSError *error) {
+        [self showAlert:error.localizedDescription];
+    }];
 }
 
 @end

@@ -374,7 +374,6 @@ typedef enum : NSUInteger {
         [self.maskViewInAddHelper setAlpha:0.5];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
         [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
-        //  [[UIApplication sharedApplication] windows];
         [self.view addSubview:self.maskViewInAddHelper];
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
         [[CurrentTask sharedManager]  setCurrentTask:self.currentTask];
@@ -461,7 +460,7 @@ typedef enum : NSUInteger {
         return;
     }
     
-    //[self scanWithTask];
+    [self scanWithTask]; return;
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
@@ -712,7 +711,7 @@ typedef enum : NSUInteger {
                 NSString *message = [attributeDict objectForKey:@"message"];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.navigationController popViewControllerAnimated:YES];
+                  //  [self.navigationController popViewControllerAnimated:YES];
                 });
                 if ([flag integerValue] == 0) {
                     self.flagWithTask = 0;
@@ -722,7 +721,6 @@ typedef enum : NSUInteger {
                     
                     self.flagWithTask = 1;
                 }
-                // self.allTaskState = [NSMutableDictionary dictionaryWithDictionary:attributeDict];
             }
         }
             break;
@@ -825,9 +823,9 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
             if (self.flagWithTask != 0) {
-
+            
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
-//                self.tableView.selectedTasks = nil;
+
 //                [self.tableView reloadDataWithSortTasks:self.sortTasks];
 //                [self refresh:nil];
 //                [self cancelSelected:nil];
@@ -874,15 +872,10 @@ typedef enum : NSUInteger {
          didScanResult:(NSString *)result
             isTwoDCode:(BOOL)isTwoDCode
 {
-    
+
     if (self.currentTask == nil) {//不勾选任务扫描
         self.netRequesetName = taskExecutionSC_noTask;
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-        //        Status 状态为released|inwork|stopped|completed
-        //        released=未开始
-        //        inwork=正在工作
-        //        stopped=暂停
-        //        completed=完成
         NSArray *parameters = @[self.taskState,userCode,result,@"",self.taskType];
         NSString *methodName = @"getScanTasks2";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
@@ -891,7 +884,6 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-            //  [self creatTableView];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
@@ -900,7 +892,6 @@ typedef enum : NSUInteger {
 
         self.netRequesetName = taskExecutionSC_withTask;
         NSArray *tasks = self.tableView.selectedTasks;
-        
         NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
         NSArray *parameters = @[result,tasksStr];
         NSString *methodName = @"scanOperatorOrEquipment";
@@ -937,11 +928,7 @@ typedef enum : NSUInteger {
         [self cancelSelected:nil];
     }
 }
-//UIPopoverPresentationControllerDelegate,只有返回UIModalPresentationNone才可以让popover在手机上按照我们在preferredContentSize中返回的size显示。这是一个枚举，可以尝试换成其他的值尝试。
-//- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
-//    return UIModalPresentationNone;
-//}
-
+#pragma UIPopoverPresentationControllerDelegate
 - (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
     return NO;
 }
@@ -952,7 +939,7 @@ typedef enum : NSUInteger {
     self.netRequesetName = taskExecutionSC_withTask;
     NSArray *tasks = self.tableView.selectedTasks;
     NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
-    NSArray *parameters = @[@"SGS000615",tasksStr];
+    NSArray *parameters = @[@"SGS000359",tasksStr];
     NSString *methodName = @"scanOperatorOrEquipment";
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -964,4 +951,47 @@ typedef enum : NSUInteger {
     }];
 }
 
+
+
+///扫描完成刷新
+- (void)selectTaskSaveToLocal:(NSMutableArray *)array
+{
+
+    [array writeToFile:[self filePathTask] atomically:YES];
+
+}
+- (NSString *)filePathTask
+{
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    NSString *filePath = [cachePath stringByAppendingPathComponent:@"task.plist"];
+    return filePath;
+}
+
+- (void)selectSectionSaveToLocal:(NSMutableArray *)array
+{
+
+    [array writeToFile:[self filePathSction] atomically:YES];
+}
+
+- (NSString *)filePathSction
+{
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    NSString *filePath = [cachePath stringByAppendingPathComponent:@"section.plist"];
+    return filePath;
+}
+
+- (NSArray *)readCacheTask
+{
+    NSArray *arr = [NSArray arrayWithContentsOfFile:[self filePathTask]];
+    return arr;
+    
+}
+
+
+- (NSArray *)readCacheSection
+{
+    NSArray *arr = [NSArray arrayWithContentsOfFile:[self filePathSction]];
+    return arr;
+}
 @end
+

@@ -68,8 +68,9 @@
 "electrode code"        =               "electrode code:";
 "part name"             =               "part name:";
 "electrode name"    =           "electrode name:";
+"mold name"             =           "mold name:";
 "status:"                        =               "status:";
-"status"                        =                   "type";
+"status"                        =                   "status";
 "task name"                =            "task name";
 "operator"                  =               "operator";
 "machine"                   =               "machine";
@@ -88,6 +89,7 @@
 "exchange"                  =                       "EX";
 "please check the net"          =                   "please check the net";
 "task can't beyond one"     =                   "task can't beyond one";
+"please selecte task"               =           "please selecte task";
 "task is finished"          =                   "task is finished";
 "taskMoldType"                  =                   "mold";
 "taskLingType"                  =                   "submold";

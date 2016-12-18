@@ -66,8 +66,9 @@
 "electrode code"        =               "铜公编号:";
 "part name"             =               "零件名称:";
 "electrode name"    =           "铜公名称:";
+"mold name"             =           "模具名称:";
 "status:"                        =               "状态:";
-"status"                =               "类型";
+"status"                =               "状态";
 "task name"                =            "任务名称";
 "operator"                  =               "操作者";
 "machine"                   =               "机床";
@@ -86,6 +87,7 @@
 "exchange"                  =                       "替换";
 "please check the net"          =               "网络访问错误，请检查网络环境";
 "task can't beyond one"     =                   "任务数只能有一个";
+"please selecte task"           =               "请选择任务";
 "task is finished"          =                   "任务已完成，不用替换";
 "taskMoldType"                  =                   "模具";
 "taskLingType"                  =                   "零件";

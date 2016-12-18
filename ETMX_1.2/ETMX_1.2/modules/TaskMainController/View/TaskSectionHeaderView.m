@@ -26,18 +26,30 @@
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{
-    if (self.delegate  && [self.delegate respondsToSelector:@selector(selecteSectionWithTag:)]) {
-        [self.delegate selecteSectionWithTag:self.tag];
+    self.mold.isSelected =!self.mold.isSelected;
+    if (self.block) {
+        self.block(self.mold);
     }
 }
 
-
--(void)setTask:(ETMXTask *)task{
-//    self.containerCode.text = [task valueForKey:@"container"];
-    NSString *str = [task valueForKey:@"container"];
-    self.containerCode.text = [NSString stringWithFormat:@"%@(%ld)",str,self.tasksCount];
+-(void)setMold:(EtmxMold *)mold{
+    _mold = mold;
+    NSArray *subMolds = mold.subMolds;
+    SubMold *subMold = subMolds[0];
+    NSArray *tasks = subMold.tasks;
+    ETMXTask *task = tasks[0];
+    NSInteger count = 0;
+    for (SubMold *s in subMolds) {
+        count+=s.tasks.count;
+    }
+    self.containerCode.text = [NSString stringWithFormat:@"%@(%ld)",[task valueForKey:@"container"],(long)count];
     self.planStartDate.text = [task valueForKey:@"planStartDate"];
     self.planEndDate.text = [task valueForKey:@"planEndDate"];
+    if (mold.isSelected) {
+        self.selectedImageView.image = [UIImage imageNamed:@"selected_image_checkmark"];
+    }else{
+        self.selectedImageView.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
+    }
 }
 
 @end

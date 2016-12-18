@@ -74,6 +74,10 @@
 		06E0C8E21DD6FCDA004648AA /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E0C8E01DD6FCDA004648AA /* SearchViewController.xib */; };
 		06E0C8E71DD70833004648AA /* ico_make.png in Resources */ = {isa = PBXBuildFile; fileRef = 06E0C8E41DD70833004648AA /* ico_make.png */; };
 		06E0C8E81DD70833004648AA /* JSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0C8E61DD70833004648AA /* JSDropDownMenu.m */; };
+		24576BE11E02DCB700FF3021 /* OutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24576BDF1E02DCB700FF3021 /* OutTableViewCell.m */; };
+		24576BE21E02DCB700FF3021 /* OutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24576BE01E02DCB700FF3021 /* OutTableViewCell.xib */; };
+		24576BE61E02DCC500FF3021 /* InTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24576BE41E02DCC500FF3021 /* InTableViewCell.m */; };
+		24576BE71E02DCC500FF3021 /* InTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24576BE51E02DCC500FF3021 /* InTableViewCell.xib */; };
 		2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */; };
 		247494901DD21B7400BD7711 /* TaskMainControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */; };
 		247494911DD21B7400BD7711 /* EtmxMold.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474947E1DD21B7400BD7711 /* EtmxMold.m */; };
@@ -81,7 +85,6 @@
 		247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494831DD21B7400BD7711 /* CustomSegmentController.m */; };
 		247494941DD21B7400BD7711 /* ETMXTableViewCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */; };
 		247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */; };
-		247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948B1DD21B7400BD7711 /* TaskContentTableView.m */; };
 		247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */; };
 		2474949A1DD21B7400BD7711 /* TaskSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */; };
 		24770FE11DD6E3B500DB4EED /* NetRequestParameter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24770FE01DD6E3B500DB4EED /* NetRequestParameter.plist */; };
@@ -89,6 +92,11 @@
 		24896ACC1DE332060028FCFE /* ExchangeOperatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24896AC81DE332060028FCFE /* ExchangeOperatorViewController.xib */; };
 		24896ACD1DE332060028FCFE /* MembersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24896ACA1DE332060028FCFE /* MembersTableViewController.m */; };
 		248F28221DF3056000EE6D07 /* CustomeBtn2.m in Sources */ = {isa = PBXBuildFile; fileRef = 248F28211DF3056000EE6D07 /* CustomeBtn2.m */; };
+		24F09B2F1E04F1AF004C0FC1 /* InTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F09B2E1E04F1AF004C0FC1 /* InTableView.m */; };
+		24F09B321E04FA11004C0FC1 /* InTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F09B311E04FA11004C0FC1 /* InTableViewHeaderView.m */; };
+		24F09B341E04FA1B004C0FC1 /* InTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F09B331E04FA1B004C0FC1 /* InTableViewHeaderView.xib */; };
+		24F09B3A1E0518AA004C0FC1 /* SubMold.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F09B391E0518AA004C0FC1 /* SubMold.m */; };
+		24F09B3D1E052A48004C0FC1 /* TaskContentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F09B3C1E052A48004C0FC1 /* TaskContentTableView.m */; };
 		316AA2FE1DE1C54A00905D7A /* CurrentTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 316AA2FD1DE1C54A00905D7A /* CurrentTask.m */; };
 		316AA3011DE1D8D400905D7A /* MemberOperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316AA3001DE1D8D400905D7A /* MemberOperViewController.m */; };
 /* End PBXBuildFile section */
@@ -244,6 +252,12 @@
 		06E0C8E41DD70833004648AA /* ico_make.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_make.png; sourceTree = "<group>"; };
 		06E0C8E51DD70833004648AA /* JSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDropDownMenu.h; sourceTree = "<group>"; };
 		06E0C8E61DD70833004648AA /* JSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDropDownMenu.m; sourceTree = "<group>"; };
+		24576BDE1E02DCB700FF3021 /* OutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutTableViewCell.h; sourceTree = "<group>"; };
+		24576BDF1E02DCB700FF3021 /* OutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutTableViewCell.m; sourceTree = "<group>"; };
+		24576BE01E02DCB700FF3021 /* OutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutTableViewCell.xib; sourceTree = "<group>"; };
+		24576BE31E02DCC500FF3021 /* InTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InTableViewCell.h; sourceTree = "<group>"; };
+		24576BE41E02DCC500FF3021 /* InTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InTableViewCell.m; sourceTree = "<group>"; };
+		24576BE51E02DCC500FF3021 /* InTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InTableViewCell.xib; sourceTree = "<group>"; };
 		247494781DD21B7400BD7711 /* TaskMainControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskMainControllerViewController.h; sourceTree = "<group>"; };
 		247494791DD21B7400BD7711 /* TaskMainControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskMainControllerViewController.m; sourceTree = "<group>"; };
 		2474947A1DD21B7400BD7711 /* TaskMainControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskMainControllerViewController.xib; sourceTree = "<group>"; };
@@ -256,8 +270,6 @@
 		247494841DD21B7400BD7711 /* ETMXTableViewCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETMXTableViewCell1.h; sourceTree = "<group>"; };
 		247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETMXTableViewCell1.m; sourceTree = "<group>"; };
 		247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETMXTableViewCell1.xib; sourceTree = "<group>"; };
-		2474948A1DD21B7400BD7711 /* TaskContentTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContentTableView.h; sourceTree = "<group>"; };
-		2474948B1DD21B7400BD7711 /* TaskContentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContentTableView.m; sourceTree = "<group>"; };
 		2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSectionHeaderView.h; sourceTree = "<group>"; };
 		2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSectionHeaderView.m; sourceTree = "<group>"; };
 		2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskSectionHeaderView.xib; sourceTree = "<group>"; };
@@ -269,6 +281,15 @@
 		24896ACA1DE332060028FCFE /* MembersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewController.m; sourceTree = "<group>"; };
 		248F28201DF3056000EE6D07 /* CustomeBtn2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomeBtn2.h; sourceTree = "<group>"; };
 		248F28211DF3056000EE6D07 /* CustomeBtn2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomeBtn2.m; sourceTree = "<group>"; };
+		24F09B2D1E04F1AF004C0FC1 /* InTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InTableView.h; sourceTree = "<group>"; };
+		24F09B2E1E04F1AF004C0FC1 /* InTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InTableView.m; sourceTree = "<group>"; };
+		24F09B301E04FA11004C0FC1 /* InTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InTableViewHeaderView.h; sourceTree = "<group>"; };
+		24F09B311E04FA11004C0FC1 /* InTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InTableViewHeaderView.m; sourceTree = "<group>"; };
+		24F09B331E04FA1B004C0FC1 /* InTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InTableViewHeaderView.xib; sourceTree = "<group>"; };
+		24F09B381E0518AA004C0FC1 /* SubMold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubMold.h; sourceTree = "<group>"; };
+		24F09B391E0518AA004C0FC1 /* SubMold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubMold.m; sourceTree = "<group>"; };
+		24F09B3B1E052A48004C0FC1 /* TaskContentTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskContentTableView.h; sourceTree = "<group>"; };
+		24F09B3C1E052A48004C0FC1 /* TaskContentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskContentTableView.m; sourceTree = "<group>"; };
 		316AA2FC1DE1C54A00905D7A /* CurrentTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentTask.h; sourceTree = "<group>"; };
 		316AA2FD1DE1C54A00905D7A /* CurrentTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentTask.m; sourceTree = "<group>"; };
 		316AA2FF1DE1D8D400905D7A /* MemberOperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberOperViewController.h; sourceTree = "<group>"; };
@@ -393,6 +414,8 @@
 				0674B8011DD08AAF004FF173 /* ETMXTask.h */,
 				0674B8021DD08AAF004FF173 /* ETMXTask.m */,
 				0674B8031DD08AAF004FF173 /* UserManager */,
+				24F09B381E0518AA004C0FC1 /* SubMold.h */,
+				24F09B391E0518AA004C0FC1 /* SubMold.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -703,13 +726,24 @@
 				247494841DD21B7400BD7711 /* ETMXTableViewCell1.h */,
 				247494851DD21B7400BD7711 /* ETMXTableViewCell1.m */,
 				247494861DD21B7400BD7711 /* ETMXTableViewCell1.xib */,
-				2474948A1DD21B7400BD7711 /* TaskContentTableView.h */,
-				2474948B1DD21B7400BD7711 /* TaskContentTableView.m */,
 				2474948C1DD21B7400BD7711 /* TaskSectionHeaderView.h */,
 				2474948D1DD21B7400BD7711 /* TaskSectionHeaderView.m */,
 				2474948E1DD21B7400BD7711 /* TaskSectionHeaderView.xib */,
 				248F28201DF3056000EE6D07 /* CustomeBtn2.h */,
 				248F28211DF3056000EE6D07 /* CustomeBtn2.m */,
+				24576BDE1E02DCB700FF3021 /* OutTableViewCell.h */,
+				24576BDF1E02DCB700FF3021 /* OutTableViewCell.m */,
+				24576BE01E02DCB700FF3021 /* OutTableViewCell.xib */,
+				24576BE31E02DCC500FF3021 /* InTableViewCell.h */,
+				24576BE41E02DCC500FF3021 /* InTableViewCell.m */,
+				24576BE51E02DCC500FF3021 /* InTableViewCell.xib */,
+				24F09B2D1E04F1AF004C0FC1 /* InTableView.h */,
+				24F09B2E1E04F1AF004C0FC1 /* InTableView.m */,
+				24F09B301E04FA11004C0FC1 /* InTableViewHeaderView.h */,
+				24F09B311E04FA11004C0FC1 /* InTableViewHeaderView.m */,
+				24F09B331E04FA1B004C0FC1 /* InTableViewHeaderView.xib */,
+				24F09B3B1E052A48004C0FC1 /* TaskContentTableView.h */,
+				24F09B3C1E052A48004C0FC1 /* TaskContentTableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -745,7 +779,7 @@
 				TargetAttributes = {
 					0674B7CF1DD086F7004FF173 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = G8KS8T2N5W;
+						DevelopmentTeam = Z429JQWA8Q;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -791,7 +825,10 @@
 				0674B8A01DD08AB0004FF173 /* zbar-samples.png in Resources */,
 				24896ACC1DE332060028FCFE /* ExchangeOperatorViewController.xib in Resources */,
 				061DEF841DE01F4A0089C2FF /* TaskTableViewCell.xib in Resources */,
+				24F09B341E04FA1B004C0FC1 /* InTableViewHeaderView.xib in Resources */,
+				24576BE21E02DCB700FF3021 /* OutTableViewCell.xib in Resources */,
 				0674B89E1DD08AB0004FF173 /* zbar-help.html in Resources */,
+				24576BE71E02DCC500FF3021 /* InTableViewCell.xib in Resources */,
 				247494951DD21B7400BD7711 /* ETMXTableViewCell1.xib in Resources */,
 				0674B8851DD08AB0004FF173 /* LICENSE in Resources */,
 				0674B89F1DD08AB0004FF173 /* zbar-helpicons.png in Resources */,
@@ -813,6 +850,7 @@
 				06E0C8E11DD6FCDA004648AA /* SearchViewController.m in Sources */,
 				0674B8A31DD08AB0004FF173 /* QRCodeGenerator.m in Sources */,
 				0674B8801DD08AB0004FF173 /* AFNetworkReachabilityManager.m in Sources */,
+				24576BE11E02DCB700FF3021 /* OutTableViewCell.m in Sources */,
 				0674B87E1DD08AB0004FF173 /* UserManager.m in Sources */,
 				0674B87C1DD08AB0004FF173 /* ETMXTask.m in Sources */,
 				0674B7D81DD086F7004FF173 /* AppDelegate.m in Sources */,
@@ -825,6 +863,7 @@
 				066000BD1DD5E87D005F2D80 /* NSString+MJExtension.m in Sources */,
 				0674B7D51DD086F7004FF173 /* main.m in Sources */,
 				247494911DD21B7400BD7711 /* EtmxMold.m in Sources */,
+				24F09B3D1E052A48004C0FC1 /* TaskContentTableView.m in Sources */,
 				24896ACB1DE332060028FCFE /* ExchangeOperatorViewController.m in Sources */,
 				0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */,
 				24896ACD1DE332060028FCFE /* MembersTableViewController.m in Sources */,
@@ -835,7 +874,6 @@
 				0674B8891DD08AB0004FF173 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0674B8881DD08AB0004FF173 /* AFImageDownloader.m in Sources */,
 				0674B88B1DD08AB0004FF173 /* UIButton+AFNetworking.m in Sources */,
-				247494981DD21B7400BD7711 /* TaskContentTableView.m in Sources */,
 				066000B81DD5E87D005F2D80 /* MJPropertyType.m in Sources */,
 				0674B88C1DD08AB0004FF173 /* UIImageView+AFNetworking.m in Sources */,
 				06776AAE1DD9AE9900A50053 /* AddHelperViewController.m in Sources */,
@@ -843,8 +881,10 @@
 				066000B71DD5E87D005F2D80 /* MJPropertyKey.m in Sources */,
 				0674B8A41DD08AB0004FF173 /* UIView+QREasyFrame.m in Sources */,
 				2474948F1DD21B7400BD7711 /* TaskMainControllerViewController.m in Sources */,
+				24576BE61E02DCC500FF3021 /* InTableViewCell.m in Sources */,
 				06E0C8D51DD6DBB6004648AA /* CheckNetWorkerTool.m in Sources */,
 				061DEF881DE01F580089C2FF /* MemberTableViewCell.m in Sources */,
+				24F09B3A1E0518AA004C0FC1 /* SubMold.m in Sources */,
 				0674B8A21DD08AB0004FF173 /* QRScanViewController.m in Sources */,
 				0674B8811DD08AB0004FF173 /* AFSecurityPolicy.m in Sources */,
 				0674B8821DD08AB0004FF173 /* AFURLRequestSerialization.m in Sources */,
@@ -854,6 +894,7 @@
 				066000B51DD5E87D005F2D80 /* MJFoundation.m in Sources */,
 				247494991DD21B7400BD7711 /* TaskSectionHeaderView.m in Sources */,
 				247494921DD21B7400BD7711 /* CustomBtn.m in Sources */,
+				24F09B321E04FA11004C0FC1 /* InTableViewHeaderView.m in Sources */,
 				0674B87B1DD08AB0004FF173 /* ETMXMachine.m in Sources */,
 				066000BC1DD5E87D005F2D80 /* NSObject+MJProperty.m in Sources */,
 				0674B8861DD08AB0004FF173 /* README.md in Sources */,
@@ -864,6 +905,7 @@
 				0674B8841DD08AB0004FF173 /* AFURLSessionManager.m in Sources */,
 				0674B8A61DD08AB0004FF173 /* ETMXApi.m in Sources */,
 				066000BA1DD5E87D005F2D80 /* NSObject+MJCoding.m in Sources */,
+				24F09B2F1E04F1AF004C0FC1 /* InTableView.m in Sources */,
 				0674B87F1DD08AB0004FF173 /* AFHTTPSessionManager.m in Sources */,
 				0674B8A11DD08AB0004FF173 /* LogiinViewController.m in Sources */,
 				316AA3011DE1D8D400905D7A /* MemberOperViewController.m in Sources */,
@@ -1003,7 +1045,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = G8KS8T2N5W;
+				DEVELOPMENT_TEAM = Z429JQWA8Q;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1023,7 +1065,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = G8KS8T2N5W;
+				DEVELOPMENT_TEAM = Z429JQWA8Q;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

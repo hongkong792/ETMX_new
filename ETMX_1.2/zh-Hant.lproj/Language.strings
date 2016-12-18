@@ -67,8 +67,9 @@
 "electrode code"        =               "銅公編號:";
 "part name"             =               "零件名稱:";
 "electrode name"    =           "銅公名稱:";
+"mold name"             =           "模具名稱:";
 "status:"                        =               "狀態:";
-"status"                        =                 "類型";
+"status"                        =                 "狀態";
 "task name"                =            "任務名稱";
 "operator"                  =               "操作者";
 "machine"                   =               "機床";
@@ -87,6 +88,7 @@
 "exchange"                  =                       "替換";
 "please check the net"              =                  "網絡訪問錯誤，請檢查網路環境";
 "task can't beyond one"     =                   "任務數只能有一個";
+"please selecte task"           =               "請選擇任務";
 "task is finished"          =                   "任務已完成，不用替換";
 "taskMoldType"                  =                   "模具";
 "taskLingType"                  =                   "零件";

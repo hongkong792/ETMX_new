@@ -1,250 +1,190 @@
 //
-//  TaskContentTableView.m
-//  ETMX
+//  OutTableView.m
+//  ETMX_1.2
 //
-//  Created by wenpq on 16/11/2.
+//  Created by wenpq on 16/12/17.
 //  Copyright © 2016年 杨香港. All rights reserved.
 //
 
 #import "TaskContentTableView.h"
-#import "ETMXTask.h"
+#import "TaskSectionHeaderView.h"
+#import "OutTableViewCell.h"
 
-
-#define CellUnFoldStateHeight               91.0f              //展开时cell的高度
-#define CellFoldStateHeight                     45.0f               //折叠时cell的高度
-#define SectionHeight                               50.0f               //section高度
-
-@interface TaskContentTableView()
-@property(nonatomic,strong) NSMutableArray *unfoldSections;       //存储展开状态的section，数组中存储的是section
-@property(nonatomic,strong) NSMutableArray *unfoldCells;              //存储展开状态的cells，数组中存储的是cells
-
-
-
+#define OutTableViewSectionHeight           50.0f
+#define InTableViewSectionHeight            35.0f
+#define InTableVeiwCellHeight               42.0f
+@interface TaskContentTableView()<OutTableViewCellDelegate>
+@property (nonatomic,strong) NSMutableArray<NSString *> *containers;//已存在的模具名数组
 @end
+
 @implementation TaskContentTableView
-#pragma mark -- INIT
--(instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
-    if (self = [super initWithFrame:frame style:style]) {
-        [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        self.delegate = self;
-        self.dataSource = self;
+#pragma mark -- common
+-(void)reloadWithTasks:(NSMutableArray<ETMXTask *> *)tasks{
+    [self.molds removeAllObjects];
+    [self.containers removeAllObjects];
+    for (ETMXTask *task in tasks) {
+        if ([self.containers containsObject:task.container]) {//已经创建了任务对应所在的模型
+            NSInteger index = 0;
+            for (NSInteger i = 0; i<self.containers.count; i++) {
+                if ([task.container isEqualToString:self.containers[i]]) {
+                    index = i;
+                    break;
+                }
+            }
+            EtmxMold *curMold = self.molds[index];
+            [curMold addNewTask:task];
+        }else{//未创建任务对应的所在的模型
+            EtmxMold *newMold = [[EtmxMold alloc] init];
+            [newMold addNewTask:task];
+            [self.molds addObject:newMold];
+            [self.containers addObject:task.container];
+        }
     }
-    return self;
+    [self reloadData];
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
-    if (self = [super initWithCoder:aDecoder]) {
-        [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        self.delegate = self;
-        self.dataSource = self;
-    }
-    return self;
-}
-
-#pragma mark -- UITableViewDataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.mold.dataSource.count;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([self.unfoldSections containsObject:[NSNumber numberWithInteger:section]]) {
-        //展开状态
-        NSArray *arr = self.mold.dataSource[section];
-        return arr.count;
+-(void)handleTapSection:(UITapGestureRecognizer *)gesture{
+    NSInteger tag = gesture.view.tag;
+    if ([self.outOpens containsObject:[NSNumber numberWithInteger:tag]]) {
+        [self.outOpens removeObject:[NSNumber numberWithInteger:tag]];
     }else{
-        //收缩状态
-        return 0;
-    }
-}
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *arr = self.mold.dataSource[indexPath.section];
-    ETMXTask *curTask = arr[indexPath.row];
-    NSString *cellID = @"TaskCellSpreadID";
-    ETMXTableViewCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil) {
-        cell = [[NSBundle mainBundle] loadNibNamed:@"ETMXTableViewCell1" owner:self options:nil].lastObject;
-    }
-    if ([self.unfoldCells containsObject:indexPath]) {
-        //展开状态
-        [cell.taskView setHidden:NO];
-    }else{
-        [cell.taskView setHidden:YES];
-    }
-    cell.block = ^BOOL(){
-        return self.isElectrode;
-    };
-    cell.task = curTask;
-    cell.cellDelegate = self;
-    if ([self.selectedTasks containsObject:curTask]) {
-        cell.selectedImageView1.image = [UIImage imageNamed:@"selected_image_checkmark"];
-        cell.selectedImageView2.image = [UIImage imageNamed:@"selected_image_checkmark"];
-    }else{
-        cell.selectedImageView1.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
-        cell.selectedImageView2.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
-    }
-    return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.unfoldCells containsObject:indexPath]) {
-        //展开状态下点击
-        [self.unfoldCells removeObject:indexPath];
-    }else{
-        [self.unfoldCells addObject:indexPath];
-    }
-    [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.unfoldCells containsObject:indexPath]) {
-        //展开状态
-        return CellUnFoldStateHeight;
-    }
-    return CellFoldStateHeight;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return SectionHeight;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    TaskSectionHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"TaskSectionHeaderView" owner:self options:nil].lastObject;
-    NSArray *tasks = self.mold.dataSource[section];
-    ETMXTask *curTask = tasks.firstObject;
-    headerView.tasksCount = tasks.count;
-    headerView.task = curTask;
-    headerView.tag = section;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
-    [headerView addGestureRecognizer:tapGesture];
-    headerView.delegate = self;
-    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:section]]||[self allSeletctdInSection:section]) {
-        headerView.selectedImageView.image = [UIImage imageNamed:@"selected_image_checkmark"];
-    }else{
-        headerView.selectedImageView.image = [UIImage imageNamed:@"selected_image_uncheckmark"];
-    }
-    return headerView;
-}
-
--(void)tapHandle:(UITapGestureRecognizer *)gesture{
-    UIView *curHeaderView = gesture.view;
-    NSInteger tag = curHeaderView.tag;
-    if ([self.unfoldSections containsObject:[NSNumber numberWithInteger:tag]]) {
-        //头部展开状态
-        [self.unfoldSections removeObject:[NSNumber numberWithInteger:tag]];
-    }else{
-        [self.unfoldSections addObject:[NSNumber numberWithInteger:tag]];
+        [self.outOpens addObject:[NSNumber numberWithInteger:tag]];
     }
     [self reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-#pragma mark-- INIT
-
--(EtmxMold *)mold{
-    if (!_mold) {
-        _mold = [[EtmxMold alloc] init];
+#pragma mark -- INIT
+-(NSMutableArray<EtmxMold *> *)molds{
+    if (_molds == nil) {
+        _molds = [[NSMutableArray alloc] init];
     }
-    return _mold;
+    return _molds;
 }
 
--(NSMutableArray *)unfoldSections{
-    if (!_unfoldSections) {
-        _unfoldSections = [[NSMutableArray alloc] init];
+-(NSMutableArray<NSString *> *)containers{
+    if (_containers == nil) {
+        _containers = [[NSMutableArray alloc] init];
     }
-    return _unfoldSections;
-}
+    return _containers;
 
--(NSMutableArray *)unfoldCells{
-    if (!_unfoldCells) {
-        _unfoldCells = [[NSMutableArray alloc] init];
+}
+-(NSMutableArray *)outOpenIndexPaths{
+    if (_outOpenIndexPaths == nil) {
+        _outOpenIndexPaths = [[NSMutableArray alloc] init];
     }
-    return _unfoldCells;
+    return _outOpenIndexPaths;
 }
 
--(NSMutableArray *)selectedSections{
-    if (_selectedSections == nil) {
-        _selectedSections = [[NSMutableArray alloc] init];
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.delegate = self;
+        self.dataSource = self;
+        self.separatorStyle =UITableViewCellSeparatorStyleNone;
     }
-    return _selectedSections;
+    return self;
 }
-
--(NSMutableArray *)selectedTasks{
-    if (_selectedTasks == nil) {
-        _selectedTasks = [[NSMutableArray alloc] init];
+-(instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style{
+    if (self = [super initWithFrame:frame style:style]) {
+        self.delegate = self;
+        self.dataSource = self;
+        self.separatorStyle =UITableViewCellSeparatorStyleNone;
     }
-    return _selectedTasks;
+    return self;
 }
 
--(void)reloadDataWithSortTasks:(NSArray *)sortTasks{
-    [self.mold loadMoldWithTasks:sortTasks];
-    [self reloadData];
+-(NSMutableArray *)outOpens{
+    if (_outOpens == nil) {
+        _outOpens = [[NSMutableArray alloc] init];
+    }
+    return _outOpens;
 }
 
-#pragma mark -- TaskSectionHeaderDelegate
--(void)selecteSectionWithTag:(NSInteger)tag{
-    if ([self.selectedSections containsObject:[NSNumber numberWithInteger:tag]]) {
-        [self.selectedSections removeObject:[NSNumber numberWithInteger:tag]];
-        for (ETMXTask *task in self.mold.dataSource[tag]) {
-            [self.selectedTasks removeObject:task];
-        }
-    }else{
-        [self.unfoldSections addObject:[NSNumber numberWithInteger:tag]];
-        [self.selectedSections addObject:[NSNumber numberWithInteger:tag]];
-        for (ETMXTask *task in self.mold.dataSource[tag]) {
-            if (![self.selectedTasks containsObject:task]) {
-                [self.selectedTasks addObject:task];
+#pragma mark -- UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.molds.count;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    EtmxMold *curMold = self.molds[section];
+    return curMold.subMolds.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellID = @"OutTableViewCell";
+    OutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        cell = [[NSBundle mainBundle] loadNibNamed:cellID owner:self options:nil].lastObject;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    EtmxMold *curMold = self.molds[indexPath.section];
+    SubMold *curSubMold = curMold.subMolds[indexPath.row];
+    cell.subMold = curSubMold;
+    cell.indexPath = indexPath;
+    cell.delegate =self;
+    return cell;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    TaskSectionHeaderView *outHeaderView =[[NSBundle mainBundle] loadNibNamed:@"TaskSectionHeaderView" owner:self options:nil].lastObject;
+    outHeaderView.mold = self.molds[section];
+    outHeaderView.tag = section;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapSection:)];
+    [outHeaderView addGestureRecognizer:tap];
+    outHeaderView.block = ^(EtmxMold *mold){
+        for (SubMold *subMold in mold.subMolds) {
+            subMold.isSelected = mold.isSelected;
+            for (ETMXTask *task in subMold.tasks) {
+                task.isSelected = subMold.isSelected;
             }
         }
-    }
-    if (self.block) {
-        self.block();
-    }
-    [self reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGE_SELECTED_TASK_NUM" object:nil];
+        });
+    };
+    return outHeaderView;
 }
 
--(void)selecteCellWithTask:(ETMXTask *)task{
-    NSIndexPath *taskIndexPath = [self getIndexPathWithTask:task];
-    if ([self.selectedTasks containsObject:task]) {
-        [self.selectedTasks removeObject:task];
-        [self.selectedSections removeObject:[NSNumber numberWithInteger:taskIndexPath.section]];
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.outOpens containsObject:[NSNumber numberWithInteger:indexPath.section]]) {
+        EtmxMold *curMold = self.molds[indexPath.section];
+        SubMold *curSubMold = curMold.subMolds[indexPath.row];
+        NSInteger count =0;
+        if ([self.outOpenIndexPaths containsObject:indexPath]) {
+            count =curSubMold.tasks.count;
+        }
+        CGFloat height = InTableViewSectionHeight + InTableVeiwCellHeight * count;
+        return height;
     }else{
-        if (![self.selectedTasks containsObject:task]) {
-            [self.selectedTasks addObject:task];
-        }
-        BOOL allTaskSelected = YES;
-        allTaskSelected = [self allSeletctdInSection:taskIndexPath.section];
-        if (allTaskSelected) {
-            [self.selectedSections addObject:[NSNumber numberWithInteger:taskIndexPath.section]];
-        }
+        return 0.0f;
     }
-    if (self.block) {
-        self.block();
-    }
-    [self reloadData];
 }
 
--(NSIndexPath *)getIndexPathWithTask:(ETMXTask *)task{
-    NSIndexPath *indexPath = [[NSIndexPath alloc] init];
-    for (NSInteger i = 0; i<self.mold.dataSource.count; i++) {
-        NSArray *arr  = self.mold.dataSource[i];
-        for (NSInteger j = 0; j<arr.count; j++) {
-            if (task == arr[j]) {
-                indexPath = [NSIndexPath indexPathForRow:j inSection:i];
-                break;
-            }
-        }
-    }
-    return indexPath;
-}
--(BOOL)allSeletctdInSection:(NSInteger)section{
-    BOOL isAllSelected = YES;
-    NSArray *arr = self.mold.dataSource[section];
-    for (ETMXTask *task in arr) {
-        if (![self.selectedTasks containsObject:task]) {
-            isAllSelected = NO;
-            break;
-        }
-    }
-    return isAllSelected;
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return OutTableViewSectionHeight;
 }
 
+#pragma mark --OutTableViewCellDelegate
+-(void)onTapIndexPath:(NSIndexPath *)indexPath{
+    if ([self.outOpenIndexPaths containsObject:indexPath]) {
+        [self.outOpenIndexPaths removeObject:indexPath];
+    }else{
+        [self.outOpenIndexPaths addObject:indexPath];
+    }
+    [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+-(void)onAllTaskSelected:(NSIndexPath *)indexPath{
+    BOOL allSubMoldSelected = YES;
+    EtmxMold *curMold = self.molds[indexPath.section];
+    for (SubMold *curSubMold in curMold.subMolds) {
+        if (!curSubMold.isSelected) {
+            allSubMoldSelected = NO;
+        }
+    }
+    curMold.isSelected = allSubMoldSelected;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+    });
+}
 @end

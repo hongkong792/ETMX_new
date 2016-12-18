@@ -137,12 +137,14 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    __block typeof(self) weakSelf = self;
-    self.tableView.block = ^(){
-        __strong typeof(self) strong = weakSelf;
-        [strong refreshBtns];
-        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
-    };
+#warning TODO:
+//    __block typeof(self) weakSelf = self;
+//    self.tableView.block = ^(){
+//        __strong typeof(self) strong = weakSelf;
+//        [strong refreshBtns];
+//        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
+//    };
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBtns) name:@"CHANGE_SELECTED_TASK_NUM" object:nil];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [self setup];
@@ -154,14 +156,13 @@ typedef enum : NSUInteger {
     [self.maskView setHidden:YES];
     [self.view addSubview:self.maskView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMaskView) name:REMOVEMASKVIEW object:nil];
-    
 }
 
 #pragma mark -- commen
 -(void)setup{
     [self initNav];
     self.taskType = WTaskTypeMold;                                      //默认是新模
-    self.taskState = WTaskStateReleased;                            //默认是未开始
+    self.taskState = WTaskStateInwork;                            //默认是未开始
     [self.typeSegment addTarget:self action:@selector(selecteType:) forControlEvents:UIControlEventValueChanged];
     [self.stateSegment addTarget:self action:@selector(selecteState:) forControlEvents:UIControlEventValueChanged];
     [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateNormal];
@@ -173,6 +174,17 @@ typedef enum : NSUInteger {
     [self.stateSegment setTitle:Localized(@"inwork") forSegmentAtIndex:1];
     [self.stateSegment setTitle:Localized(@"stopped") forSegmentAtIndex:2];
     [self.stateSegment setTitle:Localized(@"completed") forSegmentAtIndex:3];
+    self.stateSegment.selectedSegmentIndex = 1;
+}
+
+-(NSMutableArray <ETMXTask *>*)getSelectedTasks{
+    NSMutableArray *selectedArr = [[NSMutableArray alloc] init];
+    for (ETMXTask *task in self.sortTasks) {
+        if (task.isSelected) {
+            [selectedArr addObject:task];
+        }
+    }
+    return selectedArr;
 }
 
 -(void)initNav{
@@ -198,42 +210,31 @@ typedef enum : NSUInteger {
     self.navigationItem.rightBarButtonItem = searchBarItem;
 }
 
--(void)creatTableView{
-    TaskContentTableView *tableView = [[TaskContentTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headerView.frame), self.view.frame.size.width, self.view.frame.size.height - self.footerView.frame.size.height-self.headerView.frame.size.height) style:UITableViewStylePlain];
-    self.tableView =tableView;
-    __block typeof(self) weakSelf = self;
-    self.tableView.block = ^(){
-        __strong typeof(self) strong = weakSelf;
-        [strong refreshBtns];
-        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
-    };
-    [tableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-    [self.view addSubview:self.tableView];
-    [self.view bringSubviewToFront:self.indicatorView];
-}
-
 -(void)selecteType:(UISegmentedControl *)sender{
     switch (sender.selectedSegmentIndex) {
         case 0:
             self.taskType = WTaskTypeMold;
-            self.tableView.isElectrode = NO;
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"KEY_IS_ELECTRODE"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             break;
             
         case 1:
             self.taskType = WTaskTypeChangeMold;
-            self.tableView.isElectrode = NO;
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"KEY_IS_ELECTRODE"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             break;
             
         case 2:
             self.taskType = WTaskTypeElectrode;
-            self.tableView.isElectrode = YES;
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"KEY_IS_ELECTRODE"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             break;
             
         default:
             break;
     }
-    [self.tableView.selectedSections removeAllObjects];
-    [self.tableView.selectedTasks removeAllObjects];
+    [self.tableView.outOpens removeAllObjects];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
 }
 
@@ -254,13 +255,13 @@ typedef enum : NSUInteger {
         default:
             break;
     }
-    [self.tableView.selectedSections removeAllObjects];
-    [self.tableView.selectedTasks removeAllObjects];
+    [self.tableView.outOpens removeAllObjects];
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
 }
 
 //刷新按钮文字
 -(void)refreshBtns{
+    NSArray *tempArr = [self getSelectedTasks];
     NSString *releasedStr = [self.allTaskState valueForKey:@"notstart"];
     NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
     NSString *stoppedStr = [self.allTaskState valueForKey:@"stopped"];
@@ -269,12 +270,10 @@ typedef enum : NSUInteger {
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),inworkStr?inworkStr:@"0"] forSegmentAtIndex:1];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),stoppedStr?stoppedStr:@"0"] forSegmentAtIndex:2];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),completedStr?completedStr:@"0"] forSegmentAtIndex:3];
-    [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),self.tableView.selectedTasks.count] forState:UIControlStateNormal];
-    [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),self.tableView.selectedTasks.count] forState:UIControlStateHighlighted];
+    [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),tempArr.count] forState:UIControlStateNormal];
+    [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),tempArr.count] forState:UIControlStateHighlighted];
     [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
     [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
-    
-    
     [self.startBtn setTitle:Localized(@"start") forState:UIControlStateNormal];
     [self.startBtn setTitle:Localized(@"start") forState:UIControlStateHighlighted];
     
@@ -318,8 +317,7 @@ typedef enum : NSUInteger {
 //刷新
 -(void)refresh:(id)sender{
     [self refreshBtns];
-    [self.tableView.selectedTasks removeAllObjects];
-    [self.tableView.selectedSections removeAllObjects];
+    [self.tableView.outOpens removeAllObjects];
     NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
     self.title =fullName;
     [self sortAllTaskWithType:self.taskType andState:self.taskState];
@@ -346,8 +344,6 @@ typedef enum : NSUInteger {
     _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
     _chooseImagePopoverController.delegate = self;
     [self presentViewController:sea animated:NO completion:nil];
-    
-    
     
 }
 
@@ -389,9 +385,6 @@ typedef enum : NSUInteger {
         helpcon.currentTask = self.currentTask;
         [self presentViewController:helpcon animated:YES completion:nil];
         self.currentTask = nil;
- 
-        
-        
     }
 }
 
@@ -399,7 +392,7 @@ typedef enum : NSUInteger {
 - (IBAction)startTask:(id)sender {
     self.netRequesetName = taskExecutionTS;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-    NSArray *tasks = self.tableView.selectedTasks;
+    NSArray *tasks = [self getSelectedTasks];
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TS",userCode,tasksStr];
@@ -419,7 +412,7 @@ typedef enum : NSUInteger {
 - (IBAction)stopTask:(id)sender {
     self.netRequesetName = taskExecutionTP;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-    NSArray *tasks = self.tableView.selectedTasks;
+    NSArray *tasks = [self getSelectedTasks];
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TP",userCode,tasksStr];
@@ -438,7 +431,7 @@ typedef enum : NSUInteger {
 - (IBAction)finishTask:(id)sender {
     self.netRequesetName = taskExecutionTF;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-    NSArray *tasks = self.tableView.selectedTasks;
+    NSArray *tasks = [self getSelectedTasks];
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TF",userCode,tasksStr];
@@ -469,7 +462,7 @@ typedef enum : NSUInteger {
 - (IBAction)goWork:(id)sender {
     self.netRequesetName = taskExecutionDO;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-    NSArray *tasks = self.tableView.selectedTasks;
+    NSArray *tasks = [self getSelectedTasks];
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"DO",userCode,tasksStr];
@@ -483,14 +476,12 @@ typedef enum : NSUInteger {
         [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
-    
 }
 //下班
 - (IBAction)workOff:(id)sender {
-    
     self.netRequesetName = taskExecutionDF;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
-    NSArray *tasks = self.tableView.selectedTasks;
+    NSArray *tasks = [self getSelectedTasks];
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"DF",userCode,tasksStr];
@@ -507,7 +498,14 @@ typedef enum : NSUInteger {
 }
 //替換
 - (IBAction)exchange:(id)sender {
-    if (self.tableView.selectedTasks && self.tableView.selectedTasks.count > 1) {
+    NSArray *tempArr = [self getSelectedTasks];
+    if (tempArr.count == 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
+    
+    if (tempArr.count > 1) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"task can't beyond one") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
     }else{
@@ -516,7 +514,7 @@ typedef enum : NSUInteger {
             [alertView show];
         }else{
             ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
-            exchangOpVC.selecedTasks = self.tableView.selectedTasks;
+            exchangOpVC.selecedTasks = tempArr;
             __weak typeof(self) weakSelf = self;
             exchangOpVC.block = ^(){
                 __strong typeof(self) strongSelf = weakSelf;
@@ -533,23 +531,32 @@ typedef enum : NSUInteger {
             [self.view bringSubviewToFront:self.maskView];
         }
     }
-    
-    
-    
 }
 
 - (IBAction)selecteAll:(id)sender {
-    [self.tableView.selectedTasks removeAllObjects];
     for (ETMXTask *task in self.sortTasks) {
-        [self.tableView.selectedTasks addObject:task];
+        task.isSelected = YES;
+    }
+    for (EtmxMold *mold in self.tableView.molds) {
+        mold.isSelected = YES;
+        for (SubMold *subMold in mold.subMolds) {
+            subMold.isSelected = YES;
+        }
     }
     [self refreshBtns];
     [self.tableView reloadData];
 }
 
 - (IBAction)cancelSelected:(id)sender {
-    [self.tableView.selectedTasks removeAllObjects];
-    [self.tableView.selectedSections removeAllObjects];
+    for (ETMXTask *task in self.sortTasks) {
+        task.isSelected = NO;
+    }
+    for (EtmxMold *mold in self.tableView.molds) {
+        mold.isSelected = NO;
+        for (SubMold *subMold in mold.subMolds) {
+            subMold.isSelected = NO;
+        }
+    }
     [self refreshBtns];
     [self.tableView reloadData];
 }
@@ -705,7 +712,6 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_withTask:
         {
-            
             if ([elementName isEqualToString:@"Task"]) {
                 NSString * flag = [attributeDict objectForKey:@"flag"];
                 NSString *message = [attributeDict objectForKey:@"message"];
@@ -737,7 +743,7 @@ typedef enum : NSUInteger {
         case getFilterTasks2:
         {
             [self refreshBtns];
-            [self.tableView reloadDataWithSortTasks:self.sortTasks];
+            [self.tableView reloadWithTasks:self.sortTasks];
             [self.indicatorView stopAnimating];
         }
             break;
@@ -746,8 +752,6 @@ typedef enum : NSUInteger {
             if (self.flag) {
                 self.stateSegment.selectedSegmentIndex = 1;
                 self.taskState = WTaskStateInwork;
-                [self.tableView.selectedSections removeAllObjects];
-                [self.tableView.selectedTasks removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -761,8 +765,7 @@ typedef enum : NSUInteger {
             if (self.flag) {
                 self.stateSegment.selectedSegmentIndex = 2;
                 self.taskState = WTaskStateStopped;
-                [self.tableView.selectedSections removeAllObjects];
-                [self.tableView.selectedTasks removeAllObjects];
+                [self.tableView.outOpens removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -776,8 +779,7 @@ typedef enum : NSUInteger {
             if (self.flag) {
                 self.stateSegment.selectedSegmentIndex = 3;
                 self.taskState = WTaskStateCompleted;
-                [self.tableView.selectedSections removeAllObjects];
-                [self.tableView.selectedTasks removeAllObjects];
+                [self.tableView.outOpens removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -789,8 +791,7 @@ typedef enum : NSUInteger {
         case taskExecutionDO:
         {
             if (self.flag) {
-                [self.tableView.selectedSections removeAllObjects];
-                [self.tableView.selectedTasks removeAllObjects];
+                [self.tableView.outOpens removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -802,8 +803,7 @@ typedef enum : NSUInteger {
         case taskExecutionDF:
         {
             if (self.flag) {
-                [self.tableView.selectedSections removeAllObjects];
-                [self.tableView.selectedTasks removeAllObjects];
+                [self.tableView.outOpens removeAllObjects];
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
             }else{
                 [self.tableView reloadData];
@@ -815,7 +815,7 @@ typedef enum : NSUInteger {
         case taskExecutionSC_noTask:
         {
             
-            [self.tableView reloadDataWithSortTasks:self.sortTasks];
+            [self.tableView reloadWithTasks:self.sortTasks];
             [self refreshBtns];
             [self.indicatorView stopAnimating];
         }
@@ -823,12 +823,7 @@ typedef enum : NSUInteger {
         case taskExecutionSC_withTask:
         {
             if (self.flagWithTask != 0) {
-            
                 [self sortAllTaskWithType:self.taskType andState:self.taskState];
-
-//                [self.tableView reloadDataWithSortTasks:self.sortTasks];
-//                [self refresh:nil];
-//                [self cancelSelected:nil];
             }
             [self.indicatorView stopAnimating];
         }
@@ -879,7 +874,6 @@ typedef enum : NSUInteger {
         NSArray *parameters = @[self.taskState,userCode,result,@"",self.taskType];
         NSString *methodName = @"getScanTasks2";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
-            NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
@@ -891,7 +885,7 @@ typedef enum : NSUInteger {
     }else{
 
         self.netRequesetName = taskExecutionSC_withTask;
-        NSArray *tasks = self.tableView.selectedTasks;
+        NSArray *tasks = [self getSelectedTasks];
         NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
         NSArray *parameters = @[result,tasksStr];
         NSString *methodName = @"scanOperatorOrEquipment";
@@ -937,7 +931,7 @@ typedef enum : NSUInteger {
 - (void)scanWithTask
 {
     self.netRequesetName = taskExecutionSC_withTask;
-    NSArray *tasks = self.tableView.selectedTasks;
+    NSArray *tasks = [self getSelectedTasks];
     NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"SGS000359",tasksStr];
     NSString *methodName = @"scanOperatorOrEquipment";

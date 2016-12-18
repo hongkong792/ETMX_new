@@ -105,6 +105,8 @@
 /**<#arg#>*/
 @property (nonatomic ,strong)NSString*key;
 
+@property (nonatomic,assign)BOOL isSelected;
+
 -(instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

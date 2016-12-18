@@ -7,46 +7,43 @@
 //
 
 #import "EtmxMold.h"
+
 @interface EtmxMold()
-@property (nonatomic,strong) NSMutableArray *moldTitles;
+@property (nonatomic,strong) NSMutableArray<NSString *> *subMoldTitles;
 @end
 
 @implementation EtmxMold
 
--(void)loadMoldWithTasks:(NSArray *)tasks{
-    [self.moldTitles removeAllObjects];
-    [self.dataSource removeAllObjects];
-    for (ETMXTask *task in tasks) {
-        if (![_moldTitles containsObject:task.container]) {
-            NSMutableArray *newArr = [[NSMutableArray alloc] init];
-            [newArr addObject:task];
-            [self.moldTitles addObject:task.container];
-            [self.dataSource addObject:newArr];
-        }else{
-            NSInteger index = 0;
-            for (NSInteger i =0; i<self.moldTitles.count; i++) {
-                if ([task.container isEqualToString:self.moldTitles[i]]) {
-                    index = i;
-                    break;
-                }
+-(void)addNewTask:(ETMXTask *)task{
+    if ([self.subMoldTitles containsObject:task.object]) {//已经创建任务对应的零件
+        NSInteger index = 0;
+        for (NSInteger i = 0; i<self.subMolds.count; i++) {
+            if ([task.object isEqualToString:self.subMoldTitles[i]]) {
+                index = i;
+                break;
             }
-            NSMutableArray *arr =  self.dataSource[index];
-            [arr addObject:task];
         }
+        SubMold *curSubMold = self.subMolds[index];
+        [curSubMold addNewTask:task];
+    }else{//未创建任务对应的零件
+        SubMold *newSubMold = [[SubMold alloc] init];
+        [newSubMold addNewTask:task];
+        [self.subMolds addObject:newSubMold];
+        [self.subMoldTitles addObject:task.object];
     }
 }
 
--(NSMutableArray<NSMutableArray *> *)dataSource{
-    if (_dataSource == nil) {
-        _dataSource = [[NSMutableArray alloc] init];
+-(NSMutableArray<SubMold *> *)subMolds{
+    if (_subMolds == nil) {
+        _subMolds = [[NSMutableArray alloc] init];
     }
-    return _dataSource;
+    return _subMolds;
 }
 
--(NSMutableArray *)moldTitles{
-    if (_moldTitles == nil) {
-        _moldTitles = [[NSMutableArray alloc] init];
+-(NSMutableArray<NSString *> *)subMoldTitles{
+    if (_subMoldTitles == nil) {
+        _subMoldTitles = [[NSMutableArray alloc] init];
     }
-    return _moldTitles;
+    return _subMoldTitles;
 }
 @end

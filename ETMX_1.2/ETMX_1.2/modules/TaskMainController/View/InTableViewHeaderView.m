@@ -26,15 +26,16 @@
     _subMold = subMold;
     ETMXTask *firstTask = subMold.tasks[0];
     BOOL isElectrode = [[NSUserDefaults standardUserDefaults] boolForKey:@"KEY_IS_ELECTRODE"];
-    if (isElectrode) {
-        self.objectPlaceLabel.text = Localized(@"electrode code");
-    }else{
-        self.objectPlaceLabel.text = Localized(@"part code");
-    }
     self.objectLabel.text = firstTask.object;
     if ([firstTask.container isEqualToString:firstTask.object]) {
+        self.objectPlaceLabel.text = Localized(@"mold code");
         self.objectNamePlaceLabel.text = Localized(@"mold name");
     }else{
+        if (isElectrode) {
+            self.objectPlaceLabel.text = Localized(@"electrode code");
+        }else{
+            self.objectPlaceLabel.text = Localized(@"part code");
+        }
         self.objectNamePlaceLabel.text =Localized(@"part name");
     }
     self.objcectNameLabel.text = firstTask.objectName;

@@ -21,15 +21,5 @@ static NSString * _taskId;
     });
     return sharedAccountManagerInstance;
 }
-- (void)setTaskId:(NSString *)taskId
-{
-    
-    _taskId = taskId;
-}
-- (NSString *)taskId
-{    
-    return _taskId;
-}
-
 
 @end

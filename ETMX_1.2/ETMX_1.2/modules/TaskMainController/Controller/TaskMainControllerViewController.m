@@ -20,6 +20,7 @@
 #import "AddHelperViewController.h"
 #import "CurrentTask.h"
 #import "QRScanViewController.h"
+#import "SelectTaskViewController.h"
 
 
 
@@ -138,12 +139,12 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
 #warning TODO:
-//    __block typeof(self) weakSelf = self;
-//    self.tableView.block = ^(){
-//        __strong typeof(self) strong = weakSelf;
-//        [strong refreshBtns];
-//        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
-//    };
+    //    __block typeof(self) weakSelf = self;
+    //    self.tableView.block = ^(){
+    //        __strong typeof(self) strong = weakSelf;
+    //        [strong refreshBtns];
+    //        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
+    //    };
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBtns) name:@"CHANGE_SELECTED_TASK_NUM" object:nil];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -326,12 +327,15 @@ typedef enum : NSUInteger {
 //搜索事件
 -(void)search:(id)sender{
     
+    
+    
+    
     self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
     [self.maskViewInAddHelper setAlpha:0.5];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
     [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
-
+    
     [self.view addSubview:self.maskViewInAddHelper];
     SearchViewController * sea = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
     sea.delegate = self;
@@ -350,7 +354,7 @@ typedef enum : NSUInteger {
 //添帮手事件入口
 - (IBAction)addHelper:(UIButton *)sender {
     
-    if (self.currentTask == nil) {
+    if ([self getSelectedTasks].count == 0) {
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:Localized(@"please select task") message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -361,6 +365,8 @@ typedef enum : NSUInteger {
         
         
     }else{
+        
+        [self selectedTaskPrepare];
         if ([self.taskState isEqualToString:@"completed"] ) {
             [self showAlert:Localized(@"can't add member to completed task")];
             return;
@@ -452,8 +458,9 @@ typedef enum : NSUInteger {
         [self showAlert:Localized(@"can't scan With completed task")];
         return;
     }
+    [self selectedTaskPrepare];
     
-    [self scanWithTask]; return;
+    //[self scanWithTask]; return;
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
     [self.navigationController pushViewController:self.qrViewCon animated:YES];
@@ -717,12 +724,12 @@ typedef enum : NSUInteger {
                 NSString *message = [attributeDict objectForKey:@"message"];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                  //  [self.navigationController popViewControllerAnimated:YES];
+                    //  [self.navigationController popViewControllerAnimated:YES];
                 });
                 if ([flag integerValue] == 0) {
                     self.flagWithTask = 0;
                     [self showAlert:message];
- 
+                    
                 }else{
                     
                     self.flagWithTask = 1;
@@ -743,6 +750,9 @@ typedef enum : NSUInteger {
         case getFilterTasks2:
         {
             [self refreshBtns];
+            if (self.currentTask.id.length >0) {
+                  [self afterScan];
+            }
             [self.tableView reloadWithTasks:self.sortTasks];
             [self.indicatorView stopAnimating];
         }
@@ -867,7 +877,7 @@ typedef enum : NSUInteger {
          didScanResult:(NSString *)result
             isTwoDCode:(BOOL)isTwoDCode
 {
-
+    
     if (self.currentTask == nil) {//不勾选任务扫描
         self.netRequesetName = taskExecutionSC_noTask;
         NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
@@ -883,7 +893,6 @@ typedef enum : NSUInteger {
             [self showAlert:error.localizedDescription];
         }];
     }else{
-
         self.netRequesetName = taskExecutionSC_withTask;
         NSArray *tasks = [self getSelectedTasks];
         NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
@@ -950,9 +959,9 @@ typedef enum : NSUInteger {
 ///扫描完成刷新
 - (void)selectTaskSaveToLocal:(NSMutableArray *)array
 {
-
+    
     [array writeToFile:[self filePathTask] atomically:YES];
-
+    
 }
 - (NSString *)filePathTask
 {
@@ -963,7 +972,7 @@ typedef enum : NSUInteger {
 
 - (void)selectSectionSaveToLocal:(NSMutableArray *)array
 {
-
+    
     [array writeToFile:[self filePathSction] atomically:YES];
 }
 
@@ -987,5 +996,40 @@ typedef enum : NSUInteger {
     NSArray *arr = [NSArray arrayWithContentsOfFile:[self filePathSction]];
     return arr;
 }
+
+#pragma selectedTaskDeal
+- (void)selectedTaskPrepare
+{
+    if ( [self getSelectedTasks].count > 1) {
+     // [self showAlert:Localized(@"select only one")];
+        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
+        [self presentViewController:con animated:NO completion:nil];
+        return;
+        
+    }else{
+        ETMXTask * task = [[self getSelectedTasks] lastObject];
+        if (task.id.length>0) {
+            [[CurrentTask sharedManager] setCurrentTask:task];
+            [[CurrentTask sharedManager] setTaskId:task.id];
+            self.currentTask = task;
+        }
+    }
+    
+}
+
+- (void)afterScan
+{
+    ETMXTask * task = [[ETMXTask alloc] init];
+    for (int i = 0; i< self.sortTasks.count; i++) {
+        task = self.sortTasks[i];
+        if ([self.currentTask.id isEqualToString:task.id]) {
+            task.isSelected = YES;
+            [self.sortTasks replaceObjectAtIndex:i withObject:task];
+        }
+    }
+    self.currentTask = nil;
+}
+
+
 @end
 

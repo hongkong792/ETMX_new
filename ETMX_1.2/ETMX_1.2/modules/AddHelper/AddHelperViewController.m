@@ -130,8 +130,7 @@ static BOOL lastThree = NO;
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
     [paramArr addObject:@"zh-CN|zh-TW|en"];
-    
-    //    NSArray * paramArr = [NSArray arrayWithObjects:self.currentTask.id,@"zh-CN|zh-TW|en", nil];
+
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -160,8 +159,7 @@ static BOOL lastThree = NO;
         
         
     } failure:^(NSError *error) {
-        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        //        [alertView show];
+
         [self showAlert:Localized(@"please check the net")];
         
     }];
@@ -172,36 +170,28 @@ static BOOL lastThree = NO;
 //添加组员
 - (IBAction)addMember:(id)sender {
     //只用于页面
-    
-//    self.memberCell.deleteBtn.hidden = NO;
-//    self.memberCell.pauseBtn.hidden = YES;
-//    self.memberCell.finishBtn.hidden = YES;
+
     NSDictionary * dic = [UserManager instance].dic;
     UserAccount * user =_memberData[_currentData1Index];
     if ([self.currentOperUser containsObject:user]) {
        [self showAlert:Localized(@"can not add again")];
         return;
     }
-    
     user.userType = @"任務參與者";
     if (user.id.length >0 ) {
         if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
             [self showAlert:@"不能添加自己"];
-            
             //[self dismissViewControllerAnimated:YES completion:nil];
             return;
         }else{
             
             [self.currentOperUser addObject:user];
         }
-        
-        
     }else{
         [self showAlert:@"请选择组员"];
        // [self dismissViewControllerAnimated:YES completion:nil];
         return;
     }
-
     [self.memberInfoTable reloadData];
 }
 
@@ -402,13 +392,11 @@ static BOOL lastThree = NO;
     }
     //[self.memberInfoTable reloadData];
     
-    
 }
 - (void)pauseClick:(id)sender
 {
     self.requestName = SelectedPartner_Pause;
     UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
-    
     [self operClick:@"TP" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     self.selectedMember = ((UIButton *)sender).tag;
     
@@ -417,7 +405,6 @@ static BOOL lastThree = NO;
 {
     self.requestName = SelectedPartner_Finish;
     UserAccount *userAccount = [self.currentOperUser objectAtIndex:((UIButton *)sender).tag];
-    
     [self operClick:@"TF" withSelectUser:SAFE_FORMAT_STRING(userAccount.id)];
     self.selectedMember = ((UIButton *)sender).tag;
     
@@ -434,7 +421,7 @@ static BOOL lastThree = NO;
     [paramArr addObject:SAFE_FORMAT_STRING(operType)];
     NSDictionary * dic = [UserManager instance].dic;
     [paramArr addObject: [dic objectForKey:@"id"]];
-    [paramArr addObject:@"zh-CN|zh-TW|en"];
+    [paramArr addObject:@"zh-CN"];
     
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
@@ -443,16 +430,8 @@ static BOOL lastThree = NO;
         [p setDelegate:weakSelf];
         [p parse];
         
-//        operatorsFinish = YES;
-//        [weakSelf laodDataFinish];
-//        
-//        clickFinish = YES;
-        //  [weakSelf laodDataFinish];
-        
-        
     } failure:^(NSError *error) {
-        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        //        [alertView show];
+
         [self showAlert:Localized(@"please check the net")];
     }];
     

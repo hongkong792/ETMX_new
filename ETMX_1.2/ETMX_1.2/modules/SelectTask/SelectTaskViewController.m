@@ -37,7 +37,7 @@
     // Do any additional setup after loading the view.
     //注册
     [self.tableView registerNib:[UINib nibWithNibName:@"InTableViewCell" bundle:nil]  forCellReuseIdentifier:SELECTTASK];
-    self.view.frame = CGRectMake(0, 0, self.view.frame.size., 400);
+   // self.view.frame = CGRectMake(0, 0, self.view.frame.size., 400);
     //self.view.center = self.tableView.superview.center;
 }
 

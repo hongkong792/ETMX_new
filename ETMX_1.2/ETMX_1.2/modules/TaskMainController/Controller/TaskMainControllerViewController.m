@@ -1001,9 +1001,9 @@ typedef enum : NSUInteger {
 - (void)selectedTaskPrepare
 {
     if ( [self getSelectedTasks].count > 1) {
-     // [self showAlert:Localized(@"select only one")];
-        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
-        [self presentViewController:con animated:NO completion:nil];
+        [self showAlert:Localized(@"select only one")];
+//        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
+//        [self presentViewController:con animated:NO completion:nil];
         return;
         
     }else{

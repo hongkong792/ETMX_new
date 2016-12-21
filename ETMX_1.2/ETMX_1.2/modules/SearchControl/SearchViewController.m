@@ -176,7 +176,7 @@ static BOOL memberFinish = NO;
     
     
     if ([menu isEqual:self.equmenu]) {
-        return Localized(@"please select");
+        return Localized(@"please select equipment");
     }else if ([menu isEqual:self.menu]){
         return  Localized(@"please select");
         

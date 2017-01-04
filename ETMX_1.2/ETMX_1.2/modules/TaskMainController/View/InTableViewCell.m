@@ -7,27 +7,28 @@
 //
 
 #import "InTableViewCell.h"
+#import "CustomLabel.h"
 @interface InTableViewCell()
 
 //xib属性
 @property (strong, nonatomic) IBOutlet UIImageView *selectedImageView;
-@property (strong, nonatomic) IBOutlet UITextField *taskNamePlace;
-@property (strong, nonatomic) IBOutlet UITextField *taskStatusPlace;
-@property (strong, nonatomic) IBOutlet UITextField *taskOperatorPlace;
-@property (strong, nonatomic) IBOutlet UITextField *taskMachinePlace;
-@property (strong, nonatomic) IBOutlet UITextField *actStartDatePlace;
-@property (strong, nonatomic) IBOutlet UITextField *actFinishDatePlace;
-@property (strong, nonatomic) IBOutlet UITextField *userTimePlace;
-@property (strong, nonatomic) IBOutlet UITextField *actUseTimePlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskNamePlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskStatusPlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskOperatorPlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskMachinePlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *actStartDatePlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *actFinishDatePlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *userTimePlace;
+@property (strong, nonatomic) IBOutlet CustomLabel *actUseTimePlace;
 
-@property (strong, nonatomic) IBOutlet UITextField *taskName;
-@property (strong, nonatomic) IBOutlet UITextField *taskStatus;
-@property (strong, nonatomic) IBOutlet UITextField *taskOperator;
-@property (strong, nonatomic) IBOutlet UITextField *taskMachine;
-@property (strong, nonatomic) IBOutlet UITextField *ActStartDate;
-@property (strong, nonatomic) IBOutlet UITextField *actFinishDate;
-@property (strong, nonatomic) IBOutlet UITextField *useTime;
-@property (strong, nonatomic) IBOutlet UITextField *actUseTime;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskName;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskStatus;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskOperator;
+@property (strong, nonatomic) IBOutlet CustomLabel *taskMachine;
+@property (strong, nonatomic) IBOutlet CustomLabel *ActStartDate;
+@property (strong, nonatomic) IBOutlet CustomLabel *actFinishDate;
+@property (strong, nonatomic) IBOutlet CustomLabel *useTime;
+@property (strong, nonatomic) IBOutlet CustomLabel *actUseTime;
 @end
 
 @implementation InTableViewCell

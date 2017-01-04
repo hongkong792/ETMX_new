@@ -10,7 +10,7 @@
 #import "InTableViewCell.h"
 #import "InTableViewHeaderView.h"
 #define IntableViewHeaderHeight     35.0f
-#define IntableViewCellHeight       42.0f
+#define IntableViewCellHeight       63.0f
 #define IntableViewCellHeightFold   0.0f
 
 @interface InTableView()<UITableViewDelegate,UITableViewDataSource>

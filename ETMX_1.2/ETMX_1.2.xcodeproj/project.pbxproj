@@ -96,6 +96,7 @@
 		24896ACC1DE332060028FCFE /* ExchangeOperatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24896AC81DE332060028FCFE /* ExchangeOperatorViewController.xib */; };
 		24896ACD1DE332060028FCFE /* MembersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24896ACA1DE332060028FCFE /* MembersTableViewController.m */; };
 		248F28221DF3056000EE6D07 /* CustomeBtn2.m in Sources */ = {isa = PBXBuildFile; fileRef = 248F28211DF3056000EE6D07 /* CustomeBtn2.m */; };
+		249C660A1E1D30CC00FC9EBB /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249C66091E1D30CC00FC9EBB /* CustomLabel.m */; };
 		24F09B2F1E04F1AF004C0FC1 /* InTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F09B2E1E04F1AF004C0FC1 /* InTableView.m */; };
 		24F09B321E04FA11004C0FC1 /* InTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F09B311E04FA11004C0FC1 /* InTableViewHeaderView.m */; };
 		24F09B341E04FA1B004C0FC1 /* InTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F09B331E04FA1B004C0FC1 /* InTableViewHeaderView.xib */; };
@@ -291,6 +292,8 @@
 		24896ACA1DE332060028FCFE /* MembersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewController.m; sourceTree = "<group>"; };
 		248F28201DF3056000EE6D07 /* CustomeBtn2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomeBtn2.h; sourceTree = "<group>"; };
 		248F28211DF3056000EE6D07 /* CustomeBtn2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomeBtn2.m; sourceTree = "<group>"; };
+		249C66081E1D30CC00FC9EBB /* CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLabel.h; sourceTree = "<group>"; };
+		249C66091E1D30CC00FC9EBB /* CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLabel.m; sourceTree = "<group>"; };
 		24F09B2D1E04F1AF004C0FC1 /* InTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InTableView.h; sourceTree = "<group>"; };
 		24F09B2E1E04F1AF004C0FC1 /* InTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InTableView.m; sourceTree = "<group>"; };
 		24F09B301E04FA11004C0FC1 /* InTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InTableViewHeaderView.h; sourceTree = "<group>"; };
@@ -768,6 +771,8 @@
 				24F09B331E04FA1B004C0FC1 /* InTableViewHeaderView.xib */,
 				24F09B3B1E052A48004C0FC1 /* TaskContentTableView.h */,
 				24F09B3C1E052A48004C0FC1 /* TaskContentTableView.m */,
+				249C66081E1D30CC00FC9EBB /* CustomLabel.h */,
+				249C66091E1D30CC00FC9EBB /* CustomLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -928,6 +933,7 @@
 				0674B8861DD08AB0004FF173 /* README.md in Sources */,
 				0674B88E1DD08AB0004FF173 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0674B89B1DD08AB0004FF173 /* XMLReader.m in Sources */,
+				249C660A1E1D30CC00FC9EBB /* CustomLabel.m in Sources */,
 				0674B8831DD08AB0004FF173 /* AFURLResponseSerialization.m in Sources */,
 				247494931DD21B7400BD7711 /* CustomSegmentController.m in Sources */,
 				0674B8841DD08AB0004FF173 /* AFURLSessionManager.m in Sources */,

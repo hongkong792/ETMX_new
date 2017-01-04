@@ -503,7 +503,7 @@
 
 // 指明是否允许根据用户请求清除内容
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
-    NSLog(@"textFieldDidEndEditing");
+  //  NSLog(@"textFieldDidEndEditing");
     return YES;
 }
 

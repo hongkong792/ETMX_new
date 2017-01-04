@@ -106,6 +106,10 @@ typedef enum : NSUInteger {
 //按照要求排序好的所有任务，二维数组
 @property (nonatomic,strong) NSMutableArray *sortTasks;
 
+//上次勾选的任务的id数组
+@property (nonatomic,strong) NSMutableArray *lastSelectedTaskIds;
+
+
 //记录返回的状态，即未开始数、进行中数、已暂停数、已完成数
 //notstart->未开始   start->进行中   overdue-> 已超时    completed->已完成     stopped->已暂停
 @property (nonatomic,strong)NSMutableDictionary *allTaskState;
@@ -138,13 +142,6 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#warning TODO:
-    //    __block typeof(self) weakSelf = self;
-    //    self.tableView.block = ^(){
-    //        __strong typeof(self) strong = weakSelf;
-    //        [strong refreshBtns];
-    //        weakSelf.currentTask = (ETMXTask *)[weakSelf.tableView.selectedTasks lastObject];;
-    //    };
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBtns) name:@"CHANGE_SELECTED_TASK_NUM" object:nil];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -179,9 +176,11 @@ typedef enum : NSUInteger {
 }
 
 -(NSMutableArray <ETMXTask *>*)getSelectedTasks{
+    [self.lastSelectedTaskIds removeAllObjects];
     NSMutableArray *selectedArr = [[NSMutableArray alloc] init];
     for (ETMXTask *task in self.sortTasks) {
         if (task.isSelected) {
+            [self.lastSelectedTaskIds addObject:task.id];
             [selectedArr addObject:task];
         }
     }
@@ -326,10 +325,6 @@ typedef enum : NSUInteger {
 
 //搜索事件
 -(void)search:(id)sender{
-    
-    
-    
-    
     self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
     [self.maskViewInAddHelper setAlpha:0.5];
@@ -577,6 +572,13 @@ typedef enum : NSUInteger {
     return _sortTasks;
 }
 
+-(NSMutableArray *)lastSelectedTaskIds{
+    if (_lastSelectedTaskIds == nil) {
+        _lastSelectedTaskIds = [[NSMutableArray alloc] init];
+    }
+    return _lastSelectedTaskIds;
+}
+
 -(NSMutableDictionary *)allTaskState{
     if (_allTaskState == nil) {
         _allTaskState = [[NSMutableDictionary alloc] init];
@@ -608,6 +610,12 @@ typedef enum : NSUInteger {
             }
             if ([elementName isEqualToString:@"Task"]) {
                 ETMXTask *task = [[ETMXTask alloc] initWithDic:attributeDict];
+                for (NSInteger i = 0; i<self.lastSelectedTaskIds.count; i++) {
+                    if ([task.id isEqualToString:self.lastSelectedTaskIds[i]]) {
+                        task.isSelected = YES;
+                        break;
+                    }
+                }
                 [self.sortTasks addObject:task];
             }
         }

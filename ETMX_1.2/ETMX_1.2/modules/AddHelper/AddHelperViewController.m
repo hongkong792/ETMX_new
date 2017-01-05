@@ -27,8 +27,6 @@ typedef NS_ENUM(NSInteger,RequestName) {
     SelectedPartner_Delete = 300,
     SelectedPartner_Finish ,
     SelectedPartner_Pause,
-    
-    
     ///确定应用
     AddMemberConfirm = 600,
     AddMemberUseIt,
@@ -77,15 +75,6 @@ static BOOL lastThree = NO;
     [super viewDidLoad];
     
     self.currentOperUser = [NSMutableArray array];
-//    for (int i=0; i<20; i++) {
-//        UserAccount * user = [[UserAccount alloc] init];
-//        user.id = [NSString stringWithFormat:@"id_%d",i];
-//        user.name = [NSString stringWithFormat:@"name_%d",i];
-//        user.fullName =  [NSString stringWithFormat:@"fullName_%d",i];
-//        user.userType = [NSString stringWithFormat:@"usertype_%d",i];
-//        [self.currentOperUser addObject:SAFE_FORMAT_STRING(user)];
-//    }
-    
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -98,7 +87,6 @@ static BOOL lastThree = NO;
     [self.memberInfoTable registerNib:[UINib nibWithNibName:@"MemberTableViewCell" bundle:nil] forCellReuseIdentifier:MEMBER];
     
     //添加菜單
-    // _memberData = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
     _memberData = [NSMutableArray array];
     CGPoint memint= self.flagView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(memint.x , memint.y) andHeight:45];
@@ -129,7 +117,7 @@ static BOOL lastThree = NO;
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
-    [paramArr addObject:@"zh-CN|zh-TW|en"];
+    [paramArr addObject:@"zh-CN"];
 
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:opearatorMethod success:^(id data) {
@@ -278,7 +266,7 @@ static BOOL lastThree = NO;
         
     }else if (tableView == self.memberInfoTable){
         
-        NSLog(@"indexpath:%ld,%ld",(long)indexPath.section,(long)indexPath.row);
+
        MemberTableViewCell * memberCell = [tableView dequeueReusableCellWithIdentifier:MEMBER forIndexPath:indexPath];
      //   MemberTableViewCell * memberCell = [[NSBundle mainBundle] loadNibNamed:@"MemberTableViewCell" owner:self options:nil];
         self.memberCell = memberCell;
@@ -355,10 +343,13 @@ static BOOL lastThree = NO;
         NSInteger  tag;
         UserAccount * user = [self.currentOperUser objectAtIndex:indexPath.row];
         tag = indexPath.row;
-        
-        memberCell.nameLabel.text = user.name;
+        NSString *  userName = [[user.fullName componentsSeparatedByString:@" "] firstObject];
+//        NSRange  range = [user.fullName rangeOfString:@"S"];
+//        if (range.location < user.fullName.length -1 ) {
+//                 user.fullName =  [user.fullName substringToIndex:range.location];
+//        }
+        memberCell.nameLabel.text =  userName ;
         memberCell.propertyLabel.text = user.userType;
-        
         NSLog(@"Userr_:%@,%@",user.name,user.userType);
         [memberCell.deleteBtn setTitle:Localized(@"delete") forState:UIControlStateNormal];
         [memberCell.deleteBtn setTitle:Localized(@"delete") forState:UIControlStateHighlighted];

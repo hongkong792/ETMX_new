@@ -276,6 +276,10 @@
     [alert addAction:[UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         NSLog(@"点击了确定按钮--%@-%@", [weakAlert.textFields.firstObject text], [weakAlert.textFields.lastObject text]);
         
+        
+        
+        
+        
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:Localized(@"cancel selected") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         NSLog(@"点击了取消按钮");

@@ -1008,20 +1008,20 @@ typedef enum : NSUInteger {
 #pragma selectedTaskDeal
 - (void)selectedTaskPrepare
 {
-    if ( [self getSelectedTasks].count > 1) {
-        [self showAlert:Localized(@"select only one")];
-//        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
-//        [self presentViewController:con animated:NO completion:nil];
-        return;
-        
-    }else{
+//    if ( [self getSelectedTasks].count > 1) {
+//        [self showAlert:Localized(@"select only one")];
+////        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
+////        [self presentViewController:con animated:NO completion:nil];
+//        return;
+//        
+//    }else{
         ETMXTask * task = [[self getSelectedTasks] lastObject];
         if (task.id.length>0) {
             [[CurrentTask sharedManager] setCurrentTask:task];
             [[CurrentTask sharedManager] setTaskId:task.id];
             self.currentTask = task;
         }
-    }
+ //   }
     
 }
 

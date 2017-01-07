@@ -12,7 +12,7 @@
 
 #define OutTableViewSectionHeight           50.0f
 #define InTableViewSectionHeight            35.0f
-#define InTableVeiwCellHeight               63.0f
+#define InTableVeiwCellHeight               65.0f
 @interface TaskContentTableView()<OutTableViewCellDelegate>
 @property (nonatomic,strong) NSMutableArray<NSString *> *containers;//已存在的模具名数组
 @end

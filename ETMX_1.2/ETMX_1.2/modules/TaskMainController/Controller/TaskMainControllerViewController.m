@@ -361,7 +361,6 @@ typedef enum : NSUInteger {
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
         
-        
     }else{
         
         [self selectedTaskPrepare];
@@ -457,7 +456,6 @@ typedef enum : NSUInteger {
         return;
     }
     [self selectedTaskPrepare];
-    
     //[self scanWithTask]; return;
     self.qrViewCon = [[QRScanViewController alloc] init];
     self.qrViewCon.delegate = self;
@@ -719,10 +717,10 @@ typedef enum : NSUInteger {
                     if (task != nil) {
                         [self.sortTasks addObject:task];
                     }
+                }else if([attributeDict[@"flag"] isEqualToString:@"0"]){
+                    [self showAlert:attributeDict[@"message"]];
                     
                 }
-                
-                
             }
         }
             break;
@@ -909,8 +907,7 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-            [self.navigationController popViewControllerAnimated:YES];
-        } failure:^(NSError *error) {
+           } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
     }else{
@@ -927,7 +924,6 @@ typedef enum : NSUInteger {
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
-        
     }
     
 }
@@ -960,16 +956,33 @@ typedef enum : NSUInteger {
 // scan with task
 - (void)scanWithTask
 {
-    self.netRequesetName = taskExecutionSC_withTask;
-    NSArray *tasks = [self getSelectedTasks];
-    NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
-    NSArray *parameters = @[@"SGS000359",tasksStr];
-    NSString *methodName = @"scanOperatorOrEquipment";
-    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
-        NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    self.netRequesetName = taskExecutionSC_withTask;
+//    NSArray *tasks = [self getSelectedTasks];
+//    NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
+//    NSArray *parameters = @[@"SGS000359",tasksStr];
+//    NSString *methodName = @"scanOperatorOrEquipment";
+//    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+//        NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+//        [parser setDelegate:self];
+//        [parser parse];
+//    } failure:^(NSError *error) {
+//        [self showAlert:error.localizedDescription];
+//    }];
+    
+    
+    
+//不勾选扫描测试
+    self.netRequesetName = taskExecutionSC_noTask;
+    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+    NSArray *parameters2 = @[self.taskState,userCode,@"SGS001385",@"",self.taskType];
+    [NetWorkManager sendRequestWithParameters:parameters2 method:@"getScanTasks2" success:^(id data) {
+        NSString * str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
+        [self.sortTasks removeAllObjects];
         [parser parse];
+      //  [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         [self showAlert:error.localizedDescription];
     }];

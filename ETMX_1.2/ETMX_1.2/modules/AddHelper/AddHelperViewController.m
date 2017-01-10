@@ -73,7 +73,6 @@ static BOOL lastThree = NO;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     self.currentOperUser = [NSMutableArray array];
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];

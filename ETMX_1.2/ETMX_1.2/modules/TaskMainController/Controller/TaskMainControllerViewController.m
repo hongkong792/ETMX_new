@@ -517,6 +517,9 @@ typedef enum : NSUInteger {
         ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
         exchangOpVC.selecedTasks = tempArr;
         __weak typeof(self) weakSelf = self;
+        exchangOpVC.refreshTableViewBlock = ^(){
+            [self sortAllTaskWithType:self.taskType andState:self.taskState];
+        };
         exchangOpVC.block = ^(){
             __strong typeof(self) strongSelf = weakSelf;
             [strongSelf.maskView setHidden:YES];
@@ -763,6 +766,7 @@ typedef enum : NSUInteger {
                 self.isFirstLogin = NO;
                 NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
                 if (!inworkStr ||[inworkStr isEqualToString:@"0"]) {//无开始任务
+                    self.stateSegment.selectedSegmentIndex = 0;
                     self.taskState = WTaskStateReleased;
                     [self sortAllTaskWithType:self.taskType andState:self.taskState];
                 }

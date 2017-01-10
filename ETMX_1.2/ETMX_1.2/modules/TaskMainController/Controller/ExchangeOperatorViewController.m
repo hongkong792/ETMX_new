@@ -143,6 +143,10 @@ typedef enum : NSUInteger {
         {
             if ([elementName isEqualToString:@"Task"]) {
                 NSString *message = [attributeDict valueForKey:@"message"];
+                NSString *flag = [attributeDict valueForKey:@"flag"];
+                if ([flag isEqualToString:@"1"] && self.refreshTableViewBlock) {
+                    self.refreshTableViewBlock();
+                }
                 if (message && message.length>0) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alertView show];

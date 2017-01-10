@@ -9,7 +9,9 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^popDismissBlock)();
+typedef void(^refreshTableView)();
 @interface ExchangeOperatorViewController : UIViewController
 @property (nonatomic,strong) NSArray *selecedTasks;//被选的任务数组
 @property (nonatomic,copy) popDismissBlock block;
+@property (nonatomic,copy) refreshTableView refreshTableViewBlock;//刷新table
 @end

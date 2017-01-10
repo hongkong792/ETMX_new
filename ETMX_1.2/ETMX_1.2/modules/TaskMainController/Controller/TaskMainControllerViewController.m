@@ -136,6 +136,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
 @property (nonatomic,strong)UIView  * maskViewInAddHelper;
 @property (nonatomic,assign)NSInteger flagWithTask;
+
+@property (nonatomic,assign) BOOL isFirstLogin;
 @end
 
 @implementation TaskMainControllerViewController
@@ -161,6 +163,7 @@ typedef enum : NSUInteger {
     [self initNav];
     self.taskType = WTaskTypeMold;                                      //默认是新模
     self.taskState = WTaskStateInwork;                            //默认是未开始
+    self.isFirstLogin = YES;
     [self.typeSegment addTarget:self action:@selector(selecteType:) forControlEvents:UIControlEventValueChanged];
     [self.stateSegment addTarget:self action:@selector(selecteState:) forControlEvents:UIControlEventValueChanged];
     [self.addHelperBtn setTitle:Localized(@"add helper") forState:UIControlStateNormal];
@@ -507,31 +510,26 @@ typedef enum : NSUInteger {
         return;
     }
     
-    if (tempArr.count > 1) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"task can't beyond one") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    if ([self.taskState isEqualToString:WTaskStateCompleted]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"task is finished") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
     }else{
-        if ([self.taskState isEqualToString:WTaskStateCompleted]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"task is finished") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alertView show];
-        }else{
-            ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
-            exchangOpVC.selecedTasks = tempArr;
-            __weak typeof(self) weakSelf = self;
-            exchangOpVC.block = ^(){
-                __strong typeof(self) strongSelf = weakSelf;
-                [strongSelf.maskView setHidden:YES];
-                [strongSelf.view bringSubviewToFront:strongSelf.maskView];
-            };
-            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
-            
-            CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;
-            CGFloat height = [UIScreen mainScreen].bounds.size.height*0.75;
-            popover.popoverContentSize =CGSizeMake(width, height);
-            [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
-            [self.maskView setHidden:NO];
-            [self.view bringSubviewToFront:self.maskView];
-        }
+        ExchangeOperatorViewController *exchangOpVC = [[ExchangeOperatorViewController alloc] initWithNibName:@"ExchangeOperatorViewController" bundle:nil];
+        exchangOpVC.selecedTasks = tempArr;
+        __weak typeof(self) weakSelf = self;
+        exchangOpVC.block = ^(){
+            __strong typeof(self) strongSelf = weakSelf;
+            [strongSelf.maskView setHidden:YES];
+            [strongSelf.view bringSubviewToFront:strongSelf.maskView];
+        };
+        UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
+        
+        CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;
+        CGFloat height = [UIScreen mainScreen].bounds.size.height*0.75;
+        popover.popoverContentSize =CGSizeMake(width, height);
+        [popover presentPopoverFromRect:CGRectZero inView:self.exchangeBtn permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+        [self.maskView setHidden:NO];
+        [self.view bringSubviewToFront:self.maskView];
     }
 }
 
@@ -761,7 +759,16 @@ typedef enum : NSUInteger {
             if (self.currentTask.id.length >0) {
                   [self afterScan];
             }
-            [self.tableView reloadWithTasks:self.sortTasks];
+            if (self.isFirstLogin) {
+                self.isFirstLogin = NO;
+                NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
+                if (!inworkStr ||[inworkStr isEqualToString:@"0"]) {//无开始任务
+                    self.taskState = WTaskStateReleased;
+                    [self sortAllTaskWithType:self.taskType andState:self.taskState];
+                }
+            }else{
+                 [self.tableView reloadWithTasks:self.sortTasks];
+            }
             [self.indicatorView stopAnimating];
         }
             break;

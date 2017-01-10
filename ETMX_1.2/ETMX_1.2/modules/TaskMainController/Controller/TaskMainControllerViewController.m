@@ -769,6 +769,8 @@ typedef enum : NSUInteger {
                     self.stateSegment.selectedSegmentIndex = 0;
                     self.taskState = WTaskStateReleased;
                     [self sortAllTaskWithType:self.taskType andState:self.taskState];
+                }else{
+                    [self.tableView reloadWithTasks:self.sortTasks];
                 }
             }else{
                  [self.tableView reloadWithTasks:self.sortTasks];

@@ -918,6 +918,11 @@ typedef enum : NSUInteger {
         NSString *methodName = @"scanOperatorOrEquipment";
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            for (ETMXTask *task in self.sortTasks) {
+                if (task.isSelected) {
+                    task.isSelected = NO;
+                }
+            }
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
             [parser parse];
@@ -1034,20 +1039,20 @@ typedef enum : NSUInteger {
 #pragma selectedTaskDeal
 - (void)selectedTaskPrepare
 {
-//    if ( [self getSelectedTasks].count > 1) {
-//        [self showAlert:Localized(@"select only one")];
-////        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
-////        [self presentViewController:con animated:NO completion:nil];
-//        return;
-//        
-//    }else{
+    if ( [self getSelectedTasks].count > 1) {
+        [self showAlert:Localized(@"select only one")];
+//        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
+//        [self presentViewController:con animated:NO completion:nil];
+        return;
+        
+    }else{
         ETMXTask * task = [[self getSelectedTasks] lastObject];
         if (task.id.length>0) {
             [[CurrentTask sharedManager] setCurrentTask:task];
             [[CurrentTask sharedManager] setTaskId:task.id];
             self.currentTask = task;
         }
- //   }
+    }
     
 }
 

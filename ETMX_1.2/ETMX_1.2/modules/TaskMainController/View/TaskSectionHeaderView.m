@@ -43,8 +43,8 @@
         count+=s.tasks.count;
     }
     self.containerCode.text = [NSString stringWithFormat:@"%@(%ld)",[task valueForKey:@"container"],(long)count];
-    self.planStartDate.text = [task valueForKey:@"planStartDate"];
-    self.planEndDate.text = [task valueForKey:@"planEndDate"];
+    self.planStartDate.text = [task valueForKey:@"moldPlanStartDate"];
+    self.planEndDate.text = [task valueForKey:@"moldPlanEndDate"];
     if (mold.isSelected) {
         self.selectedImageView.image = [UIImage imageNamed:@"selected_image_checkmark"];
     }else{

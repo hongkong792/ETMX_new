@@ -367,7 +367,7 @@ typedef enum : NSUInteger {
             return;
         }
         [self selectedTaskPrepare];
-        if ([self.taskState isEqualToString:@"completed"] ) {
+        if ([self.taskState isEqualToString:@"completed"] ||[self.taskState isEqualToString:@"notstart"] ) {
             [self showAlert:Localized(@"can't add member to completed task")];
             return;
         }

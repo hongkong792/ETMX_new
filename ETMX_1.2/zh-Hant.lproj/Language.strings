@@ -48,7 +48,7 @@
 
 "please select" = "請選擇組員";
 "please select task" = "請選擇任務";
-"can't add member to completed task" = "不能為已完成任務添加幫手";
+"can't add member to completed task" = "不能為未开始或者已完成任務添加幫手";
 "can't scan With completed task" = "不能为已完成的任务扫描";
 "select only one" = "只能選擇一個任務";
 "please select equipment" = "请选择设备";

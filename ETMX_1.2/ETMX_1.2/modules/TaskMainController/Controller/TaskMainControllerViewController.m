@@ -501,6 +501,12 @@ typedef enum : NSUInteger {
 }
 //替換
 - (IBAction)exchange:(id)sender {
+    
+    if (![self.taskState isEqualToString:WTaskStateStopped]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"only stoped task can exchange") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     NSArray *tempArr = [self getSelectedTasks];
     if (tempArr.count == 0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

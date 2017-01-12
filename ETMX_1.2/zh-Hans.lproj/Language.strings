@@ -94,6 +94,7 @@
 "task is finished"          =                   "任务已完成，不用替换";
 "taskMoldType"                  =                   "模具";
 "taskLingType"                  =                   "零件";
+"only stoped task can exchange"         =           "只有暂停中的任务可以进行替换";
 //end  任务界面
 
 //begin 替换界面

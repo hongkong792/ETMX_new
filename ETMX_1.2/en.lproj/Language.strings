@@ -96,6 +96,7 @@
 "task is finished"          =                   "task is finished";
 "taskMoldType"                  =                   "mold";
 "taskLingType"                  =                   "submold";
+"only stoped task can exchange"     =               "only stoped task can exchange";
 //end  任务界面
 
 //begin 替换界面

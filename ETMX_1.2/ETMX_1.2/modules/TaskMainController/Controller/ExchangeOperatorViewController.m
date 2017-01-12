@@ -131,11 +131,14 @@ typedef enum : NSUInteger {
         {
             if ([elementName isEqualToString:@"User"]) {
                 UserAccount *userAccount = [[UserAccount alloc] init];
-                userAccount.id = [attributeDict valueForKey:@"id"];
-                userAccount.number = [attributeDict valueForKey:@"code"];
-                userAccount.name = [attributeDict valueForKey:@"name"];
-                userAccount.fullName = [attributeDict valueForKey:@"fullName"];
-                [self.members addObject:userAccount];
+                NSString *accountID = [attributeDict valueForKey:@"id"];
+                if (![accountID isEqualToString:@"-1"]) {
+                    userAccount.id = [attributeDict valueForKey:@"id"];
+                    userAccount.number = [attributeDict valueForKey:@"code"];
+                    userAccount.name = [attributeDict valueForKey:@"name"];
+                    userAccount.fullName = [attributeDict valueForKey:@"fullName"];
+                    [self.members addObject:userAccount];
+                }
             }
         }
             break;

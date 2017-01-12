@@ -143,8 +143,6 @@ static BOOL lastThree = NO;
         [p parse];
         memberFinish = YES;
         [weakSelf laodDataFinish];
-        
-        
     } failure:^(NSError *error) {
 
         [self showAlert:Localized(@"please check the net")];
@@ -522,7 +520,10 @@ static BOOL lastThree = NO;
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
     
-    UserAccount * user =_memberData[_currentData1Index];
+    UserAccount * user = nil;
+    if (_currentData1Index < _memberData.count) {
+    user =_memberData[_currentData1Index];
+    }
     if (user.id.length >0) {
         [paramArr addObject:SAFE_FORMAT_STRING(user.id)];
     }else{
@@ -574,13 +575,12 @@ static BOOL lastThree = NO;
         user.fullName = [attributeDict objectForKey:@"fullName"];
         user.number = [attributeDict objectForKey:@"code"];
         user.userType =  [attributeDict objectForKey:@"userType"];
-        if (user.fullName != nil) {
+        if (user.fullName != nil && ![user.fullName containsString:@"所有"]) {
             [_memberData addObject:user];
         }
     }else if (self.requestName == AddMemberConfirm || self.requestName == AddMemberUseIt ){
         
         if ([[attributeDict objectForKey:@"flag"] isEqualToString:@"1"]) {
-            
             [self showAlert:@"操作成功"];
             //数据源添加数据
         }else{

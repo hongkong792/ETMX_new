@@ -190,18 +190,15 @@ static BOOL memberFinish = NO;
     
     if ([menu isEqual:self.equmenu]) {
         
-        if (_data1.count > indexPath.row+1) {
+        if (_data1.count > indexPath.row) {
             return _data1[indexPath.row];
         }
         
     }else if ([menu isEqual:self.menu]){
-        if (_data2.count > indexPath.row+1) {
+        if (_data2.count > indexPath.row) {
             UserAccount * user = _data2[indexPath.row];
             return user.fullName;
         }
-        
-      
-        
     }
     return nil;
     

@@ -362,7 +362,10 @@ typedef enum : NSUInteger {
         [self presentViewController:alert animated:YES completion:nil];
         
     }else{
-        
+        if ( [self getSelectedTasks].count > 1) {
+            [self showAlert:Localized(@"select only one")];
+            return;
+        }
         [self selectedTaskPrepare];
         if ([self.taskState isEqualToString:@"completed"] ) {
             [self showAlert:Localized(@"can't add member to completed task")];
@@ -764,7 +767,7 @@ typedef enum : NSUInteger {
         {
             [self refreshBtns];
             if (self.currentTask.id.length >0) {
-                  [self afterScan];
+                [self afterScan];
             }
             if (self.isFirstLogin) {
                 self.isFirstLogin = NO;
@@ -777,7 +780,7 @@ typedef enum : NSUInteger {
                     [self.tableView reloadWithTasks:self.sortTasks];
                 }
             }else{
-                 [self.tableView reloadWithTasks:self.sortTasks];
+                [self.tableView reloadWithTasks:self.sortTasks];
             }
             [self.indicatorView stopAnimating];
         }
@@ -913,7 +916,7 @@ typedef enum : NSUInteger {
             [parser setDelegate:self];
             [self.sortTasks removeAllObjects];
             [parser parse];
-           } failure:^(NSError *error) {
+        } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
     }else{
@@ -967,23 +970,23 @@ typedef enum : NSUInteger {
 // scan with task
 - (void)scanWithTask
 {
-//    self.netRequesetName = taskExecutionSC_withTask;
-//    NSArray *tasks = [self getSelectedTasks];
-//    NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
-//    NSArray *parameters = @[@"SGS000359",tasksStr];
-//    NSString *methodName = @"scanOperatorOrEquipment";
-//    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
-//        NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-//        [parser setDelegate:self];
-//        [parser parse];
-//    } failure:^(NSError *error) {
-//        [self showAlert:error.localizedDescription];
-//    }];
+    //    self.netRequesetName = taskExecutionSC_withTask;
+    //    NSArray *tasks = [self getSelectedTasks];
+    //    NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
+    //    NSArray *parameters = @[@"SGS000359",tasksStr];
+    //    NSString *methodName = @"scanOperatorOrEquipment";
+    //    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+    //        NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+    //        [parser setDelegate:self];
+    //        [parser parse];
+    //    } failure:^(NSError *error) {
+    //        [self showAlert:error.localizedDescription];
+    //    }];
     
     
     
-//不勾选扫描测试
+    //不勾选扫描测试
     self.netRequesetName = taskExecutionSC_noTask;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *parameters2 = @[self.taskState,userCode,@"SGS001385",@"",self.taskType];
@@ -993,7 +996,7 @@ typedef enum : NSUInteger {
         [parser setDelegate:self];
         [self.sortTasks removeAllObjects];
         [parser parse];
-      //  [self.navigationController popViewControllerAnimated:YES];
+        //  [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         [self showAlert:error.localizedDescription];
     }];
@@ -1045,20 +1048,20 @@ typedef enum : NSUInteger {
 #pragma selectedTaskDeal
 - (void)selectedTaskPrepare
 {
-    if ( [self getSelectedTasks].count > 1) {
-        [self showAlert:Localized(@"select only one")];
-//        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
-//        [self presentViewController:con animated:NO completion:nil];
-        return;
-        
-    }else{
-        ETMXTask * task = [[self getSelectedTasks] lastObject];
-        if (task.id.length>0) {
-            [[CurrentTask sharedManager] setCurrentTask:task];
-            [[CurrentTask sharedManager] setTaskId:task.id];
-            self.currentTask = task;
-        }
+    //    if ( [self getSelectedTasks].count > 1) {
+    //        [self showAlert:Localized(@"select only one")];
+    ////        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
+    ////        [self presentViewController:con animated:NO completion:nil];
+    //        return;
+    //
+    //    }else{
+    ETMXTask * task = [[self getSelectedTasks] lastObject];
+    if (task.id.length>0) {
+        [[CurrentTask sharedManager] setCurrentTask:task];
+        [[CurrentTask sharedManager] setTaskId:task.id];
+        self.currentTask = task;
     }
+    //  }
     
 }
 

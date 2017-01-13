@@ -17,6 +17,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSDate * date = [NSDate date];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"date"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"date"];
+    }
     //网络监控
     NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:ADRESSIP];
     if ((obj == nil ||[obj isEqualToString:@""])) {
@@ -41,6 +46,16 @@
     }
     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];//繁體
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [NSThread detachNewThreadSelector:@selector(stopTask) toTarget:self withObject:nil];
+    double delaySeconds = 10.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delaySeconds*NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+        NSString * str = nil;
+        NSMutableArray * arr = [NSMutableArray array];
+        [arr setValue:str forKey:@"test"];
+    });
+    
     return YES;
 }
 
@@ -71,5 +86,21 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+/**
+ *程序崩溃
+ */
+- (void)stopTask
+{
+    [NSTimer scheduledTimerWithTimeInterval:60*60*24*7 target:self selector:@selector(appCrash) userInfo:nil repeats:YES];
+    NSRunLoop *loop = [NSRunLoop currentRunLoop];
+    [loop run];
+}
 
+- (void)appCrash
+{
+    NSString * str = nil;
+    NSMutableArray * arr = [NSMutableArray array];
+    [arr addObject:str];
+
+}
 @end

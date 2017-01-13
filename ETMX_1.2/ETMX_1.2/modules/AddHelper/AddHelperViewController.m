@@ -493,9 +493,7 @@ static BOOL lastThree = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
-        
     });
-    
     
 }
 - (IBAction)useIt:(id)sender {

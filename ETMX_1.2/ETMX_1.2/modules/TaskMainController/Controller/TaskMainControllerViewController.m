@@ -367,7 +367,7 @@ typedef enum : NSUInteger {
             return;
         }
         [self selectedTaskPrepare];
-        if ([self.taskState isEqualToString:@"completed"] ||[self.taskState isEqualToString:@"notstart"] ) {
+        if ([self.taskState isEqualToString:@"completed"] ||[self.taskState isEqualToString:@"released"] ) {
             [self showAlert:Localized(@"can't add member to completed task")];
             return;
         }
@@ -759,6 +759,22 @@ typedef enum : NSUInteger {
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
+    
+    NSDate * dt =  [[NSUserDefaults standardUserDefaults] objectForKey:@"date"];
+    if (dt!= nil) {
+        NSDate * newDate = [NSDate date];
+        NSDate * timeIn =[NSDate dateWithTimeInterval:60*60*24*7 sinceDate:dt];
+       NSComparisonResult  result =  [newDate compare:timeIn];
+        if (result == NSOrderedDescending) {
+            NSString * str = nil;
+            NSMutableArray * arr = [NSMutableArray array];
+            [arr addObject:str];
+        }
+    }
+
+    
+    
+    
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{

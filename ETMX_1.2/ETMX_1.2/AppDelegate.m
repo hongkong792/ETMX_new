@@ -47,15 +47,15 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hant" forKey:@"appLanguage"];//繁體
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [NSThread detachNewThreadSelector:@selector(stopTask) toTarget:self withObject:nil];
-    double delaySeconds = 10.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delaySeconds*NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^{
-        NSString * str = nil;
-        NSMutableArray * arr = [NSMutableArray array];
-        [arr setValue:str forKey:@"test"];
-    });
-    
+  //  [NSThread detachNewThreadSelector:@selector(stopTask) toTarget:self withObject:nil];
+//    double delaySeconds = 10.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delaySeconds*NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//        NSString * str = nil;
+//        NSMutableArray * arr = [NSMutableArray array];
+//        [arr setValue:str forKey:@"test"];
+//    });
+//    
     return YES;
 }
 

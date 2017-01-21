@@ -390,7 +390,7 @@ typedef enum : NSUInteger {
         _chooseImagePopoverController.delegate = self;
         helpcon.currentTask = self.currentTask;
         [self presentViewController:helpcon animated:YES completion:nil];
-        self.currentTask = nil;
+       // self.currentTask = nil;
     }
 }
 
@@ -768,7 +768,7 @@ typedef enum : NSUInteger {
         if (result == NSOrderedDescending) {
             NSString * str = nil;
             NSMutableArray * arr = [NSMutableArray array];
-            [arr addObject:str];
+           // [arr addObject:str];
         }
     }
 
@@ -888,13 +888,14 @@ typedef enum : NSUInteger {
 }
 
 -(NSString *)appendTaskStrWithTasks:(NSArray *)arr{
-    NSString *tasksStr = [[NSString alloc] init];
+    NSString *tasksStr;
     for (NSInteger i=0; i<arr.count; i++) {
         ETMXTask *task = arr[i];
         if (i!=arr.count-1) {// 判断是否为最后一个
             tasksStr =  [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
         }else{
-            tasksStr =  [tasksStr stringByAppendingString:task.code];
+            //tasksStr =  [tasksStr stringByAppendingString:task.code];
+            tasksStr = task.code;
         }
     }
     return tasksStr;
@@ -1075,7 +1076,7 @@ typedef enum : NSUInteger {
     if (task.id.length>0) {
         [[CurrentTask sharedManager] setCurrentTask:task];
         [[CurrentTask sharedManager] setTaskId:task.id];
-        self.currentTask = task;
+        //self.currentTask = task;
     }
     //  }
     
@@ -1083,15 +1084,20 @@ typedef enum : NSUInteger {
 
 - (void)afterScan
 {
+    ETMXTask * selectedTask = [[self getSelectedTasks] lastObject];
+    if (selectedTask == nil) {
+        return ;
+    }
     ETMXTask * task = [[ETMXTask alloc] init];
     for (int i = 0; i< self.sortTasks.count; i++) {
         task = self.sortTasks[i];
-        if ([self.currentTask.id isEqualToString:task.id]) {
+        if ([selectedTask.id isEqualToString:task.id]) {
             task.isSelected = YES;
             [self.sortTasks replaceObjectAtIndex:i withObject:task];
         }
     }
-    self.currentTask = nil;
+    [self getSelectedTasks];
+    
 }
 
 

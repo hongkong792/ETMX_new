@@ -399,6 +399,11 @@ typedef enum : NSUInteger {
     self.netRequesetName = taskExecutionTS;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = [self getSelectedTasks];
+    if (tasks.count==0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TS",userCode,tasksStr];
@@ -419,6 +424,11 @@ typedef enum : NSUInteger {
     self.netRequesetName = taskExecutionTP;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = [self getSelectedTasks];
+    if (tasks.count==0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TP",userCode,tasksStr];
@@ -438,6 +448,11 @@ typedef enum : NSUInteger {
     self.netRequesetName = taskExecutionTF;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = [self getSelectedTasks];
+    if (tasks.count==0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"TF",userCode,tasksStr];
@@ -469,6 +484,11 @@ typedef enum : NSUInteger {
     self.netRequesetName = taskExecutionDO;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = [self getSelectedTasks];
+    if (tasks.count==0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"DO",userCode,tasksStr];
@@ -488,6 +508,11 @@ typedef enum : NSUInteger {
     self.netRequesetName = taskExecutionDF;
     NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
     NSArray *tasks = [self getSelectedTasks];
+    if (tasks.count==0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        return;
+    }
     NSString *tasksStr = [[NSString alloc] init];
     tasksStr = [self appendTaskStrWithTasks:tasks];
     NSArray *parameters = @[@"DF",userCode,tasksStr];

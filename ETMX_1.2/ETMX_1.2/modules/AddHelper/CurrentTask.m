@@ -11,15 +11,23 @@
 #import "CurrentTask.h"
 
 @implementation CurrentTask
-static NSString * _taskId;
+
 + (CurrentTask *)sharedManager
 {
+
     static CurrentTask *sharedAccountManagerInstance = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         sharedAccountManagerInstance = [[self alloc] init];
-    });
+    });    
     return sharedAccountManagerInstance;
 }
+
+
+
+
+
+
+
 
 @end

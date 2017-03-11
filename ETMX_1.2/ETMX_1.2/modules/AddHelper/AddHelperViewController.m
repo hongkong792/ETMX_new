@@ -114,7 +114,7 @@ static BOOL lastThree = NO;
     
     NSString * opearatorMethod = @"getCurrentOperators";
     NSMutableArray * paramArr = [NSMutableArray array];
-    NSString * taskId =  [CurrentTask sharedManager].taskId;
+    NSString * taskId =  self.currentTask.id;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
     [paramArr addObject:@"zh-CN"];
 

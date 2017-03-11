@@ -362,6 +362,7 @@ typedef enum : NSUInteger {
         [self presentViewController:alert animated:YES completion:nil];
         
     }else{
+        
         if ( [self getSelectedTasks].count > 1) {
             [self showAlert:Localized(@"select only one")];
             return;
@@ -371,6 +372,7 @@ typedef enum : NSUInteger {
             [self showAlert:Localized(@"can't add member to completed task")];
             return;
         }
+        self.currentTask = [[self getSelectedTasks] lastObject];
         self.maskViewInAddHelper = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].origin.x, [[UIScreen mainScreen] bounds].origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
         [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
         [self.maskViewInAddHelper setAlpha:0.5];
@@ -380,6 +382,7 @@ typedef enum : NSUInteger {
         [[CurrentTask sharedManager]  setTaskId:self.currentTask.id];
         [[CurrentTask sharedManager]  setCurrentTask:self.currentTask];
         AddHelperViewController * helpcon = [[AddHelperViewController alloc] initWithNibName:@"AddHelperViewController" bundle:nil];
+        helpcon.currentTask = self.currentTask;
         helpcon.preferredContentSize = CGSizeMake(600, 1000);
         helpcon.modalPresentationStyle = UIModalPresentationPopover;
         _chooseImagePopoverController = helpcon.popoverPresentationController;
@@ -388,7 +391,7 @@ typedef enum : NSUInteger {
         _chooseImagePopoverController.sourceView = helpcon.view;
         _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
         _chooseImagePopoverController.delegate = self;
-        helpcon.currentTask = self.currentTask;
+        
         [self presentViewController:helpcon animated:YES completion:nil];
        // self.currentTask = nil;
     }

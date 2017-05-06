@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
 @protocol SearchSelectedDelegate <NSObject>
 
 - (void)userNameOnSelected:(NSString *)userCode;
 
+@end
+
+@protocol SearchMachineDelegate <NSObject>
+- (void)machineOnselected:(NSString *)machineCode;
 @end
 
 

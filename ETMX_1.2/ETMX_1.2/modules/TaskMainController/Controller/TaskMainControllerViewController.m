@@ -21,6 +21,8 @@
 #import "CurrentTask.h"
 #import "QRScanViewController.h"
 #import "SelectTaskViewController.h"
+#import "SelectMamberViewController.h"
+#import "SelectMachineViewController.h"
 
 
 
@@ -66,7 +68,7 @@ typedef enum : NSUInteger {
 //添加帮手按钮
 @property (strong, nonatomic) IBOutlet CustomBtn *addHelperBtn;
 
-//全选按钮
+//全选按钮z
 @property (strong, nonatomic) IBOutlet CustomBtn *selecteAllBtn;
 
 //取消按钮
@@ -176,6 +178,11 @@ typedef enum : NSUInteger {
     [self.stateSegment setTitle:Localized(@"stopped") forSegmentAtIndex:2];
     [self.stateSegment setTitle:Localized(@"completed") forSegmentAtIndex:3];
     self.stateSegment.selectedSegmentIndex = 1;
+    
+    //选择人员 选择机床
+    
+    
+    
 }
 
 -(NSMutableArray <ETMXTask *>*)getSelectedTasks{
@@ -396,6 +403,112 @@ typedef enum : NSUInteger {
        // self.currentTask = nil;
     }
 }
+// 选择人员
+- (IBAction)selectNumber:(id)sender
+{
+    if ([self getSelectedTasks].count == 0) {
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:Localized(@"please select task") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            return ;
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }else{
+        
+        
+        if ( [self getSelectedTasks].count > 1) {
+            [self showAlert:Localized(@"select only one")];
+            return;
+        }
+        [self selectedTaskPrepare];
+        if ([self.taskState isEqualToString:@"completed"] ) {
+            [self showAlert:Localized(@"can't add member to completed task")];
+            return;
+        }
+        self.currentTask = [[self getSelectedTasks] lastObject];
+        self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
+        [self.maskViewInAddHelper setAlpha:0.5];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
+        [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
+        
+        [self.view addSubview:self.maskViewInAddHelper];
+        SelectMamberViewController * sea = [[SelectMamberViewController alloc] initWithNibName:@"SelectMamberViewController" bundle:nil];
+        sea.delegate = self;
+        sea.preferredContentSize = CGSizeMake(600, 600);
+        sea.modalPresentationStyle = UIModalPresentationPopover;
+        _chooseImagePopoverController = sea.popoverPresentationController;
+        _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+        _chooseImagePopoverController.sourceView = sea.view;
+        _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+        _chooseImagePopoverController.delegate = self;
+        [self presentViewController:sea animated:NO completion:nil];
+        
+    }
+    
+    
+    
+    
+    
+
+
+    
+}
+
+//选择机床
+- (IBAction)selectMechin:(id)sender
+{
+    
+    if ([self getSelectedTasks].count == 0) {
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:Localized(@"please select task") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            return ;
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }else{
+        
+        
+        if ( [self getSelectedTasks].count > 1) {
+            [self showAlert:Localized(@"select only one")];
+            return;
+        }
+        [self selectedTaskPrepare];
+        if ([self.taskState isEqualToString:@"completed"] ) {
+            [self showAlert:Localized(@"can't add member to completed task")];
+            return;
+        }
+        self.currentTask = [[self getSelectedTasks] lastObject];
+        self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
+        [self.maskViewInAddHelper setAlpha:0.5];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeMaskView)];
+        [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
+        
+        [self.view addSubview:self.maskViewInAddHelper];
+        SelectMamberViewController * sea = [[SelectMamberViewController alloc] initWithNibName:@"SelectMamberViewController" bundle:nil];
+        sea.delegate = self;
+        sea.preferredContentSize = CGSizeMake(600, 600);
+        sea.modalPresentationStyle = UIModalPresentationPopover;
+        _chooseImagePopoverController = sea.popoverPresentationController;
+        _chooseImagePopoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        _chooseImagePopoverController.sourceRect = CGRectMake((self.view.frame.size.width/2), 150, 0, 0);
+        _chooseImagePopoverController.sourceView = sea.view;
+        _chooseImagePopoverController.barButtonItem = self.navigationItem.rightBarButtonItem;//导航栏右侧的小按钮
+        _chooseImagePopoverController.delegate = self;
+        [self presentViewController:sea animated:NO completion:nil];
+        
+    }
+    
+
+    
+}
+
 
 //启动
 - (IBAction)startTask:(id)sender {
@@ -937,9 +1050,31 @@ typedef enum : NSUInteger {
 #pragma SearchSelectedDelegate
 - (void)userNameOnSelected:(NSString *)userCode;
 {
+    
+     NSArray *selectedTasks =  [self getSelectedTasks];
+    NSString *currentUserNumber = [UserManager instance].dic[@"id"];
+    NSString * tasks  = [self.lastSelectedTaskIds componentsJoinedByString:@","];
     if (userCode != nil) {
         //刷新主界面
-        [self refresh:nil];
+        self.netRequesetName = taskExecutionSC_withTask;
+        //        NSArray *tasks = [self getSelectedTasks];
+        //        NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
+        NSArray *parameters = @[tasks,userCode,currentUserNumber];
+        NSString *methodName = @"setTaskOperator";
+        [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            for (ETMXTask *task in self.sortTasks) {
+                if (task.isSelected) {
+                    task.isSelected = NO;
+                }
+            }
+            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+            [parser setDelegate:self];
+            [parser parse];
+        } failure:^(NSError *error) {
+            [self showAlert:error.localizedDescription];
+        }];
+        
     }
     
 }
@@ -984,6 +1119,20 @@ typedef enum : NSUInteger {
             [self showAlert:error.localizedDescription];
         }];
     }
+    
+}
+
+
+#pragma SearchMachineDelegate
+
+- (void)machineOnselected:(NSString *)machineCode
+{
+    
+    
+    
+    
+    
+    
     
 }
 
@@ -1125,7 +1274,6 @@ typedef enum : NSUInteger {
         }
     }
     [self getSelectedTasks];
-    
 }
 
 

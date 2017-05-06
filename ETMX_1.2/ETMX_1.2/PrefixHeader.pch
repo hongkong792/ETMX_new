@@ -34,4 +34,9 @@
 #define RGB(r, g, b) \
 [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define varString(var) [NSString stringWithFormat:@"%s",#var]
+
+// 网络请求工具对象
+#define httpTool [HDNetworking sharedHDNetworking]
+// 二次封装网络请求工具对象
+#define httpRequestTool [RequestNetwork sharedRequestNetwork]
 #endif

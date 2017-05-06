@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,18 +16,21 @@
             <rect key="frame" x="0.0" y="0.0" width="1611" height="95"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="1611" height="94"/>
+                <rect key="frame" x="0.0" y="0.0" width="1611" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="BWT-qI-HXV">
+                        <rect key="frame" x="10" y="35.5" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="0Os-cF-IBJ"/>
                             <constraint firstAttribute="height" constant="24" id="Yz7-i2-412"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUI-aP-0OA">
+                        <rect key="frame" x="39" y="0.0" width="1572" height="94.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务名称" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJm-JX-oKB" customClass="CustomLabel">
+                                <rect key="frame" x="0.0" y="0.0" width="196.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PQ9-sn-9Xv"/>
                                 </constraints>
@@ -33,41 +39,49 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-wi-yce" customClass="CustomLabel">
+                                <rect key="frame" x="196.5" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作者" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucz-YD-9Yn" customClass="CustomLabel">
+                                <rect key="frame" x="393" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机床" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxC-yd-yvU" customClass="CustomLabel">
+                                <rect key="frame" x="589.5" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际开始" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-ol-IJu" customClass="CustomLabel">
+                                <rect key="frame" x="786" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际完成" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQi-Ob-IQq" customClass="CustomLabel">
+                                <rect key="frame" x="982.5" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已用时" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hr6-Ke-77E" customClass="CustomLabel">
+                                <rect key="frame" x="1179" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际工时" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4J-nT-biB" customClass="CustomLabel">
+                                <rect key="frame" x="1375.5" y="0.0" width="196.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzs-gf-kdg" customClass="CustomLabel">
+                                <rect key="frame" x="0.0" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Ss8-xf-7Ue"/>
                                 </constraints>
@@ -76,6 +90,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yd-oP-KGw" customClass="CustomLabel">
+                                <rect key="frame" x="196.5" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="eBZ-Zu-ZUx"/>
                                 </constraints>
@@ -84,6 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FQ-WL-jn6" customClass="CustomLabel">
+                                <rect key="frame" x="393" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="wdv-LP-XuX"/>
                                 </constraints>
@@ -92,6 +108,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-Ge-FQP" customClass="CustomLabel">
+                                <rect key="frame" x="589.5" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="vAP-aV-YQR"/>
                                 </constraints>
@@ -100,6 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D4-ix-u80" customClass="CustomLabel">
+                                <rect key="frame" x="786" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="6r6-pu-l6s"/>
                                 </constraints>
@@ -108,6 +126,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAh-Ue-aAa" customClass="CustomLabel">
+                                <rect key="frame" x="982.5" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="WuW-VO-a42"/>
                                 </constraints>
@@ -116,6 +135,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5E-5L-Vx7" customClass="CustomLabel">
+                                <rect key="frame" x="1179" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="8PQ-8P-Bya"/>
                                 </constraints>
@@ -124,6 +144,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvx-Gr-Q9p" customClass="CustomLabel">
+                                <rect key="frame" x="1375.5" y="21" width="196.5" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Uhl-NO-Hdj"/>
                                 </constraints>
@@ -227,7 +248,7 @@
                 <outlet property="useTime" destination="Z5E-5L-Vx7" id="i5o-gX-bQZ"/>
                 <outlet property="userTimePlace" destination="hr6-Ke-77E" id="Hsp-UD-Rsd"/>
             </connections>
-            <point key="canvasLocation" x="679.5" y="186.5"/>
+            <point key="canvasLocation" x="779" y="104"/>
         </tableViewCell>
     </objects>
     <resources>

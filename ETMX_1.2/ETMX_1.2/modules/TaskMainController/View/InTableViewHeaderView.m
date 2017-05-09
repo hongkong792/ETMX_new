@@ -13,6 +13,7 @@
     [super awakeFromNib];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.selectedImageView addGestureRecognizer:tap];
+    self.backgroundColor = [UIColor yellowColor];
 }
 
 -(void)handleTap:(UITapGestureRecognizer *)gesture{

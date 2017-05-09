@@ -49,12 +49,14 @@ typedef enum : NSUInteger {
     taskExecutionDF,            //下班
     taskExecutionSC_withTask,   //勾选任务扫描
     taskExecutionSC_noTask,     //不勾选任务扫描
+    
+    searchAll                   //搜索全部
 } NetRequestName;
 
 
 
 
-@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate,QRCodeScanDelegate,UIPopoverControllerDelegate>
+@interface TaskMainControllerViewController ()<NSXMLParserDelegate,SearchSelectedDelegate,QRCodeScanDelegate,UIPopoverControllerDelegate,SearchMachineDelegate,SearchAllDelegate>
 //xib中的控件
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *footerView;
@@ -177,6 +179,7 @@ typedef enum : NSUInteger {
     [self.stateSegment setTitle:Localized(@"inwork") forSegmentAtIndex:1];
     [self.stateSegment setTitle:Localized(@"stopped") forSegmentAtIndex:2];
     [self.stateSegment setTitle:Localized(@"completed") forSegmentAtIndex:3];
+    [self.stateSegment setTitle:Localized(@"overdue") forSegmentAtIndex:4];
     self.stateSegment.selectedSegmentIndex = 1;
     
     //选择人员 选择机床
@@ -262,6 +265,10 @@ typedef enum : NSUInteger {
         case 3:
             self.taskState = WTaskStateCompleted;
             break;
+        case 4:
+            self.taskState = WTaskStateOverdue;
+            break;
+        
         default:
             break;
     }
@@ -276,10 +283,12 @@ typedef enum : NSUInteger {
     NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
     NSString *stoppedStr = [self.allTaskState valueForKey:@"stopped"];
     NSString *completedStr = [self.allTaskState valueForKey:@"completed"];
+    NSString *overdueStr = [self.allTaskState valueForKey:@"overdue"];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"released"),releasedStr?releasedStr:@"0"] forSegmentAtIndex:0];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"inwork"),inworkStr?inworkStr:@"0"] forSegmentAtIndex:1];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"stopped"),stoppedStr?stoppedStr:@"0"] forSegmentAtIndex:2];
     [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"completed"),completedStr?completedStr:@"0"] forSegmentAtIndex:3];
+    [self.stateSegment setTitle:[NSString stringWithFormat:@"%@(%@)",Localized(@"overdue"),overdueStr?overdueStr:@"0"] forSegmentAtIndex:4];
     [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),tempArr.count] forState:UIControlStateNormal];
     [self.selecteAllBtn setTitle:[NSString stringWithFormat:@"%@(%ld)",Localized(@"selecte all"),tempArr.count] forState:UIControlStateHighlighted];
     [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
@@ -417,11 +426,11 @@ typedef enum : NSUInteger {
         
     }else{
         
-        
-        if ( [self getSelectedTasks].count > 1) {
-            [self showAlert:Localized(@"select only one")];
-            return;
-        }
+//        
+//        if ( [self getSelectedTasks].count > 1) {
+//            [self showAlert:Localized(@"select only one")];
+//            return;
+//        }
         [self selectedTaskPrepare];
         if ([self.taskState isEqualToString:@"completed"] ) {
             [self showAlert:Localized(@"can't add member to completed task")];
@@ -474,10 +483,10 @@ typedef enum : NSUInteger {
     }else{
         
         
-        if ( [self getSelectedTasks].count > 1) {
-            [self showAlert:Localized(@"select only one")];
-            return;
-        }
+//        if ( [self getSelectedTasks].count > 1) {
+//            [self showAlert:Localized(@"select only one")];
+//            return;
+//        }
         [self selectedTaskPrepare];
         if ([self.taskState isEqualToString:@"completed"] ) {
             [self showAlert:Localized(@"can't add member to completed task")];
@@ -491,7 +500,7 @@ typedef enum : NSUInteger {
         [self.maskViewInAddHelper addGestureRecognizer:tapGesture];
         
         [self.view addSubview:self.maskViewInAddHelper];
-        SelectMamberViewController * sea = [[SelectMamberViewController alloc] initWithNibName:@"SelectMamberViewController" bundle:nil];
+        SelectMachineViewController * sea = [[SelectMachineViewController alloc] initWithNibName:@"SelectMachineViewController" bundle:nil];
         sea.delegate = self;
         sea.preferredContentSize = CGSizeMake(600, 600);
         sea.modalPresentationStyle = UIModalPresentationPopover;
@@ -699,16 +708,16 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)cancelSelected:(id)sender {
-    for (ETMXTask *task in self.sortTasks) {
-        task.isSelected = NO;
-    }
-    for (EtmxMold *mold in self.tableView.molds) {
-        mold.isSelected = NO;
-        for (SubMold *subMold in mold.subMolds) {
-            subMold.isSelected = NO;
-        }
-    }
-    [self refreshBtns];
+//    for (ETMXTask *task in self.sortTasks) {
+//        task.isSelected = NO;
+//    }
+//    for (EtmxMold *mold in self.tableView.molds) {
+//        mold.isSelected = NO;
+//        for (SubMold *subMold in mold.subMolds) {
+//            subMold.isSelected = NO;
+//        }
+//    }
+//    [self refreshBtns];
     [self.tableView reloadData];
 }
 
@@ -923,9 +932,10 @@ typedef enum : NSUInteger {
         case getFilterTasks2:
         {
             [self refreshBtns];
-            if (self.currentTask.id.length >0) {
-                [self afterScan];
-            }
+//            if (self.currentTask.id.length >0) {
+//                [self afterScan];
+//            }
+           // [self afterSelect];
             if (self.isFirstLogin) {
                 self.isFirstLogin = NO;
                 NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
@@ -1029,13 +1039,13 @@ typedef enum : NSUInteger {
 }
 
 -(NSString *)appendTaskStrWithTasks:(NSArray *)arr{
-    NSString *tasksStr;
+    NSString *tasksStr = @"";
     for (NSInteger i=0; i<arr.count; i++) {
         ETMXTask *task = arr[i];
         if (i!=arr.count-1) {// 判断是否为最后一个
             tasksStr =  [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
         }else{
-            //tasksStr =  [tasksStr stringByAppendingString:task.code];
+            tasksStr =  [tasksStr stringByAppendingString:task.code];
             tasksStr = task.code;
         }
     }
@@ -1078,7 +1088,39 @@ typedef enum : NSUInteger {
     }
     
 }
+#pragma SearchMachineDelegate
 
+- (void)machineOnselected:(NSString *)machineCode
+{
+    
+    NSArray *selectedTasks =  [self getSelectedTasks];
+    NSString *currentUserNumber = [UserManager instance].dic[@"id"];
+    NSString * tasks  = [self.lastSelectedTaskIds componentsJoinedByString:@","];
+    if (machineCode != nil) {
+        //刷新主界面
+        self.netRequesetName = taskExecutionSC_withTask;
+        //        NSArray *tasks = [self getSelectedTasks];
+        //        NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
+        NSArray *parameters = @[tasks,machineCode,currentUserNumber];
+        NSString *methodName = @"setTaskEquipment";
+        [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+            NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            for (ETMXTask *task in self.sortTasks) {
+                if (task.isSelected) {
+                    task.isSelected = NO;
+                }
+            }
+            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+            [parser setDelegate:self];
+            [parser parse];
+        } failure:^(NSError *error) {
+            [self showAlert:error.localizedDescription];
+        }];
+        
+    }
+    
+    
+}
 
 # pragma dealScanning
 - (void)scanController:(QRScanViewController *)scanController
@@ -1123,18 +1165,7 @@ typedef enum : NSUInteger {
 }
 
 
-#pragma SearchMachineDelegate
 
-- (void)machineOnselected:(NSString *)machineCode
-{
-    
-    
-    
-    
-    
-    
-    
-}
 
 
 - (void)showAlert:(NSString *)tips
@@ -1275,6 +1306,46 @@ typedef enum : NSUInteger {
     }
     [self getSelectedTasks];
 }
+
+
+
+- (void)afterSelect
+{
+    ETMXTask * task = [[ETMXTask alloc] init];
+    for (int i = 0; i< self.sortTasks.count; i++) {
+        task = self.sortTasks[i];
+        if ([self.lastSelectedTaskIds containsObject:task.id]) {
+             task.isSelected = YES;
+        }
+        
+//        if ([selectedTask.id isEqualToString:task.id]) {
+//           
+//            [self.sortTasks replaceObjectAtIndex:i withObject:task];
+//        }
+    }
+  //  [self getSelectedTasks];
+}
+
+
+#pragma SearchAllDelegate
+- (void)searchAll:(NSString*)machineId memberID:(NSString *)memberID
+{
+    self.netRequesetName = getFilterTasks2;
+    NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
+    NSArray *parameters = @[self.taskState,memberID,machineId,@"",self.taskType];
+    NSString *methodName = @"queryFilterTasks";
+    [self.indicatorView startAnimating];
+    [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+        [parser setDelegate:self];
+        [parser parse];
+    } failure:^(NSError *error) {
+        [self.indicatorView stopAnimating];
+        [self showNetTip];
+    }];
+    
+}
+
 
 
 @end

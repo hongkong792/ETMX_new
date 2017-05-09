@@ -66,6 +66,7 @@
 "inwork"                    =                   "inwork";
 "stopped"                   =               "stopped";
 "completed"             =               "completed";
+"overdue"                =               "overdue";
 "mold code"             =               "mold code:";
 "part code"             =               "part code:";
 "electrode code"        =               "electrode code:";

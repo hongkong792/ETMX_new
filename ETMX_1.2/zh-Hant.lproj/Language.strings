@@ -63,6 +63,7 @@
 "inwork"                    =                   "進行中";
 "stopped"                   =               "已暫停";
 "completed"             =               "已完成";
+"overdue"                =               "已超期";
 "mold code"             =               "模具編號:";
 "part code"             =               "零件編號:";
 "electrode code"        =               "銅公編號:";

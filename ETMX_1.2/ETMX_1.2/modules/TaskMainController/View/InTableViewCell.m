@@ -54,7 +54,7 @@
        self.actUseTimePlace.backgroundColor = [UIColor purpleColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.selectedImageView addGestureRecognizer:tap];
-    self.backgroundColor = [UIColor purpleColor];
+    self.backgroundColor = [UIColor purpleColor] ;
 }
 
 -(void)handleTap:(UITapGestureRecognizer *)gesture{

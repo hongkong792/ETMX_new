@@ -16,6 +16,13 @@
 		<key>node</key>
 		<string>ns1:setTaskOperatorResponse</string>
 	</dict>
+	<key>setTaskEquipment</key>
+	<dict>
+		<key>URI</key>
+		<string>/ETMX/services/TaskOperationExecution</string>
+		<key>node</key>
+		<string>ns1:setTaskEquipmentResponse</string>
+	</dict>
 	<key>getScanTasks2</key>
 	<dict>
 		<key>URI</key>

@@ -20,17 +20,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="BWT-qI-HXV">
-                        <rect key="frame" x="10" y="35.5" width="24" height="24"/>
+                        <rect key="frame" x="30" y="36" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="0Os-cF-IBJ"/>
                             <constraint firstAttribute="height" constant="24" id="Yz7-i2-412"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUI-aP-0OA">
-                        <rect key="frame" x="39" y="0.0" width="1572" height="94.5"/>
+                        <rect key="frame" x="59" y="0.0" width="1552" height="95"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务名称" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJm-JX-oKB" customClass="CustomLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="194" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PQ9-sn-9Xv"/>
                                 </constraints>
@@ -39,49 +39,49 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-wi-yce" customClass="CustomLabel">
-                                <rect key="frame" x="196.5" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="194" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作者" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucz-YD-9Yn" customClass="CustomLabel">
-                                <rect key="frame" x="393" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="388" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机床" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxC-yd-yvU" customClass="CustomLabel">
-                                <rect key="frame" x="589.5" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="582" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际开始" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-ol-IJu" customClass="CustomLabel">
-                                <rect key="frame" x="786" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="776" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际完成" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQi-Ob-IQq" customClass="CustomLabel">
-                                <rect key="frame" x="982.5" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="970" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已用时" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hr6-Ke-77E" customClass="CustomLabel">
-                                <rect key="frame" x="1179" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="1164" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实际工时" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4J-nT-biB" customClass="CustomLabel">
-                                <rect key="frame" x="1375.5" y="0.0" width="196.5" height="21"/>
+                                <rect key="frame" x="1358" y="0.0" width="194" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzs-gf-kdg" customClass="CustomLabel">
-                                <rect key="frame" x="0.0" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="0.0" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Ss8-xf-7Ue"/>
                                 </constraints>
@@ -90,7 +90,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yd-oP-KGw" customClass="CustomLabel">
-                                <rect key="frame" x="196.5" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="194" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="eBZ-Zu-ZUx"/>
                                 </constraints>
@@ -99,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FQ-WL-jn6" customClass="CustomLabel">
-                                <rect key="frame" x="393" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="388" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="wdv-LP-XuX"/>
                                 </constraints>
@@ -108,7 +108,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-Ge-FQP" customClass="CustomLabel">
-                                <rect key="frame" x="589.5" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="582" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="vAP-aV-YQR"/>
                                 </constraints>
@@ -117,7 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D4-ix-u80" customClass="CustomLabel">
-                                <rect key="frame" x="786" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="776" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="6r6-pu-l6s"/>
                                 </constraints>
@@ -126,7 +126,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAh-Ue-aAa" customClass="CustomLabel">
-                                <rect key="frame" x="982.5" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="970" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="WuW-VO-a42"/>
                                 </constraints>
@@ -135,7 +135,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5E-5L-Vx7" customClass="CustomLabel">
-                                <rect key="frame" x="1179" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="1164" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="8PQ-8P-Bya"/>
                                 </constraints>
@@ -144,7 +144,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvx-Gr-Q9p" customClass="CustomLabel">
-                                <rect key="frame" x="1375.5" y="21" width="196.5" height="42"/>
+                                <rect key="frame" x="1358" y="21" width="194" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Uhl-NO-Hdj"/>
                                 </constraints>
@@ -219,14 +219,21 @@
                             <constraint firstItem="mzs-gf-kdg" firstAttribute="width" secondItem="fJm-JX-oKB" secondAttribute="width" id="zp2-Wt-7gW"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom2" translatesAutoresizingMaskIntoConstraints="NO" id="cYa-Js-qzn">
+                        <rect key="frame" x="0.0" y="10" width="32" height="74.5"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="xUI-aP-0OA" firstAttribute="leading" secondItem="BWT-qI-HXV" secondAttribute="trailing" constant="5" id="4Fo-l4-tDa"/>
+                    <constraint firstItem="cYa-Js-qzn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5k6-Ke-dIn"/>
+                    <constraint firstItem="xUI-aP-0OA" firstAttribute="leading" secondItem="cYa-Js-qzn" secondAttribute="trailing" constant="27" id="BS0-de-ICv"/>
                     <constraint firstItem="xUI-aP-0OA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SNg-LJ-gp3"/>
                     <constraint firstAttribute="bottom" secondItem="xUI-aP-0OA" secondAttribute="bottom" id="Z25-ZM-7V3"/>
+                    <constraint firstItem="cYa-Js-qzn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZQ5-tJ-1TJ"/>
+                    <constraint firstAttribute="bottom" secondItem="cYa-Js-qzn" secondAttribute="bottom" constant="10" id="eZV-eZ-Fol"/>
                     <constraint firstItem="BWT-qI-HXV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gDe-B4-fi3"/>
                     <constraint firstAttribute="trailing" secondItem="xUI-aP-0OA" secondAttribute="trailing" id="irh-g1-9r3"/>
-                    <constraint firstItem="BWT-qI-HXV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="yfy-Gd-dwK"/>
+                    <constraint firstItem="BWT-qI-HXV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="yfy-Gd-dwK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -248,10 +255,11 @@
                 <outlet property="useTime" destination="Z5E-5L-Vx7" id="i5o-gX-bQZ"/>
                 <outlet property="userTimePlace" destination="hr6-Ke-77E" id="Hsp-UD-Rsd"/>
             </connections>
-            <point key="canvasLocation" x="779" y="104"/>
+            <point key="canvasLocation" x="778.5" y="103.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bottom2" width="32" height="32"/>
         <image name="selected_image_uncheckmark.png" width="12" height="12"/>
     </resources>
 </document>

@@ -121,6 +121,7 @@
     cell.subMold = curSubMold;
     cell.indexPath = indexPath;
     cell.delegate =self;
+    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 

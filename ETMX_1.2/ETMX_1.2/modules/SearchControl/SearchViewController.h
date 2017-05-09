@@ -19,9 +19,14 @@
 - (void)machineOnselected:(NSString *)machineCode;
 @end
 
+@protocol SearchAllDelegate <NSObject>
+- (void)searchAll:(NSString*)machineId memberID:(NSString *)memberID;
+
+@end
+
 
 @interface SearchViewController : UIViewController
 
-@property (nonatomic,strong)id<SearchSelectedDelegate>delegate;
+@property (nonatomic,strong)id<SearchAllDelegate>delegate;
 
 @end

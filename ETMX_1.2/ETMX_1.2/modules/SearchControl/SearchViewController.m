@@ -191,7 +191,8 @@ static BOOL memberFinish = NO;
     if ([menu isEqual:self.equmenu]) {
         
         if (_data1.count > indexPath.row) {
-            return _data1[indexPath.row];
+            ETMXMachine *machine = _data1[indexPath.row];
+            return machine.machineName;
         }
         
     }else if ([menu isEqual:self.menu]){
@@ -230,8 +231,9 @@ static BOOL memberFinish = NO;
     
   [self dismissViewControllerAnimated:YES completion:^{
       UserAccount * user = _data2[_currentData2Index];
+      ETMXMachine *machine = _data1[_currentData1Index];
       [[UserManager instance] setCurAccount:user];
-      [self.delegate userNameOnSelected:user.number];
+     [self.delegate searchAll:machine.machineCode memberID:user.number];
      [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
     
       
@@ -261,7 +263,7 @@ static BOOL memberFinish = NO;
         machine.machineName = [attributeDict objectForKey:@"name"];
         machine.machineModel = [attributeDict objectForKey:@"model"];
         if (machine != nil) {
-          [_data1 addObject:machine.machineName];
+          [_data1 addObject:machine];
         }
       
         

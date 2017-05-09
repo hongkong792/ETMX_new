@@ -21,7 +21,7 @@
 }
 @property (strong, nonatomic)    JSDropDownMenu *menu;
 @property (strong, nonatomic)UIActivityIndicatorView *indicatorView;
-@property (strong, nonatomic) IBOutlet UIView *memberView;
+@property (strong, nonatomic) IBOutlet UIView *machineView;
 @property (strong, nonatomic) IBOutlet UIButton *confirmBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
@@ -39,7 +39,7 @@ static BOOL memberFinish = NO;
     self.indicatorView.alpha = 0.5;
     
     _data2 = [NSMutableArray array];
-    CGPoint point= self.memberView.frame.origin;
+    CGPoint point= self.machineView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(point.x , point.y) andHeight:45];
     self.menu.indicatorColor = [UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:1.0];
     self.menu.separatorColor = [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1.0];
@@ -51,13 +51,13 @@ static BOOL memberFinish = NO;
     NSString * equMethod = @"getEquipmentsByUserCode";
     NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
     NSArray * paramArr = [NSArray arrayWithObjects:userCode, nil];
-
+    
     [NetWorkManager sendRequestWithParameters:paramArr method:equMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:weakSelf];
         [p parse];
-  
+        
         [weakSelf laodDataFinish];
         
     } failure:^(NSError *error) {
@@ -74,11 +74,11 @@ static BOOL memberFinish = NO;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
-    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
-    
-    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
-    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
+//    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
+//    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
+//    
+//    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
+//    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
     
 }
 
@@ -120,7 +120,7 @@ static BOOL memberFinish = NO;
     
     
     
-    return  Localized(@"please select");
+    return  Localized(@"please select equipment");
     
     
 }
@@ -130,8 +130,8 @@ static BOOL memberFinish = NO;
     
     
     if (_data2.count > indexPath.row) {
-        UserAccount * user = _data2[indexPath.row];
-        return user.fullName;
+        ETMXMachine * machine = _data2[indexPath.row];
+        return machine.machineName;
     }
     return nil;
 }
@@ -151,9 +151,9 @@ static BOOL memberFinish = NO;
 - (IBAction)confirmClick:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:^{
-         ETMXMachine* machine = _data2[_currentData2Index];
-     
-        [self.delegate machineOnselected:machine.machineCode];
+        ETMXMachine* machine = _data2[_currentData2Index];
+        
+        [self.delegate machineOnselected:machine.machineID];
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
         
         
@@ -183,10 +183,10 @@ static BOOL memberFinish = NO;
         machine.machineName = [attributeDict objectForKey:@"name"];
         machine.machineModel = [attributeDict objectForKey:@"model"];
         if (machine != nil) {
-            [_data2 addObject:machine.machineName];
+            [_data2 addObject:machine];
         }
         
-
+        
     }
     
 }

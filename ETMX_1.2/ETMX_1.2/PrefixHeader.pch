@@ -39,4 +39,5 @@
 #define httpTool [HDNetworking sharedHDNetworking]
 // 二次封装网络请求工具对象
 #define httpRequestTool [RequestNetwork sharedRequestNetwork]
+#import "UIColor+Addition.h"
 #endif

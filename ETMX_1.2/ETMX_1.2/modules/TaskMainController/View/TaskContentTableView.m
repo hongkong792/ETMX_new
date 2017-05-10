@@ -15,6 +15,9 @@
 #define InTableVeiwCellHeight               65.0f
 @interface TaskContentTableView()<OutTableViewCellDelegate>
 @property (nonatomic,strong) NSMutableArray<NSString *> *containers;//已存在的模具名数组
+
+
+@property (nonatomic,weak) TaskSectionHeaderView *outHeaderView;
 @end
 
 @implementation TaskContentTableView
@@ -45,12 +48,27 @@
 
 -(void)handleTapSection:(UITapGestureRecognizer *)gesture{
     NSInteger tag = gesture.view.tag;
-    if ([self.outOpens containsObject:[NSNumber numberWithInteger:tag]]) {
+    
+    
+    
+    if ([self.outOpens containsObject:[NSNumber numberWithInteger:tag]]) {//收起
         [self.outOpens removeObject:[NSNumber numberWithInteger:tag]];
+        
     }else{
+        //展开
+        
         [self.outOpens addObject:[NSNumber numberWithInteger:tag]];
     }
     [self reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationNone];
+    if ([self.outOpens containsObject:[NSNumber numberWithInteger:tag]]) {
+        [self.outHeaderView.arrowImageView setImage:[UIImage imageNamed:@"bottom.png"]];
+        
+        
+    }else{
+        
+        [self.outHeaderView.arrowImageView setImage:[UIImage imageNamed:@"rightNew"]];
+        
+    }
 }
 
 #pragma mark -- INIT
@@ -66,7 +84,7 @@
         _containers = [[NSMutableArray alloc] init];
     }
     return _containers;
-
+    
 }
 -(NSMutableArray *)outOpenIndexPaths{
     if (_outOpenIndexPaths == nil) {
@@ -129,6 +147,7 @@
     TaskSectionHeaderView *outHeaderView =[[NSBundle mainBundle] loadNibNamed:@"TaskSectionHeaderView" owner:self options:nil].lastObject;
     outHeaderView.mold = self.molds[section];
     outHeaderView.tag = section;
+    self.outHeaderView = outHeaderView;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapSection:)];
     [outHeaderView addGestureRecognizer:tap];
     outHeaderView.block = ^(EtmxMold *mold){
@@ -144,6 +163,7 @@
         });
     };
     return outHeaderView;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -169,10 +189,13 @@
 -(void)onTapIndexPath:(NSIndexPath *)indexPath{
     if ([self.outOpenIndexPaths containsObject:indexPath]) {
         [self.outOpenIndexPaths removeObject:indexPath];
-    }else{
+
+    }else{//展开
         [self.outOpenIndexPaths addObject:indexPath];
+
     }
     [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
 }
 
 -(void)onAllTaskSelected:(NSIndexPath *)indexPath{

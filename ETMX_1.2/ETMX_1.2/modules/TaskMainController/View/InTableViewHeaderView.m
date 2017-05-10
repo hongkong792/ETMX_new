@@ -8,12 +8,19 @@
 
 #import "InTableViewHeaderView.h"
 
+
+@interface InTableViewHeaderView ()
+
+@end
+
+
+
 @implementation InTableViewHeaderView
 -(void)awakeFromNib{
     [super awakeFromNib];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.selectedImageView addGestureRecognizer:tap];
-    self.backgroundColor = [UIColor yellowColor];
+    self.backgroundColor = [UIColor colorWithHex:0x45B4FE];
 }
 
 -(void)handleTap:(UITapGestureRecognizer *)gesture{

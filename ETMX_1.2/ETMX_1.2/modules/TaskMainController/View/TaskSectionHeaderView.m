@@ -16,6 +16,11 @@
 
 
 
+
+
+
+
+
 @end
 @implementation TaskSectionHeaderView
 -(void)awakeFromNib{
@@ -23,6 +28,8 @@
     self.containerPlace.text = Localized(@"mold code");
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [self.selectedImageView addGestureRecognizer:tapGesture];
+    
+    self.backgroundColor = [UIColor colorWithHex:0x45B4FE];
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{

@@ -44,6 +44,8 @@
 -(void)handleTapSectionInTable:(UITapGestureRecognizer *)gesture{
     if (self.inTableViewDelegate && [self.inTableViewDelegate respondsToSelector:@selector(onTapInTableView)]) {
         [self.inTableViewDelegate onTapInTableView];
+        
+        
     }
 }
 #pragma mark --UITableViewDataSource

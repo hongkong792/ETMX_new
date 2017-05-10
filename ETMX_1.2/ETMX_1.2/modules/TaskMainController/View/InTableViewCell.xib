@@ -219,18 +219,11 @@
                             <constraint firstItem="mzs-gf-kdg" firstAttribute="width" secondItem="fJm-JX-oKB" secondAttribute="width" id="zp2-Wt-7gW"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom2" translatesAutoresizingMaskIntoConstraints="NO" id="cYa-Js-qzn">
-                        <rect key="frame" x="0.0" y="10" width="32" height="74.5"/>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="xUI-aP-0OA" firstAttribute="leading" secondItem="BWT-qI-HXV" secondAttribute="trailing" constant="5" id="4Fo-l4-tDa"/>
-                    <constraint firstItem="cYa-Js-qzn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5k6-Ke-dIn"/>
-                    <constraint firstItem="xUI-aP-0OA" firstAttribute="leading" secondItem="cYa-Js-qzn" secondAttribute="trailing" constant="27" id="BS0-de-ICv"/>
                     <constraint firstItem="xUI-aP-0OA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SNg-LJ-gp3"/>
                     <constraint firstAttribute="bottom" secondItem="xUI-aP-0OA" secondAttribute="bottom" id="Z25-ZM-7V3"/>
-                    <constraint firstItem="cYa-Js-qzn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZQ5-tJ-1TJ"/>
-                    <constraint firstAttribute="bottom" secondItem="cYa-Js-qzn" secondAttribute="bottom" constant="10" id="eZV-eZ-Fol"/>
                     <constraint firstItem="BWT-qI-HXV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gDe-B4-fi3"/>
                     <constraint firstAttribute="trailing" secondItem="xUI-aP-0OA" secondAttribute="trailing" id="irh-g1-9r3"/>
                     <constraint firstItem="BWT-qI-HXV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="yfy-Gd-dwK"/>
@@ -259,7 +252,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bottom2" width="32" height="32"/>
         <image name="selected_image_uncheckmark.png" width="12" height="12"/>
     </resources>
 </document>

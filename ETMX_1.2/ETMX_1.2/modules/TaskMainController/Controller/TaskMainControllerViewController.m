@@ -1046,7 +1046,7 @@ typedef enum : NSUInteger {
             tasksStr =  [tasksStr stringByAppendingString:[NSString stringWithFormat:@"%@,",task.code]];
         }else{
             tasksStr =  [tasksStr stringByAppendingString:task.code];
-            tasksStr = task.code;
+          //  tasksStr = task.code;
         }
     }
     return tasksStr;
@@ -1116,10 +1116,7 @@ typedef enum : NSUInteger {
         } failure:^(NSError *error) {
             [self showAlert:error.localizedDescription];
         }];
-        
     }
-    
-    
 }
 
 # pragma dealScanning
@@ -1165,16 +1162,12 @@ typedef enum : NSUInteger {
 }
 
 
-
-
-
 - (void)showAlert:(NSString *)tips
 {
     UIAlertController * alertCon = [UIAlertController alertControllerWithTitle:tips message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
     [alertCon addAction:action];
     [self presentViewController:alertCon animated:YES completion:nil];
-    
 }
 
 

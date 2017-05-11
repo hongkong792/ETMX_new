@@ -15,7 +15,7 @@
 
 @interface SearchViewController ()<JSDropDownMenuDataSource,JSDropDownMenuDelegate,NSXMLParserDelegate>
 {
-    NSInteger _currentData1Index;
+    NSInteger _currentData1Index  ;
     NSMutableArray *_data1;
     NSInteger _currentData2Index;
     NSMutableArray *_data2;
@@ -42,6 +42,9 @@ static BOOL memberFinish = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _currentData1Index =-1;
+    _currentData2Index =-1;
+    
      _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicatorView.center = CGPointMake(self.view.center.x, self.view.center.y);
     _indicatorView.backgroundColor = [UIColor lightGrayColor];
@@ -230,10 +233,31 @@ static BOOL memberFinish = NO;
     
     
   [self dismissViewControllerAnimated:YES completion:^{
-      UserAccount * user = _data2[_currentData2Index];
-      ETMXMachine *machine = _data1[_currentData1Index];
-      [[UserManager instance] setCurAccount:user];
-     [self.delegate searchAll:machine.machineCode memberID:user.number];
+      
+      NSString * userCode;
+      NSString * machineCode;
+      UserAccount * user;
+      ETMXMachine *machine;
+      if (_currentData2Index == -1) {
+          userCode = @"";
+          userCode = [userCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+          
+      }else{
+          user  = _data2[_currentData2Index];
+          userCode = user.number;
+      }
+      if (_currentData1Index ==-1) {
+          machineCode = @"";
+          machineCode = [machineCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      }else{
+          
+          machine  = _data1[_currentData1Index];
+          machineCode = machine.machineCode;
+      }
+
+     
+     [[UserManager instance] setCurAccount:user];
+     [self.delegate searchAll:machineCode memberID:userCode];
      [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
     
       
@@ -280,7 +304,7 @@ static BOOL memberFinish = NO;
     }
     
 }
-- (void) laodDataFinish
+- (void)laodDataFinish
 {
     if (equFinish && memberFinish) {
         [self.indicatorView stopAnimating];

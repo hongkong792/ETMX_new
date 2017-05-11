@@ -15,6 +15,8 @@
 
 @interface InTableView()<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic,strong) InTableViewHeaderView *headerView;
+
 @end
 
 @implementation InTableView
@@ -41,12 +43,15 @@
 }
 
 #pragma mark -- common
--(void)handleTapSectionInTable:(UITapGestureRecognizer *)gesture{
+-(void)handleTapSectionInTable:(UITapGestureRecognizer *)inTableHeader{
+    
+
     if (self.inTableViewDelegate && [self.inTableViewDelegate respondsToSelector:@selector(onTapInTableView)]) {
         [self.inTableViewDelegate onTapInTableView];
-        
-        
     }
+    InTableViewHeaderView *view  = (InTableViewHeaderView*)inTableHeader.view;
+    [view.arrowImageView setImage:[UIImage imageNamed:@"bottom.png"]];
+    [view layoutIfNeeded];
 }
 #pragma mark --UITableViewDataSource
 
@@ -85,9 +90,12 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     InTableViewHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"InTableViewHeaderView" owner:self options:nil].lastObject;
+    self.headerView = headerView;
+    [headerView.arrowImageView setImage: [UIImage imageNamed:@"left2.png"]];
     headerView.subMold = self.subMold;
     headerView.contentView.backgroundColor = [UIColor colorWithRed:0xBC/255.0 green:0xBC/255.0 blue:0xBC/255.0 alpha:1.0];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapSectionInTable:)];
+    tap.numberOfTapsRequired =1;
     [headerView addGestureRecognizer:tap];
     headerView.block =^(SubMold *subMold){
         for (ETMXTask *task in subMold.tasks) {

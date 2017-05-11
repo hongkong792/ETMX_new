@@ -55,18 +55,18 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tqx-kX-mxR" userLabel="arrowImage">
-                            <rect key="frame" x="5" y="5" width="30" height="30"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left" translatesAutoresizingMaskIntoConstraints="NO" id="tqx-kX-mxR" userLabel="arrowImage">
+                            <rect key="frame" x="5" y="10" width="20" height="20"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.88715275110000003" blue="0.2273754925" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="tqx-kX-mxR" firstAttribute="width" secondItem="aWr-4e-Ko4" secondAttribute="width" id="2ZR-6J-25D"/>
+                        <constraint firstItem="tqx-kX-mxR" firstAttribute="width" secondItem="aWr-4e-Ko4" secondAttribute="width" constant="-10" id="2ZR-6J-25D"/>
                         <constraint firstItem="Utr-0Y-d1U" firstAttribute="leading" secondItem="YbJ-B9-9i0" secondAttribute="trailing" constant="2" id="4hw-pJ-LdD"/>
                         <constraint firstItem="aWr-4e-Ko4" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="5J8-kM-Oj1"/>
                         <constraint firstItem="tqx-kX-mxR" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="5" id="A5Y-ns-yRV"/>
                         <constraint firstItem="csr-WN-qOE" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="B9F-0B-KS9"/>
-                        <constraint firstItem="tqx-kX-mxR" firstAttribute="top" secondItem="aWr-4e-Ko4" secondAttribute="top" id="Ip6-2I-EWM"/>
+                        <constraint firstItem="tqx-kX-mxR" firstAttribute="top" secondItem="aWr-4e-Ko4" secondAttribute="top" constant="5" id="Ip6-2I-EWM"/>
                         <constraint firstItem="aWr-4e-Ko4" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="35" id="RyA-U1-e9y"/>
                         <constraint firstItem="csr-WN-qOE" firstAttribute="leading" secondItem="r5t-6c-57F" secondAttribute="trailing" constant="2" id="TFH-Tb-Y2y"/>
                         <constraint firstItem="r5t-6c-57F" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="Yco-8a-oS4"/>
@@ -75,7 +75,7 @@
                         <constraint firstItem="vhZ-0M-62L" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="egv-ZL-UNg"/>
                         <constraint firstItem="YbJ-B9-9i0" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="fez-QA-bb1"/>
                         <constraint firstItem="r5t-6c-57F" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="80" id="geq-bc-bMJ"/>
-                        <constraint firstItem="tqx-kX-mxR" firstAttribute="bottom" secondItem="aWr-4e-Ko4" secondAttribute="bottom" id="njQ-qq-nGT"/>
+                        <constraint firstItem="tqx-kX-mxR" firstAttribute="bottom" secondItem="aWr-4e-Ko4" secondAttribute="bottom" constant="-5" id="njQ-qq-nGT"/>
                         <constraint firstItem="Utr-0Y-d1U" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="tUJ-Mx-izP"/>
                         <constraint firstItem="vhZ-0M-62L" firstAttribute="leading" secondItem="Utr-0Y-d1U" secondAttribute="trailing" constant="2" id="ueq-pH-YM5"/>
                     </constraints>
@@ -101,6 +101,7 @@
         </view>
     </objects>
     <resources>
+        <image name="left" width="32" height="32"/>
         <image name="selected_image_uncheckmark.png" width="12" height="12"/>
     </resources>
 </document>

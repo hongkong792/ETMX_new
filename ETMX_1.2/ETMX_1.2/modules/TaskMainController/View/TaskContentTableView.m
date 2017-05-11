@@ -48,25 +48,19 @@
 
 -(void)handleTapSection:(UITapGestureRecognizer *)gesture{
     NSInteger tag = gesture.view.tag;
-    
-    
-    
+ 
     if ([self.outOpens containsObject:[NSNumber numberWithInteger:tag]]) {//收起
         [self.outOpens removeObject:[NSNumber numberWithInteger:tag]];
         
     }else{
         //展开
-        
         [self.outOpens addObject:[NSNumber numberWithInteger:tag]];
     }
     [self reloadSections:[NSIndexSet indexSetWithIndex:tag] withRowAnimation:UITableViewRowAnimationNone];
     if ([self.outOpens containsObject:[NSNumber numberWithInteger:tag]]) {
         [self.outHeaderView.arrowImageView setImage:[UIImage imageNamed:@"bottom.png"]];
-        
-        
     }else{
-        
-        [self.outHeaderView.arrowImageView setImage:[UIImage imageNamed:@"rightNew"]];
+        [self.outHeaderView.arrowImageView setImage:[UIImage imageNamed:@"left2"]];
         
     }
 }
@@ -139,7 +133,7 @@
     cell.subMold = curSubMold;
     cell.indexPath = indexPath;
     cell.delegate =self;
-    cell.backgroundColor = [UIColor redColor];
+   // cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 
@@ -149,6 +143,7 @@
     outHeaderView.tag = section;
     self.outHeaderView = outHeaderView;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapSection:)];
+    tap.numberOfTapsRequired  = 1;
     [outHeaderView addGestureRecognizer:tap];
     outHeaderView.block = ^(EtmxMold *mold){
         for (SubMold *subMold in mold.subMolds) {
@@ -192,7 +187,6 @@
 
     }else{//展开
         [self.outOpenIndexPaths addObject:indexPath];
-
     }
     [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     

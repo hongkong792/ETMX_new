@@ -133,8 +133,8 @@ typedef enum : NSUInteger {
 @property (strong,nonatomic) UIPopoverPresentationController *chooseImagePopoverController;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
-
 @property (nonatomic,assign)BOOL flag;
+
 @property (nonatomic,strong) UIView *maskView;
 
 @property (nonatomic,strong) QRScanViewController * qrViewCon;
@@ -459,11 +459,6 @@ typedef enum : NSUInteger {
     }
     
     
-    
-    
-    
-
-
     
 }
 
@@ -932,6 +927,8 @@ typedef enum : NSUInteger {
         case getFilterTasks2:
         {
             [self refreshBtns];
+            NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
+            self.title =fullName;
 //            if (self.currentTask.id.length >0) {
 //                [self afterScan];
 //            }

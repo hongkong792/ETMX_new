@@ -15,18 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Fu-N4-hju" customClass="InTableView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                        <rect key="frame" x="0.0" y="3" width="320" height="37.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="1Fu-N4-hju" secondAttribute="trailing" id="5dN-eE-Cj1"/>
-                    <constraint firstItem="1Fu-N4-hju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Tr2-T6-xUQ"/>
-                    <constraint firstAttribute="bottom" secondItem="1Fu-N4-hju" secondAttribute="bottom" id="mh2-eO-PW4"/>
+                    <constraint firstItem="1Fu-N4-hju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Tr2-T6-xUQ"/>
+                    <constraint firstAttribute="bottom" secondItem="1Fu-N4-hju" secondAttribute="bottom" constant="3" id="mh2-eO-PW4"/>
                     <constraint firstItem="1Fu-N4-hju" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nMJ-5W-GPE"/>
                 </constraints>
             </tableViewCellContentView>

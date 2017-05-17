@@ -90,6 +90,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     InTableViewHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"InTableViewHeaderView" owner:self options:nil].lastObject;
+     headerView.backgroundColor = [UIColor colorWithHex:0xFFCC99];
     self.headerView = headerView;
     [headerView.arrowImageView setImage: [UIImage imageNamed:@"left2.png"]];
     headerView.subMold = self.subMold;

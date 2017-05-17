@@ -29,7 +29,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [self.selectedImageView addGestureRecognizer:tapGesture];
     
-    self.backgroundColor = [UIColor colorWithHex:0x45B4FE];
+    self.backgroundColor = [UIColor colorWithHex:0x45AEFE];
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{

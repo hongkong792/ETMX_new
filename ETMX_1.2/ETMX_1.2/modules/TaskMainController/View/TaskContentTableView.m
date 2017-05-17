@@ -134,6 +134,7 @@
     cell.indexPath = indexPath;
     cell.delegate =self;
    // cell.backgroundColor = [UIColor redColor];
+ 
     return cell;
 }
 
@@ -189,6 +190,10 @@
         [self.outOpenIndexPaths addObject:indexPath];
     }
     [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    
+    
+    
     
 }
 

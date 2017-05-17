@@ -150,6 +150,7 @@
 		066000B01DD5E87D005F2D80 /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		066000B11DD5E87D005F2D80 /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		066000B21DD5E87D005F2D80 /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		066A2BAC1EC894B400278BA1 /* alert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = alert.h; sourceTree = "<group>"; };
 		0674B7D01DD086F7004FF173 /* ETMX_1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETMX_1.2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0674B7D41DD086F7004FF173 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0674B7D61DD086F7004FF173 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -432,6 +433,7 @@
 				0674B7E41DD086F7004FF173 /* Info.plist */,
 				0674B7EA1DD087B4004FF173 /* PrefixHeader.pch */,
 				0674B7D31DD086F7004FF173 /* Supporting Files */,
+				066A2BAC1EC894B400278BA1 /* alert.h */,
 			);
 			path = ETMX_1.2;
 			sourceTree = "<group>";
@@ -854,7 +856,7 @@
 					0674B7CF1DD086F7004FF173 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = G8KS8T2N5W;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1129,6 +1131,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = G8KS8T2N5W;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
@@ -1138,8 +1141,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ETMX_1.2/Library/ZBarSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmxnew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "39c3c990-b728-4ada-91a0-79bfd16bb2d1";
+				PROVISIONING_PROFILE_SPECIFIER = newETMX;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1149,6 +1154,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = G8KS8T2N5W;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
@@ -1158,8 +1164,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ETMX_1.2/Library/ZBarSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baoduoduo.etmxnew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "39c3c990-b728-4ada-91a0-79bfd16bb2d1";
+				PROVISIONING_PROFILE_SPECIFIER = newETMX;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

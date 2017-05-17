@@ -29,4 +29,5 @@
 
 @property (nonatomic,strong)id<SearchAllDelegate>delegate;
 
+
 @end

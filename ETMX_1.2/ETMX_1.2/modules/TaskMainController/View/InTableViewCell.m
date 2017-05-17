@@ -36,23 +36,23 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.taskNamePlace.text = Localized(@"task name");
-    self.taskNamePlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
-       self.taskStatusPlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+    self.taskNamePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
+       self.taskStatusPlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.taskOperatorPlace.text = Localized(@"operator");
-       self.taskOperatorPlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+       self.taskOperatorPlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.taskMachinePlace.text = Localized(@"machine");
-       self.taskMachinePlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+       self.taskMachinePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.actStartDatePlace.text =Localized(@"actual start date");
-       self.actStartDatePlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+       self.actStartDatePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.actFinishDatePlace.text = Localized(@"actual end date");
-       self.actFinishDatePlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+       self.actFinishDatePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.userTimePlace.text = Localized(@"used work hour");
-       self.userTimePlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+       self.userTimePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.actUseTimePlace.text = Localized(@"actual work hour");
-       self.actUseTimePlace.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+       self.actUseTimePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.selectedImageView addGestureRecognizer:tap];
-    self.backgroundColor = [UIColor colorWithHex:0xF2F2F2] ;
+    self.backgroundColor = [UIColor colorWithHex:0xFFFFFF] ;
 }
 
 -(void)handleTap:(UITapGestureRecognizer *)gesture{
@@ -70,21 +70,21 @@
 -(void)setTask:(ETMXTask *)task{
     _task = task;
     self.taskName.text = [task valueForKey:@"name"];
-        self.taskName.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.taskName.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.taskStatus.text = [task valueForKey:@"status"];
-        self.taskStatus.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.taskStatus.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.taskOperator.text = [task valueForKey:@"operatorMsg"];
-        self.taskOperator.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.taskOperator.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.taskMachine.text = [task valueForKey:@"machineMsg"];
-        self.taskMachine.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.taskMachine.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.ActStartDate.text =[task valueForKey:@"actualStartDate"];
-        self.ActStartDate.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.ActStartDate.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.actFinishDate.text = [task valueForKey:@"actualEndDate"];
-        self.actFinishDate.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.actFinishDate.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.useTime.text = [task valueForKey:@"usedWorkHour"];
-        self.useTime.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.useTime.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.actUseTime.text = [task valueForKey:@"actualWorkHour"];
-        self.actUseTime.backgroundColor = [UIColor colorWithHex:0xF2F2F2];
+        self.actUseTime.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     if (task.isSelected) {
         self.selectedImageView.image = [UIImage imageNamed:@"selected_image_checkmark"];
     }else{

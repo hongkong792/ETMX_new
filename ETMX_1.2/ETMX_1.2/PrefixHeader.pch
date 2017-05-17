@@ -40,4 +40,9 @@
 // 二次封装网络请求工具对象
 #define httpRequestTool [RequestNetwork sharedRequestNetwork]
 #import "UIColor+Addition.h"
+#import "alert.h"
+
+
+
+
 #endif

@@ -14,7 +14,8 @@
     [super awakeFromNib];
     // Initialization code
     self.inTableView.inTableViewDelegate =self;
-    self.backgroundColor = [UIColor colorWithHex:0xFFCC99];
+    self.backgroundColor = [UIColor colorWithHex:0xFFC690];
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

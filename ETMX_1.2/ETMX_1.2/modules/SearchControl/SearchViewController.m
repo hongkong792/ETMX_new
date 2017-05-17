@@ -54,6 +54,12 @@ static BOOL memberFinish = NO;
  
     // Do any additional setup after loading the view from its nib.
 //    _data2 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+
+    [self initData];
+}
+
+- (void)initData
+{
     _data2 = [NSMutableArray array];
     CGPoint point= self.memberView.frame.origin;
     self.menu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(point.x , point.y) andHeight:45];
@@ -62,9 +68,9 @@ static BOOL memberFinish = NO;
     self.menu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     self.menu.dataSource = self;
     self.menu.delegate = self;
-
     
-//        _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
+    
+    //        _data1 = [NSMutableArray arrayWithObjects:@"智能排序", @"离我最近", @"评价最高", @"最新发布", @"人气最高", @"价格最低", @"价格最高", nil];
     _data1 = [NSMutableArray array];
     CGPoint equoint= self.equipmentView.frame.origin;
     self.equmenu = [[JSDropDownMenu alloc] initWithOrigin:CGPointMake(equoint.x , equoint.y) andHeight:45];
@@ -73,10 +79,6 @@ static BOOL memberFinish = NO;
     self.equmenu.textColor = [UIColor colorWithRed:83.f/255.0f green:83.f/255.0f blue:83.f/255.0f alpha:1.0f];
     self.equmenu.dataSource = self;
     self.equmenu.delegate = self;
- 
-    
-    
-
     //獲取數據
     NSString * equMethod = @"getEquipmentsByUserCode";
     NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
@@ -88,8 +90,9 @@ static BOOL memberFinish = NO;
         [p setDelegate:weakSelf];
         [p parse];
         equFinish = YES;
+        [self.view addSubview:self.equmenu];
         [weakSelf laodDataFinish];
-    
+        
     } failure:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
@@ -100,15 +103,16 @@ static BOOL memberFinish = NO;
     NSString * userMethod = @"getGroupMembersByUserCode";
     NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
     NSArray * paramUserArr = [NSArray arrayWithObjects:userNumber, nil];
-
+    
     [NetWorkManager sendRequestWithParameters:paramUserArr method:userMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSXMLParser *p = [[NSXMLParser alloc] initWithData:data];
         [p setDelegate:weakSelf];
         [p parse];
         memberFinish = YES;
+        [self.view addSubview:self.menu];
         [weakSelf laodDataFinish];
-
+        
         
     } failure:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -119,10 +123,11 @@ static BOOL memberFinish = NO;
     
     [self.view addSubview:self.indicatorView];
     [self.indicatorView startAnimating];
-
     
-
 }
+
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.equipmentLabel.text = Localized(@"equipment");
@@ -190,7 +195,6 @@ static BOOL memberFinish = NO;
 
 - (NSString *)menu:(JSDropDownMenu *)menu titleForRowAtIndexPath:(JSIndexPath *)indexPath {
     
-    
     if ([menu isEqual:self.equmenu]) {
         
         if (_data1.count > indexPath.row) {
@@ -212,14 +216,14 @@ static BOOL memberFinish = NO;
 - (void)menu:(JSDropDownMenu *)menu didSelectRowAtIndexPath:(JSIndexPath *)indexPath {
     if ([menu isEqual:self.equmenu]) {
        
-        if (indexPath.row+1 < _data1.count) {
+        if (indexPath.row < _data1.count) {
               _currentData1Index = indexPath.row;
         }
         
         
     }else if ([menu isEqual:self.menu]){
         
-        if (indexPath.row+1 < _data2.count) {
+        if (indexPath.row < _data2.count) {
             _currentData2Index =  indexPath.row;
 
         }
@@ -231,14 +235,20 @@ static BOOL memberFinish = NO;
 - (IBAction)confirmClick:(id)sender {
     
     
-    
+    if (_currentData1Index != -1 && _currentData2Index !=-1) {
+        [self showAlert:@"不可以同时选择两个,请重新选择"];
+        _currentData1Index = -1 ;
+        _currentData2Index =-1;
+        return;
+        //[self.menu reloadInputViews];
+    }
   [self dismissViewControllerAnimated:YES completion:^{
       
       NSString * userCode;
       NSString * machineCode;
-      UserAccount * user;
+      UserAccount * user = [[UserAccount alloc] init];
       ETMXMachine *machine;
-      if (_currentData2Index == -1) {
+      if (_currentData2Index == -1) {//用户
           userCode = @"";
           userCode = [userCode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
           
@@ -255,8 +265,10 @@ static BOOL memberFinish = NO;
           machineCode = machine.machineCode;
       }
 
-     
-     [[UserManager instance] setCurAccount:user];
+      if (user != nil) {
+        [[UserManager instance] setCurAccount:user];
+      }
+
      [self.delegate searchAll:machineCode memberID:userCode];
      [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
     
@@ -275,6 +287,8 @@ static BOOL memberFinish = NO;
     
     
 }
+
+
 
 
 #pragma mark -- NSXMLParserDelegate数据解析
@@ -306,10 +320,11 @@ static BOOL memberFinish = NO;
 }
 - (void)laodDataFinish
 {
+
     if (equFinish && memberFinish) {
         [self.indicatorView stopAnimating];
-        [self.view addSubview:self.menu];
-        [self.view addSubview:self.equmenu];
+      
+    
     }else{
         
         return ;
@@ -318,6 +333,31 @@ static BOOL memberFinish = NO;
     
 }
 
+
+- (void)showAlert:(NSString *)tips
+{
+    UIAlertController * alertCon = [UIAlertController alertControllerWithTitle:tips message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:Localized(@"searchConfirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self.menu removeFromSuperview];
+        [self.equmenu removeFromSuperview];
+        [self initData];
+        
+        
+        
+    }];
+    [alertCon addAction:action];
+    [self presentViewController:alertCon animated:YES completion:nil];
+    
+}
+
+
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    equFinish =NO;
+    memberFinish = NO;
+    
+}
 
 
 @end

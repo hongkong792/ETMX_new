@@ -703,16 +703,16 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)cancelSelected:(id)sender {
-//    for (ETMXTask *task in self.sortTasks) {
-//        task.isSelected = NO;
-//    }
-//    for (EtmxMold *mold in self.tableView.molds) {
-//        mold.isSelected = NO;
-//        for (SubMold *subMold in mold.subMolds) {
-//            subMold.isSelected = NO;
-//        }
-//    }
-//    [self refreshBtns];
+    for (ETMXTask *task in self.sortTasks) {
+        task.isSelected = NO;
+    }
+    for (EtmxMold *mold in self.tableView.molds) {
+        mold.isSelected = NO;
+        for (SubMold *subMold in mold.subMolds) {
+            subMold.isSelected = NO;
+        }
+    }
+    [self refreshBtns];
     [self.tableView reloadData];
 }
 

@@ -59,6 +59,8 @@ typedef NS_ENUM(NSInteger,RequestName) {
 @property (weak, nonatomic) IBOutlet UIButton *addMemberSamePart;
 
 
+@property (nonatomic,strong)NSMutableArray *addingTempArray;
+
 @end
 
 @implementation AddHelperViewController
@@ -74,6 +76,7 @@ static BOOL lastThree = NO;
     
     [super viewDidLoad];
     self.currentOperUser = [NSMutableArray array];
+    self.addingTempArray = [NSMutableArray array];
     //獲取當前任務
     self.currentTask =  [[ETMXTask alloc] init];
     _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -95,6 +98,7 @@ static BOOL lastThree = NO;
     self.menu.dataSource = self;
     self.menu.delegate = self;
     self.currentTask  =   [CurrentTask sharedManager].currentTask;
+ 
     [self loadAllData];
     
 }
@@ -171,6 +175,7 @@ static BOOL lastThree = NO;
         }else{
             
             [self.currentOperUser addObject:user];
+            [self.addingTempArray addObject:user];
         }
     }else{
         [self showAlert:@"请选择组员"];
@@ -490,6 +495,7 @@ static BOOL lastThree = NO;
     
     self.requestName = AddMemberConfirm;
     [self clickOper:@"TF"];
+    [self.addingTempArray removeAllObjects];
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -504,7 +510,9 @@ static BOOL lastThree = NO;
 }
 - (IBAction)cancel:(id)sender {
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.addingTempArray removeAllObjects];
+    }];
     
     
 }
@@ -517,24 +525,22 @@ static BOOL lastThree = NO;
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
-    
-    UserAccount * user = nil;
-    if (_currentData1Index < _memberData.count) {
-    user =_memberData[_currentData1Index];
+    for (UserAccount *user in self.addingTempArray) {
+        if (user.id.length >0) {
+            [paramArr addObject:SAFE_FORMAT_STRING(user.id)];
+        }else{
+            [self showAlert:@"请选择组员"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            return;
+        }
+        if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
+            [self showAlert:@"不能添加自己"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            return;
+        }
+        
     }
-    if (user.id.length >0) {
-        [paramArr addObject:SAFE_FORMAT_STRING(user.id)];
-    }else{
-        [self showAlert:@"请选择组员"];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return;
-    }
-    if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
-        [self showAlert:@"不能添加自己"];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return;
-    }
-    
+
     //[paramArr addObject:@"zh-CN|zh-TW|en"];
     [paramArr addObject:@"ZH"];
     [paramArr addObject:SAFE_FORMAT_STRING([dic objectForKey:@"id"])];

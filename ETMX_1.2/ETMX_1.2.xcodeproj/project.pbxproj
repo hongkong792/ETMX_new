@@ -11,7 +11,6 @@
 		061584C91E07F3E800D7D4DC /* SelectTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061584C81E07F3E800D7D4DC /* SelectTaskViewController.xib */; };
 		061585021E08DED700D7D4DC /* testTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061585001E08DED700D7D4DC /* testTableViewController.m */; };
 		061585031E08DED700D7D4DC /* testTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061585011E08DED700D7D4DC /* testTableViewController.xib */; };
-		0617CE111EC201680050F188 /* UIColor+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0617CE101EC201680050F188 /* UIColor+Addition.m */; };
 		061DEF831DE01F4A0089C2FF /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061DEF811DE01F4A0089C2FF /* TaskTableViewCell.m */; };
 		061DEF841DE01F4A0089C2FF /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061DEF821DE01F4A0089C2FF /* TaskTableViewCell.xib */; };
 		061DEF881DE01F580089C2FF /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061DEF861DE01F580089C2FF /* MemberTableViewCell.m */; };
@@ -73,6 +72,7 @@
 		0674B8A71DD08AB0004FF173 /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0674B87A1DD08AB0004FF173 /* NetWorkManager.m */; };
 		06776AAE1DD9AE9900A50053 /* AddHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06776AAC1DD9AE9900A50053 /* AddHelperViewController.m */; };
 		06776AAF1DD9AE9900A50053 /* AddHelperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06776AAD1DD9AE9900A50053 /* AddHelperViewController.xib */; };
+		068367DA1ECDBE9B00783C81 /* UIColor+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 068367D91ECDBE9B00783C81 /* UIColor+Addition.m */; };
 		06CBBD3A1EBAFD9400B2EF22 /* SelectMamberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CBBD381EBAFD9400B2EF22 /* SelectMamberViewController.m */; };
 		06CBBD3B1EBAFD9400B2EF22 /* SelectMamberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CBBD391EBAFD9400B2EF22 /* SelectMamberViewController.xib */; };
 		06CBBD3F1EBAFDA400B2EF22 /* SelectMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CBBD3D1EBAFDA400B2EF22 /* SelectMachineViewController.m */; };
@@ -118,8 +118,6 @@
 		061584FF1E08DED700D7D4DC /* testTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testTableViewController.h; sourceTree = "<group>"; };
 		061585001E08DED700D7D4DC /* testTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testTableViewController.m; sourceTree = "<group>"; };
 		061585011E08DED700D7D4DC /* testTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testTableViewController.xib; sourceTree = "<group>"; };
-		0617CE0F1EC201680050F188 /* UIColor+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Addition.h"; sourceTree = "<group>"; };
-		0617CE101EC201680050F188 /* UIColor+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Addition.m"; sourceTree = "<group>"; };
 		061DEF801DE01F4A0089C2FF /* TaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
 		061DEF811DE01F4A0089C2FF /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
 		061DEF821DE01F4A0089C2FF /* TaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
@@ -261,6 +259,8 @@
 		06776AAB1DD9AE9900A50053 /* AddHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHelperViewController.h; sourceTree = "<group>"; };
 		06776AAC1DD9AE9900A50053 /* AddHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHelperViewController.m; sourceTree = "<group>"; };
 		06776AAD1DD9AE9900A50053 /* AddHelperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddHelperViewController.xib; sourceTree = "<group>"; };
+		068367D81ECDBE9B00783C81 /* UIColor+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Addition.h"; sourceTree = "<group>"; };
+		068367D91ECDBE9B00783C81 /* UIColor+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Addition.m"; sourceTree = "<group>"; };
 		06CBBD371EBAFD9400B2EF22 /* SelectMamberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectMamberViewController.h; sourceTree = "<group>"; };
 		06CBBD381EBAFD9400B2EF22 /* SelectMamberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectMamberViewController.m; sourceTree = "<group>"; };
 		06CBBD391EBAFD9400B2EF22 /* SelectMamberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectMamberViewController.xib; sourceTree = "<group>"; };
@@ -346,15 +346,6 @@
 				061585011E08DED700D7D4DC /* testTableViewController.xib */,
 			);
 			path = SelectTask;
-			sourceTree = "<group>";
-		};
-		0617CE0E1EC201680050F188 /* UIColor */ = {
-			isa = PBXGroup;
-			children = (
-				0617CE0F1EC201680050F188 /* UIColor+Addition.h */,
-				0617CE101EC201680050F188 /* UIColor+Addition.m */,
-			);
-			path = UIColor;
 			sourceTree = "<group>";
 		};
 		0651462E1DD4850200BCDE13 /* Reachability */ = {
@@ -484,7 +475,7 @@
 		0674B8081DD08AAF004FF173 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				0617CE0E1EC201680050F188 /* UIColor */,
+				068367D71ECDBE9B00783C81 /* UIColor */,
 				06E0C8E31DD70833004648AA /* JSDropDownMenu */,
 				0651462E1DD4850200BCDE13 /* Reachability */,
 				0674B8091DD08AAF004FF173 /* AFNetworking */,
@@ -694,6 +685,15 @@
 				0674B87A1DD08AB0004FF173 /* NetWorkManager.m */,
 			);
 			path = tools;
+			sourceTree = "<group>";
+		};
+		068367D71ECDBE9B00783C81 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				068367D81ECDBE9B00783C81 /* UIColor+Addition.h */,
+				068367D91ECDBE9B00783C81 /* UIColor+Addition.m */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		06CBBD351EBAFD5100B2EF22 /* SelectMember */ = {
@@ -923,7 +923,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0617CE111EC201680050F188 /* UIColor+Addition.m in Sources */,
+				068367DA1ECDBE9B00783C81 /* UIColor+Addition.m in Sources */,
 				0674B8871DD08AB0004FF173 /* AFAutoPurgingImageCache.m in Sources */,
 				066000B91DD5E87D005F2D80 /* NSObject+MJClass.m in Sources */,
 				247494941DD21B7400BD7711 /* ETMXTableViewCell1.m in Sources */,

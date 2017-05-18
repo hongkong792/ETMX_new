@@ -671,12 +671,25 @@ typedef enum : NSUInteger {
         __weak typeof(self) weakSelf = self;
         exchangOpVC.refreshTableViewBlock = ^(){
             [self sortAllTaskWithType:self.taskType andState:self.taskState];
+            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+            for (UIView *baseView in window.subviews) {
+                for (UIView *view in baseView.subviews) {
+                    if ([view isKindOfClass:NSClassFromString(@"_UIPopoverView")]) {
+                        __strong typeof(self) strongSelf = weakSelf;
+                        [strongSelf.maskView setHidden:YES];
+                        [strongSelf.view bringSubviewToFront:strongSelf.maskView];
+                        [view removeFromSuperview];
+                        break;
+                    }
+                }
+            }
         };
         exchangOpVC.block = ^(){
             __strong typeof(self) strongSelf = weakSelf;
             [strongSelf.maskView setHidden:YES];
             [strongSelf.view bringSubviewToFront:strongSelf.maskView];
         };
+        
         UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:exchangOpVC];
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width*0.75;

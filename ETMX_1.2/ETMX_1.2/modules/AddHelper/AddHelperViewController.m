@@ -525,21 +525,44 @@ static BOOL lastThree = NO;
     NSMutableArray * paramArr = [NSMutableArray array];
     NSString * taskId =  [CurrentTask sharedManager].taskId;
     [paramArr addObject:SAFE_FORMAT_STRING(taskId)];
-    for (UserAccount *user in self.addingTempArray) {
-        if (user.id.length >0) {
-            [paramArr addObject:SAFE_FORMAT_STRING(user.id)];
-        }else{
-            [self showAlert:@"请选择组员"];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            return;
-        }
-        if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
-            [self showAlert:@"不能添加自己"];
-            [self dismissViewControllerAnimated:YES completion:nil];
+//    for (UserAccount *user in self.addingTempArray) {
+//        if (user.id.length >0) {
+//            [paramArr addObject:SAFE_FORMAT_STRING(user.id)];
+//        }else{
+//            [self showAlert:@"请选择组员"];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//            return;
+//        }
+//        if ([user.id isEqualToString:[dic objectForKey:@"id"]]) {
+//            [self showAlert:@"不能添加自己"];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//            return;
+//        }
+//        
+//    }
+    
+    
+    NSString *ids =@"";
+    
+    NSInteger  i =0 ;
+    for (UserAccount *user in self.addingTempArray)  {
+        if (user == nil){
             return;
         }
         
+        if (user.id.length>0&& i<self.addingTempArray.count-1) {
+          ids=  [ids stringByAppendingString:user.id];
+        ids = [ids stringByAppendingString:@","];
+            
+        }else {
+            ids=  [ids stringByAppendingString:user.id];
+        }
+        i++;
+       
     }
+    
+    [paramArr addObject:ids];
+    
 
     //[paramArr addObject:@"zh-CN|zh-TW|en"];
     [paramArr addObject:@"ZH"];

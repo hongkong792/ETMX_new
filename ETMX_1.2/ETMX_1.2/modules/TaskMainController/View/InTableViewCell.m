@@ -35,6 +35,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.contentView.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
     self.taskNamePlace.text = Localized(@"task name");
     self.taskNamePlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];
        self.taskStatusPlace.backgroundColor = [UIColor colorWithHex:0xFFFFFF];

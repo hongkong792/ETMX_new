@@ -80,7 +80,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fQP-vZ-upg" secondAttribute="trailing" id="4gN-kB-a2G"/>
                 <constraint firstItem="fQP-vZ-upg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dpP-4H-sn9"/>
@@ -92,6 +91,7 @@
                 <outlet property="arrowImageView" destination="tqx-kX-mxR" id="8AG-qH-9NL"/>
                 <outlet property="containerCode" destination="csr-WN-qOE" id="H6j-IH-EqH"/>
                 <outlet property="containerPlace" destination="r5t-6c-57F" id="Ax5-lm-qaf"/>
+                <outlet property="content" destination="fQP-vZ-upg" id="5SO-6w-lYe"/>
                 <outlet property="planEndDate" destination="vhZ-0M-62L" id="63j-Xz-T8o"/>
                 <outlet property="planStartDate" destination="YbJ-B9-9i0" id="EtJ-A5-5jn"/>
                 <outlet property="selectedImageView" destination="aWr-4e-Ko4" id="MZJ-BA-0Dd"/>

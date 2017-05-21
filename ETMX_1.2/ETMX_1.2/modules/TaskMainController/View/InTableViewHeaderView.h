@@ -23,4 +23,6 @@ typedef void(^InTableClickImageViewBlock)(SubMold *subMold);
 @property (nonatomic,strong) SubMold *subMold;
 @property (nonatomic,strong)IBOutlet UIImageView * arrowImageView;
 
+@property (nonatomic,strong)IBOutlet UIView * bgView;
+
 @end

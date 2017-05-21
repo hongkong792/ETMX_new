@@ -15,12 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *planEndDate;
 
 
-
-
-
-
-
-
 @end
 @implementation TaskSectionHeaderView
 -(void)awakeFromNib{
@@ -28,8 +22,7 @@
     self.containerPlace.text = Localized(@"mold code");
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [self.selectedImageView addGestureRecognizer:tapGesture];
-    
-    self.backgroundColor = [UIColor colorWithHex:0x45AEFE];
+    self.contentView.backgroundColor = [UIColor colorWithHex:0x45AEFE];
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{

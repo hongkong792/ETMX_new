@@ -16,4 +16,6 @@ typedef void(^OutTableClickImageViewBlock)(EtmxMold *mold);
 @property (strong, nonatomic) IBOutlet UIImageView *selectedImageView;
 @property (nonatomic,copy) OutTableClickImageViewBlock block;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+@property (nonatomic,strong) IBOutlet UIView *content;
+
 @end

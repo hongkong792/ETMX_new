@@ -855,7 +855,7 @@
 				TargetAttributes = {
 					0674B7CF1DD086F7004FF173 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = R9L6M6C2H9;
+						DevelopmentTeam = G8KS8T2N5W;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1132,7 +1132,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R9L6M6C2H9;
+				DEVELOPMENT_TEAM = G8KS8T2N5W;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1155,7 +1155,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R9L6M6C2H9;
+				DEVELOPMENT_TEAM = G8KS8T2N5W;
 				GCC_PREFIX_HEADER = ETMX_1.2/PrefixHeader.pch;
 				INFOPLIST_FILE = ETMX_1.2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

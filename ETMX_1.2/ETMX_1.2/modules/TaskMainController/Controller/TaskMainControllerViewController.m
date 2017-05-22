@@ -50,6 +50,9 @@ typedef enum : NSUInteger {
     taskExecutionSC_withTask,   //勾选任务扫描
     taskExecutionSC_noTask,     //不勾选任务扫描
     
+    selecteMember        ,//选择人员
+    sellectMachine       ,//选择设备
+    
     searchAll                   //搜索全部
 } NetRequestName;
 
@@ -142,6 +145,10 @@ typedef enum : NSUInteger {
 @property (nonatomic,assign)NSInteger flagWithTask;
 
 @property (nonatomic,assign) BOOL isFirstLogin;
+
+
+//选择人员
+@property (nonatomic,strong)NSMutableArray *selectedTasksArray;
 @end
 
 @implementation TaskMainControllerViewController
@@ -159,6 +166,7 @@ typedef enum : NSUInteger {
     self.maskView.alpha =0.5;
     [self.maskView setHidden:YES];
     [self.view addSubview:self.maskView];
+    self.selectedTasksArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMaskView) name:REMOVEMASKVIEW object:nil];
 }
 
@@ -183,8 +191,6 @@ typedef enum : NSUInteger {
     self.stateSegment.selectedSegmentIndex = 1;
     
     //选择人员 选择机床
-    
-    
     
 }
 
@@ -343,6 +349,7 @@ typedef enum : NSUInteger {
 }
 
 //搜索事件
+#pragma -mark 搜索
 -(void)search:(id)sender{
     self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
@@ -412,7 +419,7 @@ typedef enum : NSUInteger {
        // self.currentTask = nil;
     }
 }
-// 选择人员
+#pragma mark 选择人员
 - (IBAction)selectNumber:(id)sender
 {
     if ([self getSelectedTasks].count == 0) {
@@ -425,7 +432,6 @@ typedef enum : NSUInteger {
         [self presentViewController:alert animated:YES completion:nil];
         
     }else{
-        
 //        
 //        if ( [self getSelectedTasks].count > 1) {
 //            [self showAlert:Localized(@"select only one")];
@@ -462,7 +468,7 @@ typedef enum : NSUInteger {
     
 }
 
-//选择机床
+#pragma mark 选择机床
 - (IBAction)selectMechin:(id)sender
 {
     
@@ -700,7 +706,7 @@ typedef enum : NSUInteger {
         [self.view bringSubviewToFront:self.maskView];
     }
 }
-
+#pragma mark 全选
 - (IBAction)selecteAll:(id)sender {
     for (ETMXTask *task in self.sortTasks) {
         task.isSelected = YES;
@@ -929,23 +935,16 @@ typedef enum : NSUInteger {
            // [arr addObject:str];
         }
     }
-
-    
-    
-    
 }
-
+#pragma mark 解析结束
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     switch (self.netRequesetName) {
         case getFilterTasks2:
         {
             [self refreshBtns];
+            [self selectedAfter];
             NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
             self.title =fullName;
-//            if (self.currentTask.id.length >0) {
-//                [self afterScan];
-//            }
-           // [self afterSelect];
             if (self.isFirstLogin) {
                 self.isFirstLogin = NO;
                 NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
@@ -960,6 +959,7 @@ typedef enum : NSUInteger {
                 [self.tableView reloadWithTasks:self.sortTasks];
             }
             [self.indicatorView stopAnimating];
+            [SelectedMemberTool setSelectedMember:nil];
         }
             break;
         case taskExecutionTS:
@@ -1029,7 +1029,7 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_noTask:
         {
-            
+
             [self.tableView reloadWithTasks:self.sortTasks];
             [self refreshBtns];
             [self.indicatorView stopAnimating];
@@ -1037,12 +1037,35 @@ typedef enum : NSUInteger {
             break;
         case taskExecutionSC_withTask:
         {
-            if (self.flagWithTask != 0) {
-                [self sortAllTaskWithType:self.taskType andState:self.taskState];
+          //  if (self.flagWithTask != 0) {
+            for (ETMXTask *task in self.sortTasks) {
+                NSLog(@"task:%@",task);
+                    NSLog(@"taskid:%@",task.id);
+                if (task.isSelected) {
+                    [self.selectedTasksArray addObject:task.id];
+                }
             }
+           [self sortAllTaskWithType:self.taskType andState:self.taskState];
+       //  }
             [self.indicatorView stopAnimating];
         }
             break;
+            
+        case selecteMember:
+        {
+            [self refreshBtns];
+            NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
+            self.title =fullName;
+
+  
+        //    [self sortAllTaskWithType:self.taskType andState:self.taskState];
+  
+           // [self.tableView reloadWithTasks:self.sortTasks];
+            [self.tableView reloadData];
+     
+            [self.indicatorView stopAnimating];
+        }
+            
         default:
             break;
     }
@@ -1067,27 +1090,22 @@ typedef enum : NSUInteger {
     [alertView show];
 }
 
-#pragma SearchSelectedDelegate
+#pragma mark 选择人员回调
 - (void)userNameOnSelected:(NSString *)userCode;
 {
-    
-     NSArray *selectedTasks =  [self getSelectedTasks];
+    NSArray *selectedTasks =  [self getSelectedTasks];
     NSString *currentUserNumber = [UserManager instance].dic[@"id"];
+    [SelectedMemberTool setSelectedMember:self.lastSelectedTaskIds];
     NSString * tasks  = [self.lastSelectedTaskIds componentsJoinedByString:@","];
     if (userCode != nil) {
         //刷新主界面
         self.netRequesetName = taskExecutionSC_withTask;
-        //        NSArray *tasks = [self getSelectedTasks];
-        //        NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
         NSArray *parameters = @[tasks,userCode,currentUserNumber];
         NSString *methodName = @"setTaskOperator";
+        __weak typeof(self) weakSelf = self;
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            for (ETMXTask *task in self.sortTasks) {
-                if (task.isSelected) {
-                    task.isSelected = NO;
-                }
-            }
+
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
             [parser parse];
@@ -1102,7 +1120,6 @@ typedef enum : NSUInteger {
 
 - (void)machineOnselected:(NSString *)machineCode
 {
-    
     NSArray *selectedTasks =  [self getSelectedTasks];
     NSString *currentUserNumber = [UserManager instance].dic[@"id"];
     NSString * tasks  = [self.lastSelectedTaskIds componentsJoinedByString:@","];
@@ -1113,6 +1130,8 @@ typedef enum : NSUInteger {
         //        NSString *tasksStr = [self appendTaskStrWithTasks:tasks];
         NSArray *parameters = @[tasks,machineCode,currentUserNumber];
         NSString *methodName = @"setTaskEquipment";
+        
+        __weak typeof(self) weakSelf = self;
         [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
             NSString * test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             for (ETMXTask *task in self.sortTasks) {
@@ -1120,6 +1139,7 @@ typedef enum : NSUInteger {
                     task.isSelected = NO;
                 }
             }
+        
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
             [parser setDelegate:self];
             [parser parse];
@@ -1235,7 +1255,6 @@ typedef enum : NSUInteger {
 ///扫描完成刷新
 - (void)selectTaskSaveToLocal:(NSMutableArray *)array
 {
-    
     [array writeToFile:[self filePathTask] atomically:YES];
     
 }
@@ -1312,25 +1331,36 @@ typedef enum : NSUInteger {
 
 
 
-- (void)afterSelect
-{
-    ETMXTask * task = [[ETMXTask alloc] init];
-    for (int i = 0; i< self.sortTasks.count; i++) {
-        task = self.sortTasks[i];
-        if ([self.lastSelectedTaskIds containsObject:task.id]) {
-             task.isSelected = YES;
-        }
-        
-//        if ([selectedTask.id isEqualToString:task.id]) {
-//           
-//            [self.sortTasks replaceObjectAtIndex:i withObject:task];
+//- (NSMutableArray*)selectedTasksArray
+//{
+//    if (_selectedTasksArray) {
+//        return _selectedTasksArray;
+//    }else{
+//        
+//        NSMutableArray * array = [NSMutableArray array];
+//        ETMXTask * task = [[ETMXTask alloc] init];
+//        for (int i = 0; i< self.sortTasks.count; i++) {
+//            task = self.sortTasks[i];
+//            if (task.isSelected) {
+//                [array addObject:task];
+//                //  [self.sortTasks replaceObjectAtIndex:i withObject:task];
+//            }
 //        }
+//        _selectedTasksArray = [array copy];
+//    }
+//    return nil;
+//}
+#pragma mark 恢复选择
+- (void)selectedAfter
+{
+    NSMutableArray * array = [SelectedMemberTool getSelectedMember];
+    for (ETMXTask * task in self.sortTasks) {
+        if ([[SelectedMemberTool getSelectedMember] containsObject:task.id]) {
+            task.isSelected = YES;
+        }
     }
-  //  [self getSelectedTasks];
 }
-
-
-#pragma SearchAllDelegate
+#pragma -mark SearchAllDelegate 搜索完成回调
 - (void)searchAll:(NSString*)machineId memberID:(NSString *)memberID
 {
     self.netRequesetName = getFilterTasks2;
@@ -1339,6 +1369,8 @@ typedef enum : NSUInteger {
     NSString *methodName = @"queryFilterTasks";
     [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
+        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"searchAll:%@",str);
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
         [parser setDelegate:self];
         [parser parse];
@@ -1348,8 +1380,6 @@ typedef enum : NSUInteger {
     }];
     
 }
-
-
 
 @end
 

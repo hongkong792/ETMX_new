@@ -266,7 +266,7 @@ static BOOL memberFinish = NO;
       }
 
       if (user != nil) {
-        [[UserManager instance] setCurAccount:user];
+      //  [[UserManager instance] setCurAccount:user];
       }
 
      [self.delegate searchAll:machineCode memberID:userCode];
@@ -342,12 +342,9 @@ static BOOL memberFinish = NO;
         [self.equmenu removeFromSuperview];
         [self initData];
         
-        
-        
     }];
     [alertCon addAction:action];
     [self presentViewController:alertCon animated:YES completion:nil];
-    
 }
 
 

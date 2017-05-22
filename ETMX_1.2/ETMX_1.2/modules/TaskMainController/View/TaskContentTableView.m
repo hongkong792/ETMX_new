@@ -191,10 +191,6 @@
     }
     [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
-    
-    
-    
-    
 }
 
 -(void)onAllTaskSelected:(NSIndexPath *)indexPath{

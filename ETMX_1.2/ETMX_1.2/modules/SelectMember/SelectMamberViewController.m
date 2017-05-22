@@ -149,12 +149,10 @@ static BOOL memberFinish = NO;
     
         [self dismissViewControllerAnimated:YES completion:^{
         UserAccount * user = _data2[_currentData2Index];
-       // [[UserManager instance] setCurAccount:user];
+       //[[UserManager instance] setCurAccount:user];
         [self.delegate userNameOnSelected:user.id];
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
-        
-        
-    }];
+            }];
     
 }
 - (IBAction)cancelClick:(id)sender {
@@ -162,8 +160,6 @@ static BOOL memberFinish = NO;
     [self dismissViewControllerAnimated:YES completion:^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
-        
-        
     }];
     
     

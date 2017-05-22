@@ -14,7 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     self.inTableView.inTableViewDelegate =self;
-    self.contentView.backgroundColor = [UIColor colorWithHex:0xFFC690];
+ //   self.contentView.backgroundColor = [UIColor colorWithHex:0xFFC690];
    
 }
 

@@ -960,6 +960,7 @@ typedef enum : NSUInteger {
             }
             [self.indicatorView stopAnimating];
             [SelectedMemberTool setSelectedMember:nil];
+            [SelectedMemberTool setSelectedMachine:nil];
         }
             break;
         case taskExecutionTS:
@@ -1121,6 +1122,7 @@ typedef enum : NSUInteger {
 - (void)machineOnselected:(NSString *)machineCode
 {
     NSArray *selectedTasks =  [self getSelectedTasks];
+     [SelectedMemberTool setSelectedMachine:self.lastSelectedTaskIds];
     NSString *currentUserNumber = [UserManager instance].dic[@"id"];
     NSString * tasks  = [self.lastSelectedTaskIds componentsJoinedByString:@","];
     if (machineCode != nil) {
@@ -1355,7 +1357,7 @@ typedef enum : NSUInteger {
 {
     NSMutableArray * array = [SelectedMemberTool getSelectedMember];
     for (ETMXTask * task in self.sortTasks) {
-        if ([[SelectedMemberTool getSelectedMember] containsObject:task.id]) {
+        if ([[SelectedMemberTool getSelectedMember] containsObject:task.id]  || [[SelectedMemberTool getSelectedMachine] containsObject:task.id] ) {
             task.isSelected = YES;
         }
     }

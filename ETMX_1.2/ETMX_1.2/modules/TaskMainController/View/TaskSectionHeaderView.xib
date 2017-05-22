@@ -18,6 +18,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQP-vZ-upg">
                     <rect key="frame" x="0.0" y="0.0" width="667" height="40"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDo-8y-F6Q" userLabel="BG">
+                            <rect key="frame" x="0.0" y="5" width="667" height="35"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_image_uncheckmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="aWr-4e-Ko4">
                             <rect key="frame" x="35" y="5" width="30" height="30"/>
                             <constraints>
@@ -61,10 +65,13 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="tqx-kX-mxR" firstAttribute="width" secondItem="aWr-4e-Ko4" secondAttribute="width" constant="-10" id="2ZR-6J-25D"/>
+                        <constraint firstAttribute="trailing" secondItem="LDo-8y-F6Q" secondAttribute="trailing" id="3aY-rm-FHK"/>
                         <constraint firstItem="Utr-0Y-d1U" firstAttribute="leading" secondItem="YbJ-B9-9i0" secondAttribute="trailing" constant="2" id="4hw-pJ-LdD"/>
                         <constraint firstItem="aWr-4e-Ko4" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="5J8-kM-Oj1"/>
+                        <constraint firstItem="LDo-8y-F6Q" firstAttribute="top" secondItem="fQP-vZ-upg" secondAttribute="top" constant="5" id="5ej-yD-aQB"/>
                         <constraint firstItem="tqx-kX-mxR" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="5" id="A5Y-ns-yRV"/>
                         <constraint firstItem="csr-WN-qOE" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="B9F-0B-KS9"/>
+                        <constraint firstItem="LDo-8y-F6Q" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" id="HYE-Po-Er2"/>
                         <constraint firstItem="tqx-kX-mxR" firstAttribute="top" secondItem="aWr-4e-Ko4" secondAttribute="top" constant="5" id="Ip6-2I-EWM"/>
                         <constraint firstItem="aWr-4e-Ko4" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="35" id="RyA-U1-e9y"/>
                         <constraint firstItem="csr-WN-qOE" firstAttribute="leading" secondItem="r5t-6c-57F" secondAttribute="trailing" constant="2" id="TFH-Tb-Y2y"/>
@@ -74,6 +81,7 @@
                         <constraint firstItem="vhZ-0M-62L" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="egv-ZL-UNg"/>
                         <constraint firstItem="YbJ-B9-9i0" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="fez-QA-bb1"/>
                         <constraint firstItem="r5t-6c-57F" firstAttribute="leading" secondItem="fQP-vZ-upg" secondAttribute="leading" constant="80" id="geq-bc-bMJ"/>
+                        <constraint firstAttribute="bottom" secondItem="LDo-8y-F6Q" secondAttribute="bottom" id="hX1-jJ-eFM"/>
                         <constraint firstItem="tqx-kX-mxR" firstAttribute="bottom" secondItem="aWr-4e-Ko4" secondAttribute="bottom" constant="-5" id="njQ-qq-nGT"/>
                         <constraint firstItem="Utr-0Y-d1U" firstAttribute="centerY" secondItem="fQP-vZ-upg" secondAttribute="centerY" id="tUJ-Mx-izP"/>
                         <constraint firstItem="vhZ-0M-62L" firstAttribute="leading" secondItem="Utr-0Y-d1U" secondAttribute="trailing" constant="2" id="ueq-pH-YM5"/>
@@ -89,6 +97,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="arrowImageView" destination="tqx-kX-mxR" id="8AG-qH-9NL"/>
+                <outlet property="bgView" destination="LDo-8y-F6Q" id="iCv-mi-U2u"/>
                 <outlet property="containerCode" destination="csr-WN-qOE" id="H6j-IH-EqH"/>
                 <outlet property="containerPlace" destination="r5t-6c-57F" id="Ax5-lm-qaf"/>
                 <outlet property="content" destination="fQP-vZ-upg" id="5SO-6w-lYe"/>

@@ -11,4 +11,8 @@
 @interface SelectedMemberTool : NSObject
 + (void)setSelectedMember:(NSMutableArray *)array;
 + (NSMutableArray *)getSelectedMember;
+
++ (void)setSelectedMachine:(NSMutableArray *)array;
+
++ (NSMutableArray *)getSelectedMachine;
 @end

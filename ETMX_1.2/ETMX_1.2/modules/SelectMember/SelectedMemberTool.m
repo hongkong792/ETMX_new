@@ -23,4 +23,16 @@
     return [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];
 }
 
+
++ (void)setSelectedMachine:(NSMutableArray *)array
+{
+    NSString *cachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"machine.arch"];
+    [NSKeyedArchiver archiveRootObject:array toFile:cachePath];
+    
+}
++ (NSMutableArray *)getSelectedMachine
+{
+    NSString *cachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"machine.arch"];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];
+}
 @end

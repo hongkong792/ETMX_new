@@ -22,7 +22,7 @@
     self.containerPlace.text = Localized(@"mold code");
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle:)];
     [self.selectedImageView addGestureRecognizer:tapGesture];
-    self.contentView.backgroundColor = [UIColor colorWithHex:0x45AEFE];
+    self.bgView.backgroundColor = [UIColor colorWithHex:0x45AEFE];
 }
 
 -(void)tapHandle:(UITapGestureRecognizer *)gesture{

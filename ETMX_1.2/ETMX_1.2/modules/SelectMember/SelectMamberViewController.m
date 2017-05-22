@@ -169,20 +169,20 @@ static BOOL memberFinish = NO;
 #pragma mark -- NSXMLParserDelegate数据解析
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
-      if([elementName isEqualToString:@"User"]){
-        
+    if ([elementName isEqualToString:@"User"]) {
         UserAccount *userAccount = [[UserAccount alloc] init];
-        userAccount.id = [attributeDict objectForKey:@"id"];
-        userAccount.name = [attributeDict objectForKey:@"name"];
-        userAccount.fullName = [attributeDict objectForKey:@"fullName"];
-        userAccount.number = [attributeDict objectForKey:@"code"];
-        if (userAccount.id != nil) {
+        NSString *accountID = [attributeDict valueForKey:@"id"];
+        if (![accountID isEqualToString:@"-1"]) {
+            userAccount.id = [attributeDict valueForKey:@"id"];
+            userAccount.number = [attributeDict valueForKey:@"code"];
+            userAccount.name = [attributeDict valueForKey:@"name"];
+            userAccount.fullName = [attributeDict valueForKey:@"fullName"];
             [_data2 addObject:userAccount];
         }
-      }
+    }
     
 }
-    
+
 - (void)laodDataFinish
 {
 

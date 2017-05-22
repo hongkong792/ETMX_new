@@ -653,7 +653,7 @@ typedef enum : NSUInteger {
         [self showNetTip];
     }];
 }
-//替換
+#pragma mark 替换
 - (IBAction)exchange:(id)sender {
     
     if (![self.taskState isEqualToString:WTaskStateStopped]) {

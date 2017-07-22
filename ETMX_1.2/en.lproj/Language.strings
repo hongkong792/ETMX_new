@@ -51,6 +51,9 @@
 "please select task" = "please select task";
 "can't add member to completed task" = "can't add member to nostart or completed task";
 "can't scan With completed task" = "can't scan With completed task";
+"can't add member to inwork task" = "can't add member to inwork task";
+"can't add machine to inwork task" = "can't add machine to inwork task";
+
 
 "select only one" = "can only select one";
 "please select equipment" = "please select equipment";

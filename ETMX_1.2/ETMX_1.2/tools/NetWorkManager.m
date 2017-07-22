@@ -92,6 +92,7 @@
     [req addValue:msgLength forHTTPHeaderField:@"Content-Length"];
     // 设置请求行方法为POST，与请求报文第一行对应
     [req setHTTPMethod:@"POST"];
+    
     // 将SOAP消息加到请求中
     [req setHTTPBody: [soapMessage dataUsingEncoding:NSUTF8StringEncoding]];
     return req;

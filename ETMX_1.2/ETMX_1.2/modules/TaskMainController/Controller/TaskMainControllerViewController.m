@@ -146,6 +146,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,assign) BOOL isFirstLogin;
 
+@property (nonatomic,copy)NSString * selectedMachineCode;
 
 //选择人员
 @property (nonatomic,strong)NSMutableArray *selectedTasksArray;
@@ -168,6 +169,18 @@ typedef enum : NSUInteger {
     [self.view addSubview:self.maskView];
     self.selectedTasksArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMaskView) name:REMOVEMASKVIEW object:nil];
+    
+    
+   NSString *userName = [[UserManager instance].dic objectForKey:@"fullName"];
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:@"loginName"];
+
+    
+    
+    NSString *userAccount = [[UserManager instance].dic objectForKey:@"number"];
+    [[NSUserDefaults standardUserDefaults] setObject:userAccount forKey:@"loginUser"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
 }
 
 #pragma mark -- commen
@@ -325,7 +338,15 @@ typedef enum : NSUInteger {
 -(void)sortAllTaskWithType:(NSString *)type andState:(NSString *)state{
     self.netRequesetName = getFilterTasks2;
     NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
-    NSArray *parameters = @[self.taskState,userCode,@"",@"",self.taskType];
+    NSString *machineCode;
+    if (self.selectedMachineCode) {
+        machineCode = self.selectedMachineCode;
+    }else{
+        
+        machineCode = @"";
+    }
+    
+    NSArray *parameters = @[self.taskState,userCode,machineCode,@"",self.taskType];
     NSString *methodName = @"queryFilterTasks";
     [self.indicatorView startAnimating];
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
@@ -338,8 +359,7 @@ typedef enum : NSUInteger {
     }];
 }
 
-#pragma mark -- functions
-//刷新
+#pragma mark -- 刷新
 -(void)refresh:(id)sender{
     [self refreshBtns];
     [self.tableView.outOpens removeAllObjects];
@@ -442,6 +462,10 @@ typedef enum : NSUInteger {
             [self showAlert:Localized(@"can't add member to completed task")];
             return;
         }
+//        if ([self.taskState isEqualToString:@"inwork"]) {
+//            [self showAlert:Localized(@"can't add member to inwork task")];
+//            return;
+//        }
         self.currentTask = [[self getSelectedTasks] lastObject];
         self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
@@ -493,6 +517,11 @@ typedef enum : NSUInteger {
             [self showAlert:Localized(@"can't add member to completed task")];
             return;
         }
+        
+//        if ([self.taskState isEqualToString:@"inwork"]) {
+//            [self showAlert:Localized(@"can't add machine to inwork task")];
+//            return;
+//        }
         self.currentTask = [[self getSelectedTasks] lastObject];
         self.maskViewInAddHelper = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         [self.maskViewInAddHelper setBackgroundColor:[UIColor blackColor]];
@@ -520,10 +549,11 @@ typedef enum : NSUInteger {
 }
 
 
-//启动
+#pragma mark 启动
 - (IBAction)startTask:(id)sender {
     self.netRequesetName = taskExecutionTS;
-    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+ //   NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+        NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray *tasks = [self getSelectedTasks];
     if (tasks.count==0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -545,10 +575,11 @@ typedef enum : NSUInteger {
     }];
 }
 
-//暂停
+#pragma mark 暂停
 - (IBAction)stopTask:(id)sender {
     self.netRequesetName = taskExecutionTP;
-    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+  //  NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+    NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray *tasks = [self getSelectedTasks];
     if (tasks.count==0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -569,10 +600,18 @@ typedef enum : NSUInteger {
         [self showNetTip];
     }];
 }
-//完成
+#pragma mark 完成
 - (IBAction)finishTask:(id)sender {
     self.netRequesetName = taskExecutionTF;
-    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+  //  NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+    
+    if ([self.taskState isEqualToString:@"notstart"]  || [self.taskState isEqualToString:@"stopped"]) {
+        [self showAlert:@"未开始已暂停任务不能点击完成"];
+        return;
+    }
+    
+    
+    NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray *tasks = [self getSelectedTasks];
     if (tasks.count==0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -608,7 +647,8 @@ typedef enum : NSUInteger {
 //上班
 - (IBAction)goWork:(id)sender {
     self.netRequesetName = taskExecutionDO;
-    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+  //  NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+      NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray *tasks = [self getSelectedTasks];
     if (tasks.count==0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -629,10 +669,12 @@ typedef enum : NSUInteger {
         [self showNetTip];
     }];
 }
-//下班
+
+#pragma mark 下班
 - (IBAction)workOff:(id)sender {
     self.netRequesetName = taskExecutionDF;
-    NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+   // NSString *userCode = [[UserManager instance].dic valueForKey:@"number"];
+    NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray *tasks = [self getSelectedTasks];
     if (tasks.count==0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please selecte task") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -943,8 +985,15 @@ typedef enum : NSUInteger {
         {
             [self refreshBtns];
             [self selectedAfter];
-            NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
-            self.title =fullName;
+//            NSString *fullName = [[UserManager instance].dic valueForKey:@"fullName"];
+//           NSRange range = [fullName rangeOfString:@" "];
+//            if (range.length >0) {
+//                fullName = [fullName substringToIndex:range.location];
+//            }
+//
+          NSString*userName=  [[NSUserDefaults standardUserDefaults] objectForKey:@"loginName"];
+            
+            self.title =userName;
             if (self.isFirstLogin) {
                 self.isFirstLogin = NO;
                 NSString *inworkStr = [self.allTaskState valueForKey:@"start"];
@@ -1302,8 +1351,7 @@ typedef enum : NSUInteger {
     ////        SelectTaskViewController * con = [[SelectTaskViewController alloc] initWithTaskDataList:self.sortTasks];
     ////        [self presentViewController:con animated:NO completion:nil];
     //        return;
-    //
-    //    }else{
+    // [self sortAllTaskWithType:self.taskType andState:self.taskState];    //    }else{
     ETMXTask * task = [[self getSelectedTasks] lastObject];
     if (task.id.length>0) {
         [[CurrentTask sharedManager] setCurrentTask:task];
@@ -1366,10 +1414,12 @@ typedef enum : NSUInteger {
 - (void)searchAll:(NSString*)machineId memberID:(NSString *)memberID
 {
     self.netRequesetName = getFilterTasks2;
+    self.selectedMachineCode = machineId;
     NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
     NSArray *parameters = @[self.taskState,memberID,machineId,@"",self.taskType];
     NSString *methodName = @"queryFilterTasks";
     [self.indicatorView startAnimating];
+
     [NetWorkManager sendRequestWithParameters:parameters method:methodName success:^(id data) {
         NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"searchAll:%@",str);
@@ -1380,7 +1430,6 @@ typedef enum : NSUInteger {
         [self.indicatorView stopAnimating];
         [self showNetTip];
     }];
-    
 }
 
 @end

@@ -81,7 +81,9 @@ typedef enum : NSUInteger {
     self.netType = ExchangeTaskTypeGetGroupMembersByUserCode;
     //獲取組員
     NSString *methodName = @"getGroupMembersByUserCode";
-    NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
+  //  NSString *userCode= [[UserManager instance].dic objectForKey:@"number"];
+            NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
+    
     NSArray *paramters = @[userCode];
     [NetWorkManager sendRequestWithParameters:paramters method:methodName success:^(id data) {
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];

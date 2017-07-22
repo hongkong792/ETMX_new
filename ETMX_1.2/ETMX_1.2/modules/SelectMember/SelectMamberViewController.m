@@ -48,8 +48,9 @@ static BOOL memberFinish = NO;
     
     __weak typeof(self)weakSelf = self;
     NSString * userMethod = @"getGroupMembersByUserCode";
-    NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
-    NSArray * paramUserArr = [NSArray arrayWithObjects:userNumber, nil];
+  //  NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
+       NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
+    NSArray * paramUserArr = [NSArray arrayWithObjects:userCode, nil];
     
     [NetWorkManager sendRequestWithParameters:paramUserArr method:userMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -161,7 +162,6 @@ static BOOL memberFinish = NO;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
     }];
-    
     
 }
 

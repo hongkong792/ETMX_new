@@ -49,7 +49,8 @@ static BOOL memberFinish = NO;
     
     __weak typeof(self)weakSelf = self;
     NSString * equMethod = @"getEquipmentsByUserCode";
-    NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
+    //  NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
+    NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray * paramArr = [NSArray arrayWithObjects:userCode, nil];
     
     [NetWorkManager sendRequestWithParameters:paramArr method:equMethod success:^(id data) {
@@ -59,7 +60,6 @@ static BOOL memberFinish = NO;
         [p parse];
         
         [weakSelf laodDataFinish];
-        
     } failure:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
@@ -74,11 +74,11 @@ static BOOL memberFinish = NO;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
-//    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
-//    
-//    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
-//    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
+    //    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateNormal];
+    //    [self.confirmBtn setTitle:Localized(@"searchConfirm") forState:UIControlStateHighlighted];
+    //
+    //    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateNormal];
+    //    [self.cancelBtn setTitle:Localized(@"cancel selected") forState:UIControlStateHighlighted];
     
 }
 

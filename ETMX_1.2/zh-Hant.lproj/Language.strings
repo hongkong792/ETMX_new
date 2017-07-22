@@ -52,6 +52,8 @@
 "can't scan With completed task" = "不能为已完成的任务扫描";
 "select only one" = "只能選擇一個任務";
 "please select equipment" = "请选择设备";
+"can't add member to inwork task" = "不能为正在进行的任务选择人员";
+"can't add machine to inwork task" =  "不能为正在进行的任务选择设备";
 //begin  任务界面
 "refresh"                    =               "刷新";
 "search"                    =               "搜索";

@@ -494,7 +494,7 @@ static BOOL lastThree = NO;
 - (IBAction)confirm:(id)sender {
     
     self.requestName = AddMemberConfirm;
-    [self clickOper:@"TF"];
+   // [self clickOper:@"TF"];
     [self.addingTempArray removeAllObjects];
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];

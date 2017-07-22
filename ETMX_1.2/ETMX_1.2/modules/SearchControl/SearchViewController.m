@@ -81,7 +81,9 @@ static BOOL memberFinish = NO;
     self.equmenu.delegate = self;
     //獲取數據
     NSString * equMethod = @"getEquipmentsByUserCode";
-    NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
+   // NSString * userCode = [[UserManager instance].dic objectForKey:@"number"];
+
+    NSString * userCode =[[NSUserDefaults standardUserDefaults] objectForKey:@"loginUser"];
     NSArray * paramArr = [NSArray arrayWithObjects:userCode, nil];
     __weak typeof(self) weakSelf = self;
     [NetWorkManager sendRequestWithParameters:paramArr method:equMethod success:^(id data) {
@@ -92,7 +94,6 @@ static BOOL memberFinish = NO;
         equFinish = YES;
         [self.view addSubview:self.equmenu];
         [weakSelf laodDataFinish];
-        
     } failure:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:Localized(@"please check the net") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
@@ -101,8 +102,7 @@ static BOOL memberFinish = NO;
     
     
     NSString * userMethod = @"getGroupMembersByUserCode";
-    NSString * userNumber = [[UserManager instance].dic objectForKey:@"number"];
-    NSArray * paramUserArr = [NSArray arrayWithObjects:userNumber, nil];
+    NSArray * paramUserArr = [NSArray arrayWithObjects:userCode, nil];
     
     [NetWorkManager sendRequestWithParameters:paramUserArr method:userMethod success:^(id data) {
         NSString *datastr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -263,13 +263,15 @@ static BOOL memberFinish = NO;
           
           machine  = _data1[_currentData1Index];
           machineCode = machine.machineCode;
+          
       }
 
       if (user != nil) {
-      //  [[UserManager instance] setCurAccount:user];
+       [[UserManager instance] setCurAccount:user];
       }
 
-     [self.delegate searchAll:machineCode memberID:userCode];
+
+      [self.delegate searchAll:machineCode memberID:userCode];
      [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
     
       
@@ -281,7 +283,6 @@ static BOOL memberFinish = NO;
     [self dismissViewControllerAnimated:YES completion:^{
 
         [[NSNotificationCenter defaultCenter] postNotificationName:REMOVEMASKVIEW object:nil];
-        
         
     }];
     
@@ -312,6 +313,7 @@ static BOOL memberFinish = NO;
         userAccount.name = [attributeDict objectForKey:@"name"];
         userAccount.fullName = [attributeDict objectForKey:@"fullName"];
         userAccount.number = [attributeDict objectForKey:@"code"];
+        userAccount.userType = [attributeDict objectForKey:@"userType"];
         if (userAccount.id != nil) {
             [_data2 addObject:userAccount];
         }
